@@ -22,7 +22,7 @@
 :root{color-scheme:dark;--bg:#0b0d17;--bg2:#121527;--card:#181c33;--ink:#fff4e0;--mute:#c9c0ae;--red:#d6283e;--teal:#16a2c0;--gold:#f6a91b;--line:#272c4a}
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
+body{margin:0;background:var(--bg) url(images/marca/fundo-ceu.svg) repeat;background-size:1100px;color:var(--ink);font:17px/1.6 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
 img{max-width:100%;display:block}
 a{color:inherit}
 h1,h2,h3{font-family:Poppins,system-ui,sans-serif;line-height:1.08;letter-spacing:-.02em;margin:0;text-wrap:balance}
@@ -73,7 +73,7 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .badge{position:absolute;top:10px;left:10px;background:var(--gold);color:#1a1205;font:700 12px Poppins,sans-serif;padding:4px 10px;border-radius:999px}
 .badge.col{background:var(--teal);color:#04161b}
 /* origin */
-.origin{background:var(--bg2)}
+.origin{background:rgba(18,21,39,.72)}
 .origin .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
 .origin img{border-radius:16px;width:100%}
 .origin .story{display:grid;gap:16px;font-size:18px}
@@ -95,7 +95,7 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .picked p{color:var(--mute);margin-bottom:14px;font-size:15px}
 .picked p b{color:var(--ink)}
 /* seed of a classic */
-.classic{background:linear-gradient(180deg,var(--bg) 0%,#10142a 100%)}
+.classic{background:linear-gradient(180deg,rgba(11,13,23,0) 0%,rgba(16,20,42,.75) 100%)}
 .pairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
 .pair{background:var(--card);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
 .pair img{aspect-ratio:4/3;width:100%;object-fit:cover;object-position:center 30%}
@@ -119,16 +119,18 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .tabs span{padding:6px 14px;border-radius:999px;background:var(--bg);font-size:14px;font-weight:700}
 .tabs span:first-child{background:var(--teal);color:#04161b}
 /* curation */
-.cur .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.cur .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(24px,4vw,56px);align-items:center}
 .cur img{border-radius:16px}
-.cur .txt{display:grid;gap:16px}
+.cur .txt{display:grid;gap:22px}
+.cur .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.cur .cols>div{display:grid;gap:12px;align-content:start}
 .cur ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 .cur li{padding-left:28px;position:relative;color:#e6dccb}
 .cur li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;background:var(--teal)}
+.cur .cols>div:nth-child(2) li::before{background:var(--gold)}
 .cur li:nth-child(2)::before{background:var(--red)}
-.cur li:nth-child(3)::before{background:var(--gold)}
 /* price */
-.price{background:var(--bg2)}
+.price{background:rgba(18,21,39,.72)}
 .price .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
 .plan{background:var(--card);border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;gap:18px;box-shadow:0 0 0 2px var(--gold)}
 .plan .amt{font:800 clamp(44px,6vw,64px)/1 Poppins,sans-serif;white-space:nowrap}
@@ -183,7 +185,7 @@ footer img{height:56px;width:auto}
  .hero>img{position:relative;height:auto;aspect-ratio:4/3;object-position:72% 40%}
  .hero::before{background:linear-gradient(0deg,var(--bg) 38%,rgba(11,13,23,0) 60%)}
  .hero .txt{padding:0 16px;margin-top:-60px}
- .origin .wrap,.cur .wrap,.price .wrap,.feat.wide{grid-template-columns:1fr}
+ .origin .wrap,.cur .wrap,.price .wrap,.feat.wide,.cur .cols{grid-template-columns:1fr}
  .feats{grid-template-columns:1fr}
  .sheet{grid-template-columns:1fr}
  .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
@@ -201,6 +203,7 @@ footer img{height:56px;width:auto}
     <a href="#catalogo">Catálogo</a>
     <a href="#plantar">Valores</a>
     <a href="#como">Como funciona</a>
+    <a href="#curadoria">Curadoria</a>
     <a href="#preco">Preço</a>
     <a class="btn btn-main" href="#preco">Assinar</a>
   </div>
@@ -301,17 +304,28 @@ footer img{height:56px;width:auto}
   </div>
 </section>
 
-<section class="band cur">
+<section class="band cur" id="curadoria">
   <div class="wrap">
     <img src="images/secoes/curadoria.webp" alt="Mesa de trabalho à noite com livros clássicos, anotações a lápis e esboços de uma baleia e de um castelo">
     <div class="txt">
-      <h2>Usamos IA, e toda página passa por gente</h2>
-      <p class="lead">A IA ajuda a escrever os textos e a criar as ilustrações. O resto fica com pessoas:</p>
-      <ul>
-        <li>A escolha de cada título do catálogo é humana.</li>
-        <li>Cada texto é corrigido e adaptado para a linguagem de 4 a 8 anos.</li>
-        <li>Cada página é revisada antes de chegar ao seu filho.</li>
-      </ul>
+      <h2>Cada história é escolhida e escrita com cuidado de professor</h2>
+      <div class="cols">
+        <div>
+          <h3>Na escolha das obras</h3>
+          <ul>
+            <li>Só entra no catálogo uma obra que valha a pena reencontrar mais tarde: um clássico da literatura, uma passagem da Bíblia, a vida de um santo, uma história real ou um filme marcante.</li>
+            <li>Cada título carrega um valor ou um caminho que justifica estar ali, como coragem, fé, medicina ou empreender.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>No texto de cada livro</h3>
+          <ul>
+            <li>Vocabulário e frases do tamanho de quem tem de 4 a 8 anos, em um ou dois parágrafos por página.</li>
+            <li>Os temas delicados do original ficam de fora. A semente da obra fica.</li>
+            <li>Cada página é revisada e corrigida antes de chegar ao seu filho.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -342,7 +356,7 @@ footer img{height:56px;width:auto}
     <h2 style="margin-bottom:16px">Perguntas frequentes</h2>
     <details><summary>Para que idade é o GBM?</summary><p>De 4 a 8 anos. Os textos são curtos e as ilustrações fazem boa parte do trabalho. Para os menores, a ideia é o adulto ler em voz alta. Os maiores podem acompanhar e ler trechos sozinhos.</p></details>
     <details><summary>As histórias são resumos dos clássicos?</summary><p>Não. São histórias novas, inspiradas nos temas das grandes obras e simplificadas para a idade da criança, sem os temas delicados do original. Cada uma termina com a indicação do clássico para ler ou assistir quando crescer.</p></details>
-    <details><summary>Como vocês usam inteligência artificial?</summary><p>A IA ajuda a escrever os textos e a criar as ilustrações. A escolha do catálogo, a adaptação da linguagem e a revisão de cada página são feitas por pessoas.</p></details>
+    <details><summary>Como as histórias são escolhidas?</summary><p>Uma obra só entra no catálogo se valer a pena ser reencontrada mais tarde, e se tiver um valor ou um caminho claro para apresentar à criança. Depois disso, o texto é adaptado para a idade e cada página é revisada.</p></details>
     <details><summary>Substitui os livros de alfabetização?</summary><p>Não, complementa. Os livros de alfabetização treinam a decodificação. O GBM cuida da outra parte: a vontade de abrir um livro.</p></details>
     <details><summary>Posso baixar os livros?</summary><p>Sim. Cada e-book pode ser baixado para ler sem internet, guardar ou imprimir.</p></details>
     <details><summary>Quantos filhos posso cadastrar?</summary><p>Todos. A assinatura é da família, e cada filho tem o seu perfil.</p></details>
