@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GBM Histórias</title>
+<meta name="description" content="Clássicos, histórias da Bíblia, vidas de santos e aventuras reais recontados para crianças de 4 a 8 anos. Para pais e filhos lerem juntos.">
+<meta property="og:title" content="GBM · Histórias para ler juntos">
+<meta property="og:description" content="As grandes histórias do mundo, do tamanho do colo.">
+<meta property="og:image" content="images/marca/og-image.jpg">
+<link rel="icon" href="images/marca/favicon-32.png">
+<link rel="apple-touch-icon" href="images/marca/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE  occasion: a bedtime-story catalogue for parents, warm and unhurried
+   IDEA   a streaming shelf at night, lit by the lamp; every book points to the classic it seeds
+   PICTURE the full-bleed bedtime scene, then real shelves of covers you can open
+   COLOUR night navy from the logo, cream ink, the logo's three pages: red, teal, gold
+   TYPE   Poppins (matches the rounded wordmark) + Nunito Sans
+   LAYOUT laptop: scene full-bleed, text in its dark left corner; phone: scene on top, text under */
+:root{color-scheme:dark;--bg:#0b0d17;--bg2:#121527;--card:#181c33;--ink:#fff4e0;--mute:#c9c0ae;--red:#d6283e;--teal:#16a2c0;--gold:#f6a91b;--line:#272c4a}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:Poppins,system-ui,sans-serif;line-height:1.08;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,5vw,58px);font-weight:800}
+h2{font-size:clamp(28px,3.6vw,42px);font-weight:700}
+h3{font-size:20px;font-weight:700}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(40px,6vw,88px) max(5vw,16px)}
+.lead{color:var(--mute);font-size:18px;max-width:62ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font:700 16px Poppins,sans-serif;text-decoration:none;border:0;cursor:pointer;white-space:nowrap}
+.btn-main{background:var(--gold);color:#1a1205}
+.btn-main:hover{background:#ffbb3d}
+.btn-ghost{background:rgba(255,244,224,.1);color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(255,244,224,.35)}
+.btn-ghost:hover{background:rgba(255,244,224,.18)}
+.btn:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+/* nav */
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px max(5vw,16px);background:rgba(11,13,23,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{height:46px;width:auto}
+nav .links{display:flex;gap:24px;align-items:center;font-weight:600;font-size:15px}
+nav .links a{text-decoration:none;color:var(--mute)}
+nav .links a:hover{color:var(--ink)}
+nav .links a.btn{color:#1a1205}
+nav .btn{min-height:40px;padding:0 18px;font-size:14px}
+/* hero */
+.hero{position:relative;min-height:min(88svh,820px);display:grid;align-items:center;padding:48px max(5vw,16px);overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,23,.97) 0%,rgba(11,13,23,.85) 32%,rgba(11,13,23,0) 62%),linear-gradient(0deg,var(--bg) 0%,rgba(11,13,23,0) 26%)}
+.hero .txt{position:relative;max-width:560px;display:grid;gap:20px}
+.hero .lead{color:#e6dccb}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.hero small{color:var(--mute);font-size:14px}
+/* rows */
+.shelf{padding-top:12px}
+.shelf .intro{display:grid;gap:10px;margin-bottom:28px}
+.row{margin-bottom:34px}
+.row-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.row-h h3{display:flex;align-items:center;gap:10px}
+.row-h h3 i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.row-h span{color:var(--mute);font-size:14px}
+.track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.cover{flex:0 0 clamp(138px,15vw,190px);scroll-snap-align:start;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--card);border:0;padding:0;color:var(--ink);text-align:left;transition:transform .25s}
+.cover img{aspect-ratio:2/3;width:100%;object-fit:cover}
+.cover b{position:absolute;left:0;right:0;bottom:0;padding:36px 10px 10px;font:700 14px/1.2 Poppins,sans-serif;background:linear-gradient(0deg,rgba(8,9,16,.95) 30%,rgba(8,9,16,0))}
+.cover:hover{transform:translateY(-4px) scale(1.03)}
+.boxcard{flex:0 0 clamp(260px,30vw,380px)}
+.boxcard img{aspect-ratio:16/9}
+.badge{position:absolute;top:10px;left:10px;background:var(--gold);color:#1a1205;font:700 12px Poppins,sans-serif;padding:4px 10px;border-radius:999px}
+.badge.col{background:var(--teal);color:#04161b}
+/* origin */
+.origin{background:var(--bg2)}
+.origin .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.origin img{border-radius:16px;width:100%}
+.origin .story{display:grid;gap:16px;font-size:18px}
+.origin .story p{color:#e6dccb}
+.origin .sign{color:var(--gold);font-weight:700}
+/* plant */
+.plant .head{display:grid;gap:10px;margin-bottom:28px}
+.seeds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.seed{position:relative;border-radius:14px;overflow:hidden;border:0;padding:0;cursor:pointer;background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 2px transparent}
+.seed img{aspect-ratio:1;width:100%;object-fit:cover;transition:transform .3s}
+.seed span{position:absolute;left:12px;bottom:12px;font:700 16px Poppins,sans-serif;background:rgba(11,13,23,.78);padding:6px 12px;border-radius:999px}
+.seed small{position:absolute;right:10px;top:10px;font-size:12px;background:rgba(11,13,23,.7);padding:3px 9px;border-radius:999px;color:var(--mute)}
+.seed[aria-pressed=true]{box-shadow:0 0 0 3px var(--gold)}
+.seed[aria-pressed=true] img{transform:scale(1.05)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px}
+.chip{min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--mute);font:600 15px "Nunito Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.picked{background:var(--card);border-radius:16px;padding:20px}
+.picked p{color:var(--mute);margin-bottom:14px;font-size:15px}
+.picked p b{color:var(--ink)}
+/* seed of a classic */
+.classic{background:linear-gradient(180deg,var(--bg) 0%,#10142a 100%)}
+.pairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+.pair{background:var(--card);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.pair img{aspect-ratio:4/3;width:100%;object-fit:cover;object-position:center 30%}
+.pair div{padding:18px;display:grid;gap:8px;align-content:start}
+.pair .later{border-top:1px dashed var(--line);padding-top:12px;margin-top:4px;font-size:15px;color:var(--mute)}
+.pair .later strong{color:var(--gold);display:block;font-family:Poppins,sans-serif;font-size:16px}
+/* features */
+.feats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
+.feat{background:var(--card);border-radius:16px;padding:24px;display:grid;gap:12px;align-content:start}
+.feat p{color:var(--mute)}
+.feat.wide{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;padding:0;overflow:hidden}
+.feat.wide img{height:100%;object-fit:cover}
+.feat.wide>div{padding:24px;display:grid;gap:12px}
+.who{display:flex;flex-wrap:wrap;gap:18px;margin-top:4px}
+.who figure{margin:0;display:grid;justify-items:center;gap:6px;font-weight:700;font-size:15px}
+.who img{width:72px;height:72px;border-radius:50%}
+.who .add{width:72px;height:72px;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font-size:30px;color:var(--mute)}
+.note{background:#fff4e0;color:#2a2416;border-radius:10px;padding:14px 16px;font-size:15px;transform:rotate(-1deg)}
+.note b{display:block;font-family:Poppins,sans-serif;font-size:13px;color:#8a6a1e}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs span{padding:6px 14px;border-radius:999px;background:var(--bg);font-size:14px;font-weight:700}
+.tabs span:first-child{background:var(--teal);color:#04161b}
+/* curation */
+.cur .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.cur img{border-radius:16px}
+.cur .txt{display:grid;gap:16px}
+.cur ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.cur li{padding-left:28px;position:relative;color:#e6dccb}
+.cur li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;background:var(--teal)}
+.cur li:nth-child(2)::before{background:var(--red)}
+.cur li:nth-child(3)::before{background:var(--gold)}
+/* price */
+.price{background:var(--bg2)}
+.price .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.plan{background:var(--card);border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;gap:18px;box-shadow:0 0 0 2px var(--gold)}
+.plan .amt{font:800 clamp(44px,6vw,64px)/1 Poppins,sans-serif;white-space:nowrap}
+.plan .amt small{font-size:18px;font-weight:600;color:var(--mute)}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.plan li{padding-left:30px;position:relative}
+.plan li::before{content:"";position:absolute;left:2px;top:6px;width:16px;height:9px;border-left:3px solid var(--gold);border-bottom:3px solid var(--gold);transform:rotate(-45deg)}
+.plan .btn{width:100%}
+/* faq */
+.faq .wrap{max-width:860px}
+details{border-bottom:1px solid var(--line);padding:4px 0}
+summary{cursor:pointer;list-style:none;font:700 18px Poppins,sans-serif;padding:16px 36px 16px 0;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:26px;color:var(--gold)}
+details[open] summary::after{content:"–"}
+details p{color:var(--mute);padding:0 0 18px}
+/* final */
+.final{position:relative;overflow:hidden;min-height:420px;display:grid;align-items:center}
+.final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
+.final::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,23,.96) 0%,rgba(11,13,23,.7) 40%,rgba(11,13,23,.05) 75%)}
+.final .txt{position:relative;max-width:520px;display:grid;gap:18px}
+footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--mute);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+footer img{height:56px;width:auto}
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:16px;background:rgba(5,6,12,.78)}
+.modal.on{display:grid}
+.sheet{background:var(--bg2);border-radius:18px;max-width:760px;width:100%;max-height:92svh;overflow:auto;display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);position:relative}
+.sheet.wide{grid-template-columns:1fr}
+.sheet>img{width:100%;height:100%;object-fit:cover}
+.sheet.wide>img{aspect-ratio:16/9;height:auto}
+.sheet .in{padding:24px;display:grid;gap:12px;align-content:start}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--card);white-space:nowrap}
+.sheet .later{background:var(--card);border-radius:12px;padding:14px;border-left:4px solid var(--gold)}
+.sheet .later small{color:var(--mute);display:block;font-size:13px}
+.sheet .later strong{font-family:Poppins,sans-serif}
+.vols{margin:0;padding-left:20px;color:#e6dccb}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.acts .btn{min-height:44px;padding:0 18px;font-size:15px}
+.x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(11,13,23,.8);color:var(--ink);font-size:24px;cursor:pointer;z-index:2}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;opacity:0;visibility:hidden;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
+@media(max-width:900px){
+ nav .links a{display:none}
+ .seeds{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .pairs{grid-template-columns:1fr}
+ .pair{grid-template-columns:minmax(0,140px) minmax(0,1fr);grid-template-rows:auto}
+ .pair img{aspect-ratio:auto;height:100%}
+}
+@media(max-width:700px){
+ .hero{min-height:0;padding:0 0 32px;align-items:end}
+ .hero>img{position:relative;height:auto;aspect-ratio:4/3;object-position:72% 40%}
+ .hero::before{background:linear-gradient(0deg,var(--bg) 38%,rgba(11,13,23,0) 60%)}
+ .hero .txt{padding:0 16px;margin-top:-60px}
+ .origin .wrap,.cur .wrap,.price .wrap,.feat.wide{grid-template-columns:1fr}
+ .feats{grid-template-columns:1fr}
+ .sheet{grid-template-columns:1fr}
+ .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
+ .final>img{opacity:.45}
+ .pair{grid-template-columns:minmax(0,110px) minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#topo" aria-label="GBM, início"><img class="logo" src="images/marca/logo-nav.png" alt="GBM"></a>
+  <div class="links">
+    <a href="#catalogo">Catálogo</a>
+    <a href="#plantar">Valores</a>
+    <a href="#como">Como funciona</a>
+    <a href="#preco">Preço</a>
+    <a class="btn btn-main" href="#preco">Assinar</a>
+  </div>
+</nav>
+
+<header class="hero" id="topo">
+  <img src="images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
+  <div class="txt">
+    <h1>As grandes histórias do mundo, do tamanho do colo.</h1>
+    <p class="lead">Clássicos, histórias da Bíblia, vidas de santos e aventuras reais, recontados para crianças de 4 a 8 anos. Histórias que o adulto tem gosto de contar e a criança pede de novo.</p>
+    <div class="ctas">
+      <a class="btn btn-main" href="#preco">Assinar por R$ 19,90/mês</a>
+      <a class="btn btn-ghost" href="#catalogo">Ver o catálogo</a>
+    </div>
+    <small>Uma assinatura para todos os seus filhos, cada um com o seu perfil.</small>
+  </div>
+</header>
+
+<section class="band shelf" id="catalogo">
+  <div class="wrap">
+    <div class="intro">
+      <h2>Toda história é a semente de um clássico</h2>
+      <p class="lead">Cada livro termina com uma indicação para quando a criança crescer: o livro ou o filme que aquela história preparou. Toque numa capa para ver.</p>
+    </div>
+    <div id="rows"></div>
+  </div>
+</section>
+
+<section class="band origin">
+  <div class="wrap">
+    <img src="images/secoes/origem-antes-e-depois.webp" alt="O mesmo pai e a mesma filha com o mesmo livro: à esquerda entediados, à direita encantados com uma baleia saindo das páginas">
+    <div class="story">
+      <h2>Começou numa noite qualquer, com a Giovana</h2>
+      <p>Ela tinha 6 anos e estava aprendendo a ler. Eu sentava ao lado dela com aqueles livrinhos de sempre: frases curtas, repetidas, sem história nenhuma. Na terceira página, eu já estava bocejando. E ela também.</p>
+      <p>Entendi ali que o problema não era o livro. Era a falta de uma história que valesse a pena para nós dois.</p>
+      <p>Então comecei a contar outras: a baleia branca que ninguém alcançava, o menino pastor que enfrentou um gigante, o navio preso no gelo do fim do mundo. Ela pedia de novo. Eu queria contar de novo.</p>
+      <p class="sign">Cleber, pai da Giovana, do Bento e da Maria</p>
+    </div>
+  </div>
+</section>
+
+<section class="band plant" id="plantar">
+  <div class="wrap">
+    <div class="head">
+      <h2>Você escolhe o que plantar</h2>
+      <p class="lead">Antes de escolher o que ser, a criança precisa saber o que existe. No perfil de cada filho, você marca os valores e os caminhos que quer apresentar, e a estante dele se organiza a partir disso. Experimente:</p>
+    </div>
+    <div class="seeds" id="seeds"></div>
+    <div class="chips" id="chips"></div>
+    <div class="picked"><p id="pickedTxt"></p><div class="track" id="pickedRow"></div></div>
+  </div>
+</section>
+
+<section class="band classic">
+  <div class="wrap">
+    <h2>Hoje, uma história no colo. Amanhã, o clássico na estante.</h2>
+    <p class="lead" style="margin-top:12px">Não são resumos nem versões fiéis. São histórias novas, escritas para a idade da criança, que guardam a semente da obra original. Quando ela crescer e encontrar o clássico, vai reconhecer.</p>
+    <div class="pairs" id="pairs"></div>
+  </div>
+</section>
+
+<section class="band" id="como">
+  <div class="wrap">
+    <h2>Feito para ler junto</h2>
+    <div class="feats">
+      <div class="feat wide">
+        <img src="images/secoes/elo-avo.webp" alt="Avô contando uma história para dois netos sentados no tapete">
+        <div>
+          <h3>Um ou dois parágrafos por página, e uma ilustração que prende</h3>
+          <p>O texto é curto para caber na atenção da criança e bom o bastante para o adulto querer ler em voz alta. Pai, mãe, avó ou babá: quem conta também se diverte.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Quem está lendo?</h3>
+        <p>Um perfil para cada filho, com a própria estante, o próprio progresso e os próprios valores.</p>
+        <div class="who">
+          <figure><img src="images/avatares/avatar-raposa.webp" alt="">Giovana</figure>
+          <figure><img src="images/avatares/avatar-leao.webp" alt="">Bento</figure>
+          <figure><img src="images/avatares/avatar-baleia.webp" alt="">Maria</figure>
+          <figure><span class="add">+</span>Adicionar</figure>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Marca-página e anotações</h3>
+        <p>Pare onde quiser e retome dali. E anote o que a criança disse: daqui a alguns anos, essa vai ser a parte mais bonita.</p>
+        <div class="note"><b>Moby Dick · página 7</b>A Gi perguntou por que a baleia é branca. Combinamos de descobrir juntos amanhã.</div>
+      </div>
+      <div class="feat">
+        <h3>Tenho interesse</h3>
+        <p>Guarde os títulos que chamaram a atenção e acompanhe o que já foi lido em cada perfil.</p>
+        <div class="tabs"><span>Não lidos · 4</span><span>Lidos · 7</span></div>
+      </div>
+      <div class="feat">
+        <h3>Boxes e coleções</h3>
+        <p>Histórias que continuam vêm em box, com os volumes em ordem. Títulos que conversam entre si formam coleções. E você pode baixar cada e-book para guardar ou imprimir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band cur">
+  <div class="wrap">
+    <img src="images/secoes/curadoria.webp" alt="Mesa de trabalho à noite com livros clássicos, anotações a lápis e esboços de uma baleia e de um castelo">
+    <div class="txt">
+      <h2>Escrito com inteligência artificial. Revisado por gente.</h2>
+      <p class="lead">Usamos IA na escrita dos textos e na criação das ilustrações. Nada vai para a estante sem passar por pessoas.</p>
+      <ul>
+        <li>A escolha de cada título do catálogo é humana.</li>
+        <li>Cada texto é corrigido e adaptado para a linguagem de 4 a 8 anos.</li>
+        <li>Cada página é revisada antes de chegar ao seu filho.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band price" id="preco">
+  <div class="wrap">
+    <div style="display:grid;gap:14px">
+      <h2>Um preço, a família inteira</h2>
+      <p class="lead">Os livros de alfabetização ensinam a ler. O GBM ensina a gostar de ler.</p>
+    </div>
+    <div class="plan">
+      <h3>Assinatura GBM</h3>
+      <div class="amt">R$ 19,90 <small>/mês</small></div>
+      <ul>
+        <li>Catálogo completo: clássicos, Bíblia, santos, aventuras reais</li>
+        <li>Perfis para todos os seus filhos</li>
+        <li>Lançamentos frequentes</li>
+        <li>Download dos e-books para guardar e imprimir</li>
+        <li>Marca-página, anotações e lista "Tenho interesse"</li>
+      </ul>
+      <button class="btn btn-main" data-toast="O cadastro abre em breve.">Assinar agora</button>
+    </div>
+  </div>
+</section>
+
+<section class="band faq">
+  <div class="wrap">
+    <h2 style="margin-bottom:16px">Perguntas frequentes</h2>
+    <details><summary>Para que idade é o GBM?</summary><p>De 4 a 8 anos. Os textos são curtos e as ilustrações fazem boa parte do trabalho. Para os menores, a ideia é o adulto ler em voz alta. Os maiores podem acompanhar e ler trechos sozinhos.</p></details>
+    <details><summary>As histórias são resumos dos clássicos?</summary><p>Não. São histórias novas, inspiradas nos temas das grandes obras e simplificadas para a idade da criança, sem os temas delicados do original. Cada uma termina com a indicação do clássico para ler ou assistir quando crescer.</p></details>
+    <details><summary>Como vocês usam inteligência artificial?</summary><p>A IA ajuda a escrever os textos e a criar as ilustrações. A escolha do catálogo, a adaptação da linguagem e a revisão de cada página são feitas por pessoas.</p></details>
+    <details><summary>Substitui os livros de alfabetização?</summary><p>Não, complementa. Os livros de alfabetização treinam a decodificação. O GBM cuida da outra parte: a vontade de abrir um livro.</p></details>
+    <details><summary>Posso baixar os livros?</summary><p>Sim. Cada e-book pode ser baixado para ler sem internet, guardar ou imprimir.</p></details>
+    <details><summary>Quantos filhos posso cadastrar?</summary><p>Todos. A assinatura é da família, e cada filho tem o seu perfil.</p></details>
+  </div>
+</section>
+
+<section class="band final">
+  <img src="images/hero/hero-mae-e-filha.webp" alt="Mãe e filha lendo juntas no sofá; da tela saem cenas de histórias">
+  <div class="txt">
+    <h2>A próxima história de vocês começa hoje</h2>
+    <p class="lead">R$ 19,90 por mês, para a família inteira.</p>
+    <div><a class="btn btn-main" href="#preco">Assinar o GBM</a></div>
+  </div>
+</section>
+
+<footer>
+  <img src="images/marca/logo.png" alt="GBM">
+  <span>© 2026 GBM · Histórias para ler juntos</span>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="sheet" id="sheet"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+{
+const C={coragem:"#d6283e",fe:"#f6a91b",raizes:"#16a2c0",empreender:"#f6a91b",ciencia:"#16a2c0",familia:"#d6283e",exploracao:"#16a2c0"};
+const T=[
+ {id:"moby-dick",t:"Moby Dick",v:["Coragem"],c:["Exploração"],s:"Um menino marinheiro, um mar sem fim e uma baleia branca que ninguém consegue alcançar.",o:"Moby Dick",a:"Herman Melville",k:"leia",i:"14+"},
+ {id:"o-menino-que-nunca-saiu-da-vila",t:"O Menino que Nunca Saiu da Vila",v:["Coragem"],c:["Exploração"],s:"Um menino do sertão que tem medo de tudo precisa atravessar a serra para devolver o que foi roubado.",o:"O Hobbit",a:"J.R.R. Tolkien",k:"leia",i:"10+"},
+ {id:"davi-e-o-gigante",t:"Davi e o Gigante",v:["Fé","Coragem"],c:[],s:"O menor dos irmãos, cinco pedras do riacho e um gigante que todos temiam.",o:"Bíblia, 1 Samuel 16 e 17",a:"",k:"leia",i:"livre"},
+ {id:"william-wallace",t:"William Wallace",v:["Coragem"],c:["Servir e proteger"],s:"Nas colinas da Escócia, um menino com uma espada de madeira sonha em proteger o seu povo.",o:"Coração Valente (1995)",a:"",k:"assista",i:"16+"},
+ {id:"o-bombeiro",t:"O Bombeiro",v:["Coragem","Família"],c:["Servir e proteger"],s:"Um dia no quartel: o alarme, o medo, a coragem e um filho esperando em casa.",o:"Brigada 49 (2004)",a:"",k:"assista",i:"14+"},
+ {id:"iracema",t:"Iracema",v:[],c:["Raízes do Brasil"],s:"A guerreira das lagoas do Ceará, a jandaia no ombro e uma terra que ainda não tinha nome.",o:"Iracema",a:"José de Alencar",k:"leia",i:"12+"},
+ {id:"bentinho-e-capitu",t:"Bentinho e Capitu",v:["Amizade"],c:["Raízes do Brasil"],s:"Dois vizinhos crescendo juntos no Rio antigo, e uma menina de olhos grandes que ninguém esquece.",o:"Dom Casmurro",a:"Machado de Assis",k:"leia",i:"14+"},
+ {id:"a-turma-do-mucuripe",t:"A Turma do Mucuripe",v:["Amizade"],c:["Raízes do Brasil"],s:"Quatro amigos da beira-mar de Fortaleza que se protegem como irmãos e guardam, cada um, um sonho.",o:"Capitães da Areia",a:"Jorge Amado",k:"leia",i:"14+"},
+ {id:"robinson-e-a-ilha",t:"Robinson e a Ilha",v:["Perseverança"],c:["Empreender"],s:"Sozinho numa ilha, um menino aprende a construir tudo a partir do nada.",o:"Robinson Crusoé",a:"Daniel Defoe",k:"leia",i:"10+"},
+ {id:"o-menino-caixeiro",t:"O Menino Caixeiro",v:["Perseverança"],c:["Empreender"],s:"Atrás do balcão de uma venda no Rio, um menino anota tudo e sonha grande.",o:"Mauá: Empresário do Império",a:"Jorge Caldeira",k:"leia",i:"16+"},
+ {id:"os-irmaos-da-lanchonete",t:"Os Irmãos da Lanchonete",v:["Honestidade"],c:["Empreender"],s:"Dois irmãos desenham com giz a cozinha mais rápida do mundo. Um dia, chega um vendedor com um sonho enorme.",o:"Fome de Poder (2016)",a:"",k:"assista",i:"14+"},
+ {id:"a-familia-1-o-menino-que-chegou-de-navio",t:"O Menino que Chegou de Navio",v:["Família"],c:["Empreender"],s:"Um menino italiano desembarca sozinho em Santos com uma mala e muita coragem.",o:"O Poderoso Chefão",a:"Mario Puzo",k:"leia",i:"16+"},
+ {id:"tomas-o-menino-das-perguntas",t:"Tomás, o Menino das Perguntas",v:["Fé","Curiosidade"],c:[],s:"Quieto, grandão e cheio de perguntas. Os colegas riam dele. Até ele abrir a boca.",o:"Santo Tomás de Aquino",a:"G.K. Chesterton",k:"leia",i:"16+"},
+ {id:"a-grande-viagem-de-dante",t:"A Grande Viagem de Dante",v:["Curiosidade","Fé"],c:[],s:"Um jovem poeta e seu guia sobem a montanha mais alta do mundo em busca da luz.",o:"A Divina Comédia",a:"Dante Alighieri",k:"leia",i:"16+"},
+ {id:"santos-dumont-e-o-sonho-de-voar",t:"Santos Dumont e o Sonho de Voar",v:["Curiosidade"],c:["Ciência e invenção"],s:"Um brasileiro em Paris, uma máquina frágil e o dia em que o homem voou.",o:"O que eu vi, o que nós veremos",a:"Santos Dumont",k:"leia",i:"12+"},
+ {id:"florence-a-dama-da-lampada",t:"Florence, a Dama da Lâmpada",v:["Curiosidade"],c:["Medicina"],s:"Todas as noites, uma enfermeira atravessava o hospital com uma lâmpada na mão.",o:"A Dama da Lâmpada (1951)",a:"",k:"assista",i:"10+"},
+ {id:"shackleton-e-o-navio-no-gelo",t:"Shackleton e o Navio no Gelo",v:["Perseverança"],c:["Exploração"],s:"Um navio preso no gelo do fim do mundo e uma tripulação que se recusou a desistir.",o:"A Incrível Viagem de Shackleton",a:"Alfred Lansing",k:"leia",i:"12+"},
+ {id:"a-ilha-das-regras",t:"A Ilha das Regras",v:["Honestidade","Amizade"],c:[],s:"Cinco crianças sozinhas numa ilha precisam inventar as próprias regras.",o:"Senhor das Moscas",a:"William Golding",k:"leia",i:"14+"}
+];
+const B=[
+ {id:"box-a-familia",t:"A Família",n:"3 volumes",col:0,vols:["O Menino que Chegou de Navio","O Filho que Queria Outro Caminho","O Que Deixamos para os Filhos"],o:"O Poderoso Chefão (livro de Mario Puzo e filmes de Coppola)",k:"leia e assista",i:"16+"},
+ {id:"box-a-grande-viagem-de-dante",t:"A Grande Viagem de Dante",n:"3 volumes",col:0,vols:["Inferno","Purgatório","Paraíso"],o:"A Divina Comédia, de Dante Alighieri",k:"leia",i:"16+"},
+ {id:"box-jesus",t:"Jesus",n:"3 volumes",col:0,vols:["O Nascimento","Os Milagres","A Paixão e a Ressurreição"],o:"Os Evangelhos e o filme Jesus de Nazaré (1977)",k:"leia e assista",i:"livre"},
+ {id:"box-william-wallace",t:"William Wallace",n:"2 volumes",col:0,vols:["Parte 1","Parte 2"],o:"Coração Valente (1995)",k:"assista",i:"16+"},
+ {id:"box-os-tres-amigos",t:"Os Três Amigos",n:"3 volumes",col:0,vols:["Volume 1","Volume 2","Volume 3"],o:"O Senhor dos Anéis, de J.R.R. Tolkien",k:"leia",i:"12+"},
+ {id:"colecao-machado-de-assis",t:"Machado de Assis",n:"Coleção",col:1,vols:["Bentinho e Capitu","O Senhor que Contou a Vida de Trás para Frente"],o:"Dom Casmurro e Memórias Póstumas de Brás Cubas",k:"leia",i:"14+"},
+ {id:"colecao-jose-de-alencar",t:"José de Alencar",n:"Coleção",col:1,vols:["Iracema","Cinco Minutos"],o:"Iracema e Cinco Minutos",k:"leia",i:"12+"},
+ {id:"colecao-doutores-da-igreja",t:"Doutores da Igreja",n:"Coleção",col:1,vols:["Agostinho","Tomás, o Menino das Perguntas"],o:"Confissões, de Santo Agostinho, e Santo Tomás de Aquino, de Chesterton",k:"leia",i:"16+"},
+ {id:"colecao-herois-de-farda",t:"Heróis de Farda",n:"Coleção",col:1,vols:["O Policial","O Bombeiro"],o:"Tropa de Elite (2007) e Brigada 49 (2004)",k:"assista",i:"16+"}
+];
+const ROWS=[["Coragem",C.coragem,x=>x.v.includes("Coragem")],["Raízes do Brasil",C.raizes,x=>x.c.includes("Raízes do Brasil")],["Empreender",C.empreender,x=>x.c.includes("Empreender")],["Curiosidade e ciência",C.ciencia,x=>x.v.includes("Curiosidade")],["Fé",C.fe,x=>x.v.includes("Fé")]];
+const $=s=>document.querySelector(s);
+const cover=x=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="images/capas/${x.id}.webp" alt=""><b>${x.t}</b></button>`;
+const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="lazy" src="images/boxes/${x.id}.webp" alt=""><span class="badge ${x.col?'col':''}">${x.n}</span><b>${x.t}</b></button>`;
+$("#rows").innerHTML=ROWS.map(([n,col,f])=>{const l=T.filter(f);return `<div class="row"><div class="row-h"><h3><i style="background:${col}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")+`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${B.length} conjuntos</span></div><div class="track">${B.map(boxc).join("")}</div></div>`;
+/* plant */
+const SEEDS=[["Fé","valor-fe","Valor"],["Coragem","valor-coragem","Valor"],["Empreender","caminho-empreender","Caminho"],["Ciência e invenção","caminho-ciencia-e-invencao","Caminho"]];
+const MORE=["Honestidade","Amizade","Curiosidade","Perseverança","Família","Medicina","Exploração","Servir e proteger","Raízes do Brasil"];
+const sel=new Set(["Coragem","Empreender"]);
+$("#seeds").innerHTML=SEEDS.map(([n,f,k])=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="images/cards/${f}.webp" alt=""><small>${k}</small><span>${n}</span></button>`).join("");
+$("#chips").innerHTML=MORE.map(n=>`<button class="chip" data-tag="${n}" aria-pressed="false">${n}</button>`).join("");
+const has=(x,n)=>x.v.includes(n)||x.c.includes(n);
+function paint(){
+ document.querySelectorAll("[data-tag]").forEach(b=>b.setAttribute("aria-pressed",sel.has(b.dataset.tag)));
+ const l=T.filter(x=>[...sel].some(n=>has(x,n)));
+ const names=[...sel];
+ $("#pickedTxt").innerHTML=names.length?`Estante do Bento com <b>${names.join(", ").replace(/, ([^,]*)$/," e $1")}</b>: ${l.length} ${l.length==1?"título":"títulos"}.`:"Marque pelo menos um valor ou caminho para montar a estante.";
+ $("#pickedRow").innerHTML=l.length?l.map(cover).join(""):"";
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-tag]");if(!b)return;const n=b.dataset.tag;sel.has(n)?sel.delete(n):sel.add(n);paint()});
+paint();
+/* pairs */
+const PAIRS=["bentinho-e-capitu","o-menino-que-nunca-saiu-da-vila","os-irmaos-da-lanchonete"];
+$("#pairs").innerHTML=PAIRS.map(id=>{const x=T.find(y=>y.id==id);return `<article class="pair"><img loading="lazy" src="images/capas/${x.id}.webp" alt=""><div><h3>${x.t}</h3><p style="color:var(--mute);font-size:15px">${x.s}</p><p class="later">Quando crescer, ${x.k}:<strong>${x.o}${x.a?", de "+x.a:""}</strong>Idade sugerida: ${x.i}</p></div></article>`}).join("");
+/* modal */
+const M=$("#modal"),S=$("#sheet");let last=null;
+const acts=`<div class="acts"><button class="btn btn-main" data-toast="Disponível para assinantes.">Ler agora</button><button class="btn btn-ghost" data-toast="Salvo em Tenho interesse.">Tenho interesse</button></div>`;
+function open(html,wide){S.className="sheet"+(wide?" wide":"");S.innerHTML=`<button class="x" aria-label="Fechar">×</button>`+html;M.classList.add("on");last=document.activeElement;S.querySelector(".x").focus()}
+function close(){M.classList.remove("on");last&&last.focus()}
+document.addEventListener("click",e=>{
+ const c=e.target.closest("[data-id]"),b=e.target.closest("[data-box]");
+ if(c){const x=T.find(y=>y.id==c.dataset.id);const tags=[...x.v,...x.c].map(t=>`<span>${t}</span>`).join("");
+  open(`<img src="images/capas/${x.id}.webp" alt=""><div class="in"><h2 id="mTitle">${x.t}</h2><div class="meta"><span>4 a 8 anos</span>${tags}</div><p style="color:#e6dccb">${x.s}</p><div class="later"><small>Quando crescer, ${x.k}</small><strong>${x.o}</strong>${x.a?`<small>${x.a}</small>`:""}<small>Idade sugerida: ${x.i}</small></div>${acts}</div>`)}
+ if(b){const x=B.find(y=>y.id==b.dataset.box);
+  open(`<img src="images/boxes/${x.id}.webp" alt=""><div class="in"><h2 id="mTitle">${x.t}</h2><div class="meta"><span>${x.n}</span><span>${x.col?"Leia em qualquer ordem":"Leia em ordem"}</span></div><ol class="vols">${x.vols.map(v=>`<li>${v}</li>`).join("")}</ol><div class="later"><small>Quando crescer, ${x.k}</small><strong>${x.o}</strong><small>Idade sugerida: ${x.i}</small></div>${acts}</div>`,true)}
+ if(e.target.closest(".x")||e.target===M)close();
+ const t=e.target.closest("[data-toast]");if(t){const el=$("#toast");el.textContent=t.dataset.toast;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2200)}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
+}
+</script>
+</body>
+</html>
