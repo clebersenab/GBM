@@ -1,0 +1,1613 @@
+{
+ "valores": [
+  "Fé",
+  "Coragem",
+  "Honestidade",
+  "Amizade",
+  "Curiosidade",
+  "Perseverança",
+  "Família"
+ ],
+ "caminhos": [
+  "Medicina",
+  "Empreender",
+  "Ciência e Inovação",
+  "Música",
+  "Direito",
+  "Servir e proteger"
+ ],
+ "fileiras_landing": [
+  "Clássicos da literatura",
+  "Do cinema e das séries",
+  "Histórias reais e de fé"
+ ],
+ "titulos": [
+  {
+   "id": "moby-dick",
+   "titulo": "Moby Dick",
+   "sinopse": "Um menino marinheiro atravessa o mar atrás de uma baleia branca que ninguém consegue alcançar.",
+   "obra_mae": {
+    "titulo": "Moby Dick",
+    "autor": "Herman Melville",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/moby-dick.webp"
+  },
+  {
+   "id": "bentinho-e-capitu",
+   "titulo": "Bentinho e Capitu",
+   "sinopse": "Dois vizinhos crescendo juntos no Rio antigo, e uma menina de olhos grandes que ninguém esquece.",
+   "obra_mae": {
+    "titulo": "Dom Casmurro",
+    "autor": "Machado de Assis",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Amizade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-machado-de-assis",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/bentinho-e-capitu.webp"
+  },
+  {
+   "id": "iracema",
+   "titulo": "Iracema",
+   "sinopse": "Com a jandaia no ombro, a guerreira das lagoas do Ceará guarda uma terra que ainda não tinha nome.",
+   "obra_mae": {
+    "titulo": "Iracema",
+    "autor": "José de Alencar",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-jose-de-alencar",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/iracema.webp"
+  },
+  {
+   "id": "dante-2-purgatorio",
+   "titulo": "A Grande Viagem de Dante: o Purgatório",
+   "sinopse": "Um jovem poeta e seu guia sobem a montanha mais alta do mundo em busca da luz.",
+   "obra_mae": {
+    "titulo": "A Divina Comédia",
+    "autor": "Dante Alighieri",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": "box-a-grande-viagem-de-dante",
+   "volume": 2,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/a-grande-viagem-de-dante.webp"
+  },
+  {
+   "id": "o-menino-que-nunca-saiu-da-vila",
+   "titulo": "O Menino que Nunca Saiu da Vila",
+   "sinopse": "Um menino do sertão que tem medo de tudo precisa atravessar a serra para devolver o que foi roubado.",
+   "obra_mae": {
+    "titulo": "O Hobbit",
+    "autor": "J.R.R. Tolkien",
+    "tipo": "livro",
+    "idade": "10+"
+   },
+   "valores": [
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/o-menino-que-nunca-saiu-da-vila.webp"
+  },
+  {
+   "id": "a-ilha-das-regras",
+   "titulo": "A Ilha das Regras",
+   "sinopse": "Cinco crianças sozinhas numa ilha precisam inventar as próprias regras.",
+   "obra_mae": {
+    "titulo": "Senhor das Moscas",
+    "autor": "William Golding",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Honestidade",
+    "Amizade"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/a-ilha-das-regras.webp"
+  },
+  {
+   "id": "a-turma-do-mucuripe",
+   "titulo": "A Turma do Mucuripe",
+   "sinopse": "Quatro amigos da beira-mar de Fortaleza que se protegem como irmãos e guardam, cada um, um sonho.",
+   "obra_mae": {
+    "titulo": "Capitães da Areia",
+    "autor": "Jorge Amado",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Amizade"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/a-turma-do-mucuripe.webp"
+  },
+  {
+   "id": "robinson-e-a-ilha",
+   "titulo": "Robinson e a Ilha",
+   "sinopse": "Sozinho numa ilha, um menino aprende a construir tudo a partir do nada.",
+   "obra_mae": {
+    "titulo": "Robinson Crusoé",
+    "autor": "Daniel Defoe",
+    "tipo": "livro",
+    "idade": "10+"
+   },
+   "valores": [
+    "Perseverança"
+   ],
+   "caminhos": [
+    "Empreender"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/robinson-e-a-ilha.webp"
+  },
+  {
+   "id": "a-banda-da-garagem",
+   "titulo": "A Banda da Garagem",
+   "sinopse": "Quatro amigos de uma cidade do interior ouvem a música deles tocar no rádio pela primeira vez.",
+   "obra_mae": {
+    "titulo": "The Wonders: O Sonho Não Acabou (1996)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "10+"
+   },
+   "valores": [
+    "Amizade"
+   ],
+   "caminhos": [
+    "Música"
+   ],
+   "grupo": "colecao-ritmo",
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries",
+    "Raízes do Brasil"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/a-banda-da-garagem.webp"
+  },
+  {
+   "id": "o-menino-da-bateria",
+   "titulo": "O Menino da Bateria",
+   "sinopse": "Todo dia, depois da escola, um menino treina na bateria até o braço cansar. Ele quer ser o melhor.",
+   "obra_mae": {
+    "titulo": "Whiplash: Em Busca da Perfeição (2014)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "16+"
+   },
+   "valores": [
+    "Perseverança"
+   ],
+   "caminhos": [
+    "Música"
+   ],
+   "grupo": "colecao-ritmo",
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/o-menino-da-bateria.webp"
+  },
+  {
+   "id": "os-irmaos-da-lanchonete",
+   "titulo": "Os Irmãos da Lanchonete",
+   "sinopse": "Dois irmãos desenham com giz a cozinha mais rápida do mundo. Um dia, chega um vendedor com um sonho enorme.",
+   "obra_mae": {
+    "titulo": "Fome de Poder (2016)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "14+"
+   },
+   "valores": [
+    "Honestidade"
+   ],
+   "caminhos": [
+    "Empreender"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/os-irmaos-da-lanchonete.webp"
+  },
+  {
+   "id": "a-familia-1-o-menino-que-chegou-de-navio",
+   "titulo": "O Menino que Chegou de Navio",
+   "sinopse": "Um menino italiano desembarca sozinho em Santos com uma mala e muita coragem.",
+   "obra_mae": {
+    "titulo": "O Poderoso Chefão",
+    "autor": "Mario Puzo",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Família"
+   ],
+   "caminhos": [
+    "Empreender"
+   ],
+   "grupo": "box-a-familia",
+   "volume": 1,
+   "fileiras": [
+    "Do cinema e das séries",
+    "Raízes do Brasil"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/a-familia-1-o-menino-que-chegou-de-navio.webp"
+  },
+  {
+   "id": "a-familia-2-o-filho-que-queria-outro-caminho",
+   "titulo": "O Filho que Queria Outro Caminho",
+   "sinopse": "O caçula queria ser professor. Quando o pai adoece, ele assume a venda da família só por um tempo.",
+   "obra_mae": {
+    "titulo": "O Poderoso Chefão",
+    "autor": "Mario Puzo",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Família"
+   ],
+   "caminhos": [
+    "Empreender"
+   ],
+   "grupo": "box-a-familia",
+   "volume": 2,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/a-familia-2-o-filho-que-queria-outro-caminho.webp"
+  },
+  {
+   "id": "a-familia-3-o-que-deixamos-para-os-filhos",
+   "titulo": "O Que Deixamos para os Filhos",
+   "sinopse": "Já velho, ele quer entregar aos netos algo melhor do que recebeu.",
+   "obra_mae": {
+    "titulo": "O Poderoso Chefão",
+    "autor": "Mario Puzo",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Família"
+   ],
+   "caminhos": [
+    "Empreender"
+   ],
+   "grupo": "box-a-familia",
+   "volume": 3,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/a-familia-3-o-que-deixamos-para-os-filhos.webp"
+  },
+  {
+   "id": "o-bombeiro",
+   "titulo": "O Bombeiro",
+   "sinopse": "O alarme toca no quartel. Em casa, um filho espera o pai voltar.",
+   "obra_mae": {
+    "titulo": "Brigada 49 (2004)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "14+"
+   },
+   "valores": [
+    "Coragem",
+    "Família"
+   ],
+   "caminhos": [
+    "Servir e proteger"
+   ],
+   "grupo": "colecao-herois-de-farda",
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/o-bombeiro.webp"
+  },
+  {
+   "id": "o-advogado-da-turma",
+   "titulo": "O Advogado da Turma",
+   "sinopse": "Ele resolve todas as brigas da escola com bons argumentos. Até o melhor amigo pedir ajuda para ganhar com uma mentirinha.",
+   "obra_mae": {
+    "titulo": "Suits",
+    "autor": "",
+    "tipo": "série",
+    "idade": "14+"
+   },
+   "valores": [
+    "Honestidade"
+   ],
+   "caminhos": [
+    "Direito"
+   ],
+   "grupo": "colecao-justica",
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/o-advogado-da-turma.webp"
+  },
+  {
+   "id": "a-filha-do-advogado",
+   "titulo": "A Filha do Advogado",
+   "sinopse": "A cidade inteira já condenou aquele homem. O pai de Lia resolve defendê-lo.",
+   "obra_mae": {
+    "titulo": "O Sol é para Todos",
+    "autor": "Harper Lee",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Coragem"
+   ],
+   "caminhos": [
+    "Direito"
+   ],
+   "grupo": "colecao-justica",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/a-filha-do-advogado.webp"
+  },
+  {
+   "id": "shackleton-e-o-navio-no-gelo",
+   "titulo": "Shackleton e o Navio no Gelo",
+   "sinopse": "O navio ficou preso no gelo do fim do mundo, e a tripulação não desistiu.",
+   "obra_mae": {
+    "titulo": "A Incrível Viagem de Shackleton",
+    "autor": "Alfred Lansing",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Perseverança"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/shackleton-e-o-navio-no-gelo.webp"
+  },
+  {
+   "id": "santos-dumont-e-o-sonho-de-voar",
+   "titulo": "Santos Dumont e o Sonho de Voar",
+   "sinopse": "Em Paris, um brasileiro monta uma máquina frágil e tenta fazer o homem voar.",
+   "obra_mae": {
+    "titulo": "O que eu vi, o que nós veremos",
+    "autor": "Santos Dumont",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [
+    "Ciência e Inovação"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé",
+    "Raízes do Brasil"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/santos-dumont-e-o-sonho-de-voar.webp"
+  },
+  {
+   "id": "florence-a-dama-da-lampada",
+   "titulo": "Florence, a Dama da Lâmpada",
+   "sinopse": "Todas as noites, uma enfermeira atravessava o hospital com uma lâmpada na mão.",
+   "obra_mae": {
+    "titulo": "A Dama da Lâmpada (1951)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "10+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [
+    "Medicina"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/florence-a-dama-da-lampada.webp"
+  },
+  {
+   "id": "rui-o-menino-que-falava-bonito",
+   "titulo": "Rui, o Menino que Falava Bonito",
+   "sinopse": "O menino de Salvador que vivia nos livros cresceu e defendeu o Brasil diante do mundo.",
+   "obra_mae": {
+    "titulo": "Oração aos Moços",
+    "autor": "Rui Barbosa",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [
+    "Direito"
+   ],
+   "grupo": "colecao-justica",
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé",
+    "Raízes do Brasil"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/rui-o-menino-que-falava-bonito.webp"
+  },
+  {
+   "id": "william-wallace-1",
+   "titulo": "William Wallace: Parte 1",
+   "sinopse": "Nas colinas da Escócia, um menino com uma espada de madeira sonha em proteger o seu povo.",
+   "obra_mae": {
+    "titulo": "Coração Valente (1995)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "16+"
+   },
+   "valores": [
+    "Coragem"
+   ],
+   "caminhos": [
+    "Servir e proteger"
+   ],
+   "grupo": "box-william-wallace",
+   "volume": 1,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/william-wallace.webp"
+  },
+  {
+   "id": "davi-e-o-gigante",
+   "titulo": "Davi e o Gigante",
+   "sinopse": "O menor dos irmãos escolhe cinco pedras no riacho e vai enfrentar o gigante que todos temiam.",
+   "obra_mae": {
+    "titulo": "Bíblia, 1 Samuel 16 e 17",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": "box-herois-de-israel",
+   "volume": 2,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/davi-e-o-gigante.webp"
+  },
+  {
+   "id": "tomas-o-menino-das-perguntas",
+   "titulo": "Tomás, o Menino das Perguntas",
+   "sinopse": "Tomás era quieto e grandão, e os colegas riam dele. Até o dia em que ele resolveu falar.",
+   "obra_mae": {
+    "titulo": "Santo Tomás de Aquino",
+    "autor": "G.K. Chesterton",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Fé",
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-doutores-da-igreja",
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": true,
+   "capa": "images/capas/tomas-o-menino-das-perguntas.webp"
+  },
+  {
+   "id": "o-menino-caixeiro",
+   "titulo": "O Menino Caixeiro",
+   "sinopse": "Atrás do balcão de uma venda no Rio, um menino anota tudo e sonha grande.",
+   "obra_mae": {
+    "titulo": "Mauá: Empresário do Império",
+    "autor": "Jorge Caldeira",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Perseverança"
+   ],
+   "caminhos": [
+    "Empreender"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/o-menino-caixeiro.webp"
+  },
+  {
+   "id": "os-tres-amigos-1",
+   "titulo": "Os Três Amigos: o Presente",
+   "sinopse": "Três amigos encontram uma bússola dourada que facilita tudo.",
+   "obra_mae": {
+    "titulo": "O Senhor dos Anéis",
+    "autor": "J.R.R. Tolkien",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Amizade"
+   ],
+   "caminhos": [],
+   "grupo": "box-os-tres-amigos",
+   "volume": 1,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "os-tres-amigos-2",
+   "titulo": "Os Três Amigos: a Floresta",
+   "sinopse": "Com a bússola na mão, um deles começa a mudar. Os outros dois não desistem dele.",
+   "obra_mae": {
+    "titulo": "O Senhor dos Anéis",
+    "autor": "J.R.R. Tolkien",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Amizade"
+   ],
+   "caminhos": [],
+   "grupo": "box-os-tres-amigos",
+   "volume": 2,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "os-tres-amigos-3",
+   "titulo": "Os Três Amigos: a Montanha",
+   "sinopse": "No alto da montanha, ele escolhe abrir mão do presente.",
+   "obra_mae": {
+    "titulo": "O Senhor dos Anéis",
+    "autor": "J.R.R. Tolkien",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Amizade"
+   ],
+   "caminhos": [],
+   "grupo": "box-os-tres-amigos",
+   "volume": 3,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "william-wallace-2",
+   "titulo": "William Wallace: Parte 2",
+   "sinopse": "O menino cresceu, e agora o povo das colinas espera por ele.",
+   "obra_mae": {
+    "titulo": "Coração Valente (1995)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "16+"
+   },
+   "valores": [
+    "Coragem"
+   ],
+   "caminhos": [
+    "Servir e proteger"
+   ],
+   "grupo": "box-william-wallace",
+   "volume": 2,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "dante-1-inferno",
+   "titulo": "A Grande Viagem de Dante: o Inferno",
+   "sinopse": "Com uma lanterna na mão, o velho poeta guia o jovem pelo lugar de quem escolheu errado.",
+   "obra_mae": {
+    "titulo": "A Divina Comédia",
+    "autor": "Dante Alighieri",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": "box-a-grande-viagem-de-dante",
+   "volume": 1,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "dante-3-paraiso",
+   "titulo": "A Grande Viagem de Dante: o Paraíso",
+   "sinopse": "No alto do céu, entre anéis de luz, alguém espera Dante de braços abertos.",
+   "obra_mae": {
+    "titulo": "A Divina Comédia",
+    "autor": "Dante Alighieri",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": "box-a-grande-viagem-de-dante",
+   "volume": 3,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "sansao",
+   "titulo": "Sansão",
+   "sinopse": "O homem mais forte do mundo carrega os portões da cidade nas costas.",
+   "obra_mae": {
+    "titulo": "Bíblia, Juízes 13 a 16",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": "box-herois-de-israel",
+   "volume": 1,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "salomao",
+   "titulo": "Salomão",
+   "sinopse": "O jovem rei pediu sabedoria em vez de riqueza.",
+   "obra_mae": {
+    "titulo": "Bíblia, 1 Reis e Provérbios",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé",
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "grupo": "box-herois-de-israel",
+   "volume": 3,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "jesus-1-o-nascimento",
+   "titulo": "Jesus: o Nascimento",
+   "sinopse": "Numa noite estrelada, um bebê nasce num estábulo.",
+   "obra_mae": {
+    "titulo": "Os Evangelhos",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé",
+    "Família"
+   ],
+   "caminhos": [],
+   "grupo": "box-jesus",
+   "volume": 1,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "jesus-2-os-milagres",
+   "titulo": "Jesus: os Milagres",
+   "sinopse": "Um menino oferece cinco pães e dois peixes, e ninguém fica com fome.",
+   "obra_mae": {
+    "titulo": "Os Evangelhos",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": "box-jesus",
+   "volume": 2,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "jesus-3-a-paixao-e-a-ressurreicao",
+   "titulo": "Jesus: a Paixão e a Ressurreição",
+   "sinopse": "Na manhã de domingo, a pedra do túmulo amanhece rolada.",
+   "obra_mae": {
+    "titulo": "Os Evangelhos e Jesus de Nazaré (1977)",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": "box-jesus",
+   "volume": 3,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "as-parabolas-de-jesus",
+   "titulo": "As Parábolas de Jesus",
+   "sinopse": "A ovelha perdida, o semeador e o filho que voltou para casa.",
+   "obra_mae": {
+    "titulo": "Evangelho de Lucas",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "o-senhor-que-contou-a-vida-de-tras-para-frente",
+   "titulo": "O Senhor que Contou a Vida de Trás para Frente",
+   "sinopse": "Um senhor de cartola conta a vida dele começando pelo fim.",
+   "obra_mae": {
+    "titulo": "Memórias Póstumas de Brás Cubas",
+    "autor": "Machado de Assis",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-machado-de-assis",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "cinco-minutos",
+   "titulo": "Cinco Minutos",
+   "sinopse": "Por cinco minutos de atraso, um rapaz perde o ônibus e encontra um mistério.",
+   "obra_mae": {
+    "titulo": "Cinco Minutos",
+    "autor": "José de Alencar",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-jose-de-alencar",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "agostinho",
+   "titulo": "Agostinho",
+   "sinopse": "Na praia, um menino tenta colocar o mar inteiro num buraco na areia.",
+   "obra_mae": {
+    "titulo": "Confissões",
+    "autor": "Santo Agostinho",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Fé",
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-doutores-da-igreja",
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "o-policial",
+   "titulo": "O Policial",
+   "sinopse": "Ninguém estava olhando. Ele recusou o envelope mesmo assim.",
+   "obra_mae": {
+    "titulo": "Tropa de Elite (2007)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "16+"
+   },
+   "valores": [
+    "Honestidade",
+    "Coragem"
+   ],
+   "caminhos": [
+    "Servir e proteger"
+   ],
+   "grupo": "colecao-herois-de-farda",
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "a-cigarra-e-a-formiga",
+   "titulo": "A Cigarra e a Formiga",
+   "sinopse": "Uma cantou o verão inteiro. A outra guardou comida para o inverno.",
+   "obra_mae": {
+    "titulo": "Fábulas",
+    "autor": "La Fontaine",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Perseverança"
+   ],
+   "caminhos": [
+    "Empreender"
+   ],
+   "grupo": "colecao-fabulas",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "mito-nordico",
+   "titulo": "Como o Mundo Começou: a Árvore dos Mundos",
+   "sinopse": "Uma árvore gigante segura todos os mundos nos galhos.",
+   "obra_mae": {
+    "titulo": "Edda",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-como-o-mundo-comecou",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "mito-grego",
+   "titulo": "Como o Mundo Começou: o Presente do Fogo",
+   "sinopse": "Um titã gentil entrega o fogo às pessoas.",
+   "obra_mae": {
+    "titulo": "Teogonia",
+    "autor": "Hesíodo",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-como-o-mundo-comecou",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "mito-tupi",
+   "titulo": "Como o Mundo Começou: o Sol e a Lua",
+   "sinopse": "O sol e a lua dividem o mesmo céu sobre o rio.",
+   "obra_mae": {
+    "titulo": "Lendas tupis",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-como-o-mundo-comecou",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "genesis",
+   "titulo": "Como o Mundo Começou: o Gênesis",
+   "sinopse": "No começo, um jardim, um rio e todos os animais.",
+   "obra_mae": {
+    "titulo": "Bíblia, Gênesis",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé",
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-como-o-mundo-comecou",
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "o-cajueiro-do-quintal",
+   "titulo": "O Cajueiro do Quintal",
+   "sinopse": "Um cajueiro centenário viu quatro gerações da família brincarem na sombra dele.",
+   "obra_mae": {
+    "titulo": "A Casa",
+    "autor": "Natércia Campos",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Família"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "a-vila-de-muitas-portas",
+   "titulo": "A Vila de Muitas Portas",
+   "sinopse": "Dezenas de famílias vivem lado a lado, e cada porta guarda uma história.",
+   "obra_mae": {
+    "titulo": "O Cortiço",
+    "autor": "Aluísio Azevedo",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Amizade",
+    "Família"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "o-anel-de-giges",
+   "titulo": "O Anel de Giges",
+   "sinopse": "Um pastor encontra um anel que o deixa invisível. O que ele faria se ninguém visse?",
+   "obra_mae": {
+    "titulo": "A República",
+    "autor": "Platão",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Honestidade"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "joana-darc",
+   "titulo": "Joana d'Arc",
+   "sinopse": "Uma menina do campo ouve um chamado e muda a história do seu país.",
+   "obra_mae": {
+    "titulo": "Joana d'Arc",
+    "autor": "Régine Pernoud",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Fé",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "o-pequeno-cavaleiro",
+   "titulo": "O Pequeno Cavaleiro",
+   "sinopse": "No torneio, o escudeiro de oito anos segura o elmo do seu cavaleiro.",
+   "obra_mae": {
+    "titulo": "Ivanhoé",
+    "autor": "Walter Scott",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Coragem",
+    "Honestidade"
+   ],
+   "caminhos": [
+    "Servir e proteger"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "irma-dulce",
+   "titulo": "Irmã Dulce",
+   "sinopse": "Num galinheiro de Salvador, uma freira pequenininha abre o maior hospital da Bahia.",
+   "obra_mae": {
+    "titulo": "Irmã Dulce (2014)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "12+"
+   },
+   "valores": [
+    "Fé",
+    "Família"
+   ],
+   "caminhos": [
+    "Medicina"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "padre-pio-o-menino-de-pietrelcina",
+   "titulo": "Padre Pio, o Menino de Pietrelcina",
+   "sinopse": "Desde pequeno, o menino Francesco queria ser frade.",
+   "obra_mae": {
+    "titulo": "Padre Pio (2000)",
+    "autor": "Carlo Carlei",
+    "tipo": "filme",
+    "idade": "12+"
+   },
+   "valores": [
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "pasteur",
+   "titulo": "Pasteur",
+   "sinopse": "Um cientista e um menino de mão enfaixada que veio de longe pedir ajuda.",
+   "obra_mae": {
+    "titulo": "A História de Louis Pasteur (1936)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "12+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [
+    "Medicina",
+    "Ciência e Inovação"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "oswaldo-cruz",
+   "titulo": "Oswaldo Cruz",
+   "sinopse": "Um jovem médico procura mosquitos nas poças do Rio de Janeiro.",
+   "obra_mae": {
+    "titulo": "Sonhos Tropicais",
+    "autor": "Moacyr Scliar",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [
+    "Medicina"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "a-doutora-detetive",
+   "titulo": "A Doutora Detetive",
+   "sinopse": "Uma médica que resolve doenças como mistérios, pista por pista.",
+   "obra_mae": {
+    "titulo": "Sherlock Holmes e House",
+    "autor": "Arthur Conan Doyle",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [
+    "Medicina"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "o-menino-que-notava-tudo",
+   "titulo": "O Menino que Notava Tudo",
+   "sinopse": "Ele vê o que ninguém mais vê.",
+   "obra_mae": {
+    "titulo": "The Good Doctor",
+    "autor": "",
+    "tipo": "série",
+    "idade": "14+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Perseverança"
+   ],
+   "caminhos": [
+    "Medicina"
+   ],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": false,
+   "capa": null
+  }
+ ],
+ "grupos": [
+  {
+   "id": "box-a-familia",
+   "titulo": "A Família",
+   "tipo": "box",
+   "obra_mae": {
+    "titulo": "O Poderoso Chefão (livro e filmes)",
+    "autor": "Mario Puzo e Francis Ford Coppola",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "arte": "images/boxes/box-a-familia.webp",
+   "vitrine": true,
+   "titulos": [
+    "a-familia-1-o-menino-que-chegou-de-navio",
+    "a-familia-2-o-filho-que-queria-outro-caminho",
+    "a-familia-3-o-que-deixamos-para-os-filhos"
+   ]
+  },
+  {
+   "id": "box-a-grande-viagem-de-dante",
+   "titulo": "A Grande Viagem de Dante",
+   "tipo": "box",
+   "obra_mae": {
+    "titulo": "A Divina Comédia",
+    "autor": "Dante Alighieri",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "arte": "images/boxes/box-a-grande-viagem-de-dante.webp",
+   "vitrine": true,
+   "titulos": [
+    "dante-1-inferno",
+    "dante-2-purgatorio",
+    "dante-3-paraiso"
+   ]
+  },
+  {
+   "id": "box-jesus",
+   "titulo": "Jesus",
+   "tipo": "box",
+   "obra_mae": {
+    "titulo": "Os Evangelhos e Jesus de Nazaré (1977)",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "arte": "images/boxes/box-jesus.webp",
+   "vitrine": true,
+   "titulos": [
+    "jesus-1-o-nascimento",
+    "jesus-2-os-milagres",
+    "jesus-3-a-paixao-e-a-ressurreicao"
+   ]
+  },
+  {
+   "id": "box-william-wallace",
+   "titulo": "William Wallace",
+   "tipo": "box",
+   "obra_mae": {
+    "titulo": "Coração Valente (1995)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "16+"
+   },
+   "arte": "images/boxes/box-william-wallace.webp",
+   "vitrine": true,
+   "titulos": [
+    "william-wallace-1",
+    "william-wallace-2"
+   ]
+  },
+  {
+   "id": "box-herois-de-israel",
+   "titulo": "Heróis de Israel",
+   "tipo": "box",
+   "obra_mae": {
+    "titulo": "Bíblia: Juízes, 1 Samuel e 1 Reis",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "sansao",
+    "davi-e-o-gigante",
+    "salomao"
+   ]
+  },
+  {
+   "id": "box-os-tres-amigos",
+   "titulo": "Os Três Amigos",
+   "tipo": "box",
+   "obra_mae": {
+    "titulo": "O Senhor dos Anéis",
+    "autor": "J.R.R. Tolkien",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "arte": "images/boxes/box-os-tres-amigos.webp",
+   "vitrine": false,
+   "titulos": [
+    "os-tres-amigos-1",
+    "os-tres-amigos-2",
+    "os-tres-amigos-3"
+   ]
+  },
+  {
+   "id": "colecao-machado-de-assis",
+   "titulo": "Machado de Assis",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Dom Casmurro e Memórias Póstumas de Brás Cubas",
+    "autor": "Machado de Assis",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "arte": "images/boxes/colecao-machado-de-assis.webp",
+   "vitrine": true,
+   "titulos": [
+    "bentinho-e-capitu",
+    "o-senhor-que-contou-a-vida-de-tras-para-frente"
+   ]
+  },
+  {
+   "id": "colecao-jose-de-alencar",
+   "titulo": "José de Alencar",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Iracema e Cinco Minutos",
+    "autor": "José de Alencar",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "arte": "images/boxes/colecao-jose-de-alencar.webp",
+   "vitrine": true,
+   "titulos": [
+    "cinco-minutos",
+    "iracema"
+   ]
+  },
+  {
+   "id": "colecao-doutores-da-igreja",
+   "titulo": "Doutores da Igreja",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Confissões e Santo Tomás de Aquino",
+    "autor": "Santo Agostinho e G.K. Chesterton",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "arte": "images/boxes/colecao-doutores-da-igreja.webp",
+   "vitrine": true,
+   "titulos": [
+    "agostinho",
+    "tomas-o-menino-das-perguntas"
+   ]
+  },
+  {
+   "id": "colecao-herois-de-farda",
+   "titulo": "Heróis de Farda",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Tropa de Elite (2007) e Brigada 49 (2004)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "16+"
+   },
+   "arte": "images/boxes/colecao-herois-de-farda.webp",
+   "vitrine": false,
+   "titulos": [
+    "o-bombeiro",
+    "o-policial"
+   ]
+  },
+  {
+   "id": "colecao-ritmo",
+   "titulo": "Ritmo",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "The Wonders (1996) e Whiplash (2014)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "16+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "a-banda-da-garagem",
+    "o-menino-da-bateria"
+   ]
+  },
+  {
+   "id": "colecao-justica",
+   "titulo": "Justiça",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Suits, O Sol é para Todos e Oração aos Moços",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "a-filha-do-advogado",
+    "o-advogado-da-turma",
+    "rui-o-menino-que-falava-bonito"
+   ]
+  },
+  {
+   "id": "colecao-fabulas",
+   "titulo": "Fábulas",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Fábulas",
+    "autor": "La Fontaine",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "a-cigarra-e-a-formiga"
+   ]
+  },
+  {
+   "id": "colecao-como-o-mundo-comecou",
+   "titulo": "Como o Mundo Começou",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Edda, Teogonia, lendas tupis e Gênesis",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "mito-nordico",
+    "genesis",
+    "mito-grego",
+    "mito-tupi"
+   ]
+  }
+ ]
+}

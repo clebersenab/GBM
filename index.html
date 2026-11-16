@@ -409,80 +409,49 @@ footer img{height:56px;width:auto}
 
 <script>
 {
-const C={coragem:"#d6283e",fe:"#f6a91b",raizes:"#16a2c0",empreender:"#f6a91b",ciencia:"#16a2c0",familia:"#d6283e",exploracao:"#16a2c0"};
-const T=[
- {id:"moby-dick",t:"Moby Dick",v:["Coragem"],c:["Exploração"],s:"Um menino marinheiro atravessa o mar atrás de uma baleia branca que ninguém consegue alcançar.",o:"Moby Dick",a:"Herman Melville",k:"leia",i:"14+"},
- {id:"o-menino-que-nunca-saiu-da-vila",t:"O Menino que Nunca Saiu da Vila",v:["Coragem"],c:["Exploração"],s:"Um menino do sertão que tem medo de tudo precisa atravessar a serra para devolver o que foi roubado.",o:"O Hobbit",a:"J.R.R. Tolkien",k:"leia",i:"10+"},
- {id:"davi-e-o-gigante",t:"Davi e o Gigante",v:["Fé","Coragem"],c:[],s:"O menor dos irmãos escolhe cinco pedras no riacho e vai enfrentar o gigante que todos temiam.",o:"Bíblia, 1 Samuel 16 e 17",a:"",k:"leia",i:"livre"},
- {id:"william-wallace",t:"William Wallace",v:["Coragem"],c:["Servir e proteger"],s:"Nas colinas da Escócia, um menino com uma espada de madeira sonha em proteger o seu povo.",o:"Coração Valente (1995)",a:"",k:"assista",i:"16+"},
- {id:"o-bombeiro",t:"O Bombeiro",v:["Coragem","Família"],c:["Servir e proteger"],s:"O alarme toca no quartel. Em casa, um filho espera o pai voltar.",o:"Brigada 49 (2004)",a:"",k:"assista",i:"14+"},
- {id:"iracema",t:"Iracema",v:[],c:["Raízes do Brasil"],s:"Com a jandaia no ombro, a guerreira das lagoas do Ceará guarda uma terra que ainda não tinha nome.",o:"Iracema",a:"José de Alencar",k:"leia",i:"12+"},
- {id:"bentinho-e-capitu",t:"Bentinho e Capitu",v:["Amizade"],c:["Raízes do Brasil"],s:"Dois vizinhos crescendo juntos no Rio antigo, e uma menina de olhos grandes que ninguém esquece.",o:"Dom Casmurro",a:"Machado de Assis",k:"leia",i:"14+"},
- {id:"a-turma-do-mucuripe",t:"A Turma do Mucuripe",v:["Amizade"],c:["Raízes do Brasil"],s:"Quatro amigos da beira-mar de Fortaleza que se protegem como irmãos e guardam, cada um, um sonho.",o:"Capitães da Areia",a:"Jorge Amado",k:"leia",i:"14+"},
- {id:"robinson-e-a-ilha",t:"Robinson e a Ilha",v:["Perseverança"],c:["Empreender"],s:"Sozinho numa ilha, um menino aprende a construir tudo a partir do nada.",o:"Robinson Crusoé",a:"Daniel Defoe",k:"leia",i:"10+"},
- {id:"o-menino-caixeiro",t:"O Menino Caixeiro",v:["Perseverança"],c:["Empreender"],s:"Atrás do balcão de uma venda no Rio, um menino anota tudo e sonha grande.",o:"Mauá: Empresário do Império",a:"Jorge Caldeira",k:"leia",i:"16+"},
- {id:"os-irmaos-da-lanchonete",t:"Os Irmãos da Lanchonete",v:["Honestidade"],c:["Empreender"],s:"Dois irmãos desenham com giz a cozinha mais rápida do mundo. Um dia, chega um vendedor com um sonho enorme.",o:"Fome de Poder (2016)",a:"",k:"assista",i:"14+"},
- {id:"a-familia-1-o-menino-que-chegou-de-navio",t:"O Menino que Chegou de Navio",v:["Família"],c:["Empreender"],s:"Um menino italiano desembarca sozinho em Santos com uma mala e muita coragem.",o:"O Poderoso Chefão",a:"Mario Puzo",k:"leia",i:"16+"},
- {id:"tomas-o-menino-das-perguntas",t:"Tomás, o Menino das Perguntas",v:["Fé","Curiosidade"],c:[],s:"Tomás era quieto e grandão, e os colegas riam dele. Até o dia em que ele resolveu falar.",o:"Santo Tomás de Aquino",a:"G.K. Chesterton",k:"leia",i:"16+"},
- {id:"a-grande-viagem-de-dante",t:"A Grande Viagem de Dante",v:["Curiosidade","Fé"],c:[],s:"Um jovem poeta e seu guia sobem a montanha mais alta do mundo em busca da luz.",o:"A Divina Comédia",a:"Dante Alighieri",k:"leia",i:"16+"},
- {id:"santos-dumont-e-o-sonho-de-voar",t:"Santos Dumont e o Sonho de Voar",v:["Curiosidade"],c:["Ciência e invenção"],s:"Em Paris, um brasileiro monta uma máquina frágil e tenta fazer o homem voar.",o:"O que eu vi, o que nós veremos",a:"Santos Dumont",k:"leia",i:"12+"},
- {id:"florence-a-dama-da-lampada",t:"Florence, a Dama da Lâmpada",v:["Curiosidade"],c:["Medicina"],s:"Todas as noites, uma enfermeira atravessava o hospital com uma lâmpada na mão.",o:"A Dama da Lâmpada (1951)",a:"",k:"assista",i:"10+"},
- {id:"shackleton-e-o-navio-no-gelo",t:"Shackleton e o Navio no Gelo",v:["Perseverança"],c:["Exploração"],s:"O navio ficou preso no gelo do fim do mundo, e a tripulação não desistiu.",o:"A Incrível Viagem de Shackleton",a:"Alfred Lansing",k:"leia",i:"12+"},
- {id:"a-banda-da-garagem",t:"A Banda da Garagem",v:["Amizade"],c:["Música"],s:"Quatro amigos de uma cidade do interior ouvem a música deles tocar no rádio pela primeira vez.",o:"The Wonders: O Sonho Não Acabou (1996)",a:"",k:"assista",i:"10+"},
- {id:"o-menino-da-bateria",t:"O Menino da Bateria",v:["Perseverança"],c:["Música"],s:"Todo dia, depois da escola, um menino treina na bateria até o braço cansar. Ele quer ser o melhor.",o:"Whiplash: Em Busca da Perfeição (2014)",a:"",k:"assista",i:"16+"},
- {id:"a-ilha-das-regras",t:"A Ilha das Regras",v:["Honestidade","Amizade"],c:[],s:"Cinco crianças sozinhas numa ilha precisam inventar as próprias regras.",o:"Senhor das Moscas",a:"William Golding",k:"leia",i:"14+"}
-];
-const B=[
- {id:"box-a-familia",t:"A Família",n:"3 volumes",col:0,vols:["O Menino que Chegou de Navio","O Filho que Queria Outro Caminho","O Que Deixamos para os Filhos"],o:"O Poderoso Chefão (livro de Mario Puzo e filmes de Coppola)",k:"leia e assista",i:"16+"},
- {id:"box-a-grande-viagem-de-dante",t:"A Grande Viagem de Dante",n:"3 volumes",col:0,vols:["Inferno","Purgatório","Paraíso"],o:"A Divina Comédia, de Dante Alighieri",k:"leia",i:"16+"},
- {id:"box-jesus",t:"Jesus",n:"3 volumes",col:0,vols:["O Nascimento","Os Milagres","A Paixão e a Ressurreição"],o:"Os Evangelhos e o filme Jesus de Nazaré (1977)",k:"leia e assista",i:"livre"},
- {id:"box-william-wallace",t:"William Wallace",n:"2 volumes",col:0,vols:["Parte 1","Parte 2"],o:"Coração Valente (1995)",k:"assista",i:"16+"},
- {id:"box-os-tres-amigos",t:"Os Três Amigos",n:"3 volumes",col:0,vols:["Volume 1","Volume 2","Volume 3"],o:"O Senhor dos Anéis, de J.R.R. Tolkien",k:"leia",i:"12+"},
- {id:"colecao-machado-de-assis",t:"Machado de Assis",n:"Coleção",col:1,vols:["Bentinho e Capitu","O Senhor que Contou a Vida de Trás para Frente"],o:"Dom Casmurro e Memórias Póstumas de Brás Cubas",k:"leia",i:"14+"},
- {id:"colecao-jose-de-alencar",t:"José de Alencar",n:"Coleção",col:1,vols:["Iracema","Cinco Minutos"],o:"Iracema e Cinco Minutos",k:"leia",i:"12+"},
- {id:"colecao-doutores-da-igreja",t:"Doutores da Igreja",n:"Coleção",col:1,vols:["Agostinho","Tomás, o Menino das Perguntas"],o:"Confissões, de Santo Agostinho, e Santo Tomás de Aquino, de Chesterton",k:"leia",i:"16+"},
- {id:"colecao-herois-de-farda",t:"Heróis de Farda",n:"Coleção",col:1,vols:["O Policial","O Bombeiro"],o:"Tropa de Elite (2007) e Brigada 49 (2004)",k:"assista",i:"16+"}
-];
-const ROWS=[["Coragem",C.coragem,x=>x.v.includes("Coragem")],["Raízes do Brasil",C.raizes,x=>x.c.includes("Raízes do Brasil")],["Empreender",C.empreender,x=>x.c.includes("Empreender")],["Música","#d6283e",x=>x.c.includes("Música")],["Curiosidade e ciência",C.ciencia,x=>x.v.includes("Curiosidade")],["Fé",C.fe,x=>x.v.includes("Fé")]];
 const $=s=>document.querySelector(s);
-const cover=x=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="images/capas/${x.id}.webp" alt=""><b>${x.t}</b></button>`;
-const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="lazy" src="images/boxes/${x.id}.webp" alt=""><span class="badge ${x.col?'col':''}">${x.n}</span><b>${x.t}</b></button>`;
-$("#rows").innerHTML=ROWS.map(([n,col,f])=>{const l=T.filter(f);return `<div class="row"><div class="row-h"><h3><i style="background:${col}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")+`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${B.length} conjuntos</span></div><div class="track">${B.map(boxc).join("")}</div></div>`;
-/* plant */
-const SEEDS=[["Fé","valor-fe","Valor"],["Coragem","valor-coragem","Valor"],["Empreender","caminho-empreender","Caminho"],["Ciência e invenção","caminho-ciencia-e-invencao","Caminho"]];
-const MORE=["Honestidade","Amizade","Curiosidade","Perseverança","Família","Medicina","Exploração","Servir e proteger","Raízes do Brasil","Música"];
+const COL={"Clássicos da literatura":"#16a2c0","Do cinema e das séries":"#d6283e","Histórias reais e de fé":"#f6a91b"};
+const SEEDS=[["Fé","valor-fe","Valor"],["Coragem","valor-coragem","Valor"],["Empreender","caminho-empreender","Caminho"],["Ciência e Inovação","caminho-ciencia-e-invencao","Caminho"]];
 const sel=new Set(["Coragem","Empreender"]);
-$("#seeds").innerHTML=SEEDS.map(([n,f,k])=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="images/cards/${f}.webp" alt=""><small>${k}</small><span>${n}</span></button>`).join("");
-$("#chips").innerHTML=MORE.map(n=>`<button class="chip" data-tag="${n}" aria-pressed="false">${n}</button>`).join("");
-const has=(x,n)=>x.v.includes(n)||x.c.includes(n);
+let T=[],G=[];
+const later=(o,cls)=>{const k=o.tipo=="livro"?"leia":"assista";return `<div class="${cls}"><small>Quando crescer, ${k}</small><strong>${o.titulo}</strong>${o.autor?`<small>${o.autor}</small>`:""}<small>Idade sugerida: ${o.idade}</small></div>`};
+const cover=x=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="${x.capa}" alt=""><b>${x.titulo}</b></button>`;
+const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="lazy" src="${x.arte}" alt=""><span class="badge ${x.tipo=="colecao"?"col":""}">${x.tipo=="colecao"?"Coleção":x.titulos.length+" volumes"}</span><b>${x.titulo}</b></button>`;
+const has=(x,n)=>x.valores.includes(n)||x.caminhos.includes(n);
+function rows(cat){
+ const vit=T.filter(x=>x.vitrine&&x.capa), gv=G.filter(g=>g.vitrine);
+ $("#rows").innerHTML=cat.fileiras_landing.map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return `<div class="row"><div class="row-h"><h3><i style="background:${COL[n]||"var(--ink)"}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")
+ +`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${gv.length} conjuntos</span></div><div class="track">${gv.map(boxc).join("")}</div></div>`;
+ $("#seeds").innerHTML=SEEDS.map(([n,f,k])=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="images/cards/${f}.webp" alt=""><small>${k}</small><span>${n}</span></button>`).join("");
+ const withImg=SEEDS.map(x=>x[0]);
+ $("#chips").innerHTML=[...cat.valores,...cat.caminhos].filter(n=>!withImg.includes(n)).map(n=>`<button class="chip" data-tag="${n}" aria-pressed="false">${n}</button>`).join("");
+ $("#pairs").innerHTML=["bentinho-e-capitu","o-menino-que-nunca-saiu-da-vila","os-irmaos-da-lanchonete"].map(id=>{const x=T.find(y=>y.id==id);const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
+ paint();
+}
 function paint(){
  document.querySelectorAll("[data-tag]").forEach(b=>b.setAttribute("aria-pressed",sel.has(b.dataset.tag)));
- const l=T.filter(x=>[...sel].some(n=>has(x,n)));
+ const l=T.filter(x=>x.capa&&[...sel].some(n=>has(x,n)));
  const names=[...sel];
  $("#pickedTxt").innerHTML=names.length?`Estante do Bento com <b>${names.join(", ").replace(/, ([^,]*)$/," e $1")}</b>: ${l.length} ${l.length==1?"título":"títulos"}.`:"Marque pelo menos um valor ou caminho para montar a estante.";
- $("#pickedRow").innerHTML=l.length?l.map(cover).join(""):"";
+ $("#pickedRow").innerHTML=l.map(cover).join("");
 }
-document.addEventListener("click",e=>{const b=e.target.closest("[data-tag]");if(!b)return;const n=b.dataset.tag;sel.has(n)?sel.delete(n):sel.add(n);paint()});
-paint();
-/* pairs */
-const PAIRS=["bentinho-e-capitu","o-menino-que-nunca-saiu-da-vila","os-irmaos-da-lanchonete"];
-$("#pairs").innerHTML=PAIRS.map(id=>{const x=T.find(y=>y.id==id);return `<article class="pair"><img loading="lazy" src="images/capas/${x.id}.webp" alt=""><div><h3>${x.t}</h3><p style="color:var(--mute);font-size:15px">${x.s}</p><p class="later">Quando crescer, ${x.k}:<strong>${x.o}${x.a?", de "+x.a:""}</strong>Idade sugerida: ${x.i}</p></div></article>`}).join("");
-/* modal */
 const M=$("#modal"),S=$("#sheet");let last=null;
 const acts=`<div class="acts"><button class="btn btn-main" data-toast="Disponível para assinantes.">Ler agora</button><button class="btn btn-ghost" data-toast="Salvo em Tenho interesse.">Tenho interesse</button></div>`;
 function open(html,wide){S.className="sheet"+(wide?" wide":"");S.innerHTML=`<button class="x" aria-label="Fechar">×</button>`+html;M.classList.add("on");last=document.activeElement;S.querySelector(".x").focus()}
 function close(){M.classList.remove("on");last&&last.focus()}
 document.addEventListener("click",e=>{
+ const tg=e.target.closest("[data-tag]");if(tg){const n=tg.dataset.tag;sel.has(n)?sel.delete(n):sel.add(n);paint();return}
  const c=e.target.closest("[data-id]"),b=e.target.closest("[data-box]");
- if(c){const x=T.find(y=>y.id==c.dataset.id);const tags=[...x.v,...x.c].map(t=>`<span>${t}</span>`).join("");
-  open(`<img src="images/capas/${x.id}.webp" alt=""><div class="in"><h2 id="mTitle">${x.t}</h2><div class="meta"><span>4 a 8 anos</span>${tags}</div><p style="color:#e6dccb">${x.s}</p><div class="later"><small>Quando crescer, ${x.k}</small><strong>${x.o}</strong>${x.a?`<small>${x.a}</small>`:""}<small>Idade sugerida: ${x.i}</small></div>${acts}</div>`)}
- if(b){const x=B.find(y=>y.id==b.dataset.box);
-  open(`<img src="images/boxes/${x.id}.webp" alt=""><div class="in"><h2 id="mTitle">${x.t}</h2><div class="meta"><span>${x.n}</span><span>${x.col?"Leia em qualquer ordem":"Leia em ordem"}</span></div><ol class="vols">${x.vols.map(v=>`<li>${v}</li>`).join("")}</ol><div class="later"><small>Quando crescer, ${x.k}</small><strong>${x.o}</strong><small>Idade sugerida: ${x.i}</small></div>${acts}</div>`,true)}
+ if(c){const x=T.find(y=>y.id==c.dataset.id);const tags=[...x.valores,...x.caminhos].map(t=>`<span>${t}</span>`).join("");
+  open(`<img src="${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>4 a 8 anos</span>${tags}</div><p style="color:#e6dccb">${x.sinopse}</p>${later(x.obra_mae,"later")}${acts}</div>`)}
+ if(b){const g=G.find(y=>y.id==b.dataset.box);const vols=g.titulos.map(id=>T.find(t=>t.id==id).titulo);
+  open(`<img src="${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span>${g.tipo=="colecao"?"Coleção":vols.length+" volumes"}</span><span>${g.tipo=="colecao"?"Leia em qualquer ordem":"Leia em ordem"}</span></div><ol class="vols">${vols.map(v=>`<li>${v}</li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true)}
  if(e.target.closest(".x")||e.target===M)close();
  const t=e.target.closest("[data-toast]");if(t){const el=$("#toast");el.textContent=t.dataset.toast;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2200)}
 });
 document.querySelectorAll("#opts button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#opts button").forEach(x=>x.className="");const ok=b.dataset.ok=="1";b.className=ok?"ok":"no";$("#qfb").textContent=ok?"Isso! A baleia era branca, por isso todo mundo a reconhecia de longe.":"Quase. Lembra do que o marinheiro viu no mar?"}));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
+fetch("data/catalogo.json").then(r=>r.json()).then(cat=>{T=cat.titulos;G=cat.grupos;rows(cat)}).catch(()=>{$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>'});
 }
 </script>
 </body>
