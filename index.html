@@ -116,6 +116,16 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .note{background:#fff4e0;color:#2a2416;border-radius:10px;padding:14px 16px;font-size:15px;transform:rotate(-1deg)}
 .note b{display:block;font-family:Poppins,sans-serif;font-size:13px;color:#8a6a1e}
 .tabs{display:flex;gap:8px;flex-wrap:wrap}
+.feat.quiz{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.feat.quiz>div:first-child{display:grid;gap:12px}
+.qbox{background:var(--bg);border-radius:14px;padding:18px;display:grid;gap:10px}
+.qbox small{color:var(--mute);font-size:13px}
+.qbox b{font-family:Poppins,sans-serif;font-size:20px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{min-height:44px;padding:0 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.opts button.ok{background:var(--teal);border-color:var(--teal);color:#04161b}
+.opts button.no{border-color:var(--red);color:var(--red)}
+.plan .fine{color:var(--mute);font-size:13px;text-align:center}
 .tabs span{padding:6px 14px;border-radius:999px;background:var(--bg);font-size:14px;font-weight:700}
 .tabs span:first-child{background:var(--teal);color:#04161b}
 /* curation */
@@ -185,7 +195,7 @@ footer img{height:56px;width:auto}
  .hero>img{position:relative;height:auto;aspect-ratio:4/3;object-position:72% 40%}
  .hero::before{background:linear-gradient(0deg,var(--bg) 38%,rgba(11,13,23,0) 60%)}
  .hero .txt{padding:0 16px;margin-top:-60px}
- .origin .wrap,.cur .wrap,.price .wrap,.feat.wide,.cur .cols{grid-template-columns:1fr}
+ .origin .wrap,.cur .wrap,.price .wrap,.feat.wide,.cur .cols,.feat.quiz{grid-template-columns:1fr}
  .feats{grid-template-columns:1fr}
  .sheet{grid-template-columns:1fr}
  .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
@@ -276,6 +286,18 @@ footer img{height:56px;width:auto}
           <p>O texto é curto para caber na atenção da criança e bom o bastante para o adulto querer ler em voz alta, seja pai, mãe, avó ou babá.</p>
         </div>
       </div>
+      <div class="feat quiz">
+        <div>
+          <h3>Um quiz no fim de cada história</h3>
+          <p>De 5 a 10 perguntas para ver se a criança entendeu o que leu. Com os menores, o adulto lê a pergunta e a criança responde apontando. A última pergunta não tem resposta certa: é ela que puxa a conversa.</p>
+        </div>
+        <div class="qbox">
+          <small>Moby Dick · pergunta 3 de 6</small>
+          <b>De que cor era a baleia?</b>
+          <div class="opts" id="opts"><button data-ok="0">Azul</button><button data-ok="1">Branca</button><button data-ok="0">Cinza</button></div>
+          <small id="qfb">Toque numa resposta.</small>
+        </div>
+      </div>
       <div class="feat">
         <h3>Quem está lendo?</h3>
         <p>Cada filho tem o seu perfil, com estante e progresso separados. O que a Maria leu não bagunça a lista do Bento.</p>
@@ -298,7 +320,7 @@ footer img{height:56px;width:auto}
       </div>
       <div class="feat">
         <h3>Boxes e coleções</h3>
-        <p>Histórias que continuam vêm em box, com os volumes em ordem. Títulos que conversam entre si formam coleções. E você pode baixar cada e-book para guardar ou imprimir.</p>
+        <p>Histórias que continuam vêm em box, com os volumes em ordem. Títulos que conversam entre si formam coleções.</p>
       </div>
     </div>
   </div>
@@ -323,6 +345,7 @@ footer img{height:56px;width:auto}
             <li>Vocabulário e frases do tamanho de quem tem de 4 a 8 anos, em um ou dois parágrafos por página.</li>
             <li>Os temas delicados do original ficam de fora. A semente da obra fica.</li>
             <li>Cada página é revisada e corrigida antes de chegar ao seu filho.</li>
+            <li>No fim, um quiz de 5 a 10 perguntas confere se a história foi entendida.</li>
           </ul>
         </div>
       </div>
@@ -343,10 +366,11 @@ footer img{height:56px;width:auto}
         <li>Catálogo completo: clássicos, Bíblia, santos, aventuras reais</li>
         <li>Perfis para todos os seus filhos</li>
         <li>Lançamentos frequentes</li>
-        <li>Download dos e-books para guardar e imprimir</li>
+        <li>Quiz de compreensão no fim de cada história</li>
         <li>Marca-página, anotações e lista "Tenho interesse"</li>
       </ul>
       <button class="btn btn-main" data-toast="O cadastro abre em breve.">Assinar agora</button>
+      <small class="fine">Os e-books também ficam disponíveis em PDF.</small>
     </div>
   </div>
 </section>
@@ -358,7 +382,8 @@ footer img{height:56px;width:auto}
     <details><summary>As histórias são resumos dos clássicos?</summary><p>Não. São histórias novas, inspiradas nos temas das grandes obras e simplificadas para a idade da criança, sem os temas delicados do original. Cada uma termina com a indicação do clássico para ler ou assistir quando crescer.</p></details>
     <details><summary>Como as histórias são escolhidas?</summary><p>Uma obra só entra no catálogo se valer a pena ser reencontrada mais tarde, e se tiver um valor ou um caminho claro para apresentar à criança. Depois disso, o texto é adaptado para a idade e cada página é revisada.</p></details>
     <details><summary>Substitui os livros de alfabetização?</summary><p>Não, complementa. Os livros de alfabetização treinam a decodificação. O GBM cuida da outra parte: a vontade de abrir um livro.</p></details>
-    <details><summary>Posso baixar os livros?</summary><p>Sim. Cada e-book pode ser baixado para ler sem internet, guardar ou imprimir.</p></details>
+    <details><summary>Como sei se meu filho entendeu a história?</summary><p>Cada livro termina com um quiz de 5 a 10 perguntas. Para os menores, as respostas são desenhos, e o adulto lê as perguntas em voz alta. A última pergunta é aberta, para vocês conversarem sobre a história.</p></details>
+    <details><summary>Posso baixar os livros?</summary><p>Sim. Cada e-book também está disponível em PDF.</p></details>
     <details><summary>Quantos filhos posso cadastrar?</summary><p>Todos. A assinatura é da família, e cada filho tem o seu perfil.</p></details>
   </div>
 </section>
@@ -403,6 +428,8 @@ const T=[
  {id:"santos-dumont-e-o-sonho-de-voar",t:"Santos Dumont e o Sonho de Voar",v:["Curiosidade"],c:["Ciência e invenção"],s:"Em Paris, um brasileiro monta uma máquina frágil e tenta fazer o homem voar.",o:"O que eu vi, o que nós veremos",a:"Santos Dumont",k:"leia",i:"12+"},
  {id:"florence-a-dama-da-lampada",t:"Florence, a Dama da Lâmpada",v:["Curiosidade"],c:["Medicina"],s:"Todas as noites, uma enfermeira atravessava o hospital com uma lâmpada na mão.",o:"A Dama da Lâmpada (1951)",a:"",k:"assista",i:"10+"},
  {id:"shackleton-e-o-navio-no-gelo",t:"Shackleton e o Navio no Gelo",v:["Perseverança"],c:["Exploração"],s:"O navio ficou preso no gelo do fim do mundo, e a tripulação não desistiu.",o:"A Incrível Viagem de Shackleton",a:"Alfred Lansing",k:"leia",i:"12+"},
+ {id:"a-banda-da-garagem",t:"A Banda da Garagem",v:["Amizade"],c:["Música"],s:"Quatro amigos de uma cidade do interior ouvem a música deles tocar no rádio pela primeira vez.",o:"The Wonders: O Sonho Não Acabou (1996)",a:"",k:"assista",i:"10+"},
+ {id:"o-menino-da-bateria",t:"O Menino da Bateria",v:["Perseverança"],c:["Música"],s:"Todo dia, depois da escola, um menino treina na bateria até o braço cansar. Ele quer ser o melhor.",o:"Whiplash: Em Busca da Perfeição (2014)",a:"",k:"assista",i:"16+"},
  {id:"a-ilha-das-regras",t:"A Ilha das Regras",v:["Honestidade","Amizade"],c:[],s:"Cinco crianças sozinhas numa ilha precisam inventar as próprias regras.",o:"Senhor das Moscas",a:"William Golding",k:"leia",i:"14+"}
 ];
 const B=[
@@ -416,14 +443,14 @@ const B=[
  {id:"colecao-doutores-da-igreja",t:"Doutores da Igreja",n:"Coleção",col:1,vols:["Agostinho","Tomás, o Menino das Perguntas"],o:"Confissões, de Santo Agostinho, e Santo Tomás de Aquino, de Chesterton",k:"leia",i:"16+"},
  {id:"colecao-herois-de-farda",t:"Heróis de Farda",n:"Coleção",col:1,vols:["O Policial","O Bombeiro"],o:"Tropa de Elite (2007) e Brigada 49 (2004)",k:"assista",i:"16+"}
 ];
-const ROWS=[["Coragem",C.coragem,x=>x.v.includes("Coragem")],["Raízes do Brasil",C.raizes,x=>x.c.includes("Raízes do Brasil")],["Empreender",C.empreender,x=>x.c.includes("Empreender")],["Curiosidade e ciência",C.ciencia,x=>x.v.includes("Curiosidade")],["Fé",C.fe,x=>x.v.includes("Fé")]];
+const ROWS=[["Coragem",C.coragem,x=>x.v.includes("Coragem")],["Raízes do Brasil",C.raizes,x=>x.c.includes("Raízes do Brasil")],["Empreender",C.empreender,x=>x.c.includes("Empreender")],["Música","#d6283e",x=>x.c.includes("Música")],["Curiosidade e ciência",C.ciencia,x=>x.v.includes("Curiosidade")],["Fé",C.fe,x=>x.v.includes("Fé")]];
 const $=s=>document.querySelector(s);
 const cover=x=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="images/capas/${x.id}.webp" alt=""><b>${x.t}</b></button>`;
 const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="lazy" src="images/boxes/${x.id}.webp" alt=""><span class="badge ${x.col?'col':''}">${x.n}</span><b>${x.t}</b></button>`;
 $("#rows").innerHTML=ROWS.map(([n,col,f])=>{const l=T.filter(f);return `<div class="row"><div class="row-h"><h3><i style="background:${col}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")+`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${B.length} conjuntos</span></div><div class="track">${B.map(boxc).join("")}</div></div>`;
 /* plant */
 const SEEDS=[["Fé","valor-fe","Valor"],["Coragem","valor-coragem","Valor"],["Empreender","caminho-empreender","Caminho"],["Ciência e invenção","caminho-ciencia-e-invencao","Caminho"]];
-const MORE=["Honestidade","Amizade","Curiosidade","Perseverança","Família","Medicina","Exploração","Servir e proteger","Raízes do Brasil"];
+const MORE=["Honestidade","Amizade","Curiosidade","Perseverança","Família","Medicina","Exploração","Servir e proteger","Raízes do Brasil","Música"];
 const sel=new Set(["Coragem","Empreender"]);
 $("#seeds").innerHTML=SEEDS.map(([n,f,k])=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="images/cards/${f}.webp" alt=""><small>${k}</small><span>${n}</span></button>`).join("");
 $("#chips").innerHTML=MORE.map(n=>`<button class="chip" data-tag="${n}" aria-pressed="false">${n}</button>`).join("");
@@ -454,6 +481,7 @@ document.addEventListener("click",e=>{
  if(e.target.closest(".x")||e.target===M)close();
  const t=e.target.closest("[data-toast]");if(t){const el=$("#toast");el.textContent=t.dataset.toast;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2200)}
 });
+document.querySelectorAll("#opts button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#opts button").forEach(x=>x.className="");const ok=b.dataset.ok=="1";b.className=ok?"ok":"no";$("#qfb").textContent=ok?"Isso! A baleia era branca, por isso todo mundo a reconhecia de longe.":"Quase. Lembra do que o marinheiro viu no mar?"}));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
 }
 </script>
