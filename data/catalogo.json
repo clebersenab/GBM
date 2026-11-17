@@ -619,7 +619,7 @@
   {
    "id": "o-balcao-de-irineu",
    "titulo": "O Balcão de Irineu",
-   "sinopse": "Atrás do balcão de uma venda no Rio antigo, Irineu anota tudo e sonha grande.",
+   "sinopse": "Atrás do balcão de uma venda no Rio antigo, Irineu anota tudo e sonha grande. Ele vai virar o Barão de Mauá.",
    "obra_mae": {
     "titulo": "Mauá: Empresário do Império",
     "autor": "Jorge Caldeira",
@@ -1122,9 +1122,9 @@
    "lancamento": false
   },
   {
-   "id": "joana-darc",
-   "titulo": "Joana d'Arc",
-   "sinopse": "Uma menina do campo ouve um chamado e muda a história do seu país.",
+   "id": "santa-joana-darc",
+   "titulo": "Santa Joana d'Arc",
+   "sinopse": "Joana era uma menina do campo que cuidava das ovelhas. Um dia, ouviu um chamado que mudou a história do seu país.",
    "obra_mae": {
     "titulo": "Joana d'Arc",
     "autor": "Régine Pernoud",
@@ -1136,13 +1136,13 @@
     "Coragem"
    ],
    "caminhos": [],
-   "grupo": null,
+   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": "images/capas/joana-darc.webp",
+   "capa": "images/capas/santa-joana-darc.webp",
    "lancamento": false
   },
   {
@@ -1188,7 +1188,7 @@
    "caminhos": [
     "Medicina"
    ],
-   "grupo": null,
+   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé",
@@ -1212,7 +1212,7 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": null,
+   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
@@ -1223,8 +1223,8 @@
   },
   {
    "id": "pasteur",
-   "titulo": "Pasteur",
-   "sinopse": "Um cientista e um menino de mão enfaixada que veio de longe pedir ajuda.",
+   "titulo": "Louis Pasteur",
+   "sinopse": "Louis Pasteur, um cientista, e um menino de mão enfaixada que veio de longe pedir ajuda.",
    "obra_mae": {
     "titulo": "A História de Louis Pasteur (1936)",
     "autor": "",
@@ -1519,7 +1519,7 @@
   {
    "id": "ben-hur",
    "titulo": "Ben-Hur: a Corrida de Bigas",
-   "sinopse": "Um jovem traído pelo melhor amigo perde tudo. Anos depois, os dois se reencontram na grande corrida do circo.",
+   "sinopse": "Judá Ben-Hur é traído pelo melhor amigo e perde tudo. Anos depois, os dois se reencontram na grande corrida do circo.",
    "obra_mae": {
     "titulo": "Ben-Hur",
     "autor": "Lew Wallace",
@@ -1688,16 +1688,19 @@
    "titulo": "Santos da Igreja",
    "tipo": "colecao",
    "obra_mae": {
-    "titulo": "Confissões, de Santo Agostinho, e Santo Tomás de Aquino, de Chesterton",
-    "autor": "Santo Agostinho e G.K. Chesterton",
+    "titulo": "Confissões, Santo Tomás de Aquino (Chesterton), Joana d'Arc (Régine Pernoud), Padre Pio (2000) e Irmã Dulce (2014)",
+    "autor": "",
     "tipo": "livro",
-    "idade": "16+"
+    "idade": "12+"
    },
    "arte": "images/boxes/colecao-santos-da-igreja.webp",
    "vitrine": true,
    "titulos": [
     "santo-agostinho",
-    "sao-tomas-de-aquino"
+    "sao-tomas-de-aquino",
+    "santa-joana-darc",
+    "padre-pio",
+    "irma-dulce"
    ]
   },
   {
