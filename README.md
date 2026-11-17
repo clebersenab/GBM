@@ -1,24 +1,42 @@
 # GBM
 Histórias para ler juntos
 
-## Estrutura de imagens
+## Estrutura do projeto
 
-Toda imagem fica em `/images`. Cada arte tem dois arquivos com o mesmo nome:
+```
+/
+├── landing/      página de venda (landing/index.html), servida em gbm…/
+├── app/          plataforma do assinante (app/index.html), hoje um protótipo navegável
+├── images/       imagens compartilhadas pela landing e pelo app
+├── data/         catálogo (catalogo.json), lido pela landing e pelo app
+├── vercel.json   faz a raiz do site abrir a landing
+└── README.md
+```
 
-- `.png`: original em alta resolução (fonte, não usar na landing)
-- `.webp`: versão leve para a web (é esta que a landing carrega)
+- A raiz não guarda arquivos soltos. Imagem nova vai direto para a pasta certa em `/images`.
+- `data/` fica fora de `landing/` e `app/` porque os dois leem o mesmo catálogo.
+- As páginas usam caminhos relativos (`../images`, `../data`), então funcionam no Vercel e localmente.
+- Quando o app crescer (login, banco, build), ele ganha o próprio `package.json` dentro de `app/`, sem mexer na landing.
+
+### Imagens
+
+Cada arte tem dois arquivos com o mesmo nome:
+
+- `.png`: original em alta resolução (fonte, não usar nas páginas)
+- `.webp`: versão leve para a web (é esta que as páginas carregam)
 
 ```
 images/
 ├── marca/        logo e símbolo (svg é o master; transparente, fundo claro e fundo escuro), logo-nav, logo-web, favicons, og-image, referencia/
 ├── hero/         banner principal (pai e filho / mãe e filha)
 ├── secoes/       origem (antes e depois), elo, curadoria
-├── cards/        "Você escolhe o que plantar": valor-*.png e caminho-*.png
+├── cards/        "Você escolhe o que plantar": valor-* (planta) e caminho-* (porta)
 ├── capas/        capas verticais 2:3 dos títulos avulsos e volumes
-├── destaques/    versões 16:9 de capas para o carrossel de destaque
+├── destaques/    versões 16:9 de algumas capas (uso futuro em anúncios e no app)
 ├── boxes/        artes 16:9 de box-* (continuação) e colecao-* (relacionados)
 ├── avatares/     avatares de perfil ("Quem está lendo?") + a folha original
-└── _descartadas/ variações não usadas (manter até decidir apagar)
+├── plataforma/   capturas do protótipo do app, usadas na landing
+└── _descartadas/ versões substituídas (manter até decidir apagar)
 ```
 
 ### Convenção de nomes
@@ -28,18 +46,7 @@ images/
 
 ## Inventário
 
-| Pasta | Tem | Falta |
-|---|---|---|
-| marca | logo v2 (roxo, azul e laranja) em svg e png, símbolo, favicons, og-image | — |
-| hero | pai e filho, mãe e filha | — |
-| secoes | origem, elo (avô), elo (mãos), curadoria | — |
-| cards | 7 valores (planta) e 6 caminhos (porta) | — |
-| capas | 62 (catálogo completo) | — |
-| destaques | menino da vila, ilha das regras, turma do mucuripe | — |
-| boxes | a família, dante, jesus, os três amigos*, william wallace, doutores da igreja, heróis de farda, josé de alencar, machado de assis | heróis de israel, fábulas |
-| avatares | 8 | — |
-
-\* `box-os-tres-amigos` deve ser refeita: capa verde e luz na mão do protagonista lembram demais a obra-mãe.
+Catálogo inicial completo: 62 títulos com capa, 14 boxes e coleções com arte, 13 cards (7 valores e 6 caminhos), marca v2.
 
 ## Catálogo (`data/catalogo.json`)
 
@@ -48,7 +55,7 @@ Fonte única de todos os títulos, boxes e coleções. A landing lê este arquiv
 - `titulos[]`: id, título, sinopse, obra-mãe (título, autor, tipo, idade sugerida), valores, caminhos, grupo (box ou coleção), volume, fileiras, capa.
 - `grupos[]`: boxes (`tipo: box`, leitura em ordem) e coleções (`tipo: colecao`), com a arte e a lista de títulos.
 - `vitrine: true` marca o que aparece na landing. O resto só aparece para quem assina.
-- `capa: null` indica que a imagem ainda não foi gerada.
+- `capa: null` indica que a imagem ainda não foi gerada (hoje nenhum título está assim).
 
 ## Lançamentos
 
@@ -57,7 +64,7 @@ Fonte única de todos os títulos, boxes e coleções. A landing lê este arquiv
 
 ## Plataforma (especificação)
 
-Protótipo navegável em `app.html` (perfis, estante, leitor, fim do livro). As telas da landing em `images/plataforma` são capturas desse protótipo.
+Protótipo navegável em `app/index.html` (perfis, estante, leitor, fim do livro). As telas da landing em `images/plataforma` são capturas desse protótipo.
 
 Estados de leitura por perfil: **não iniciado**, **iniciado** (com página atual), **lido**. A estante mostra "Continue lendo" (iniciados), "Indicados", "Lançamentos" e "Tenho interesse" (com filtro lidos e não lidos).
 
