@@ -10,7 +10,7 @@ Toda imagem fica em `/images`. Cada arte tem dois arquivos com o mesmo nome:
 
 ```
 images/
-├── marca/        logo (svg é o master), ícone do app, favicons, og-image (compartilhamento)
+├── marca/        logo e símbolo (svg é o master; transparente, fundo claro e fundo escuro), logo-nav, logo-web, favicons, og-image, referencia/
 ├── hero/         banner principal (pai e filho / mãe e filha)
 ├── secoes/       origem (antes e depois), elo, curadoria
 ├── cards/        "Você escolhe o que plantar": valor-*.png e caminho-*.png
@@ -30,7 +30,7 @@ images/
 
 | Pasta | Tem | Falta |
 |---|---|---|
-| marca | logo (svg/png), logo horizontal, ícone, favicons, og-image | — |
+| marca | logo v2 (roxo, azul e laranja) em svg e png, símbolo, favicons, og-image | — |
 | hero | pai e filho, mãe e filha | — |
 | secoes | origem, elo (avô), elo (mãos), curadoria | — |
 | cards | 7 valores (planta) e 6 caminhos (porta) | — |
