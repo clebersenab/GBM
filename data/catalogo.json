@@ -1515,6 +1515,30 @@
    "vitrine": false,
    "capa": null,
    "lancamento": false
+  },
+  {
+   "id": "ben-hur",
+   "titulo": "Ben-Hur: a Corrida de Bigas",
+   "sinopse": "Um jovem traído pelo melhor amigo perde tudo. Anos depois, os dois se reencontram na grande corrida do circo.",
+   "obra_mae": {
+    "titulo": "Ben-Hur",
+    "autor": "Lew Wallace",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Perseverança",
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null,
+   "lancamento": false
   }
  ],
  "grupos": [
