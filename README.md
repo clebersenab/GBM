@@ -52,7 +52,8 @@ Catálogo inicial completo: 62 títulos com capa, 14 boxes e coleções com arte
 
 Fonte única de todos os títulos, boxes e coleções. A landing lê este arquivo e a plataforma vai usá-lo para alimentar o banco.
 
-- `titulos[]`: id, título, sinopse, obra-mãe (título, autor, tipo, idade sugerida), valores, caminhos, grupo (box ou coleção), volume, fileiras, capa.
+- `titulos[]`: id, título, sinopse, obra-mãe (título, autor, tipo, idade sugerida), valores, caminhos, `box` (no máximo um, porque define a ordem de leitura), `volume`, `colecoes` (quantas forem: um título pode estar em várias), fileiras, capa.
+- Exemplo: *Davi e o Gigante* está no box Heróis de Israel (volume 2) e na coleção Histórias Bíblicas; *Paulo e o Naufrágio* está nas coleções Santos da Igreja e Histórias Bíblicas.
 - `grupos[]`: boxes (`tipo: box`, leitura em ordem) e coleções (`tipo: colecao`), com a arte e a lista de títulos.
 - `vitrine: true` marca o que aparece na landing. O resto só aparece para quem assina.
 - `capa: null` indica que a imagem ainda não foi gerada (hoje nenhum título está assim).

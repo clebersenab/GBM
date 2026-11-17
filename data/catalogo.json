@@ -36,14 +36,15 @@
     "Coragem"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": true,
    "capa": "images/capas/moby-dick.webp",
-   "lancamento": true
+   "lancamento": true,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "bentinho-e-capitu",
@@ -59,7 +60,6 @@
     "Amizade"
    ],
    "caminhos": [],
-   "grupo": "colecao-machado-de-assis",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -67,7 +67,11 @@
    ],
    "vitrine": true,
    "capa": "images/capas/bentinho-e-capitu.webp",
-   "lancamento": true
+   "lancamento": true,
+   "box": null,
+   "colecoes": [
+    "colecao-machado-de-assis"
+   ]
   },
   {
    "id": "iracema",
@@ -83,7 +87,6 @@
     "Coragem"
    ],
    "caminhos": [],
-   "grupo": "colecao-jose-de-alencar",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -91,7 +94,11 @@
    ],
    "vitrine": true,
    "capa": "images/capas/iracema.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-jose-de-alencar"
+   ]
   },
   {
    "id": "dante-2-purgatorio",
@@ -108,14 +115,15 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": "box-a-grande-viagem-de-dante",
    "volume": 2,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": true,
    "capa": "images/capas/a-grande-viagem-de-dante.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-a-grande-viagem-de-dante",
+   "colecoes": []
   },
   {
    "id": "ze-candeia",
@@ -131,7 +139,6 @@
     "Coragem"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -139,7 +146,9 @@
    ],
    "vitrine": true,
    "capa": "images/capas/ze-candeia.webp",
-   "lancamento": true
+   "lancamento": true,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "a-ilha-das-regras",
@@ -156,14 +165,15 @@
     "Amizade"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/a-ilha-das-regras.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "a-turma-do-mucuripe",
@@ -179,7 +189,6 @@
     "Amizade"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -187,7 +196,9 @@
    ],
    "vitrine": false,
    "capa": "images/capas/a-turma-do-mucuripe.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "robinson-crusoe",
@@ -205,14 +216,15 @@
    "caminhos": [
     "Empreender"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/robinson-crusoe.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "a-banda-da-garagem",
@@ -230,7 +242,6 @@
    "caminhos": [
     "Música"
    ],
-   "grupo": "colecao-ritmo",
    "volume": null,
    "fileiras": [
     "Do cinema e das séries",
@@ -238,7 +249,11 @@
    ],
    "vitrine": true,
    "capa": "images/capas/a-banda-da-garagem.webp",
-   "lancamento": true
+   "lancamento": true,
+   "box": null,
+   "colecoes": [
+    "colecao-ritmo"
+   ]
   },
   {
    "id": "as-baquetas-de-teo",
@@ -256,14 +271,17 @@
    "caminhos": [
     "Música"
    ],
-   "grupo": "colecao-ritmo",
    "volume": null,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": true,
    "capa": "images/capas/as-baquetas-de-teo.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-ritmo"
+   ]
   },
   {
    "id": "a-cozinha-de-giz",
@@ -281,14 +299,15 @@
    "caminhos": [
     "Empreender"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": true,
    "capa": "images/capas/a-cozinha-de-giz.webp",
-   "lancamento": true
+   "lancamento": true,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "a-familia-1-enzo-chega-a-santos",
@@ -306,7 +325,6 @@
    "caminhos": [
     "Empreender"
    ],
-   "grupo": "box-a-familia",
    "volume": 1,
    "fileiras": [
     "Do cinema e das séries",
@@ -314,7 +332,9 @@
    ],
    "vitrine": true,
    "capa": "images/capas/a-familia-1-enzo-chega-a-santos.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-a-familia",
+   "colecoes": []
   },
   {
    "id": "a-familia-2-pietro-e-a-venda",
@@ -332,14 +352,15 @@
    "caminhos": [
     "Empreender"
    ],
-   "grupo": "box-a-familia",
    "volume": 2,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": false,
    "capa": "images/capas/a-familia-2-pietro-e-a-venda.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-a-familia",
+   "colecoes": []
   },
   {
    "id": "a-familia-3-a-chave-do-vovo-pietro",
@@ -357,14 +378,15 @@
    "caminhos": [
     "Empreender"
    ],
-   "grupo": "box-a-familia",
    "volume": 3,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": false,
    "capa": "images/capas/a-familia-3-a-chave-do-vovo-pietro.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-a-familia",
+   "colecoes": []
   },
   {
    "id": "o-bombeiro",
@@ -383,14 +405,17 @@
    "caminhos": [
     "Servir e proteger"
    ],
-   "grupo": "colecao-herois-de-farda",
    "volume": null,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": true,
    "capa": "images/capas/o-bombeiro.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-herois-de-farda"
+   ]
   },
   {
    "id": "a-causa-de-caio",
@@ -408,14 +433,17 @@
    "caminhos": [
     "Direito"
    ],
-   "grupo": "colecao-justica",
    "volume": null,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": true,
    "capa": "images/capas/a-causa-de-caio.webp",
-   "lancamento": true
+   "lancamento": true,
+   "box": null,
+   "colecoes": [
+    "colecao-justica"
+   ]
   },
   {
    "id": "lia-e-o-julgamento",
@@ -433,7 +461,6 @@
    "caminhos": [
     "Direito"
    ],
-   "grupo": "colecao-justica",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -441,7 +468,11 @@
    ],
    "vitrine": false,
    "capa": "images/capas/lia-e-o-julgamento.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-justica"
+   ]
   },
   {
    "id": "shackleton-e-o-navio-no-gelo",
@@ -457,14 +488,15 @@
     "Perseverança"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": true,
    "capa": "images/capas/shackleton-e-o-navio-no-gelo.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "santos-dumont-e-o-sonho-de-voar",
@@ -482,7 +514,6 @@
    "caminhos": [
     "Ciência e Inovação"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé",
@@ -490,7 +521,9 @@
    ],
    "vitrine": true,
    "capa": "images/capas/santos-dumont-e-o-sonho-de-voar.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "florence-a-dama-da-lampada",
@@ -508,14 +541,15 @@
    "caminhos": [
     "Medicina"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": true,
    "capa": "images/capas/florence-a-dama-da-lampada.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "rui-barbosa",
@@ -533,7 +567,6 @@
    "caminhos": [
     "Direito"
    ],
-   "grupo": "colecao-justica",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé",
@@ -541,7 +574,11 @@
    ],
    "vitrine": true,
    "capa": "images/capas/rui-barbosa.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-justica"
+   ]
   },
   {
    "id": "william-wallace-1",
@@ -559,14 +596,15 @@
    "caminhos": [
     "Servir e proteger"
    ],
-   "grupo": "box-william-wallace",
    "volume": 1,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": true,
    "capa": "images/capas/william-wallace.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-william-wallace",
+   "colecoes": []
   },
   {
    "id": "davi-e-o-gigante",
@@ -583,14 +621,17 @@
     "Coragem"
    ],
    "caminhos": [],
-   "grupo": "box-herois-de-israel",
    "volume": 2,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": true,
    "capa": "images/capas/davi-e-o-gigante.webp",
-   "lancamento": true
+   "lancamento": true,
+   "box": "box-herois-de-israel",
+   "colecoes": [
+    "colecao-historias-biblicas"
+   ]
   },
   {
    "id": "sao-tomas-de-aquino",
@@ -607,14 +648,17 @@
     "Curiosidade"
    ],
    "caminhos": [],
-   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": true,
    "capa": "images/capas/sao-tomas-de-aquino.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-santos-da-igreja"
+   ]
   },
   {
    "id": "o-balcao-de-irineu",
@@ -632,7 +676,6 @@
    "caminhos": [
     "Empreender"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé",
@@ -640,7 +683,9 @@
    ],
    "vitrine": false,
    "capa": "images/capas/o-balcao-de-irineu.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "os-tres-amigos-1",
@@ -656,14 +701,15 @@
     "Amizade"
    ],
    "caminhos": [],
-   "grupo": "box-os-tres-amigos",
    "volume": 1,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/os-tres-amigos-1.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-os-tres-amigos",
+   "colecoes": []
   },
   {
    "id": "os-tres-amigos-2",
@@ -679,14 +725,15 @@
     "Amizade"
    ],
    "caminhos": [],
-   "grupo": "box-os-tres-amigos",
    "volume": 2,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/os-tres-amigos-2.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-os-tres-amigos",
+   "colecoes": []
   },
   {
    "id": "os-tres-amigos-3",
@@ -702,14 +749,15 @@
     "Amizade"
    ],
    "caminhos": [],
-   "grupo": "box-os-tres-amigos",
    "volume": 3,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/os-tres-amigos-3.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-os-tres-amigos",
+   "colecoes": []
   },
   {
    "id": "william-wallace-2",
@@ -727,14 +775,15 @@
    "caminhos": [
     "Servir e proteger"
    ],
-   "grupo": "box-william-wallace",
    "volume": 2,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/william-wallace-2.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-william-wallace",
+   "colecoes": []
   },
   {
    "id": "dante-1-inferno",
@@ -751,14 +800,15 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": "box-a-grande-viagem-de-dante",
    "volume": 1,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/dante-1-inferno.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-a-grande-viagem-de-dante",
+   "colecoes": []
   },
   {
    "id": "dante-3-paraiso",
@@ -775,14 +825,15 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": "box-a-grande-viagem-de-dante",
    "volume": 3,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/dante-3-paraiso.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-a-grande-viagem-de-dante",
+   "colecoes": []
   },
   {
    "id": "sansao",
@@ -799,14 +850,17 @@
     "Coragem"
    ],
    "caminhos": [],
-   "grupo": "box-herois-de-israel",
    "volume": 1,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/sansao.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-herois-de-israel",
+   "colecoes": [
+    "colecao-historias-biblicas"
+   ]
   },
   {
    "id": "salomao",
@@ -823,14 +877,17 @@
     "Curiosidade"
    ],
    "caminhos": [],
-   "grupo": "box-herois-de-israel",
    "volume": 3,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/salomao.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-herois-de-israel",
+   "colecoes": [
+    "colecao-historias-biblicas"
+   ]
   },
   {
    "id": "jesus-1-o-nascimento",
@@ -847,14 +904,17 @@
     "Família"
    ],
    "caminhos": [],
-   "grupo": "box-jesus",
    "volume": 1,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/jesus-1-o-nascimento.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-jesus",
+   "colecoes": [
+    "colecao-historias-biblicas"
+   ]
   },
   {
    "id": "jesus-2-os-milagres",
@@ -870,14 +930,17 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": "box-jesus",
    "volume": 2,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/jesus-2-os-milagres.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-jesus",
+   "colecoes": [
+    "colecao-historias-biblicas"
+   ]
   },
   {
    "id": "jesus-3-a-paixao-e-a-ressurreicao",
@@ -893,14 +956,17 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": "box-jesus",
    "volume": 3,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/jesus-3-a-paixao-e-a-ressurreicao.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": "box-jesus",
+   "colecoes": [
+    "colecao-historias-biblicas"
+   ]
   },
   {
    "id": "as-parabolas-de-jesus",
@@ -916,14 +982,17 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/as-parabolas-de-jesus.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-historias-biblicas"
+   ]
   },
   {
    "id": "memorias-de-bras-cubas",
@@ -939,7 +1008,6 @@
     "Curiosidade"
    ],
    "caminhos": [],
-   "grupo": "colecao-machado-de-assis",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -947,7 +1015,11 @@
    ],
    "vitrine": false,
    "capa": "images/capas/memorias-de-bras-cubas.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-machado-de-assis"
+   ]
   },
   {
    "id": "cinco-minutos",
@@ -963,7 +1035,6 @@
     "Curiosidade"
    ],
    "caminhos": [],
-   "grupo": "colecao-jose-de-alencar",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -971,7 +1042,11 @@
    ],
    "vitrine": false,
    "capa": "images/capas/cinco-minutos.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-jose-de-alencar"
+   ]
   },
   {
    "id": "santo-agostinho",
@@ -988,14 +1063,17 @@
     "Curiosidade"
    ],
    "caminhos": [],
-   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/santo-agostinho.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-santos-da-igreja"
+   ]
   },
   {
    "id": "o-policial",
@@ -1014,7 +1092,6 @@
    "caminhos": [
     "Servir e proteger"
    ],
-   "grupo": "colecao-herois-de-farda",
    "volume": null,
    "fileiras": [
     "Do cinema e das séries",
@@ -1022,7 +1099,11 @@
    ],
    "vitrine": false,
    "capa": "images/capas/o-policial.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-herois-de-farda"
+   ]
   },
   {
    "id": "a-cigarra-e-a-formiga",
@@ -1040,14 +1121,17 @@
    "caminhos": [
     "Empreender"
    ],
-   "grupo": "colecao-fabulas",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/a-cigarra-e-a-formiga.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-fabulas"
+   ]
   },
   {
    "id": "o-cajueiro-do-quintal",
@@ -1063,7 +1147,6 @@
     "Família"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -1071,7 +1154,9 @@
    ],
    "vitrine": false,
    "capa": "images/capas/o-cajueiro-do-quintal.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "a-vila-de-muitas-portas",
@@ -1088,7 +1173,6 @@
     "Família"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -1096,7 +1180,9 @@
    ],
    "vitrine": false,
    "capa": "images/capas/a-vila-de-muitas-portas.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "o-anel-de-giges",
@@ -1112,14 +1198,15 @@
     "Honestidade"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/o-anel-de-giges.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "santa-joana-darc",
@@ -1136,14 +1223,17 @@
     "Coragem"
    ],
    "caminhos": [],
-   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/santa-joana-darc.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-santos-da-igreja"
+   ]
   },
   {
    "id": "ivanhoe-e-o-escudeiro",
@@ -1162,14 +1252,15 @@
    "caminhos": [
     "Servir e proteger"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/ivanhoe-e-o-escudeiro.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "irma-dulce",
@@ -1188,7 +1279,6 @@
    "caminhos": [
     "Medicina"
    ],
-   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé",
@@ -1196,7 +1286,11 @@
    ],
    "vitrine": false,
    "capa": "images/capas/irma-dulce.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-santos-da-igreja"
+   ]
   },
   {
    "id": "padre-pio",
@@ -1212,14 +1306,17 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/padre-pio.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-santos-da-igreja"
+   ]
   },
   {
    "id": "pasteur",
@@ -1238,14 +1335,15 @@
     "Medicina",
     "Ciência e Inovação"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/pasteur.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "oswaldo-cruz",
@@ -1263,7 +1361,6 @@
    "caminhos": [
     "Medicina"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé",
@@ -1271,7 +1368,9 @@
    ],
    "vitrine": false,
    "capa": "images/capas/oswaldo-cruz.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "doutora-clara-investiga",
@@ -1289,14 +1388,15 @@
    "caminhos": [
     "Medicina"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": false,
    "capa": "images/capas/doutora-clara-investiga.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "samuel-repara-em-tudo",
@@ -1315,14 +1415,15 @@
    "caminhos": [
     "Medicina"
    ],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": false,
    "capa": "images/capas/samuel-repara-em-tudo.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "lucio-e-o-gladiador",
@@ -1339,14 +1440,15 @@
     "Família"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Do cinema e das séries"
    ],
    "vitrine": true,
    "capa": "images/capas/lucio-e-o-gladiador.webp",
-   "lancamento": true
+   "lancamento": true,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "julio-cesar",
@@ -1363,14 +1465,17 @@
     "Honestidade"
    ],
    "caminhos": [],
-   "grupo": "colecao-shakespeare",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/julio-cesar.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-shakespeare"
+   ]
   },
   {
    "id": "hamlet",
@@ -1387,14 +1492,17 @@
     "Honestidade"
    ],
    "caminhos": [],
-   "grupo": "colecao-shakespeare",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": true,
    "capa": "images/capas/hamlet.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-shakespeare"
+   ]
   },
   {
    "id": "rei-lear",
@@ -1411,14 +1519,17 @@
     "Família"
    ],
    "caminhos": [],
-   "grupo": "colecao-shakespeare",
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/rei-lear.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-shakespeare"
+   ]
   },
   {
    "id": "os-lusiadas",
@@ -1435,7 +1546,6 @@
     "Perseverança"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura",
@@ -1443,7 +1553,9 @@
    ],
    "vitrine": true,
    "capa": "images/capas/os-lusiadas.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "o-vaso-da-vovo",
@@ -1459,14 +1571,15 @@
     "Honestidade"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/o-vaso-da-vovo.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "iliucha-e-o-cachorro",
@@ -1483,14 +1596,15 @@
     "Família"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": "images/capas/iliucha-e-o-cachorro.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   },
   {
    "id": "paulo-e-o-naufragio",
@@ -1507,14 +1621,18 @@
     "Coragem"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/paulo-e-o-naufragio.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-santos-da-igreja",
+    "colecao-historias-biblicas"
+   ]
   },
   {
    "id": "ben-hur",
@@ -1531,14 +1649,15 @@
     "Fé"
    ],
    "caminhos": [],
-   "grupo": null,
    "volume": null,
    "fileiras": [
     "Clássicos da literatura"
    ],
    "vitrine": true,
    "capa": "images/capas/ben-hur.webp",
-   "lancamento": false
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
   }
  ],
  "grupos": [
@@ -1700,7 +1819,8 @@
     "sao-tomas-de-aquino",
     "santa-joana-darc",
     "padre-pio",
-    "irma-dulce"
+    "irma-dulce",
+    "paulo-e-o-naufragio"
    ]
   },
   {
@@ -1787,6 +1907,29 @@
     "julio-cesar",
     "hamlet",
     "rei-lear"
+   ]
+  },
+  {
+   "id": "colecao-historias-biblicas",
+   "titulo": "Histórias Bíblicas",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Bíblia",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "sansao",
+    "davi-e-o-gigante",
+    "salomao",
+    "jesus-1-o-nascimento",
+    "jesus-2-os-milagres",
+    "jesus-3-a-paixao-e-a-ressurreicao",
+    "as-parabolas-de-jesus",
+    "paulo-e-o-naufragio"
    ]
   }
  ],
