@@ -36,7 +36,7 @@ images/
 | cards | fé, coragem, empreender, ciência e invenção | honestidade, amizade, curiosidade, perseverança, família, medicina, exploração, servir e proteger, raízes do brasil |
 | capas | 20 | — para a landing v1 |
 | destaques | menino da vila, ilha das regras, turma do mucuripe | — |
-| boxes | a família, dante, jesus, os três amigos*, william wallace, doutores da igreja, heróis de farda, josé de alencar, machado de assis | heróis de israel, como o mundo começou, fábulas |
+| boxes | a família, dante, jesus, os três amigos*, william wallace, doutores da igreja, heróis de farda, josé de alencar, machado de assis | heróis de israel, fábulas |
 | avatares | 8 | — |
 
 \* `box-os-tres-amigos` deve ser refeita: capa verde e luz na mão do protagonista lembram demais a obra-mãe.

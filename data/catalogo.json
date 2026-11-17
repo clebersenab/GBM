@@ -1050,101 +1050,6 @@
    "lancamento": false
   },
   {
-   "id": "mito-nordico",
-   "titulo": "Como o Mundo Começou: a Árvore dos Mundos",
-   "sinopse": "Uma árvore gigante segura todos os mundos nos galhos.",
-   "obra_mae": {
-    "titulo": "Edda",
-    "autor": "",
-    "tipo": "livro",
-    "idade": "12+"
-   },
-   "valores": [
-    "Curiosidade"
-   ],
-   "caminhos": [],
-   "grupo": "colecao-como-o-mundo-comecou",
-   "volume": null,
-   "fileiras": [
-    "Clássicos da literatura"
-   ],
-   "vitrine": false,
-   "capa": null,
-   "lancamento": false
-  },
-  {
-   "id": "mito-grego",
-   "titulo": "Como o Mundo Começou: o Presente do Fogo",
-   "sinopse": "Um titã gentil entrega o fogo às pessoas.",
-   "obra_mae": {
-    "titulo": "Teogonia",
-    "autor": "Hesíodo",
-    "tipo": "livro",
-    "idade": "14+"
-   },
-   "valores": [
-    "Curiosidade",
-    "Coragem"
-   ],
-   "caminhos": [],
-   "grupo": "colecao-como-o-mundo-comecou",
-   "volume": null,
-   "fileiras": [
-    "Clássicos da literatura"
-   ],
-   "vitrine": false,
-   "capa": null,
-   "lancamento": false
-  },
-  {
-   "id": "mito-tupi",
-   "titulo": "Como o Mundo Começou: o Sol e a Lua",
-   "sinopse": "O sol e a lua dividem o mesmo céu sobre o rio.",
-   "obra_mae": {
-    "titulo": "Lendas tupis",
-    "autor": "",
-    "tipo": "livro",
-    "idade": "livre"
-   },
-   "valores": [
-    "Curiosidade"
-   ],
-   "caminhos": [],
-   "grupo": "colecao-como-o-mundo-comecou",
-   "volume": null,
-   "fileiras": [
-    "Clássicos da literatura",
-    "Raízes do Brasil"
-   ],
-   "vitrine": false,
-   "capa": null,
-   "lancamento": false
-  },
-  {
-   "id": "genesis",
-   "titulo": "Como o Mundo Começou: o Gênesis",
-   "sinopse": "No começo, um jardim, um rio e todos os animais.",
-   "obra_mae": {
-    "titulo": "Bíblia, Gênesis",
-    "autor": "",
-    "tipo": "livro",
-    "idade": "livre"
-   },
-   "valores": [
-    "Fé",
-    "Curiosidade"
-   ],
-   "caminhos": [],
-   "grupo": "colecao-como-o-mundo-comecou",
-   "volume": null,
-   "fileiras": [
-    "Histórias reais e de fé"
-   ],
-   "vitrine": false,
-   "capa": null,
-   "lancamento": false
-  },
-  {
    "id": "o-cajueiro-do-quintal",
    "titulo": "O Cajueiro do Quintal",
    "sinopse": "Um cajueiro centenário viu quatro gerações da família brincarem na sombra dele.",
@@ -1765,25 +1670,6 @@
    "vitrine": false,
    "titulos": [
     "a-cigarra-e-a-formiga"
-   ]
-  },
-  {
-   "id": "colecao-como-o-mundo-comecou",
-   "titulo": "Como o Mundo Começou",
-   "tipo": "colecao",
-   "obra_mae": {
-    "titulo": "Edda, Teogonia, lendas tupis e Gênesis",
-    "autor": "",
-    "tipo": "livro",
-    "idade": "12+"
-   },
-   "arte": null,
-   "vitrine": false,
-   "titulos": [
-    "mito-nordico",
-    "genesis",
-    "mito-grego",
-    "mito-tupi"
    ]
   },
   {
