@@ -72,12 +72,16 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .boxcard img{aspect-ratio:16/9}
 .badge{position:absolute;top:10px;left:10px;background:var(--gold);color:#1a1205;font:700 12px Poppins,sans-serif;padding:4px 10px;border-radius:999px}
 .badge.col{background:var(--teal);color:#04161b}
+.badge.box{background:var(--red);color:#fff}
 /* origin */
 .origin{background:rgba(18,21,39,.72)}
 .origin .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
 .origin img{border-radius:16px;width:100%}
 .origin .story{display:grid;gap:16px;font-size:18px}
 .origin .story p{color:#e6dccb}
+.origin .name{display:flex;align-items:center;gap:16px;margin-top:6px;padding:16px 18px;border-radius:14px;background:rgba(11,13,23,.6)}
+.origin .name img{width:84px;flex:0 0 84px}
+.origin .name p{font-size:16px;color:var(--ink)}
 .origin .sign{color:var(--gold);font-weight:700}
 /* plant */
 .plant .head{display:grid;gap:10px;margin-bottom:28px}
@@ -156,7 +160,7 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 /* price */
 .price{background:rgba(18,21,39,.72)}
 .price .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
-.plan{background:var(--card);border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;gap:18px;box-shadow:0 0 0 2px var(--gold)}
+.plan{border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;gap:18px;border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(120deg,var(--red),var(--teal) 55%,var(--gold)) border-box}
 .plan .amt{font:800 clamp(44px,6vw,64px)/1 Poppins,sans-serif;white-space:nowrap}
 .plan .amt small{font-size:18px;font-weight:600;color:var(--mute)}
 .plan ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
@@ -266,6 +270,7 @@ footer img{height:72px;width:auto}
       <p>Ali eu entendi o que faltava: uma história que valesse a pena para nós dois.</p>
       <p>Então comecei a contar outras: a baleia branca que ninguém alcançava, o menino pastor que enfrentou um gigante, o navio preso no gelo do fim do mundo. Ela pedia de novo, e pela primeira vez eu também queria.</p>
       <p class="sign">Cleber, pai da Giovana, do Bento e da Maria</p>
+      <div class="name"><img src="images/marca/simbolo.svg" alt="O símbolo do GBM: um livro aberto com três páginas, em roxo, azul e laranja"><p>G, B e M são Giovana, Bento e Maria. As três páginas do livro no logo têm as cores preferidas de cada um.</p></div>
     </div>
   </div>
 </section>
@@ -446,7 +451,7 @@ const sel=new Set(["Coragem","Empreender"]);
 let T=[],G=[];
 const later=(o,cls)=>{const k=o.tipo=="livro"?"leia":"assista";return `<div class="${cls}"><small>Quando crescer, ${k}</small><strong>${o.titulo}</strong>${o.autor?`<small>${o.autor}</small>`:""}<small>Idade sugerida: ${o.idade}</small></div>`};
 const cover=x=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="${x.capa}" alt=""><b>${x.titulo}</b></button>`;
-const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="lazy" src="${x.arte}" alt=""><span class="badge ${x.tipo=="colecao"?"col":""}">${x.tipo=="colecao"?"Coleção":x.titulos.length+" volumes"}</span><b>${x.titulo}</b></button>`;
+const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="lazy" src="${x.arte}" alt=""><span class="badge ${x.tipo=="colecao"?"col":"box"}">${x.tipo=="colecao"?"Coleção":x.titulos.length+" volumes"}</span><b>${x.titulo}</b></button>`;
 const has=(x,n)=>x.valores.includes(n)||x.caminhos.includes(n);
 function rows(cat){
  const vit=T.filter(x=>x.vitrine&&x.capa), gv=G.filter(g=>g.vitrine);
