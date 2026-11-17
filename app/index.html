@@ -212,7 +212,7 @@ function shelf(){
  const tags=[...kid.v,...kid.c];
  const ind=T.filter(x=>x.capa&&tags.some(n=>has(x,n))&&!going.some(g=>g[0].id==x.id)).slice(0,12);
  const lan=T.filter(x=>x.lancamento&&x.capa);
- const intIds=["a-banda-da-garagem","florence-a-dama-da-lampada","os-irmaos-da-lanchonete","shackleton-e-o-navio-no-gelo","iracema","bentinho-e-capitu"];
+ const intIds=["a-banda-da-garagem","florence-a-dama-da-lampada","a-cozinha-de-giz","shackleton-e-o-navio-no-gelo","iracema","bentinho-e-capitu"];
  const lidos=["iracema","bentinho-e-capitu"];
  $("#shelf").innerHTML=`<div class="hello"><div><h1>Oi, ${kid.n}!</h1><p>Hoje é noite de quê?</p></div><div class="tags">${kid.v.map(v=>`<span class="v">${v}</span>`).join("")}${kid.c.map(c=>`<span class="c">${c}</span>`).join("")}</div></div>
  <div class="row"><div class="row-h"><h2><i style="background:var(--orange)"></i>Continue lendo</h2></div><div class="track">${going.map(([x,p])=>cv(x,`<span class="bar"><i style="width:${p}%"></i></span>`)).join("")}</div></div>
