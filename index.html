@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GBM Histórias</title>
+<meta name="description" content="Clássicos, histórias da Bíblia, vidas de santos e aventuras reais recontados para crianças de 3 a 8 anos. Para pais e filhos lerem juntos.">
+<meta property="og:title" content="GBM · Histórias para ler juntos">
+<meta property="og:description" content="As grandes histórias do mundo, do tamanho do colo.">
+<meta property="og:image" content="images/marca/og-image.jpg">
+<link rel="icon" href="images/marca/favicon-32.png">
+<link rel="apple-touch-icon" href="images/marca/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE  occasion: a bedtime-story catalogue for parents, warm and unhurried
+   IDEA   a streaming shelf at night, lit by the lamp; every book points to the classic it seeds
+   PICTURE the full-bleed bedtime scene, then real shelves of covers you can open
+   COLOUR night navy from the logo, cream ink, the logo's three pages: purple, sky blue, orange
+   TYPE   Poppins (matches the rounded wordmark) + Nunito Sans
+   LAYOUT laptop: scene full-bleed, text in its dark left corner; phone: scene on top, text under */
+:root{color-scheme:dark;--bg:#0b0d17;--bg2:#121527;--card:#181c33;--ink:#fff4e0;--mute:#c9c0ae;--red:#9146b5;--teal:#62c8ed;--gold:#f28c28;--line:#272c4a}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg) url(images/marca/fundo-ceu.svg) repeat;background-size:1100px;color:var(--ink);font:17px/1.6 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:Poppins,system-ui,sans-serif;line-height:1.08;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,5vw,58px);font-weight:800}
+h2{font-size:clamp(28px,3.6vw,42px);font-weight:700}
+h3{font-size:20px;font-weight:700}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(40px,6vw,88px) max(5vw,16px)}
+.lead{color:var(--mute);font-size:18px;max-width:62ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font:700 16px Poppins,sans-serif;text-decoration:none;border:0;cursor:pointer;white-space:nowrap}
+.btn-main{background:var(--gold);color:#1a1205}
+.btn-main:hover{background:#ff9f45}
+.btn-ghost{background:rgba(255,244,224,.1);color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(255,244,224,.35)}
+.btn-ghost:hover{background:rgba(255,244,224,.18)}
+.btn:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+/* nav */
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px max(5vw,16px);background:rgba(11,13,23,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{height:46px;width:auto}
+nav .links{display:flex;gap:24px;align-items:center;font-weight:600;font-size:15px}
+nav .links a{text-decoration:none;color:var(--mute)}
+nav .links a:hover{color:var(--ink)}
+nav .links a.btn{color:#1a1205}
+nav .btn{min-height:40px;padding:0 18px;font-size:14px}
+/* hero */
+.hero{position:relative;min-height:min(88svh,820px);display:grid;align-items:center;padding:48px max(5vw,16px);overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,23,.97) 0%,rgba(11,13,23,.85) 32%,rgba(11,13,23,0) 62%),linear-gradient(0deg,var(--bg) 0%,rgba(11,13,23,0) 26%)}
+.hero .txt{position:relative;max-width:560px;display:grid;gap:20px}
+.hero .lead{color:#e6dccb}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.hero small{color:var(--mute);font-size:14px}
+/* rows */
+.shelf{padding-top:12px}
+.shelf .intro{display:grid;gap:10px;margin-bottom:28px}
+.row{margin-bottom:34px}
+.row-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.row-h h3{display:flex;align-items:center;gap:10px}
+.row-h h3 i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.row-h span{color:var(--mute);font-size:14px}
+.track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.cover{flex:0 0 clamp(138px,15vw,190px);scroll-snap-align:start;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--card);border:0;padding:0;color:var(--ink);text-align:left;transition:transform .25s}
+.cover img{aspect-ratio:2/3;width:100%;object-fit:cover}
+.cover b{position:absolute;left:0;right:0;bottom:0;padding:36px 10px 10px;font:700 14px/1.2 Poppins,sans-serif;background:linear-gradient(0deg,rgba(8,9,16,.95) 30%,rgba(8,9,16,0))}
+.cover:hover{transform:translateY(-4px) scale(1.03)}
+.boxcard{flex:0 0 clamp(260px,30vw,380px)}
+.boxcard img{aspect-ratio:16/9}
+.badge{position:absolute;top:10px;left:10px;background:var(--gold);color:#1a1205;font:700 12px Poppins,sans-serif;padding:4px 10px;border-radius:999px}
+.badge.col{background:var(--teal);color:#04161b}
+.badge.box{background:var(--red);color:#fff}
+/* origin */
+.origin{background:rgba(18,21,39,.72)}
+.origin .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.origin img{border-radius:16px;width:100%}
+.origin .story{display:grid;gap:16px;font-size:18px}
+.origin .story p{color:#e6dccb}
+.origin .sign{color:var(--gold);font-weight:700}
+/* plant */
+.plant .head{display:grid;gap:10px;margin-bottom:28px}
+.grp{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:26px 0 12px}
+.grp p{color:var(--mute);font-size:15px}
+.seeds{display:grid;gap:12px}
+.seeds.val{grid-template-columns:repeat(7,minmax(0,1fr))}
+.seeds.cam{grid-template-columns:repeat(6,minmax(0,1fr))}
+.seed{border:0;padding:0;background:none;color:var(--ink);cursor:pointer;display:grid;gap:8px;justify-items:center;text-align:center}
+.seed img{width:100%;object-fit:cover;transition:transform .3s,box-shadow .3s;box-shadow:0 0 0 2px var(--line)}
+.val .seed img{aspect-ratio:1;border-radius:16px}
+.cam .seed img{aspect-ratio:3/4;border-radius:999px 999px 14px 14px}
+.seed span{font:700 14px/1.2 Poppins,sans-serif}
+.val .seed[aria-pressed=true] img{box-shadow:0 0 0 3px var(--gold)}
+.cam .seed[aria-pressed=true] img{box-shadow:0 0 0 3px var(--teal)}
+.seed[aria-pressed=true] img{transform:translateY(-3px)}
+.seed[aria-pressed=true] span{color:var(--gold)}
+.cam .seed[aria-pressed=true] span{color:var(--teal)}
+.picked{margin-top:26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px}
+.chip{min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--mute);font:600 15px "Nunito Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.picked{background:var(--card);border-radius:16px;padding:20px}
+.picked p{color:var(--mute);margin-bottom:14px;font-size:15px}
+.picked p b{color:var(--ink)}
+/* seed of a classic */
+.classic{background:linear-gradient(180deg,rgba(11,13,23,0) 0%,rgba(16,20,42,.75) 100%)}
+.pairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+.pair{background:var(--card);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.pair img{aspect-ratio:4/3;width:100%;object-fit:cover;object-position:center 30%}
+.pair div{padding:18px;display:grid;gap:8px;align-content:start}
+.pair .later{border-top:1px dashed var(--line);padding-top:12px;margin-top:4px;font-size:15px;color:var(--mute)}
+.pair .later strong{color:var(--gold);display:block;font-family:Poppins,sans-serif;font-size:16px}
+/* features */
+.feats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
+.feat{background:var(--card);border-radius:16px;padding:24px;display:grid;gap:12px;align-content:start}
+.feat p{color:var(--mute)}
+.feat.wide{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;padding:0;overflow:hidden}
+.feat.wide img{height:100%;object-fit:cover}
+.feat.wide>div{padding:24px;display:grid;gap:12px}
+.who{display:flex;flex-wrap:wrap;gap:18px;margin-top:4px}
+.who figure{margin:0;display:grid;justify-items:center;gap:6px;font-weight:700;font-size:15px}
+.who img{width:72px;height:72px;border-radius:50%}
+.who .add{width:72px;height:72px;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font-size:30px;color:var(--mute)}
+.note{background:#fff4e0;color:#2a2416;border-radius:10px;padding:14px 16px;font-size:15px;transform:rotate(-1deg)}
+.note b{display:block;font-family:Poppins,sans-serif;font-size:13px;color:#8a6a1e}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.peek{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+.peek figure{margin:0;display:grid;gap:8px}
+.peek img{border-radius:12px;aspect-ratio:16/10;width:100%;object-fit:cover;box-shadow:0 0 0 1px var(--line),0 18px 40px -24px rgba(0,0,0,.9)}
+.peek figcaption{color:var(--mute);font-size:14px;text-align:center}
+.rate{display:flex;gap:10px;flex-wrap:wrap}
+.rate button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.rate svg{width:18px;height:18px;fill:currentColor}
+.rate button[aria-pressed=true][data-r="1"]{background:var(--teal);border-color:var(--teal);color:#04161b}
+.rate button[aria-pressed=true][data-r="0"]{border-color:var(--red);color:var(--red)}
+.feat.quiz{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.feat.quiz>div:first-child{display:grid;gap:12px}
+.qbox{background:var(--bg);border-radius:14px;padding:18px;display:grid;gap:10px}
+.qbox small{color:var(--mute);font-size:13px}
+.qbox b{font-family:Poppins,sans-serif;font-size:20px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{min-height:44px;padding:0 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.opts button.ok{background:var(--teal);border-color:var(--teal);color:#04161b}
+.opts button.no{border-color:var(--red);color:var(--red)}
+.plan .fine{color:var(--mute);font-size:13px;text-align:center}
+.tabs span{padding:6px 14px;border-radius:999px;background:var(--bg);font-size:14px;font-weight:700}
+.tabs span:first-child{background:var(--teal);color:#04161b}
+/* curation */
+.cur .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(24px,4vw,56px);align-items:center}
+.cur img{border-radius:16px}
+.cur .txt{display:grid;gap:22px}
+.cur .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.cur .cols>div{display:grid;gap:12px;align-content:start}
+.cur ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.cur li{padding-left:28px;position:relative;color:#e6dccb}
+.cur li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;background:var(--teal)}
+.cur .cols>div:nth-child(2) li::before{background:var(--gold)}
+.cur li:nth-child(2)::before{background:var(--red)}
+/* price */
+.price{background:rgba(18,21,39,.72)}
+.price .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.plan{border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;gap:18px;border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(120deg,var(--red),var(--teal) 55%,var(--gold)) border-box}
+.plan .amt{font:800 clamp(44px,6vw,64px)/1 Poppins,sans-serif;white-space:nowrap}
+.plan .amt small{font-size:18px;font-weight:600;color:var(--mute)}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.plan li{padding-left:30px;position:relative}
+.plan li::before{content:"";position:absolute;left:2px;top:6px;width:16px;height:9px;border-left:3px solid var(--gold);border-bottom:3px solid var(--gold);transform:rotate(-45deg)}
+.plan .btn{width:100%}
+/* faq */
+.faq .wrap{max-width:860px}
+details{border-bottom:1px solid var(--line);padding:4px 0}
+summary{cursor:pointer;list-style:none;font:700 18px Poppins,sans-serif;padding:16px 36px 16px 0;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:26px;color:var(--gold)}
+details[open] summary::after{content:"–"}
+details p{color:var(--mute);padding:0 0 18px}
+/* final */
+.final{position:relative;overflow:hidden;min-height:420px;display:grid;align-items:center}
+.final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
+.final::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,23,.96) 0%,rgba(11,13,23,.7) 40%,rgba(11,13,23,.05) 75%)}
+.final .txt{position:relative;max-width:520px;display:grid;gap:18px}
+footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--mute);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+footer img{height:72px;width:auto}
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:16px;background:rgba(5,6,12,.78)}
+.modal.on{display:grid}
+.sheet{background:var(--bg2);border-radius:18px;max-width:760px;width:100%;max-height:92svh;overflow:auto;display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);position:relative}
+.sheet.wide{grid-template-columns:1fr}
+.sheet>img{width:100%;height:100%;object-fit:cover}
+.sheet.wide>img{aspect-ratio:16/9;height:auto}
+.sheet .in{padding:24px;display:grid;gap:12px;align-content:start}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--card);white-space:nowrap}
+.sheet .later{background:var(--card);border-radius:12px;padding:14px;border-left:4px solid var(--gold)}
+.sheet .later small{color:var(--mute);display:block;font-size:13px}
+.sheet .later strong{font-family:Poppins,sans-serif}
+.vols{margin:0;padding-left:20px;color:#e6dccb}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.acts .btn{min-height:44px;padding:0 18px;font-size:15px}
+.x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(11,13,23,.8);color:var(--ink);font-size:24px;cursor:pointer;z-index:2}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;opacity:0;visibility:hidden;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
+@media(max-width:900px){
+ nav .links a{display:none}
+ .seeds.val{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .seeds.cam{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .pairs{grid-template-columns:1fr}
+ .pair{grid-template-columns:minmax(0,140px) minmax(0,1fr);grid-template-rows:auto}
+ .pair img{aspect-ratio:auto;height:100%}
+}
+@media(max-width:700px){
+ .hero{min-height:0;padding:0 0 32px;align-items:end}
+ .hero>img{position:relative;height:auto;aspect-ratio:4/3;object-position:72% 40%}
+ .hero::before{background:linear-gradient(0deg,var(--bg) 38%,rgba(11,13,23,0) 60%)}
+ .hero .txt{padding:0 16px;margin-top:-60px}
+ .origin .wrap,.cur .wrap,.price .wrap,.feat.wide,.cur .cols,.feat.quiz{grid-template-columns:1fr}
+ .feats{grid-template-columns:1fr}
+ .peek{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
+ .peek figure{flex:0 0 82%;scroll-snap-align:start}
+ .sheet{grid-template-columns:1fr}
+ .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
+ .final>img{opacity:.45}
+ .pair{grid-template-columns:minmax(0,110px) minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#topo" aria-label="GBM, início"><img class="logo" src="images/marca/logo-nav.png" alt="GBM"></a>
+  <div class="links">
+    <a href="#catalogo">Catálogo</a>
+    <a href="#plantar">Valores</a>
+    <a href="#como">Como funciona</a>
+    <a href="#curadoria">Curadoria</a>
+    <a href="#preco">Preço</a>
+    <a class="btn btn-main" href="#preco">Assinar</a>
+  </div>
+</nav>
+
+<header class="hero" id="topo">
+  <img src="images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
+  <div class="txt">
+    <h1>As grandes histórias do mundo, do tamanho do colo.</h1>
+    <p class="lead">Clássicos, histórias da Bíblia, vidas de santos e aventuras reais, recontados para crianças de 3 a 8 anos. O adulto tem gosto de contar, e a criança pede de novo.</p>
+    <div class="ctas">
+      <a class="btn btn-main" href="#preco">Assinar por R$ 19,90/mês</a>
+      <a class="btn btn-ghost" href="#catalogo">Ver o catálogo</a>
+    </div>
+    <small>Uma assinatura para todos os seus filhos, cada um com o seu perfil.</small>
+  </div>
+</header>
+
+<section class="band shelf" id="catalogo">
+  <div class="wrap">
+    <div class="intro">
+      <h2>Toda história é a semente de um clássico</h2>
+      <p class="lead">Cada livro termina com uma indicação para quando a criança crescer: o livro ou o filme que aquela história preparou. Toque numa capa para ver.</p>
+    </div>
+    <div id="rows"></div>
+  </div>
+</section>
+
+<section class="band origin">
+  <div class="wrap">
+    <img src="images/secoes/origem-antes-e-depois.webp" alt="O mesmo pai e a mesma filha com o mesmo livro: à esquerda entediados, à direita encantados com uma baleia saindo das páginas">
+    <div class="story">
+      <h2>Começou numa noite qualquer, com a Giovana</h2>
+      <p>Ela tinha 6 anos e estava aprendendo a ler. Eu sentava ao lado dela com aqueles livrinhos de sempre: frases curtas, repetidas, sem história nenhuma. Na terceira página, eu já estava bocejando. E ela também.</p>
+      <p>Ali eu entendi o que faltava: uma história que valesse a pena para nós dois.</p>
+      <p>Então comecei a contar outras: a baleia branca que ninguém alcançava, o menino pastor que enfrentou um gigante, o navio preso no gelo do fim do mundo. Ela pedia de novo, e pela primeira vez eu também queria.</p>
+      <p class="sign">Cleber, pai da Giovana, do Bento e da Maria</p>
+    </div>
+  </div>
+</section>
+
+<section class="band plant" id="plantar">
+  <div class="wrap">
+    <div class="head">
+      <h2>Você escolhe o que plantar</h2>
+      <p class="lead">No perfil de cada filho, você marca os valores e os caminhos que quer mostrar a ele, e a estante se organiza a partir disso. Teste aqui:</p>
+    </div>
+    <div class="grp"><h3>Valores para cultivar</h3><p>O que você quer ver crescer dentro dele.</p></div>
+    <div class="seeds val" id="seedsV"></div>
+    <div class="grp"><h3>Caminhos para conhecer</h3><p>Profissões e mundos que ele pode descobrir lá fora.</p></div>
+    <div class="seeds cam" id="seedsC"></div>
+    <div class="picked"><p id="pickedTxt"></p><div class="track" id="pickedRow"></div></div>
+  </div>
+</section>
+
+<section class="band classic">
+  <div class="wrap">
+    <h2>Quando crescer, ela vai reconhecer a história</h2>
+    <p class="lead" style="margin-top:12px">Cada livro do GBM é uma história nova, escrita para a idade da criança, que guarda a semente de uma obra sem copiar nem resumir. Anos depois, quando abrir Dom Casmurro, ela vai reencontrar a menina dos olhos grandes.</p>
+    <div class="pairs" id="pairs"></div>
+  </div>
+</section>
+
+<section class="band" id="como">
+  <div class="wrap">
+    <h2>Feito para ler junto</h2>
+    <div class="feats">
+      <div class="feat wide">
+        <img src="images/secoes/elo-avo.webp" alt="Avô contando uma história para dois netos sentados no tapete">
+        <div>
+          <h3>Um ou dois parágrafos por página, e uma ilustração que prende</h3>
+          <p>O texto é curto para caber na atenção da criança e bom o bastante para o adulto querer ler em voz alta, seja pai, mãe, avó ou babá.</p>
+        </div>
+      </div>
+      <div class="feat quiz">
+        <div>
+          <h3>Um quiz no fim de cada história</h3>
+          <p>De 5 a 10 perguntas para ver se a criança entendeu o que leu. Com os menores, o adulto lê a pergunta e a criança responde apontando. A última pergunta não tem resposta certa: é ela que puxa a conversa.</p>
+        </div>
+        <div class="qbox">
+          <small>Moby Dick · pergunta 3 de 6</small>
+          <b>De que cor era a baleia?</b>
+          <div class="opts" id="opts"><button data-ok="0">Azul</button><button data-ok="1">Branca</button><button data-ok="0">Cinza</button></div>
+          <small id="qfb">Toque numa resposta.</small>
+        </div>
+      </div>
+    </div>
+    <div class="peek">
+      <figure><img loading="lazy" src="images/plataforma/estante.webp" alt="Tela da estante da Giovana com as fileiras Continue lendo e Indicados"><figcaption>A estante de cada filho</figcaption></figure>
+      <figure><img loading="lazy" src="images/plataforma/leitor.webp" alt="Tela do leitor com a ilustração de Moby Dick ao lado do texto"><figcaption>O livro aberto na tela</figcaption></figure>
+      <figure><img loading="lazy" src="images/plataforma/fim.webp" alt="Tela do fim do livro com o quiz e a indicação do clássico"><figcaption>No fim, o quiz e o clássico para quando crescer</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band cur" id="curadoria">
+  <div class="wrap">
+    <img src="images/secoes/curadoria.webp" alt="Mesa de trabalho à noite com livros clássicos, anotações a lápis e esboços de uma baleia e de um castelo">
+    <div class="txt">
+      <h2>Cada história é escolhida e escrita com cuidado de professor</h2>
+      <div class="cols">
+        <div>
+          <h3>Na escolha das obras</h3>
+          <ul>
+            <li>Só entra no catálogo uma obra que valha a pena reencontrar mais tarde: um clássico da literatura, uma passagem da Bíblia, a vida de um santo, uma história real ou um filme marcante.</li>
+            <li>Cada título carrega um valor ou um caminho que justifica estar ali, como coragem, fé, medicina ou empreender.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>No texto de cada livro</h3>
+          <ul>
+            <li>Vocabulário e frases do tamanho de quem tem de 3 a 8 anos, em um ou dois parágrafos por página.</li>
+            <li>Os temas delicados do original ficam de fora. A semente da obra fica.</li>
+            <li>Cada página é revisada e corrigida antes de chegar ao seu filho.</li>
+            <li>No fim, um quiz de 5 a 10 perguntas confere se a história foi entendida.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band price" id="preco">
+  <div class="wrap">
+    <div style="display:grid;gap:14px">
+      <h2>Um preço, a família inteira</h2>
+      <p class="lead">Pense no GBM como o complemento da cartilha: ela ensina a ler, e ele dá motivo para a criança querer.</p>
+    </div>
+    <div class="plan">
+      <h3>Assinatura GBM</h3>
+      <div class="amt">R$ 19,90 <small>/mês</small></div>
+      <ul>
+        <li>Catálogo completo: clássicos, Bíblia, santos, aventuras reais</li>
+        <li>Perfis para todos os seus filhos</li>
+                <li>Quiz de compreensão no fim de cada história</li>
+        <li>Lançamentos frequentes</li>
+      </ul>
+      <button class="btn btn-main" data-toast="O cadastro abre em breve.">Assinar agora</button>
+      <small class="fine">Os e-books também ficam disponíveis em PDF.</small>
+    </div>
+  </div>
+</section>
+
+<section class="band faq">
+  <div class="wrap">
+    <h2 style="margin-bottom:16px">Perguntas frequentes</h2>
+    <details><summary>Para que idade é o GBM?</summary><p>De 3 a 8 anos. Os textos são curtos e as ilustrações fazem boa parte do trabalho. Para os menores, a ideia é o adulto ler em voz alta. Os maiores podem acompanhar e ler trechos sozinhos.</p></details>
+    <details><summary>As histórias são resumos dos clássicos?</summary><p>Não. São histórias novas, inspiradas nos temas das grandes obras e simplificadas para a idade da criança, sem os temas delicados do original. Cada uma termina com a indicação do clássico para ler ou assistir quando crescer.</p></details>
+    <details><summary>Como as histórias são escolhidas?</summary><p>Uma obra só entra no catálogo se valer a pena ser reencontrada mais tarde, e se tiver um valor ou um caminho claro para apresentar à criança. Depois disso, o texto é adaptado para a idade e cada página é revisada.</p></details>
+    <details><summary>Substitui os livros de alfabetização?</summary><p>Não, complementa. Os livros de alfabetização treinam a decodificação. O GBM cuida da outra parte: a vontade de abrir um livro.</p></details>
+    <details><summary>Como sei se meu filho entendeu a história?</summary><p>Cada livro termina com um quiz de 5 a 10 perguntas. Para os menores, as respostas são desenhos, e o adulto lê as perguntas em voz alta. A última pergunta é aberta, para vocês conversarem sobre a história.</p></details>
+    <details><summary>Posso baixar os livros?</summary><p>Sim. Cada e-book também está disponível em PDF.</p></details>
+    <details><summary>Quantos filhos posso cadastrar?</summary><p>Todos. A assinatura é da família, e cada filho tem o seu perfil.</p></details>
+  </div>
+</section>
+
+<section class="band final">
+  <img src="images/hero/hero-mae-e-filha.webp" alt="Mãe e filha lendo juntas no sofá; da tela saem cenas de histórias">
+  <div class="txt">
+    <h2>Escolham a história de hoje à noite</h2>
+    <p class="lead">R$ 19,90 por mês, para a família inteira.</p>
+    <div><a class="btn btn-main" href="#preco">Assinar o GBM</a></div>
+  </div>
+</section>
+
+<footer>
+  <img src="images/marca/logo-web.png" alt="GBM, Histórias para ler juntos">
+  <span>© 2026 GBM · Histórias para ler juntos</span>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="sheet" id="sheet"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const COL={"Clássicos da literatura":"#62c8ed","Do cinema e das séries":"#9146b5","Histórias reais e de fé":"#f28c28"};
+const slug=t=>t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ /g,"-");
+const seed=(n,k)=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="images/cards/${k}-${slug(n)}.webp" alt=""><span>${n}</span></button>`;
+const sel=new Set(["Coragem","Empreender"]);
+let T=[],G=[];
+const later=(o,cls)=>{const k=o.tipo=="livro"?"leia":"assista";return `<div class="${cls}"><small>Quando crescer, ${k}</small><strong>${o.titulo}</strong>${o.autor?`<small>${o.autor}</small>`:""}<small>Idade sugerida: ${o.idade}</small></div>`};
+const cover=x=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="${x.capa}" alt=""><b>${x.titulo}</b></button>`;
+const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="lazy" src="${x.arte}" alt=""><span class="badge ${x.tipo=="colecao"?"col":"box"}">${x.tipo=="colecao"?"Coleção":x.titulos.length+" volumes"}</span><b>${x.titulo}</b></button>`;
+const has=(x,n)=>x.valores.includes(n)||x.caminhos.includes(n);
+function rows(cat){
+ const vit=T.filter(x=>x.vitrine&&x.capa), gv=G.filter(g=>g.vitrine);
+ const lan=(cat.lancamentos_ordem||[]).map(id=>T.find(t=>t.id==id)).filter(x=>x&&x.capa);
+ $("#rows").innerHTML=`<div class="row"><div class="row-h"><h3><i style="background:var(--gold)"></i>Lançamentos</h3><span>${lan.length} títulos</span></div><div class="track">${lan.map(x=>cover(x).replace('<b>','<span class="badge">Novo</span><b>')).join("")}</div></div>`+cat.fileiras_landing.map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return `<div class="row"><div class="row-h"><h3><i style="background:${COL[n]||"var(--ink)"}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")
+ +`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${gv.length} conjuntos</span></div><div class="track">${gv.map(boxc).join("")}</div></div>`;
+ $("#seedsV").innerHTML=cat.valores.map(n=>seed(n,"valor")).join("");
+ $("#seedsC").innerHTML=cat.caminhos.map(n=>seed(n,"caminho")).join("");
+ $("#pairs").innerHTML=["bentinho-e-capitu","o-menino-que-nunca-saiu-da-vila","os-irmaos-da-lanchonete"].map(id=>{const x=T.find(y=>y.id==id);const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
+ paint();
+}
+function paint(){
+ document.querySelectorAll("[data-tag]").forEach(b=>b.setAttribute("aria-pressed",sel.has(b.dataset.tag)));
+ const l=T.filter(x=>x.capa&&[...sel].some(n=>has(x,n)));
+ const names=[...sel];
+ $("#pickedTxt").innerHTML=names.length?`Estante do Bento com <b>${names.join(", ").replace(/, ([^,]*)$/," e $1")}</b>: ${l.length} ${l.length==1?"título":"títulos"}.`:"Marque pelo menos um valor ou caminho para montar a estante.";
+ $("#pickedRow").innerHTML=l.map(cover).join("");
+}
+const M=$("#modal"),S=$("#sheet");let last=null;
+const acts=`<div class="acts"><button class="btn btn-main" data-toast="Disponível para assinantes.">Ler agora</button><button class="btn btn-ghost" data-toast="Salvo em Tenho interesse.">Tenho interesse</button></div>`;
+function open(html,wide){S.className="sheet"+(wide?" wide":"");S.innerHTML=`<button class="x" aria-label="Fechar">×</button>`+html;M.classList.add("on");last=document.activeElement;S.querySelector(".x").focus()}
+function close(){M.classList.remove("on");last&&last.focus()}
+document.addEventListener("click",e=>{
+ const tg=e.target.closest("[data-tag]");if(tg){const n=tg.dataset.tag;sel.has(n)?sel.delete(n):sel.add(n);paint();return}
+ const c=e.target.closest("[data-id]"),b=e.target.closest("[data-box]");
+ if(c){const x=T.find(y=>y.id==c.dataset.id);const tags=[...x.valores,...x.caminhos].map(t=>`<span>${t}</span>`).join("");
+  open(`<img src="${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>3 a 8 anos</span>${tags}</div><p style="color:#e6dccb">${x.sinopse}</p>${later(x.obra_mae,"later")}${acts}</div>`)}
+ if(b){const g=G.find(y=>y.id==b.dataset.box);const vols=g.titulos.map(id=>T.find(t=>t.id==id).titulo);
+  open(`<img src="${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span>${g.tipo=="colecao"?"Coleção":vols.length+" volumes"}</span><span>${g.tipo=="colecao"?"Leia em qualquer ordem":"Leia em ordem"}</span></div><ol class="vols">${vols.map(v=>`<li>${v}</li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true)}
+ if(e.target.closest(".x")||e.target===M)close();
+ const t=e.target.closest("[data-toast]");if(t){const el=$("#toast");el.textContent=t.dataset.toast;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2200)}
+});
+document.querySelectorAll("#opts button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#opts button").forEach(x=>x.className="");const ok=b.dataset.ok=="1";b.className=ok?"ok":"no";$("#qfb").textContent=ok?"Isso! A baleia era branca, por isso todo mundo a reconhecia de longe.":"Quase. Lembra do que o marinheiro viu no mar?"}));
+document.querySelectorAll("#rate button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll("#rate button").forEach(x=>x.setAttribute("aria-pressed",x===b))));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
+fetch("data/catalogo.json").then(r=>r.json()).then(cat=>{T=cat.titulos;G=cat.grupos;rows(cat)}).catch(()=>{$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>'});
+}
+</script>
+</body>
+</html>
