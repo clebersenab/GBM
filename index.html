@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GBM Histórias</title>
-<meta name="description" content="Clássicos, histórias da Bíblia, vidas de santos e aventuras reais recontados para crianças de 4 a 8 anos. Para pais e filhos lerem juntos.">
+<meta name="description" content="Clássicos, histórias da Bíblia, vidas de santos e aventuras reais recontados para crianças de 3 a 8 anos. Para pais e filhos lerem juntos.">
 <meta property="og:title" content="GBM · Histórias para ler juntos">
 <meta property="og:description" content="As grandes histórias do mundo, do tamanho do colo.">
 <meta property="og:image" content="images/marca/og-image.jpg">
@@ -239,7 +239,7 @@ footer img{height:72px;width:auto}
   <img src="images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
   <div class="txt">
     <h1>As grandes histórias do mundo, do tamanho do colo.</h1>
-    <p class="lead">Clássicos, histórias da Bíblia, vidas de santos e aventuras reais, recontados para crianças de 4 a 8 anos. O adulto tem gosto de contar, e a criança pede de novo.</p>
+    <p class="lead">Clássicos, histórias da Bíblia, vidas de santos e aventuras reais, recontados para crianças de 3 a 8 anos. O adulto tem gosto de contar, e a criança pede de novo.</p>
     <div class="ctas">
       <a class="btn btn-main" href="#preco">Assinar por R$ 19,90/mês</a>
       <a class="btn btn-ghost" href="#catalogo">Ver o catálogo</a>
@@ -372,7 +372,7 @@ footer img{height:72px;width:auto}
         <div>
           <h3>No texto de cada livro</h3>
           <ul>
-            <li>Vocabulário e frases do tamanho de quem tem de 4 a 8 anos, em um ou dois parágrafos por página.</li>
+            <li>Vocabulário e frases do tamanho de quem tem de 3 a 8 anos, em um ou dois parágrafos por página.</li>
             <li>Os temas delicados do original ficam de fora. A semente da obra fica.</li>
             <li>Cada página é revisada e corrigida antes de chegar ao seu filho.</li>
             <li>No fim, um quiz de 5 a 10 perguntas confere se a história foi entendida.</li>
@@ -408,7 +408,7 @@ footer img{height:72px;width:auto}
 <section class="band faq">
   <div class="wrap">
     <h2 style="margin-bottom:16px">Perguntas frequentes</h2>
-    <details><summary>Para que idade é o GBM?</summary><p>De 4 a 8 anos. Os textos são curtos e as ilustrações fazem boa parte do trabalho. Para os menores, a ideia é o adulto ler em voz alta. Os maiores podem acompanhar e ler trechos sozinhos.</p></details>
+    <details><summary>Para que idade é o GBM?</summary><p>De 3 a 8 anos. Os textos são curtos e as ilustrações fazem boa parte do trabalho. Para os menores, a ideia é o adulto ler em voz alta. Os maiores podem acompanhar e ler trechos sozinhos.</p></details>
     <details><summary>As histórias são resumos dos clássicos?</summary><p>Não. São histórias novas, inspiradas nos temas das grandes obras e simplificadas para a idade da criança, sem os temas delicados do original. Cada uma termina com a indicação do clássico para ler ou assistir quando crescer.</p></details>
     <details><summary>Como as histórias são escolhidas?</summary><p>Uma obra só entra no catálogo se valer a pena ser reencontrada mais tarde, e se tiver um valor ou um caminho claro para apresentar à criança. Depois disso, o texto é adaptado para a idade e cada página é revisada.</p></details>
     <details><summary>Substitui os livros de alfabetização?</summary><p>Não, complementa. Os livros de alfabetização treinam a decodificação. O GBM cuida da outra parte: a vontade de abrir um livro.</p></details>
@@ -474,7 +474,7 @@ document.addEventListener("click",e=>{
  const tg=e.target.closest("[data-tag]");if(tg){const n=tg.dataset.tag;sel.has(n)?sel.delete(n):sel.add(n);paint();return}
  const c=e.target.closest("[data-id]"),b=e.target.closest("[data-box]");
  if(c){const x=T.find(y=>y.id==c.dataset.id);const tags=[...x.valores,...x.caminhos].map(t=>`<span>${t}</span>`).join("");
-  open(`<img src="${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>4 a 8 anos</span>${tags}</div><p style="color:#e6dccb">${x.sinopse}</p>${later(x.obra_mae,"later")}${acts}</div>`)}
+  open(`<img src="${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>3 a 8 anos</span>${tags}</div><p style="color:#e6dccb">${x.sinopse}</p>${later(x.obra_mae,"later")}${acts}</div>`)}
  if(b){const g=G.find(y=>y.id==b.dataset.box);const vols=g.titulos.map(id=>T.find(t=>t.id==id).titulo);
   open(`<img src="${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span>${g.tipo=="colecao"?"Coleção":vols.length+" volumes"}</span><span>${g.tipo=="colecao"?"Leia em qualquer ordem":"Leia em ordem"}</span></div><ol class="vols">${vols.map(v=>`<li>${v}</li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true)}
  if(e.target.closest(".x")||e.target===M)close();
