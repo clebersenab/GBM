@@ -1349,30 +1349,6 @@
    "lancamento": false
   },
   {
-   "id": "romulo-e-remo",
-   "titulo": "Rômulo e Remo",
-   "sinopse": "Dois irmãos gêmeos, uma loba que cuida deles e uma cidade que ainda não existia.",
-   "obra_mae": {
-    "titulo": "História de Roma",
-    "autor": "Tito Lívio",
-    "tipo": "livro",
-    "idade": "16+"
-   },
-   "valores": [
-    "Família",
-    "Coragem"
-   ],
-   "caminhos": [],
-   "grupo": "colecao-roma-antiga",
-   "volume": 1,
-   "fileiras": [
-    "Clássicos da literatura"
-   ],
-   "vitrine": false,
-   "capa": null,
-   "lancamento": false
-  },
-  {
    "id": "a-corrida-de-bigas",
    "titulo": "A Corrida de Bigas",
    "sinopse": "Um jovem traído pelo melhor amigo perde tudo. Anos depois, os dois se reencontram no circo de Roma.",
@@ -1439,6 +1415,174 @@
    "volume": 5,
    "fileiras": [
     "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null,
+   "lancamento": false
+  },
+  {
+   "id": "julio-cesar",
+   "titulo": "Júlio César",
+   "sinopse": "O general mais famoso de Roma e o melhor amigo dele. Mas em quem ele podia confiar?",
+   "obra_mae": {
+    "titulo": "Júlio César",
+    "autor": "William Shakespeare",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Amizade",
+    "Honestidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-shakespeare",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null,
+   "lancamento": false
+  },
+  {
+   "id": "hamlet-o-principe-que-nao-sabia-decidir",
+   "titulo": "O Príncipe que Não Sabia Decidir",
+   "sinopse": "O rei morreu, o tio assumiu o trono, e o jovem príncipe desconfia de que algo está errado.",
+   "obra_mae": {
+    "titulo": "Hamlet",
+    "autor": "William Shakespeare",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Coragem",
+    "Honestidade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-shakespeare",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null,
+   "lancamento": false
+  },
+  {
+   "id": "o-rei-e-as-tres-filhas",
+   "titulo": "O Rei e as Três Filhas",
+   "sinopse": "Duas filhas fizeram discursos lindos. A caçula disse só a verdade.",
+   "obra_mae": {
+    "titulo": "Rei Lear",
+    "autor": "William Shakespeare",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Honestidade",
+    "Família"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-shakespeare",
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null,
+   "lancamento": false
+  },
+  {
+   "id": "a-viagem-de-vasco-da-gama",
+   "titulo": "A Viagem de Vasco da Gama",
+   "sinopse": "Os navios portugueses vão para onde ninguém tinha ido, e no cabo das tormentas um gigante se levanta do mar.",
+   "obra_mae": {
+    "titulo": "Os Lusíadas",
+    "autor": "Luís de Camões",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Coragem",
+    "Perseverança"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": null,
+   "lancamento": false
+  },
+  {
+   "id": "o-menino-que-escondeu-o-vaso-quebrado",
+   "titulo": "O Menino que Escondeu o Vaso Quebrado",
+   "sinopse": "Ninguém descobriu quem quebrou o vaso da avó. Então por que ele não consegue mais dormir?",
+   "obra_mae": {
+    "titulo": "Crime e Castigo",
+    "autor": "Fiódor Dostoiévski",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Honestidade"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null,
+   "lancamento": false
+  },
+  {
+   "id": "os-meninos-e-o-cachorro-perdido",
+   "titulo": "Os Meninos e o Cachorro Perdido",
+   "sinopse": "Os colegas que provocavam Iliúcha viram seus amigos, e juntos procuram o cachorro que ele achava ter perdido para sempre.",
+   "obra_mae": {
+    "titulo": "Os Irmãos Karamázov",
+    "autor": "Fiódor Dostoiévski",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Amizade",
+    "Família"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null,
+   "lancamento": false
+  },
+  {
+   "id": "paulo-e-o-naufragio",
+   "titulo": "Paulo e o Naufrágio",
+   "sinopse": "Uma luz no caminho de Damasco mudou a vida de Paulo. Anos depois, o navio dele naufraga perto de uma ilha.",
+   "obra_mae": {
+    "titulo": "Epístolas de São Paulo e Atos dos Apóstolos",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "livre"
+   },
+   "valores": [
+    "Fé",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": null,
@@ -1677,7 +1821,7 @@
    "titulo": "Roma Antiga",
    "tipo": "colecao",
    "obra_mae": {
-    "titulo": "Ben-Hur, Os Últimos Dias de Pompeia, Quo Vadis e Gladiador",
+    "titulo": "Júlio César, Gladiador, Ben-Hur, Os Últimos Dias de Pompeia e Quo Vadis",
     "autor": "",
     "tipo": "livro",
     "idade": "12+"
@@ -1685,11 +1829,29 @@
    "arte": null,
    "vitrine": false,
    "titulos": [
-    "romulo-e-remo",
+    "julio-cesar",
     "o-gladiador-que-queria-voltar-para-casa",
     "a-corrida-de-bigas",
     "a-menina-de-pompeia",
     "os-amigos-das-catacumbas"
+   ]
+  },
+  {
+   "id": "colecao-shakespeare",
+   "titulo": "Shakespeare",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Júlio César, Hamlet e Rei Lear",
+    "autor": "William Shakespeare",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "julio-cesar",
+    "hamlet-o-principe-que-nao-sabia-decidir",
+    "o-rei-e-as-tres-filhas"
    ]
   }
  ],
