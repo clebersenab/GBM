@@ -1377,10 +1377,102 @@
     "Família"
    ],
    "caminhos": [],
-   "grupo": null,
-   "volume": null,
+   "grupo": "colecao-roma-antiga",
+   "volume": 2,
    "fileiras": [
     "Do cinema e das séries"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "romulo-e-remo",
+   "titulo": "Rômulo e Remo",
+   "sinopse": "Dois irmãos gêmeos, uma loba que cuida deles e uma cidade que ainda não existia.",
+   "obra_mae": {
+    "titulo": "História de Roma",
+    "autor": "Tito Lívio",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Família",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-roma-antiga",
+   "volume": 1,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "a-corrida-de-bigas",
+   "titulo": "A Corrida de Bigas",
+   "sinopse": "Um jovem traído pelo melhor amigo perde tudo. Anos depois, os dois se reencontram no circo de Roma.",
+   "obra_mae": {
+    "titulo": "Ben-Hur",
+    "autor": "Lew Wallace",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Perseverança",
+    "Fé"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-roma-antiga",
+   "volume": 3,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "a-menina-de-pompeia",
+   "titulo": "A Menina de Pompeia",
+   "sinopse": "Quando o vulcão acorda, uma menina cega é a única que sabe guiar os amigos pelas ruas escuras.",
+   "obra_mae": {
+    "titulo": "Os Últimos Dias de Pompeia",
+    "autor": "Edward Bulwer-Lytton",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Coragem",
+    "Amizade"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-roma-antiga",
+   "volume": 4,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": null
+  },
+  {
+   "id": "os-amigos-das-catacumbas",
+   "titulo": "Os Amigos das Catacumbas",
+   "sinopse": "Em Roma, uma menina descobre por que a família reza escondida debaixo da terra.",
+   "obra_mae": {
+    "titulo": "Quo Vadis",
+    "autor": "Henryk Sienkiewicz",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Fé",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "grupo": "colecao-roma-antiga",
+   "volume": 5,
+   "fileiras": [
+    "Clássicos da literatura"
    ],
    "vitrine": false,
    "capa": null
@@ -1630,6 +1722,26 @@
     "genesis",
     "mito-grego",
     "mito-tupi"
+   ]
+  },
+  {
+   "id": "colecao-roma-antiga",
+   "titulo": "Roma Antiga",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Ben-Hur, Os Últimos Dias de Pompeia, Quo Vadis e Gladiador",
+    "autor": "",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "romulo-e-remo",
+    "o-gladiador-que-queria-voltar-para-casa",
+    "a-corrida-de-bigas",
+    "a-menina-de-pompeia",
+    "os-amigos-das-catacumbas"
    ]
   }
  ]
