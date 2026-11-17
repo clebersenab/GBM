@@ -42,7 +42,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": true,
-   "capa": "images/capas/moby-dick.webp"
+   "capa": "images/capas/moby-dick.webp",
+   "lancamento": true
   },
   {
    "id": "bentinho-e-capitu",
@@ -65,7 +66,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/bentinho-e-capitu.webp"
+   "capa": "images/capas/bentinho-e-capitu.webp",
+   "lancamento": true
   },
   {
    "id": "iracema",
@@ -88,7 +90,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/iracema.webp"
+   "capa": "images/capas/iracema.webp",
+   "lancamento": false
   },
   {
    "id": "dante-2-purgatorio",
@@ -111,7 +114,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": true,
-   "capa": "images/capas/a-grande-viagem-de-dante.webp"
+   "capa": "images/capas/a-grande-viagem-de-dante.webp",
+   "lancamento": false
   },
   {
    "id": "o-menino-que-nunca-saiu-da-vila",
@@ -134,7 +138,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/o-menino-que-nunca-saiu-da-vila.webp"
+   "capa": "images/capas/o-menino-que-nunca-saiu-da-vila.webp",
+   "lancamento": true
   },
   {
    "id": "a-ilha-das-regras",
@@ -157,7 +162,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": true,
-   "capa": "images/capas/a-ilha-das-regras.webp"
+   "capa": "images/capas/a-ilha-das-regras.webp",
+   "lancamento": false
   },
   {
    "id": "a-turma-do-mucuripe",
@@ -180,7 +186,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/a-turma-do-mucuripe.webp"
+   "capa": "images/capas/a-turma-do-mucuripe.webp",
+   "lancamento": false
   },
   {
    "id": "robinson-e-a-ilha",
@@ -204,7 +211,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": "images/capas/robinson-e-a-ilha.webp"
+   "capa": "images/capas/robinson-e-a-ilha.webp",
+   "lancamento": false
   },
   {
    "id": "a-banda-da-garagem",
@@ -229,7 +237,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/a-banda-da-garagem.webp"
+   "capa": "images/capas/a-banda-da-garagem.webp",
+   "lancamento": true
   },
   {
    "id": "o-menino-da-bateria",
@@ -253,7 +262,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": true,
-   "capa": "images/capas/o-menino-da-bateria.webp"
+   "capa": "images/capas/o-menino-da-bateria.webp",
+   "lancamento": false
   },
   {
    "id": "os-irmaos-da-lanchonete",
@@ -277,7 +287,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": true,
-   "capa": "images/capas/os-irmaos-da-lanchonete.webp"
+   "capa": "images/capas/os-irmaos-da-lanchonete.webp",
+   "lancamento": true
   },
   {
    "id": "a-familia-1-o-menino-que-chegou-de-navio",
@@ -302,7 +313,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/a-familia-1-o-menino-que-chegou-de-navio.webp"
+   "capa": "images/capas/a-familia-1-o-menino-que-chegou-de-navio.webp",
+   "lancamento": false
   },
   {
    "id": "a-familia-2-o-filho-que-queria-outro-caminho",
@@ -326,7 +338,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": "images/capas/a-familia-2-o-filho-que-queria-outro-caminho.webp"
+   "capa": "images/capas/a-familia-2-o-filho-que-queria-outro-caminho.webp",
+   "lancamento": false
   },
   {
    "id": "a-familia-3-o-que-deixamos-para-os-filhos",
@@ -350,7 +363,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": "images/capas/a-familia-3-o-que-deixamos-para-os-filhos.webp"
+   "capa": "images/capas/a-familia-3-o-que-deixamos-para-os-filhos.webp",
+   "lancamento": false
   },
   {
    "id": "o-bombeiro",
@@ -375,7 +389,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": true,
-   "capa": "images/capas/o-bombeiro.webp"
+   "capa": "images/capas/o-bombeiro.webp",
+   "lancamento": false
   },
   {
    "id": "o-advogado-da-turma",
@@ -399,7 +414,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": true,
-   "capa": "images/capas/o-advogado-da-turma.webp"
+   "capa": "images/capas/o-advogado-da-turma.webp",
+   "lancamento": true
   },
   {
    "id": "a-filha-do-advogado",
@@ -424,7 +440,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": "images/capas/a-filha-do-advogado.webp"
+   "capa": "images/capas/a-filha-do-advogado.webp",
+   "lancamento": false
   },
   {
    "id": "shackleton-e-o-navio-no-gelo",
@@ -446,7 +463,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": true,
-   "capa": "images/capas/shackleton-e-o-navio-no-gelo.webp"
+   "capa": "images/capas/shackleton-e-o-navio-no-gelo.webp",
+   "lancamento": true
   },
   {
    "id": "santos-dumont-e-o-sonho-de-voar",
@@ -471,7 +489,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/santos-dumont-e-o-sonho-de-voar.webp"
+   "capa": "images/capas/santos-dumont-e-o-sonho-de-voar.webp",
+   "lancamento": false
   },
   {
    "id": "florence-a-dama-da-lampada",
@@ -495,7 +514,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": true,
-   "capa": "images/capas/florence-a-dama-da-lampada.webp"
+   "capa": "images/capas/florence-a-dama-da-lampada.webp",
+   "lancamento": false
   },
   {
    "id": "rui-o-menino-que-falava-bonito",
@@ -520,7 +540,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/rui-o-menino-que-falava-bonito.webp"
+   "capa": "images/capas/rui-o-menino-que-falava-bonito.webp",
+   "lancamento": false
   },
   {
    "id": "william-wallace-1",
@@ -544,7 +565,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": true,
-   "capa": "images/capas/william-wallace.webp"
+   "capa": "images/capas/william-wallace.webp",
+   "lancamento": false
   },
   {
    "id": "davi-e-o-gigante",
@@ -567,7 +589,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": true,
-   "capa": "images/capas/davi-e-o-gigante.webp"
+   "capa": "images/capas/davi-e-o-gigante.webp",
+   "lancamento": true
   },
   {
    "id": "tomas-o-menino-das-perguntas",
@@ -590,7 +613,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": true,
-   "capa": "images/capas/tomas-o-menino-das-perguntas.webp"
+   "capa": "images/capas/tomas-o-menino-das-perguntas.webp",
+   "lancamento": false
   },
   {
    "id": "o-menino-caixeiro",
@@ -615,7 +639,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": "images/capas/o-menino-caixeiro.webp"
+   "capa": "images/capas/o-menino-caixeiro.webp",
+   "lancamento": false
   },
   {
    "id": "os-tres-amigos-1",
@@ -637,7 +662,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "os-tres-amigos-2",
@@ -659,7 +685,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "os-tres-amigos-3",
@@ -681,7 +708,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "william-wallace-2",
@@ -705,7 +733,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "dante-1-inferno",
@@ -728,7 +757,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "dante-3-paraiso",
@@ -751,7 +781,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "sansao",
@@ -774,7 +805,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "salomao",
@@ -797,7 +829,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "jesus-1-o-nascimento",
@@ -820,7 +853,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "jesus-2-os-milagres",
@@ -842,7 +876,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "jesus-3-a-paixao-e-a-ressurreicao",
@@ -864,7 +899,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "as-parabolas-de-jesus",
@@ -886,7 +922,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "o-senhor-que-contou-a-vida-de-tras-para-frente",
@@ -909,7 +946,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "cinco-minutos",
@@ -932,7 +970,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "agostinho",
@@ -955,7 +994,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "o-policial",
@@ -981,7 +1021,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "a-cigarra-e-a-formiga",
@@ -1005,7 +1046,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "mito-nordico",
@@ -1027,7 +1069,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "mito-grego",
@@ -1050,7 +1093,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "mito-tupi",
@@ -1073,7 +1117,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "genesis",
@@ -1096,7 +1141,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "o-cajueiro-do-quintal",
@@ -1119,7 +1165,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "a-vila-de-muitas-portas",
@@ -1143,7 +1190,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "o-anel-de-giges",
@@ -1165,7 +1213,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "joana-darc",
@@ -1188,7 +1237,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "o-pequeno-cavaleiro",
@@ -1213,7 +1263,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "irma-dulce",
@@ -1239,7 +1290,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "padre-pio-o-menino-de-pietrelcina",
@@ -1261,7 +1313,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "pasteur",
@@ -1286,7 +1339,8 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "oswaldo-cruz",
@@ -1311,7 +1365,8 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "a-doutora-detetive",
@@ -1335,7 +1390,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "o-menino-que-notava-tudo",
@@ -1360,7 +1416,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "o-gladiador-que-queria-voltar-para-casa",
@@ -1383,7 +1440,8 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "romulo-e-remo",
@@ -1406,7 +1464,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "a-corrida-de-bigas",
@@ -1429,7 +1488,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "a-menina-de-pompeia",
@@ -1452,7 +1512,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   },
   {
    "id": "os-amigos-das-catacumbas",
@@ -1475,7 +1536,8 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null
+   "capa": null,
+   "lancamento": false
   }
  ],
  "grupos": [
@@ -1744,5 +1806,15 @@
     "os-amigos-das-catacumbas"
    ]
   }
+ ],
+ "lancamentos_ordem": [
+  "moby-dick",
+  "o-menino-que-nunca-saiu-da-vila",
+  "o-advogado-da-turma",
+  "os-irmaos-da-lanchonete",
+  "a-banda-da-garagem",
+  "davi-e-o-gigante",
+  "bentinho-e-capitu",
+  "shackleton-e-o-navio-no-gelo"
  ]
 }

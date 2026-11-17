@@ -49,3 +49,32 @@ Fonte única de todos os títulos, boxes e coleções. A landing lê este arquiv
 - `grupos[]`: boxes (`tipo: box`, leitura em ordem) e coleções (`tipo: colecao`), com a arte e a lista de títulos.
 - `vitrine: true` marca o que aparece na landing. O resto só aparece para quem assina.
 - `capa: null` indica que a imagem ainda não foi gerada.
+
+## Lançamentos
+
+- `lancamento: true` no título e `lancamentos_ordem` na raiz do catálogo definem a fileira "Lançamentos", que aparece na landing e na plataforma.
+- Quando a plataforma estiver no ar, trocar por uma data de lançamento (`lancado_em`) e mostrar os últimos 30 dias.
+
+## Plataforma (especificação)
+
+Dados de uso ficam no banco, fora do catálogo:
+
+| Tabela | Campos |
+|---|---|
+| `perfis` | id, conta_id, nome, avatar, valores[], caminhos[] |
+| `leituras` | perfil_id, titulo_id, pagina_atual, concluido_em |
+| `avaliacoes` | conta_id, perfil_id, titulo_id, valor (gostei = 1, não gostei = 0), criado_em |
+| `comentarios` | id, conta_id, titulo_id, texto, avaliacao, status (pendente, aprovado, recusado), criado_em |
+| `interesses` | perfil_id, titulo_id |
+| `anotacoes` | perfil_id, titulo_id, pagina, texto |
+
+**Avaliação e comentários**
+- Gostei e não gostei aparecem na última página, depois do quiz.
+- Comentários são escritos pelo adulto da conta, nunca pela criança, e passam por moderação antes de aparecer.
+- Mostrar o percentual de "gostei" só quando o título tiver avaliações suficientes (por exemplo, 20).
+
+**Recomendações**, por perfil, nesta ordem:
+1. Próximo volume de um box já começado.
+2. Títulos com os valores e caminhos marcados no perfil.
+3. Títulos que compartilham valores, caminhos ou coleção com os que o perfil marcou como "gostei".
+4. Excluir os já lidos; rebaixar os parecidos com os marcados como "não gostei".

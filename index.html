@@ -116,6 +116,11 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .note{background:#fff4e0;color:#2a2416;border-radius:10px;padding:14px 16px;font-size:15px;transform:rotate(-1deg)}
 .note b{display:block;font-family:Poppins,sans-serif;font-size:13px;color:#8a6a1e}
 .tabs{display:flex;gap:8px;flex-wrap:wrap}
+.rate{display:flex;gap:10px;flex-wrap:wrap}
+.rate button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.rate svg{width:18px;height:18px;fill:currentColor}
+.rate button[aria-pressed=true][data-r="1"]{background:var(--teal);border-color:var(--teal);color:#04161b}
+.rate button[aria-pressed=true][data-r="0"]{border-color:var(--red);color:var(--red)}
 .feat.quiz{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
 .feat.quiz>div:first-child{display:grid;gap:12px}
 .qbox{background:var(--bg);border-radius:14px;padding:18px;display:grid;gap:10px}
@@ -322,6 +327,18 @@ footer img{height:56px;width:auto}
         <h3>Boxes e coleções</h3>
         <p>Histórias que continuam vêm em box, com os volumes em ordem. Títulos que conversam entre si formam coleções.</p>
       </div>
+      <div class="feat">
+        <h3>Gostei ou não gostei</h3>
+        <p>No fim de cada livro, vocês dizem o que acharam. Os comentários de outras famílias ajudam a escolher a próxima história.</p>
+        <div class="rate" id="rate">
+          <button data-r="1" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v11H3V10h4zm2 11V10l4.5-7c1.4 0 2.3 1.2 2 2.5L14.8 9H20a2 2 0 0 1 2 2.3l-1.4 8A2 2 0 0 1 18.6 21H9z"/></svg>Gostei</button>
+          <button data-r="0" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(180deg)"><path d="M7 10v11H3V10h4zm2 11V10l4.5-7c1.4 0 2.3 1.2 2 2.5L14.8 9H20a2 2 0 0 1 2 2.3l-1.4 8A2 2 0 0 1 18.6 21H9z"/></svg>Não gostei</button>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Indicações para o seu filho</h3>
+        <p>A estante aprende com o que vocês leram, com o que gostaram e com os valores que você marcou no perfil. Terminou o primeiro volume de um box? O próximo já aparece em primeiro.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -365,8 +382,8 @@ footer img{height:56px;width:auto}
       <ul>
         <li>Catálogo completo: clássicos, Bíblia, santos, aventuras reais</li>
         <li>Perfis para todos os seus filhos</li>
-        <li>Lançamentos frequentes</li>
-        <li>Quiz de compreensão no fim de cada história</li>
+                <li>Quiz de compreensão no fim de cada história</li>
+        <li>Lançamentos frequentes e indicações para cada filho</li>
         <li>Marca-página, anotações e lista "Tenho interesse"</li>
       </ul>
       <button class="btn btn-main" data-toast="O cadastro abre em breve.">Assinar agora</button>
@@ -420,7 +437,8 @@ const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="la
 const has=(x,n)=>x.valores.includes(n)||x.caminhos.includes(n);
 function rows(cat){
  const vit=T.filter(x=>x.vitrine&&x.capa), gv=G.filter(g=>g.vitrine);
- $("#rows").innerHTML=cat.fileiras_landing.map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return `<div class="row"><div class="row-h"><h3><i style="background:${COL[n]||"var(--ink)"}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")
+ const lan=(cat.lancamentos_ordem||[]).map(id=>T.find(t=>t.id==id)).filter(x=>x&&x.capa);
+ $("#rows").innerHTML=`<div class="row"><div class="row-h"><h3><i style="background:var(--gold)"></i>Lançamentos</h3><span>${lan.length} títulos</span></div><div class="track">${lan.map(x=>cover(x).replace('<b>','<span class="badge">Novo</span><b>')).join("")}</div></div>`+cat.fileiras_landing.map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return `<div class="row"><div class="row-h"><h3><i style="background:${COL[n]||"var(--ink)"}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")
  +`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${gv.length} conjuntos</span></div><div class="track">${gv.map(boxc).join("")}</div></div>`;
  $("#seeds").innerHTML=SEEDS.map(([n,f,k])=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="images/cards/${f}.webp" alt=""><small>${k}</small><span>${n}</span></button>`).join("");
  const withImg=SEEDS.map(x=>x[0]);
@@ -450,6 +468,7 @@ document.addEventListener("click",e=>{
  const t=e.target.closest("[data-toast]");if(t){const el=$("#toast");el.textContent=t.dataset.toast;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2200)}
 });
 document.querySelectorAll("#opts button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#opts button").forEach(x=>x.className="");const ok=b.dataset.ok=="1";b.className=ok?"ok":"no";$("#qfb").textContent=ok?"Isso! A baleia era branca, por isso todo mundo a reconhecia de longe.":"Quase. Lembra do que o marinheiro viu no mar?"}));
+document.querySelectorAll("#rate button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll("#rate button").forEach(x=>x.setAttribute("aria-pressed",x===b))));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
 fetch("data/catalogo.json").then(r=>r.json()).then(cat=>{T=cat.titulos;G=cat.grupos;rows(cat)}).catch(()=>{$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>'});
 }
