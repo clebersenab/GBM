@@ -1361,6 +1361,29 @@
    ],
    "vitrine": false,
    "capa": null
+  },
+  {
+   "id": "o-gladiador-que-queria-voltar-para-casa",
+   "titulo": "O Gladiador que Queria Voltar para Casa",
+   "sinopse": "O homem mais forte de Roma só pensava numa coisa: voltar para a fazenda e para a família.",
+   "obra_mae": {
+    "titulo": "Gladiador (2000)",
+    "autor": "",
+    "tipo": "filme",
+    "idade": "16+"
+   },
+   "valores": [
+    "Coragem",
+    "Família"
+   ],
+   "caminhos": [],
+   "grupo": null,
+   "volume": null,
+   "fileiras": [
+    "Do cinema e das séries"
+   ],
+   "vitrine": false,
+   "capa": null
   }
  ],
  "grupos": [
