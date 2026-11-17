@@ -81,13 +81,22 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .origin .sign{color:var(--gold);font-weight:700}
 /* plant */
 .plant .head{display:grid;gap:10px;margin-bottom:28px}
-.seeds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.seed{position:relative;border-radius:14px;overflow:hidden;border:0;padding:0;cursor:pointer;background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 2px transparent}
-.seed img{aspect-ratio:1;width:100%;object-fit:cover;transition:transform .3s}
-.seed span{position:absolute;left:12px;bottom:12px;font:700 16px Poppins,sans-serif;background:rgba(11,13,23,.78);padding:6px 12px;border-radius:999px}
-.seed small{position:absolute;right:10px;top:10px;font-size:12px;background:rgba(11,13,23,.7);padding:3px 9px;border-radius:999px;color:var(--mute)}
-.seed[aria-pressed=true]{box-shadow:0 0 0 3px var(--gold)}
-.seed[aria-pressed=true] img{transform:scale(1.05)}
+.grp{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:26px 0 12px}
+.grp p{color:var(--mute);font-size:15px}
+.seeds{display:grid;gap:12px}
+.seeds.val{grid-template-columns:repeat(7,minmax(0,1fr))}
+.seeds.cam{grid-template-columns:repeat(6,minmax(0,1fr))}
+.seed{border:0;padding:0;background:none;color:var(--ink);cursor:pointer;display:grid;gap:8px;justify-items:center;text-align:center}
+.seed img{width:100%;object-fit:cover;transition:transform .3s,box-shadow .3s;box-shadow:0 0 0 2px var(--line)}
+.val .seed img{aspect-ratio:1;border-radius:16px}
+.cam .seed img{aspect-ratio:3/4;border-radius:999px 999px 14px 14px}
+.seed span{font:700 14px/1.2 Poppins,sans-serif}
+.val .seed[aria-pressed=true] img{box-shadow:0 0 0 3px var(--gold)}
+.cam .seed[aria-pressed=true] img{box-shadow:0 0 0 3px var(--teal)}
+.seed[aria-pressed=true] img{transform:translateY(-3px)}
+.seed[aria-pressed=true] span{color:var(--gold)}
+.cam .seed[aria-pressed=true] span{color:var(--teal)}
+.picked{margin-top:26px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px}
 .chip{min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--mute);font:600 15px "Nunito Sans",sans-serif;cursor:pointer}
 .chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -190,7 +199,8 @@ footer img{height:56px;width:auto}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
 @media(max-width:900px){
  nav .links a{display:none}
- .seeds{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .seeds.val{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .seeds.cam{grid-template-columns:repeat(3,minmax(0,1fr))}
  .pairs{grid-template-columns:1fr}
  .pair{grid-template-columns:minmax(0,140px) minmax(0,1fr);grid-template-rows:auto}
  .pair img{aspect-ratio:auto;height:100%}
@@ -266,8 +276,10 @@ footer img{height:56px;width:auto}
       <h2>Você escolhe o que plantar</h2>
       <p class="lead">No perfil de cada filho, você marca os valores e os caminhos que quer mostrar a ele, e a estante se organiza a partir disso. Teste aqui:</p>
     </div>
-    <div class="seeds" id="seeds"></div>
-    <div class="chips" id="chips"></div>
+    <div class="grp"><h3>Valores para cultivar</h3><p>O que você quer ver crescer dentro dele.</p></div>
+    <div class="seeds val" id="seedsV"></div>
+    <div class="grp"><h3>Caminhos para conhecer</h3><p>Profissões e mundos que ele pode descobrir lá fora.</p></div>
+    <div class="seeds cam" id="seedsC"></div>
     <div class="picked"><p id="pickedTxt"></p><div class="track" id="pickedRow"></div></div>
   </div>
 </section>
@@ -428,7 +440,8 @@ footer img{height:56px;width:auto}
 {
 const $=s=>document.querySelector(s);
 const COL={"Clássicos da literatura":"#16a2c0","Do cinema e das séries":"#d6283e","Histórias reais e de fé":"#f6a91b"};
-const SEEDS=[["Fé","valor-fe","Valor"],["Coragem","valor-coragem","Valor"],["Empreender","caminho-empreender","Caminho"],["Ciência e Inovação","caminho-ciencia-e-invencao","Caminho"]];
+const slug=t=>t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ /g,"-");
+const seed=(n,k)=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="images/cards/${k}-${slug(n)}.webp" alt=""><span>${n}</span></button>`;
 const sel=new Set(["Coragem","Empreender"]);
 let T=[],G=[];
 const later=(o,cls)=>{const k=o.tipo=="livro"?"leia":"assista";return `<div class="${cls}"><small>Quando crescer, ${k}</small><strong>${o.titulo}</strong>${o.autor?`<small>${o.autor}</small>`:""}<small>Idade sugerida: ${o.idade}</small></div>`};
@@ -440,9 +453,8 @@ function rows(cat){
  const lan=(cat.lancamentos_ordem||[]).map(id=>T.find(t=>t.id==id)).filter(x=>x&&x.capa);
  $("#rows").innerHTML=`<div class="row"><div class="row-h"><h3><i style="background:var(--gold)"></i>Lançamentos</h3><span>${lan.length} títulos</span></div><div class="track">${lan.map(x=>cover(x).replace('<b>','<span class="badge">Novo</span><b>')).join("")}</div></div>`+cat.fileiras_landing.map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return `<div class="row"><div class="row-h"><h3><i style="background:${COL[n]||"var(--ink)"}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")
  +`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${gv.length} conjuntos</span></div><div class="track">${gv.map(boxc).join("")}</div></div>`;
- $("#seeds").innerHTML=SEEDS.map(([n,f,k])=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="images/cards/${f}.webp" alt=""><small>${k}</small><span>${n}</span></button>`).join("");
- const withImg=SEEDS.map(x=>x[0]);
- $("#chips").innerHTML=[...cat.valores,...cat.caminhos].filter(n=>!withImg.includes(n)).map(n=>`<button class="chip" data-tag="${n}" aria-pressed="false">${n}</button>`).join("");
+ $("#seedsV").innerHTML=cat.valores.map(n=>seed(n,"valor")).join("");
+ $("#seedsC").innerHTML=cat.caminhos.map(n=>seed(n,"caminho")).join("");
  $("#pairs").innerHTML=["bentinho-e-capitu","o-menino-que-nunca-saiu-da-vila","os-irmaos-da-lanchonete"].map(id=>{const x=T.find(y=>y.id==id);const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
  paint();
 }

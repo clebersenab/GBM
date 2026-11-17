@@ -33,7 +33,7 @@ images/
 | marca | logo (svg/png), logo horizontal, ícone, favicons, og-image | — |
 | hero | pai e filho, mãe e filha | — |
 | secoes | origem, elo (avô), elo (mãos), curadoria | — |
-| cards | fé, coragem, empreender, ciência e invenção | honestidade, amizade, curiosidade, perseverança, família, medicina, exploração, servir e proteger, raízes do brasil |
+| cards | 7 valores (planta) e 6 caminhos (porta) | — |
 | capas | 20 | — para a landing v1 |
 | destaques | menino da vila, ilha das regras, turma do mucuripe | — |
 | boxes | a família, dante, jesus, os três amigos*, william wallace, doutores da igreja, heróis de farda, josé de alencar, machado de assis | heróis de israel, fábulas |
