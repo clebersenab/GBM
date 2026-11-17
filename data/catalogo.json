@@ -161,7 +161,7 @@
    "fileiras": [
     "Clássicos da literatura"
    ],
-   "vitrine": true,
+   "vitrine": false,
    "capa": "images/capas/a-ilha-das-regras.webp",
    "lancamento": false
   },
@@ -185,7 +185,7 @@
     "Clássicos da literatura",
     "Raízes do Brasil"
    ],
-   "vitrine": true,
+   "vitrine": false,
    "capa": "images/capas/a-turma-do-mucuripe.webp",
    "lancamento": false
   },
@@ -464,7 +464,7 @@
    ],
    "vitrine": true,
    "capa": "images/capas/shackleton-e-o-navio-no-gelo.webp",
-   "lancamento": true
+   "lancamento": false
   },
   {
    "id": "santos-dumont-e-o-sonho-de-voar",
@@ -1118,7 +1118,7 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null,
+   "capa": "images/capas/o-anel-de-giges.webp",
    "lancamento": false
   },
   {
@@ -1344,9 +1344,9 @@
    "fileiras": [
     "Do cinema e das séries"
    ],
-   "vitrine": false,
+   "vitrine": true,
    "capa": "images/capas/o-gladiador-que-queria-voltar-para-casa.webp",
-   "lancamento": false
+   "lancamento": true
   },
   {
    "id": "julio-cesar",
@@ -1369,7 +1369,7 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null,
+   "capa": "images/capas/julio-cesar.webp",
    "lancamento": false
   },
   {
@@ -1392,8 +1392,8 @@
    "fileiras": [
     "Clássicos da literatura"
    ],
-   "vitrine": false,
-   "capa": null,
+   "vitrine": true,
+   "capa": "images/capas/hamlet.webp",
    "lancamento": false
   },
   {
@@ -1417,7 +1417,7 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null,
+   "capa": "images/capas/rei-lear.webp",
    "lancamento": false
   },
   {
@@ -1441,8 +1441,8 @@
     "Clássicos da literatura",
     "Raízes do Brasil"
    ],
-   "vitrine": false,
-   "capa": null,
+   "vitrine": true,
+   "capa": "images/capas/os-lusiadas.webp",
    "lancamento": false
   },
   {
@@ -1465,7 +1465,7 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null,
+   "capa": "images/capas/o-menino-que-escondeu-o-vaso-quebrado.webp",
    "lancamento": false
   },
   {
@@ -1489,7 +1489,7 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": null,
+   "capa": "images/capas/os-meninos-e-o-cachorro-perdido.webp",
    "lancamento": false
   },
   {
@@ -1513,7 +1513,7 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": null,
+   "capa": "images/capas/paulo-e-o-naufragio.webp",
    "lancamento": false
   },
   {
@@ -1536,8 +1536,8 @@
    "fileiras": [
     "Clássicos da literatura"
    ],
-   "vitrine": false,
-   "capa": null,
+   "vitrine": true,
+   "capa": "images/capas/ben-hur.webp",
    "lancamento": false
   }
  ],
@@ -1778,8 +1778,8 @@
     "tipo": "livro",
     "idade": "14+"
    },
-   "arte": null,
-   "vitrine": false,
+   "arte": "images/boxes/colecao-shakespeare.webp",
+   "vitrine": true,
    "titulos": [
     "julio-cesar",
     "hamlet",
@@ -1793,8 +1793,8 @@
   "o-advogado-da-turma",
   "os-irmaos-da-lanchonete",
   "a-banda-da-garagem",
+  "o-gladiador-que-queria-voltar-para-casa",
   "davi-e-o-gigante",
-  "bentinho-e-capitu",
-  "shackleton-e-o-navio-no-gelo"
+  "bentinho-e-capitu"
  ]
 }

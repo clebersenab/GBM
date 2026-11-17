@@ -34,7 +34,7 @@ images/
 | hero | pai e filho, mãe e filha | — |
 | secoes | origem, elo (avô), elo (mãos), curadoria | — |
 | cards | 7 valores (planta) e 6 caminhos (porta) | — |
-| capas | 20 | — para a landing v1 |
+| capas | 62 (catálogo completo) | — |
 | destaques | menino da vila, ilha das regras, turma do mucuripe | — |
 | boxes | a família, dante, jesus, os três amigos*, william wallace, doutores da igreja, heróis de farda, josé de alencar, machado de assis | heróis de israel, fábulas |
 | avatares | 8 | — |
