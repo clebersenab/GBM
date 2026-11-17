@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GBM Plataforma</title>
-<link rel="icon" href="images/marca/favicon-32.png">
+<link rel="icon" href="../images/marca/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap" rel="stylesheet">
 <style>
@@ -17,7 +17,7 @@
 :root{color-scheme:dark;--bg:#0b0d17;--bg2:#121527;--card:#181c33;--ink:#fff4e0;--mute:#c9c0ae;--line:#272c4a;--purple:#9146b5;--blue:#62c8ed;--orange:#f28c28;--paper:#fff8ec;--paperink:#2a2318}
 *{box-sizing:border-box;min-width:0}
 html,body{height:100%}
-body{margin:0;background:var(--bg) url(images/marca/fundo-ceu.svg) repeat;background-size:1100px;color:var(--ink);font:16px/1.55 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
+body{margin:0;background:var(--bg) url(../images/marca/fundo-ceu.svg) repeat;background-size:1100px;color:var(--ink);font:16px/1.55 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
 img{max-width:100%;display:block}
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
@@ -124,7 +124,7 @@ h1,h2,h3{font-family:Poppins,system-ui,sans-serif;margin:0;letter-spacing:-.02em
 
 <section class="view" id="perfis">
   <div>
-    <img src="images/marca/logo-web.png" alt="GBM" style="height:90px;width:auto;margin:0 auto">
+    <img src="../images/marca/logo-web.png" alt="GBM" style="height:90px;width:auto;margin:0 auto">
     <h1>Quem está lendo?</h1>
     <div class="who" id="who"></div>
   </div>
@@ -132,7 +132,7 @@ h1,h2,h3{font-family:Poppins,system-ui,sans-serif;margin:0;letter-spacing:-.02em
 
 <section class="view" id="estante">
   <header class="top">
-    <img class="logo" src="images/marca/logo-nav.png" alt="GBM">
+    <img class="logo" src="../images/marca/logo-nav.png" alt="GBM">
     <button class="me" data-go="perfis" id="meBtn"></button>
   </header>
   <div class="wrap" id="shelf"></div>
@@ -156,7 +156,7 @@ h1,h2,h3{font-family:Poppins,system-ui,sans-serif;margin:0;letter-spacing:-.02em
 
 <section class="view" id="fim">
   <header class="top">
-    <img class="logo" src="images/marca/logo-nav.png" alt="GBM">
+    <img class="logo" src="../images/marca/logo-nav.png" alt="GBM">
     <button class="me" data-go="estante" id="meBtn2"></button>
   </header>
   <div class="end">
@@ -194,16 +194,16 @@ const $=s=>document.querySelector(s);
 const KIDS=[{n:"Giovana",a:"raposa",v:["Coragem","Amizade"],c:["Medicina"]},{n:"Bento",a:"leao",v:["Coragem","Perseverança"],c:["Empreender","Música"]},{n:"Maria",a:"baleia",v:["Fé","Família"],c:[]}];
 let kid=KIDS[0],T=[],page=2;
 const PAGES=[
- {img:"images/capas/moby-dick.webp",pos:"center 30%",t:["Ismael tinha dez anos quando subiu num navio pela primeira vez.","O barco se chamava Pequod e cheirava a sal, a corda molhada e a aventura."]},
- {img:"images/destaques/moby-dick.webp",pos:"30% center",t:["O capitão Ahab andava de um lado para o outro do convés.","Ele só falava de uma coisa: uma baleia enorme, branca como a espuma do mar, que ninguém nunca tinha conseguido alcançar."]},
- {img:"images/destaques/moby-dick.webp",pos:"85% center",t:["Ismael nunca tinha visto o mar tão grande. Do alto do mastro, ele olhava para todos os lados, procurando <mark>um jato de água subindo no meio das ondas</mark>.","\"Lá vem ela!\", gritou alguém lá de baixo."],note:true},
- {img:"images/capas/moby-dick.webp",pos:"center 60%",t:["Era ela. A baleia branca subiu devagar, bem do lado do barquinho de Ismael.","Por um instante, o olho enorme dela olhou direto para ele."]}
+ {img:"../images/capas/moby-dick.webp",pos:"center 30%",t:["Ismael tinha dez anos quando subiu num navio pela primeira vez.","O barco se chamava Pequod e cheirava a sal, a corda molhada e a aventura."]},
+ {img:"../images/destaques/moby-dick.webp",pos:"30% center",t:["O capitão Ahab andava de um lado para o outro do convés.","Ele só falava de uma coisa: uma baleia enorme, branca como a espuma do mar, que ninguém nunca tinha conseguido alcançar."]},
+ {img:"../images/destaques/moby-dick.webp",pos:"85% center",t:["Ismael nunca tinha visto o mar tão grande. Do alto do mastro, ele olhava para todos os lados, procurando <mark>um jato de água subindo no meio das ondas</mark>.","\"Lá vem ela!\", gritou alguém lá de baixo."],note:true},
+ {img:"../images/capas/moby-dick.webp",pos:"center 60%",t:["Era ela. A baleia branca subiu devagar, bem do lado do barquinho de Ismael.","Por um instante, o olho enorme dela olhou direto para ele."]}
 ];
 const TOTAL=12;
 const show=v=>{document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==v));scrollTo(0,0);if(v=="estante")shelf();if(v=="leitor")reader();if(v=="fim")after()};
-const meHTML=()=>`<img src="images/avatares/avatar-${kid.a}.webp" alt=""><span>${kid.n}</span>`;
-$("#who").innerHTML=KIDS.map((k,i)=>`<button data-kid="${i}"><img src="images/avatares/avatar-${k.a}.webp" alt="">${k.n}<small>${k.v.join(", ")}</small></button>`).join("")+`<button><span class="add">+</span>Adicionar<small>novo perfil</small></button>`;
-const cv=(x,extra="")=>`<button class="cv" data-read="${x.id}"><img loading="lazy" src="${x.capa}" alt="">${extra}<b>${x.titulo}</b></button>`;
+const meHTML=()=>`<img src="../images/avatares/avatar-${kid.a}.webp" alt=""><span>${kid.n}</span>`;
+$("#who").innerHTML=KIDS.map((k,i)=>`<button data-kid="${i}"><img src="../images/avatares/avatar-${k.a}.webp" alt="">${k.n}<small>${k.v.join(", ")}</small></button>`).join("")+`<button><span class="add">+</span>Adicionar<small>novo perfil</small></button>`;
+const cv=(x,extra="")=>`<button class="cv" data-read="${x.id}"><img loading="lazy" src="../${x.capa}" alt="">${extra}<b>${x.titulo}</b></button>`;
 const has=(x,n)=>x.valores.includes(n)||x.caminhos.includes(n);
 function shelf(){
  $("#meBtn").innerHTML=meHTML();
@@ -248,7 +248,7 @@ $("#opts").addEventListener("click",e=>{const b=e.target.closest("button");if(!b
 $("#rate").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("#rate").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b))});
 const route=()=>show(["perfis","estante","leitor","fim"].includes(location.hash.slice(1))?location.hash.slice(1):"perfis");
 addEventListener("hashchange",route);
-fetch("data/catalogo.json").then(r=>r.json()).then(c=>{T=c.titulos;route()}).catch(()=>route());
+fetch("../data/catalogo.json").then(r=>r.json()).then(c=>{T=c.titulos;route()}).catch(()=>route());
 }
 </script>
 </body>
