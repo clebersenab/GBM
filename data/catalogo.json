@@ -118,9 +118,9 @@
    "lancamento": false
   },
   {
-   "id": "o-menino-que-nunca-saiu-da-vila",
-   "titulo": "O Menino que Nunca Saiu da Vila",
-   "sinopse": "Um menino do sertão que tem medo de tudo precisa atravessar a serra para devolver o que foi roubado.",
+   "id": "ze-candeia",
+   "titulo": "Zé Candeia e a Travessia da Serra",
+   "sinopse": "Zé Candeia tem medo de tudo. Mesmo assim, pega a lamparina e atravessa a serra para devolver o que foi roubado.",
    "obra_mae": {
     "titulo": "O Hobbit",
     "autor": "J.R.R. Tolkien",
@@ -138,7 +138,7 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/o-menino-que-nunca-saiu-da-vila.webp",
+   "capa": "images/capas/ze-candeia.webp",
    "lancamento": true
   },
   {
@@ -190,8 +190,8 @@
    "lancamento": false
   },
   {
-   "id": "robinson-e-a-ilha",
-   "titulo": "Robinson e a Ilha",
+   "id": "robinson-crusoe",
+   "titulo": "Robinson Crusoé",
    "sinopse": "Sozinho numa ilha, um menino aprende a construir tudo a partir do nada.",
    "obra_mae": {
     "titulo": "Robinson Crusoé",
@@ -211,7 +211,7 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": "images/capas/robinson-e-a-ilha.webp",
+   "capa": "images/capas/robinson-crusoe.webp",
    "lancamento": false
   },
   {
@@ -241,9 +241,9 @@
    "lancamento": true
   },
   {
-   "id": "o-menino-da-bateria",
-   "titulo": "O Menino da Bateria",
-   "sinopse": "Todo dia, depois da escola, um menino treina na bateria até o braço cansar. Ele quer ser o melhor.",
+   "id": "as-baquetas-de-teo",
+   "titulo": "As Baquetas de Téo",
+   "sinopse": "Todo dia, depois da escola, Téo treina na bateria até o braço cansar. Ele quer ser o melhor.",
    "obra_mae": {
     "titulo": "Whiplash: Em Busca da Perfeição (2014)",
     "autor": "",
@@ -262,12 +262,12 @@
     "Do cinema e das séries"
    ],
    "vitrine": true,
-   "capa": "images/capas/o-menino-da-bateria.webp",
+   "capa": "images/capas/as-baquetas-de-teo.webp",
    "lancamento": false
   },
   {
-   "id": "os-irmaos-da-lanchonete",
-   "titulo": "Os Irmãos da Lanchonete",
+   "id": "a-cozinha-de-giz",
+   "titulo": "A Cozinha de Giz",
    "sinopse": "Dois irmãos desenham com giz a cozinha mais rápida do mundo. Um dia, chega um vendedor com um sonho enorme.",
    "obra_mae": {
     "titulo": "Fome de Poder (2016)",
@@ -287,13 +287,13 @@
     "Do cinema e das séries"
    ],
    "vitrine": true,
-   "capa": "images/capas/os-irmaos-da-lanchonete.webp",
+   "capa": "images/capas/a-cozinha-de-giz.webp",
    "lancamento": true
   },
   {
-   "id": "a-familia-1-o-menino-que-chegou-de-navio",
-   "titulo": "O Menino que Chegou de Navio",
-   "sinopse": "Um menino italiano desembarca sozinho em Santos com uma mala e muita coragem.",
+   "id": "a-familia-1-enzo-chega-a-santos",
+   "titulo": "Enzo Chega a Santos",
+   "sinopse": "Enzo desembarca sozinho no porto de Santos, com uma mala e muita coragem.",
    "obra_mae": {
     "titulo": "O Poderoso Chefão",
     "autor": "Mario Puzo",
@@ -313,13 +313,13 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/a-familia-1-o-menino-que-chegou-de-navio.webp",
+   "capa": "images/capas/a-familia-1-enzo-chega-a-santos.webp",
    "lancamento": false
   },
   {
-   "id": "a-familia-2-o-filho-que-queria-outro-caminho",
-   "titulo": "O Filho que Queria Outro Caminho",
-   "sinopse": "O caçula queria ser professor. Quando o pai adoece, ele assume a venda da família só por um tempo.",
+   "id": "a-familia-2-pietro-e-a-venda",
+   "titulo": "Pietro e a Venda da Família",
+   "sinopse": "Pietro queria ser professor. Quando o pai adoece, ele assume a venda da família só por um tempo.",
    "obra_mae": {
     "titulo": "O Poderoso Chefão",
     "autor": "Mario Puzo",
@@ -338,13 +338,13 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": "images/capas/a-familia-2-o-filho-que-queria-outro-caminho.webp",
+   "capa": "images/capas/a-familia-2-pietro-e-a-venda.webp",
    "lancamento": false
   },
   {
-   "id": "a-familia-3-o-que-deixamos-para-os-filhos",
-   "titulo": "O Que Deixamos para os Filhos",
-   "sinopse": "Já velho, ele quer entregar aos netos algo melhor do que recebeu.",
+   "id": "a-familia-3-a-chave-do-vovo-pietro",
+   "titulo": "A Chave do Vovô Pietro",
+   "sinopse": "Já velho, Pietro quer entregar aos netos algo melhor do que recebeu.",
    "obra_mae": {
     "titulo": "O Poderoso Chefão",
     "autor": "Mario Puzo",
@@ -363,7 +363,7 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": "images/capas/a-familia-3-o-que-deixamos-para-os-filhos.webp",
+   "capa": "images/capas/a-familia-3-a-chave-do-vovo-pietro.webp",
    "lancamento": false
   },
   {
@@ -393,9 +393,9 @@
    "lancamento": false
   },
   {
-   "id": "o-advogado-da-turma",
-   "titulo": "O Advogado da Turma",
-   "sinopse": "Ele resolve todas as brigas da escola com bons argumentos. Até o melhor amigo pedir ajuda para ganhar com uma mentirinha.",
+   "id": "a-causa-de-caio",
+   "titulo": "A Causa de Caio",
+   "sinopse": "Caio resolve todas as brigas da escola com bons argumentos. Até o melhor amigo pedir ajuda para ganhar com uma mentirinha.",
    "obra_mae": {
     "titulo": "Suits",
     "autor": "",
@@ -414,12 +414,12 @@
     "Do cinema e das séries"
    ],
    "vitrine": true,
-   "capa": "images/capas/o-advogado-da-turma.webp",
+   "capa": "images/capas/a-causa-de-caio.webp",
    "lancamento": true
   },
   {
-   "id": "a-filha-do-advogado",
-   "titulo": "A Filha do Advogado",
+   "id": "lia-e-o-julgamento",
+   "titulo": "Lia e o Julgamento",
    "sinopse": "A cidade inteira já condenou aquele homem. O pai de Lia resolve defendê-lo.",
    "obra_mae": {
     "titulo": "O Sol é para Todos",
@@ -440,7 +440,7 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": "images/capas/a-filha-do-advogado.webp",
+   "capa": "images/capas/lia-e-o-julgamento.webp",
    "lancamento": false
   },
   {
@@ -518,8 +518,8 @@
    "lancamento": false
   },
   {
-   "id": "rui-o-menino-que-falava-bonito",
-   "titulo": "Rui, o Menino que Falava Bonito",
+   "id": "rui-barbosa",
+   "titulo": "Rui Barbosa, a Águia de Haia",
    "sinopse": "O menino de Salvador que vivia nos livros cresceu e defendeu o Brasil diante do mundo.",
    "obra_mae": {
     "titulo": "Oração aos Moços",
@@ -540,7 +540,7 @@
     "Raízes do Brasil"
    ],
    "vitrine": true,
-   "capa": "images/capas/rui-o-menino-que-falava-bonito.webp",
+   "capa": "images/capas/rui-barbosa.webp",
    "lancamento": false
   },
   {
@@ -593,8 +593,8 @@
    "lancamento": true
   },
   {
-   "id": "tomas-o-menino-das-perguntas",
-   "titulo": "Tomás, o Menino das Perguntas",
+   "id": "sao-tomas-de-aquino",
+   "titulo": "São Tomás de Aquino",
    "sinopse": "Tomás era quieto e grandão, e os colegas riam dele. Até o dia em que ele resolveu falar.",
    "obra_mae": {
     "titulo": "Santo Tomás de Aquino",
@@ -607,19 +607,19 @@
     "Curiosidade"
    ],
    "caminhos": [],
-   "grupo": "colecao-doutores-da-igreja",
+   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": true,
-   "capa": "images/capas/tomas-o-menino-das-perguntas.webp",
+   "capa": "images/capas/sao-tomas-de-aquino.webp",
    "lancamento": false
   },
   {
-   "id": "o-menino-caixeiro",
-   "titulo": "O Menino Caixeiro",
-   "sinopse": "Atrás do balcão de uma venda no Rio, um menino anota tudo e sonha grande.",
+   "id": "o-balcao-de-irineu",
+   "titulo": "O Balcão de Irineu",
+   "sinopse": "Atrás do balcão de uma venda no Rio antigo, Irineu anota tudo e sonha grande.",
    "obra_mae": {
     "titulo": "Mauá: Empresário do Império",
     "autor": "Jorge Caldeira",
@@ -639,7 +639,7 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": "images/capas/o-menino-caixeiro.webp",
+   "capa": "images/capas/o-balcao-de-irineu.webp",
    "lancamento": false
   },
   {
@@ -926,9 +926,9 @@
    "lancamento": false
   },
   {
-   "id": "o-senhor-que-contou-a-vida-de-tras-para-frente",
-   "titulo": "O Senhor que Contou a Vida de Trás para Frente",
-   "sinopse": "Um senhor de cartola conta a vida dele começando pelo fim.",
+   "id": "memorias-de-bras-cubas",
+   "titulo": "Memórias de Brás Cubas",
+   "sinopse": "Brás Cubas conta a própria vida começando pelo fim.",
    "obra_mae": {
     "titulo": "Memórias Póstumas de Brás Cubas",
     "autor": "Machado de Assis",
@@ -946,7 +946,7 @@
     "Raízes do Brasil"
    ],
    "vitrine": false,
-   "capa": "images/capas/o-senhor-que-contou-a-vida-de-tras-para-frente.webp",
+   "capa": "images/capas/memorias-de-bras-cubas.webp",
    "lancamento": false
   },
   {
@@ -974,8 +974,8 @@
    "lancamento": false
   },
   {
-   "id": "agostinho",
-   "titulo": "Agostinho",
+   "id": "santo-agostinho",
+   "titulo": "Santo Agostinho",
    "sinopse": "Na praia, um menino tenta colocar o mar inteiro num buraco na areia.",
    "obra_mae": {
     "titulo": "Confissões",
@@ -988,13 +988,13 @@
     "Curiosidade"
    ],
    "caminhos": [],
-   "grupo": "colecao-doutores-da-igreja",
+   "grupo": "colecao-santos-da-igreja",
    "volume": null,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": "images/capas/agostinho.webp",
+   "capa": "images/capas/santo-agostinho.webp",
    "lancamento": false
   },
   {
@@ -1146,9 +1146,9 @@
    "lancamento": false
   },
   {
-   "id": "o-pequeno-cavaleiro",
-   "titulo": "O Pequeno Cavaleiro",
-   "sinopse": "No torneio, o escudeiro de oito anos segura o elmo do seu cavaleiro.",
+   "id": "ivanhoe-e-o-escudeiro",
+   "titulo": "Ivanhoé e o Escudeiro",
+   "sinopse": "No torneio, o escudeiro de oito anos segura o elmo de Ivanhoé.",
    "obra_mae": {
     "titulo": "Ivanhoé",
     "autor": "Walter Scott",
@@ -1168,7 +1168,7 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": "images/capas/o-pequeno-cavaleiro.webp",
+   "capa": "images/capas/ivanhoe-e-o-escudeiro.webp",
    "lancamento": false
   },
   {
@@ -1199,8 +1199,8 @@
    "lancamento": false
   },
   {
-   "id": "padre-pio-o-menino-de-pietrelcina",
-   "titulo": "Padre Pio, o Menino de Pietrelcina",
+   "id": "padre-pio",
+   "titulo": "Padre Pio",
    "sinopse": "Desde pequeno, o menino Francesco queria ser frade.",
    "obra_mae": {
     "titulo": "Padre Pio (2000)",
@@ -1218,7 +1218,7 @@
     "Histórias reais e de fé"
    ],
    "vitrine": false,
-   "capa": "images/capas/padre-pio-o-menino-de-pietrelcina.webp",
+   "capa": "images/capas/padre-pio.webp",
    "lancamento": false
   },
   {
@@ -1274,9 +1274,9 @@
    "lancamento": false
   },
   {
-   "id": "a-doutora-detetive",
-   "titulo": "A Doutora Detetive",
-   "sinopse": "Uma médica que resolve doenças como mistérios, pista por pista.",
+   "id": "doutora-clara-investiga",
+   "titulo": "Doutora Clara Investiga",
+   "sinopse": "A Doutora Clara resolve doenças como mistérios, pista por pista.",
    "obra_mae": {
     "titulo": "Sherlock Holmes e House",
     "autor": "Arthur Conan Doyle",
@@ -1295,13 +1295,13 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": "images/capas/a-doutora-detetive.webp",
+   "capa": "images/capas/doutora-clara-investiga.webp",
    "lancamento": false
   },
   {
-   "id": "o-menino-que-notava-tudo",
-   "titulo": "O Menino que Notava Tudo",
-   "sinopse": "Ele vê o que ninguém mais vê.",
+   "id": "samuel-repara-em-tudo",
+   "titulo": "Samuel Repara em Tudo",
+   "sinopse": "Na sala de espera do hospital, Samuel percebe detalhes que ninguém mais vê.",
    "obra_mae": {
     "titulo": "The Good Doctor",
     "autor": "",
@@ -1321,13 +1321,13 @@
     "Do cinema e das séries"
    ],
    "vitrine": false,
-   "capa": "images/capas/o-menino-que-notava-tudo.webp",
+   "capa": "images/capas/samuel-repara-em-tudo.webp",
    "lancamento": false
   },
   {
-   "id": "o-gladiador-que-queria-voltar-para-casa",
-   "titulo": "O Gladiador que Queria Voltar para Casa",
-   "sinopse": "O homem mais forte de Roma só pensava numa coisa: voltar para a fazenda e para a família.",
+   "id": "lucio-e-o-gladiador",
+   "titulo": "Lúcio e o Gladiador",
+   "sinopse": "Lúcio vende pão perto do Coliseu e fica amigo de um gladiador enorme que só pensa em voltar para casa.",
    "obra_mae": {
     "titulo": "Gladiador (2000)",
     "autor": "",
@@ -1345,7 +1345,7 @@
     "Do cinema e das séries"
    ],
    "vitrine": true,
-   "capa": "images/capas/o-gladiador-que-queria-voltar-para-casa.webp",
+   "capa": "images/capas/lucio-e-o-gladiador.webp",
    "lancamento": true
   },
   {
@@ -1374,7 +1374,7 @@
   },
   {
    "id": "hamlet",
-   "titulo": "Hamlet, o Príncipe que Não Sabia Decidir",
+   "titulo": "Hamlet",
    "sinopse": "O rei morreu, o tio assumiu o trono, e o jovem príncipe desconfia de que algo está errado.",
    "obra_mae": {
     "titulo": "Hamlet",
@@ -1446,9 +1446,9 @@
    "lancamento": false
   },
   {
-   "id": "o-menino-que-escondeu-o-vaso-quebrado",
-   "titulo": "O Menino que Escondeu o Vaso Quebrado",
-   "sinopse": "Ninguém descobriu quem quebrou o vaso da avó. Então por que ele não consegue mais dormir?",
+   "id": "o-vaso-da-vovo",
+   "titulo": "O Vaso da Vovó",
+   "sinopse": "Ninguém descobriu quem quebrou o vaso da vovó. Então por que Nino não consegue mais dormir?",
    "obra_mae": {
     "titulo": "Crime e Castigo",
     "autor": "Fiódor Dostoiévski",
@@ -1465,12 +1465,12 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": "images/capas/o-menino-que-escondeu-o-vaso-quebrado.webp",
+   "capa": "images/capas/o-vaso-da-vovo.webp",
    "lancamento": false
   },
   {
-   "id": "os-meninos-e-o-cachorro-perdido",
-   "titulo": "Os Meninos e o Cachorro Perdido",
+   "id": "iliucha-e-o-cachorro",
+   "titulo": "Iliúcha e o Cachorro",
    "sinopse": "Os colegas que provocavam Iliúcha viram seus amigos, e juntos procuram o cachorro que ele achava ter perdido para sempre.",
    "obra_mae": {
     "titulo": "Os Irmãos Karamázov",
@@ -1489,7 +1489,7 @@
     "Clássicos da literatura"
    ],
    "vitrine": false,
-   "capa": "images/capas/os-meninos-e-o-cachorro-perdido.webp",
+   "capa": "images/capas/iliucha-e-o-cachorro.webp",
    "lancamento": false
   },
   {
@@ -1555,9 +1555,9 @@
    "arte": "images/boxes/box-a-familia.webp",
    "vitrine": true,
    "titulos": [
-    "a-familia-1-o-menino-que-chegou-de-navio",
-    "a-familia-2-o-filho-que-queria-outro-caminho",
-    "a-familia-3-o-que-deixamos-para-os-filhos"
+    "a-familia-1-enzo-chega-a-santos",
+    "a-familia-2-pietro-e-a-venda",
+    "a-familia-3-a-chave-do-vovo-pietro"
    ]
   },
   {
@@ -1663,7 +1663,7 @@
    "vitrine": true,
    "titulos": [
     "bentinho-e-capitu",
-    "o-senhor-que-contou-a-vida-de-tras-para-frente"
+    "memorias-de-bras-cubas"
    ]
   },
   {
@@ -1684,20 +1684,20 @@
    ]
   },
   {
-   "id": "colecao-doutores-da-igreja",
-   "titulo": "Doutores da Igreja",
+   "id": "colecao-santos-da-igreja",
+   "titulo": "Santos da Igreja",
    "tipo": "colecao",
    "obra_mae": {
-    "titulo": "Confissões e Santo Tomás de Aquino",
+    "titulo": "Confissões, de Santo Agostinho, e Santo Tomás de Aquino, de Chesterton",
     "autor": "Santo Agostinho e G.K. Chesterton",
     "tipo": "livro",
     "idade": "16+"
    },
-   "arte": "images/boxes/colecao-doutores-da-igreja.webp",
+   "arte": "images/boxes/colecao-santos-da-igreja.webp",
    "vitrine": true,
    "titulos": [
-    "agostinho",
-    "tomas-o-menino-das-perguntas"
+    "santo-agostinho",
+    "sao-tomas-de-aquino"
    ]
   },
   {
@@ -1731,7 +1731,7 @@
    "vitrine": false,
    "titulos": [
     "a-banda-da-garagem",
-    "o-menino-da-bateria"
+    "as-baquetas-de-teo"
    ]
   },
   {
@@ -1747,9 +1747,9 @@
    "arte": "images/boxes/colecao-justica.webp",
    "vitrine": false,
    "titulos": [
-    "a-filha-do-advogado",
-    "o-advogado-da-turma",
-    "rui-o-menino-que-falava-bonito"
+    "lia-e-o-julgamento",
+    "a-causa-de-caio",
+    "rui-barbosa"
    ]
   },
   {
@@ -1789,11 +1789,11 @@
  ],
  "lancamentos_ordem": [
   "moby-dick",
-  "o-menino-que-nunca-saiu-da-vila",
-  "o-advogado-da-turma",
-  "os-irmaos-da-lanchonete",
+  "ze-candeia",
+  "a-causa-de-caio",
+  "a-cozinha-de-giz",
   "a-banda-da-garagem",
-  "o-gladiador-que-queria-voltar-para-casa",
+  "lucio-e-o-gladiador",
   "davi-e-o-gigante",
   "bentinho-e-capitu"
  ]

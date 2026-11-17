@@ -430,7 +430,7 @@ function rows(cat){
  +`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${gv.length} conjuntos</span></div><div class="track">${gv.map(boxc).join("")}</div></div>`;
  $("#seedsV").innerHTML=cat.valores.map(n=>seed(n,"valor")).join("");
  $("#seedsC").innerHTML=cat.caminhos.map(n=>seed(n,"caminho")).join("");
- $("#pairs").innerHTML=["bentinho-e-capitu","o-menino-que-nunca-saiu-da-vila","os-irmaos-da-lanchonete"].map(id=>{const x=T.find(y=>y.id==id);const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="../${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
+ $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=T.find(y=>y.id==id);const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="../${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
  paint();
 }
 function paint(){
