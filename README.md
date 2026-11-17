@@ -57,6 +57,12 @@ Fonte única de todos os títulos, boxes e coleções. A landing lê este arquiv
 
 ## Plataforma (especificação)
 
+Protótipo navegável em `app.html` (perfis, estante, leitor, fim do livro). As telas da landing em `images/plataforma` são capturas desse protótipo.
+
+Estados de leitura por perfil: **não iniciado**, **iniciado** (com página atual), **lido**. A estante mostra "Continue lendo" (iniciados), "Indicados", "Lançamentos" e "Tenho interesse" (com filtro lidos e não lidos).
+
+Na landing, esses recursos não são listados: aparecem só nas capturas de tela.
+
 Dados de uso ficam no banco, fora do catálogo:
 
 | Tabela | Campos |
@@ -67,6 +73,8 @@ Dados de uso ficam no banco, fora do catálogo:
 | `comentarios` | id, conta_id, titulo_id, texto, avaliacao, status (pendente, aprovado, recusado), criado_em |
 | `interesses` | perfil_id, titulo_id |
 | `anotacoes` | perfil_id, titulo_id, pagina, texto |
+| `marcacoes` | perfil_id, titulo_id, pagina, trecho (início e fim), cor |
+| `marca_pagina` | perfil_id, titulo_id, pagina |
 
 **Avaliação e comentários**
 - Gostei e não gostei aparecem na última página, depois do quiz.

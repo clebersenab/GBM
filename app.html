@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GBM Plataforma</title>
+<link rel="icon" href="images/marca/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap" rel="stylesheet">
+<style>
+/* VOICE  everyday product: the app a family opens at bedtime
+   IDEA   a streaming shelf that turns into a picture book when you open a title
+   PICTURE the reader itself: illustration page facing a text page
+   COLOUR night navy, cream; orange for actions, sky blue for discovery, purple for boxes
+   TYPE   Poppins for interface, Literata for the story text
+   LAYOUT tablet-first; reader is two facing pages, stacks on phone */
+:root{color-scheme:dark;--bg:#0b0d17;--bg2:#121527;--card:#181c33;--ink:#fff4e0;--mute:#c9c0ae;--line:#272c4a;--purple:#9146b5;--blue:#62c8ed;--orange:#f28c28;--paper:#fff8ec;--paperink:#2a2318}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg) url(images/marca/fundo-ceu.svg) repeat;background-size:1100px;color:var(--ink);font:16px/1.55 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+h1,h2,h3{font-family:Poppins,system-ui,sans-serif;margin:0;letter-spacing:-.02em;line-height:1.1}
+.view{display:none;min-height:100%}
+.view.on{display:block}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px max(4vw,16px);border-bottom:1px solid var(--line);background:rgba(11,13,23,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:5}
+.top .logo{height:38px;width:auto}
+.me{display:flex;align-items:center;gap:10px;background:none;border:0;padding:4px 8px;border-radius:999px}
+.me img{width:40px;height:40px;border-radius:50%;box-shadow:0 0 0 2px var(--orange)}
+.me span{font-weight:700}
+/* perfis */
+#perfis{display:none;place-items:center;min-height:100vh;padding:40px 16px;text-align:center}
+#perfis.on{display:grid}
+#perfis h1{font-size:clamp(30px,4vw,44px);margin:22px 0 34px}
+.who{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(18px,4vw,44px)}
+.who button{background:none;border:0;display:grid;gap:12px;justify-items:center;font:700 18px Poppins,sans-serif}
+.who img,.who .add{width:clamp(96px,13vw,150px);height:clamp(96px,13vw,150px);border-radius:24px;transition:transform .2s,box-shadow .2s}
+.who button:hover img{transform:translateY(-4px);box-shadow:0 0 0 4px var(--ink)}
+.who .add{display:grid;place-items:center;border:3px dashed var(--line);font-size:48px;color:var(--mute)}
+.who small{display:block;color:var(--mute);font:600 13px "Nunito Sans",sans-serif}
+/* estante */
+.wrap{padding:24px max(4vw,16px) 48px;max-width:1400px;margin:0 auto}
+.hello{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:22px}
+.hello h1{font-size:clamp(26px,3vw,36px)}
+.hello p{color:var(--mute);margin:6px 0 0}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px;background:var(--card)}
+.tags .v{box-shadow:inset 0 0 0 1.5px var(--orange)}
+.tags .c{box-shadow:inset 0 0 0 1.5px var(--blue)}
+.row{margin-bottom:28px}
+.row-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.row-h h2{font-size:20px;display:flex;align-items:center;gap:10px}
+.row-h h2 i{width:10px;height:10px;border-radius:3px}
+.row-h .seg{display:flex;gap:6px}
+.seg button{border:0;padding:6px 14px;border-radius:999px;background:var(--card);font-weight:700;font-size:14px}
+.seg button[aria-pressed=true]{background:var(--blue);color:#06202a}
+.track{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.cv{flex:0 0 clamp(124px,12vw,168px);position:relative;border:0;padding:0;border-radius:10px;overflow:hidden;background:var(--card);text-align:left}
+.cv img{aspect-ratio:2/3;width:100%;object-fit:cover}
+.cv b{position:absolute;left:0;right:0;bottom:0;padding:30px 9px 9px;font:700 13px/1.2 Poppins,sans-serif;background:linear-gradient(0deg,rgba(8,9,16,.95) 30%,rgba(8,9,16,0))}
+.cv .bar{position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.18);z-index:2}
+.cv .bar i{display:block;height:100%;background:var(--orange)}
+.cv .tag{position:absolute;top:8px;left:8px;font:700 11px Poppins,sans-serif;padding:3px 9px;border-radius:999px;background:var(--orange);color:#1d1003}
+.cv .tag.lido{background:var(--blue);color:#06202a}
+.why{color:var(--mute);font-size:14px;margin:-4px 0 10px}
+/* leitor */
+#leitor{min-height:100vh;display:none;grid-template-rows:auto 1fr auto}
+#leitor.on{display:grid}
+.rbar{display:flex;align-items:center;gap:10px;padding:10px max(3vw,14px);background:rgba(11,13,23,.92);border-bottom:1px solid var(--line)}
+.rbar .t{flex:1;font:700 16px Poppins,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rbar .t small{display:block;font:600 13px "Nunito Sans",sans-serif;color:var(--mute)}
+.ib{width:44px;height:44px;border-radius:12px;border:0;background:var(--card);display:grid;place-items:center}
+.ib svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ib[aria-pressed=true]{background:var(--orange);color:#1d1003}
+.ib.mark[aria-pressed=true]{background:#ffd65a;color:#2a2318}
+.book{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;margin:clamp(14px,3vw,32px) auto;width:min(1180px,calc(100% - 28px));border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.8);position:relative}
+.book .art{position:relative;background:#091022}
+.book .art img{width:100%;height:100%;object-fit:cover;min-height:340px}
+.book .pg{background:var(--paper);color:var(--paperink);padding:clamp(24px,4vw,56px);display:grid;align-content:center;gap:18px;font:500 clamp(19px,1.8vw,24px)/1.65 Literata,Georgia,serif;position:relative}
+.pg p{margin:0}
+.pg mark{background:#ffe27a;color:inherit;padding:0 2px;border-radius:3px}
+.pg .n{position:absolute;bottom:14px;right:22px;font:600 13px "Nunito Sans",sans-serif;color:#9a8b70}
+.note{position:absolute;right:18px;top:18px;width:min(280px,44%);background:#fff2b8;color:#3a2f12;border-radius:10px;padding:12px 14px;font:600 14px/1.45 "Nunito Sans",sans-serif;box-shadow:0 10px 24px -10px rgba(0,0,0,.35);transform:rotate(1.5deg)}
+.note b{display:block;font:700 12px Poppins,sans-serif;color:#8a6a1e;margin-bottom:2px}
+.nav{display:flex;align-items:center;gap:14px;padding:10px max(3vw,14px) 18px;justify-content:center}
+.nav .ib{width:52px;height:52px;border-radius:50%}
+.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:60%}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--orange)}
+.dots i.done{background:#8f6a3e}
+/* fim */
+.end{max-width:980px;margin:0 auto;padding:28px 16px 48px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px}
+.panel{background:var(--card);border-radius:18px;padding:22px;display:grid;gap:14px;align-content:start}
+.panel h2{font-size:22px}
+.panel small{color:var(--mute)}
+.opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.opts button{border:2px solid var(--line);background:var(--bg);border-radius:14px;padding:10px;display:grid;gap:8px;justify-items:center;font-weight:700}
+.opts .sw{width:56px;height:56px;border-radius:50%}
+.opts button.ok{border-color:var(--blue);background:#10283a}
+.opts button.no{border-color:var(--purple)}
+.qfb{min-height:24px;color:var(--mute)}
+.rate{display:flex;gap:10px;flex-wrap:wrap}
+.rate button{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;border:2px solid var(--line);background:var(--bg);font-weight:700}
+.rate svg{width:20px;height:20px;fill:currentColor}
+.rate button[aria-pressed=true][data-r="1"]{background:var(--blue);border-color:var(--blue);color:#06202a}
+.rate button[aria-pressed=true][data-r="0"]{border-color:var(--purple);color:#d9b6ff}
+.later{border-left:4px solid var(--orange);padding:12px 14px;background:var(--bg);border-radius:10px}
+.later small{display:block}
+.later strong{font-family:Poppins,sans-serif;font-size:18px}
+.span2{grid-column:1/-1}
+.sample{position:fixed;left:12px;bottom:10px;font-size:12px;color:var(--mute);background:rgba(11,13,23,.8);padding:4px 10px;border-radius:999px;z-index:20}
+@media(max-width:760px){
+ .book{grid-template-columns:1fr}
+ .book .art img{min-height:0;aspect-ratio:16/10}
+ .note{position:static;width:auto;transform:none}
+ .end{grid-template-columns:1fr}
+ .me span{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="view" id="perfis">
+  <div>
+    <img src="images/marca/logo-web.png" alt="GBM" style="height:90px;width:auto;margin:0 auto">
+    <h1>Quem está lendo?</h1>
+    <div class="who" id="who"></div>
+  </div>
+</section>
+
+<section class="view" id="estante">
+  <header class="top">
+    <img class="logo" src="images/marca/logo-nav.png" alt="GBM">
+    <button class="me" data-go="perfis" id="meBtn"></button>
+  </header>
+  <div class="wrap" id="shelf"></div>
+</section>
+
+<section class="view" id="leitor">
+  <div class="rbar">
+    <button class="ib" data-go="estante" aria-label="Voltar para a estante"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="t" id="rTitle"></div>
+    <button class="ib mark" id="bMark" aria-pressed="true" aria-label="Marcador de texto"><svg viewBox="0 0 24 24"><path d="M4 20h6M14 4l6 6-9 9H5v-6z"/></svg></button>
+    <button class="ib" id="bNote" aria-pressed="true" aria-label="Anotação"><svg viewBox="0 0 24 24"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4"/></svg></button>
+    <button class="ib" id="bBook" aria-pressed="true" aria-label="Marca-página"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button>
+  </div>
+  <div class="book" id="book"></div>
+  <div class="nav">
+    <button class="ib" id="prev" aria-label="Página anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="dots" id="dots"></div>
+    <button class="ib" id="next" aria-label="Próxima página"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+</section>
+
+<section class="view" id="fim">
+  <header class="top">
+    <img class="logo" src="images/marca/logo-nav.png" alt="GBM">
+    <button class="me" data-go="estante" id="meBtn2"></button>
+  </header>
+  <div class="end">
+    <div class="panel">
+      <small>Moby Dick · pergunta 3 de 6</small>
+      <h2>De que cor era a baleia?</h2>
+      <div class="opts" id="opts">
+        <button data-ok="0"><span class="sw" style="background:#2b5fb8"></span>Azul</button>
+        <button data-ok="1"><span class="sw" style="background:#f4f1ea"></span>Branca</button>
+        <button data-ok="0"><span class="sw" style="background:#7d8590"></span>Cinza</button>
+      </div>
+      <p class="qfb" id="qfb">O adulto lê a pergunta. A criança aponta a resposta.</p>
+    </div>
+    <div class="panel">
+      <h2>O que vocês acharam?</h2>
+      <div class="rate" id="rate">
+        <button data-r="1" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M7 10v11H3V10h4zm2 11V10l4.5-7c1.4 0 2.3 1.2 2 2.5L14.8 9H20a2 2 0 0 1 2 2.3l-1.4 8A2 2 0 0 1 18.6 21H9z"/></svg>Gostei</button>
+        <button data-r="0" aria-pressed="false"><svg viewBox="0 0 24 24" style="transform:rotate(180deg)"><path d="M7 10v11H3V10h4zm2 11V10l4.5-7c1.4 0 2.3 1.2 2 2.5L14.8 9H20a2 2 0 0 1 2 2.3l-1.4 8A2 2 0 0 1 18.6 21H9z"/></svg>Não gostei</button>
+      </div>
+      <div class="later"><small>Quando crescer, leia</small><strong>Moby Dick</strong><small>Herman Melville · idade sugerida: 14+</small></div>
+    </div>
+    <div class="panel span2">
+      <h2>Para ler depois</h2>
+      <p class="why" style="margin:0">Porque a Giovana gostou de histórias de coragem e de mar.</p>
+      <div class="track" id="afterRow"></div>
+    </div>
+  </div>
+</section>
+
+<span class="sample">Protótipo com dados de exemplo</span>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const KIDS=[{n:"Giovana",a:"raposa",v:["Coragem","Amizade"],c:["Medicina"]},{n:"Bento",a:"leao",v:["Coragem","Perseverança"],c:["Empreender","Música"]},{n:"Maria",a:"baleia",v:["Fé","Família"],c:[]}];
+let kid=KIDS[0],T=[],page=2;
+const PAGES=[
+ {img:"images/capas/moby-dick.webp",pos:"center 30%",t:["Ismael tinha dez anos quando subiu num navio pela primeira vez.","O barco se chamava Pequod e cheirava a sal, a corda molhada e a aventura."]},
+ {img:"images/destaques/moby-dick.webp",pos:"30% center",t:["O capitão Ahab andava de um lado para o outro do convés.","Ele só falava de uma coisa: uma baleia enorme, branca como a espuma do mar, que ninguém nunca tinha conseguido alcançar."]},
+ {img:"images/destaques/moby-dick.webp",pos:"85% center",t:["Ismael nunca tinha visto o mar tão grande. Do alto do mastro, ele olhava para todos os lados, procurando <mark>um jato de água subindo no meio das ondas</mark>.","\"Lá vem ela!\", gritou alguém lá de baixo."],note:true},
+ {img:"images/capas/moby-dick.webp",pos:"center 60%",t:["Era ela. A baleia branca subiu devagar, bem do lado do barquinho de Ismael.","Por um instante, o olho enorme dela olhou direto para ele."]}
+];
+const TOTAL=12;
+const show=v=>{document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==v));scrollTo(0,0);if(v=="estante")shelf();if(v=="leitor")reader();if(v=="fim")after()};
+const meHTML=()=>`<img src="images/avatares/avatar-${kid.a}.webp" alt=""><span>${kid.n}</span>`;
+$("#who").innerHTML=KIDS.map((k,i)=>`<button data-kid="${i}"><img src="images/avatares/avatar-${k.a}.webp" alt="">${k.n}<small>${k.v.join(", ")}</small></button>`).join("")+`<button><span class="add">+</span>Adicionar<small>novo perfil</small></button>`;
+const cv=(x,extra="")=>`<button class="cv" data-read="${x.id}"><img loading="lazy" src="${x.capa}" alt="">${extra}<b>${x.titulo}</b></button>`;
+const has=(x,n)=>x.valores.includes(n)||x.caminhos.includes(n);
+function shelf(){
+ $("#meBtn").innerHTML=meHTML();
+ const by=id=>T.find(t=>t.id==id);
+ const going=[[by("moby-dick"),25],[by("os-tres-amigos-2"),60],[by("davi-e-o-gigante"),80]].filter(x=>x[0]);
+ const tags=[...kid.v,...kid.c];
+ const ind=T.filter(x=>x.capa&&tags.some(n=>has(x,n))&&!going.some(g=>g[0].id==x.id)).slice(0,12);
+ const lan=T.filter(x=>x.lancamento&&x.capa);
+ const intIds=["a-banda-da-garagem","florence-a-dama-da-lampada","os-irmaos-da-lanchonete","shackleton-e-o-navio-no-gelo","iracema","bentinho-e-capitu"];
+ const lidos=["iracema","bentinho-e-capitu"];
+ $("#shelf").innerHTML=`<div class="hello"><div><h1>Oi, ${kid.n}!</h1><p>Hoje é noite de quê?</p></div><div class="tags">${kid.v.map(v=>`<span class="v">${v}</span>`).join("")}${kid.c.map(c=>`<span class="c">${c}</span>`).join("")}</div></div>
+ <div class="row"><div class="row-h"><h2><i style="background:var(--orange)"></i>Continue lendo</h2></div><div class="track">${going.map(([x,p])=>cv(x,`<span class="bar"><i style="width:${p}%"></i></span>`)).join("")}</div></div>
+ <div class="row"><div class="row-h"><h2><i style="background:var(--blue)"></i>Indicados para ${kid.n==="Maria"?"a":kid.n==="Bento"?"o":"a"} ${kid.n}</h2></div><p class="why">Pelos valores e caminhos do perfil e pelo que ${kid.n==="Bento"?"ele":"ela"} já gostou.</p><div class="track">${ind.map(x=>cv(x)).join("")}</div></div>
+ <div class="row"><div class="row-h"><h2><i style="background:var(--orange)"></i>Lançamentos</h2></div><div class="track">${lan.map(x=>cv(x,'<span class="tag">Novo</span>')).join("")}</div></div>
+ <div class="row"><div class="row-h"><h2><i style="background:var(--purple)"></i>Tenho interesse</h2><div class="seg" id="seg"><button aria-pressed="true" data-f="todos">Todos</button><button aria-pressed="false" data-f="nao">Não lidos</button><button aria-pressed="false" data-f="sim">Lidos</button></div></div><div class="track" id="intRow"></div></div>`;
+ const paintInt=f=>{$("#intRow").innerHTML=intIds.map(by).filter(Boolean).filter(x=>f=="todos"||(f=="sim")==lidos.includes(x.id)).map(x=>cv(x,lidos.includes(x.id)?'<span class="tag lido">Lido</span>':"")).join("")};
+ paintInt("todos");
+ $("#seg").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("#seg").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));paintInt(b.dataset.f)});
+}
+function reader(){
+ const p=PAGES[page];
+ $("#rTitle").innerHTML=`Moby Dick<small>Página ${page+2} de ${TOTAL}</small>`;
+ const mark=$("#bMark").getAttribute("aria-pressed")=="true", note=$("#bNote").getAttribute("aria-pressed")=="true";
+ const txt=p.t.map(s=>`<p>${mark?s:s.replace(/<\/?mark>/g,"")}</p>`).join("");
+ $("#book").innerHTML=`<div class="art"><img src="${p.img}" alt="" style="object-position:${p.pos}"></div><div class="pg">${p.note&&note?`<div class="note"><b>Anotação de ${kid.n==="Giovana"?"Cleber":"Cleber"} · página ${page+2}</b>A Gi perguntou por que a baleia é branca. Combinamos de descobrir juntos amanhã.</div>`:""}${txt}<span class="n">${page+2}</span></div>`;
+ $("#dots").innerHTML=Array.from({length:TOTAL},(_,i)=>`<i class="${i==page+1?"on":i<page+1?"done":""}"></i>`).join("");
+}
+function after(){
+ $("#meBtn2").innerHTML=meHTML();
+ const l=T.filter(x=>x.capa&&x.id!="moby-dick"&&(has(x,"Coragem")||x.fileiras.includes("Clássicos da literatura"))).slice(0,10);
+ $("#afterRow").innerHTML=l.map(x=>cv(x)).join("");
+}
+document.addEventListener("click",e=>{
+ const g=e.target.closest("[data-go]");if(g){show(g.dataset.go);return}
+ const k=e.target.closest("[data-kid]");if(k){kid=KIDS[+k.dataset.kid];location.hash="estante";return}
+ const r=e.target.closest("[data-read]");if(r){page=2;location.hash="leitor";return}
+});
+["bMark","bNote","bBook"].forEach(id=>$("#"+id).addEventListener("click",e=>{const b=e.currentTarget;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!="true");reader()}));
+$("#prev").addEventListener("click",()=>{if(page>0){page--;reader()}});
+$("#next").addEventListener("click",()=>{if(page<PAGES.length-1){page++;reader()}else location.hash="fim"});
+$("#opts").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("#opts").querySelectorAll("button").forEach(x=>x.className="");const ok=b.dataset.ok=="1";b.className=ok?"ok":"no";$("#qfb").textContent=ok?"Isso! Branca como a espuma do mar.":"Quase. Lembra do que o capitão Ahab dizia?"});
+$("#rate").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("#rate").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+const route=()=>show(["perfis","estante","leitor","fim"].includes(location.hash.slice(1))?location.hash.slice(1):"perfis");
+addEventListener("hashchange",route);
+fetch("data/catalogo.json").then(r=>r.json()).then(c=>{T=c.titulos;route()}).catch(()=>route());
+}
+</script>
+</body>
+</html>
