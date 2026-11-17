@@ -1445,8 +1445,8 @@
    "lancamento": false
   },
   {
-   "id": "hamlet-o-principe-que-nao-sabia-decidir",
-   "titulo": "O Príncipe que Não Sabia Decidir",
+   "id": "hamlet",
+   "titulo": "Hamlet, o Príncipe que Não Sabia Decidir",
    "sinopse": "O rei morreu, o tio assumiu o trono, e o jovem príncipe desconfia de que algo está errado.",
    "obra_mae": {
     "titulo": "Hamlet",
@@ -1469,8 +1469,8 @@
    "lancamento": false
   },
   {
-   "id": "o-rei-e-as-tres-filhas",
-   "titulo": "O Rei e as Três Filhas",
+   "id": "rei-lear",
+   "titulo": "Rei Lear e as Três Filhas",
    "sinopse": "Duas filhas fizeram discursos lindos. A caçula disse só a verdade.",
    "obra_mae": {
     "titulo": "Rei Lear",
@@ -1493,8 +1493,8 @@
    "lancamento": false
   },
   {
-   "id": "a-viagem-de-vasco-da-gama",
-   "titulo": "A Viagem de Vasco da Gama",
+   "id": "os-lusiadas",
+   "titulo": "Os Lusíadas: a Viagem de Vasco da Gama",
    "sinopse": "Os navios portugueses vão para onde ninguém tinha ido, e no cabo das tormentas um gigante se levanta do mar.",
    "obra_mae": {
     "titulo": "Os Lusíadas",
@@ -1850,8 +1850,8 @@
    "vitrine": false,
    "titulos": [
     "julio-cesar",
-    "hamlet-o-principe-que-nao-sabia-decidir",
-    "o-rei-e-as-tres-filhas"
+    "hamlet",
+    "rei-lear"
    ]
   }
  ],
