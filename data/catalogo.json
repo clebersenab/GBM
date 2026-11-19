@@ -956,7 +956,7 @@
     "Fé"
    ],
    "caminhos": [],
-   "volume": 3,
+   "volume": 4,
    "fileiras": [
     "Histórias reais e de fé"
    ],
@@ -970,7 +970,7 @@
   },
   {
    "id": "as-parabolas-de-jesus",
-   "titulo": "As Parábolas de Jesus",
+   "titulo": "Jesus: as Parábolas",
    "sinopse": "A ovelha perdida, o semeador e o filho que voltou para casa.",
    "obra_mae": {
     "titulo": "Evangelho de Lucas",
@@ -982,14 +982,14 @@
     "Fé"
    ],
    "caminhos": [],
-   "volume": null,
+   "volume": 3,
    "fileiras": [
     "Histórias reais e de fé"
    ],
    "vitrine": false,
    "capa": "images/capas/as-parabolas-de-jesus.webp",
    "lancamento": false,
-   "box": null,
+   "box": "box-jesus",
    "colecoes": [
     "colecao-historias-biblicas"
    ]
@@ -1714,9 +1714,10 @@
    "titulos": [
     "jesus-1-o-nascimento",
     "jesus-2-os-milagres",
+    "as-parabolas-de-jesus",
     "jesus-3-a-paixao-e-a-ressurreicao"
    ],
-   "descricao": "A vida de Jesus contada para os pequenos, do estábulo em Belém à manhã de domingo."
+   "descricao": "A vida de Jesus contada para os pequenos, em ordem: o estábulo em Belém, os milagres, as histórias que ele contava e a manhã de domingo."
   },
   {
    "id": "box-william-wallace",

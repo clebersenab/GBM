@@ -47,25 +47,15 @@ nav .links a:not(.btn){text-decoration:none;color:var(--mute)}
 nav .links a:not(.btn):hover{color:var(--ink)}
 nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 /* hero */
-.hero{position:relative;min-height:min(86svh,800px);display:grid;align-items:center;padding:56px max(5vw,16px) 72px;overflow:hidden}
+.hero{position:relative;min-height:min(88svh,820px);display:grid;align-items:center;padding:64px 0 80px;overflow:hidden}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0,color-mix(in srgb,var(--bg) 96%,transparent) calc(5vw + 400px),color-mix(in srgb,var(--bg) 70%,transparent) calc(5vw + 560px),transparent calc(5vw + 820px)),linear-gradient(0deg,var(--bg) 0%,transparent 24%)}
-.hero .txt{position:relative;max-width:520px;display:grid;gap:0}
-.hero h1{margin-bottom:18px}
-.hero .lead{margin-bottom:26px}
-.seedrow{margin:0 0 34px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 16px;align-items:center}
-.seedrow dt{font:700 13px Poppins,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
-.seedrow dd{margin:0;display:flex;flex-wrap:wrap;gap:8px}
-.chip{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;font:700 14px Poppins,sans-serif;text-decoration:none;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(4px);transition:background .2s}
-.chip.v{box-shadow:inset 0 0 0 1.5px var(--orange);color:#ffc58a}
-.chip.j{box-shadow:inset 0 0 0 1.5px var(--blue);color:#a9e3f7}
-.chip.v:hover{background:color-mix(in srgb,var(--orange) 22%,var(--bg))}
-.chip.j:hover{background:color-mix(in srgb,var(--blue) 22%,var(--bg))}
-.hero .ctas{margin-bottom:14px}
-.hero .lead{color:var(--ink);font-size:21px;max-width:none;text-shadow:0 1px 12px rgba(11,13,23,.9)}
-.hero h1,.hero small{text-shadow:0 2px 16px rgba(11,13,23,.85)}
-.hero small{color:var(--ink2)}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--bg) 0,color-mix(in srgb,var(--bg) 82%,transparent) calc(var(--hx) + 300px),color-mix(in srgb,var(--bg) 45%,transparent) calc(var(--hx) + 580px),transparent calc(var(--hx) + 820px)),linear-gradient(0deg,var(--bg) 0%,transparent 24%)}
+.hero{--hx:max(6vw,calc((100vw - 1240px) / 2 + 2vw))}
+.hero .txt{position:relative;z-index:2;margin-left:var(--hx);width:min(600px,calc(100% - 2 * var(--hx)));display:grid}
+.hero h1{font-size:clamp(42px,5.4vw,72px);margin-bottom:22px;text-shadow:0 2px 16px rgba(11,13,23,.85)}
+.hero .lead{color:var(--ink);font-size:clamp(19px,1.6vw,23px);line-height:1.45;max-width:none;margin-bottom:14px;text-shadow:0 1px 12px rgba(11,13,23,.9)}
+.hero .sub{color:var(--ink2);font-size:17px;line-height:1.55;margin-bottom:32px;max-width:52ch;text-shadow:0 1px 12px rgba(11,13,23,.9)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
 .hero small{color:var(--mute);font-size:14px}
 /* catálogo */
 .shelf{padding-top:clamp(64px,8vw,104px)}
@@ -247,17 +237,12 @@ footer img{height:72px;width:auto}
 @media(max-width:760px){
  body{font-size:16px}
  .lead{font-size:16px}
- .hero{min-height:0;padding:0 0 40px;align-items:end}
+ .hero{min-height:0;padding:0 0 40px;align-items:end;--hx:16px}
  .hero>img{position:relative;height:auto;aspect-ratio:4/3;object-position:72% 40%}
  .hero::before{background:linear-gradient(0deg,var(--bg) 40%,transparent 62%)}
- .hero .txt{padding:0 16px;margin-top:-56px}
- .hero h1{margin-bottom:12px}
- .hero .lead{margin-bottom:20px;font-size:18px}
- .seedrow{margin-bottom:26px;gap:10px 10px}
- .seedrow dt{font-size:11px;letter-spacing:.06em}
- .seedrow dd{gap:6px}
- .chip{min-height:32px;padding:0 11px;font-size:13px}
- .br{display:none}
+ .hero .txt{margin-top:-56px}
+ .hero h1{margin-bottom:14px}
+ .hero .sub{font-size:16px;margin-bottom:24px}
  .hero .ctas .btn{flex:1 1 auto}
  .price .wrap,.cur .cols{grid-template-columns:1fr}
  .peek{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
@@ -300,16 +285,13 @@ footer img{height:72px;width:auto}
   <img src="../images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
   <div class="txt">
     <h1>Histórias para ler juntos</h1>
-    <p class="lead">Clássicos e grandes filmes recontados<br class="br"> para crianças de 3 a 8 anos.</p>
-    <dl class="seedrow">
-      <dt>Plantam</dt><dd><a class="chip v" href="#plantar" data-pick="valores:Fé">Fé</a><a class="chip v" href="#plantar" data-pick="valores:Coragem">Coragem</a><a class="chip v" href="#plantar" data-pick="valores:Honestidade">Honestidade</a></dd>
-      <dt>Mostram</dt><dd><a class="chip j" href="#plantar" data-pick="jornadas:Medicina">Medicina</a><a class="chip j" href="#plantar" data-pick="jornadas:Direito">Direito</a><a class="chip j" href="#plantar" data-pick="jornadas:Empreender">Empreender</a></dd>
-    </dl>
+    <p class="lead">Livros que plantam nas crianças a semente dos grandes clássicos da literatura e do cinema.</p>
+    <p class="sub">Em cada história, valores como coragem, criatividade e fé, e caminhos para o futuro como empreender, a medicina e o direito.</p>
     <div class="ctas">
       <a class="btn btn-main" href="#preco">Assinar por R$ 19,90/mês</a>
       <a class="btn btn-ghost" href="#catalogo">Ver o catálogo</a>
     </div>
-    <small>Uma assinatura para todos os seus filhos, cada um com o seu perfil.</small>
+    <small>Para crianças de 3 a 8 anos. Uma assinatura para todos os seus filhos.</small>
   </div>
 </header>
 
@@ -542,7 +524,6 @@ function openGroup(g){const vols=g.titulos.map(byId).filter(Boolean);
   open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-col">Coleção · ${vols.length} títulos</span><span>Leia em qualquer ordem</span></div><p class="desc">${g.descricao}</p><div class="setgrid">${vols.map(v=>`<button data-id="${v.id}"><img src="${A}${v.capa}" alt=""><span>${v.titulo}</span></button>`).join("")}</div>${acts}</div>`,true);
  }}
 document.addEventListener("click",e=>{
- const pk=e.target.closest("[data-pick]");if(pk&&cat.valores){const[m,n]=pk.dataset.pick.split(":");mode=m;sel=n;seeds();const b=document.querySelector(`.seed[data-tag="${n}"]`);b&&b.scrollIntoView({block:"nearest",inline:"nearest"});return}
  const md=e.target.closest(".mode button");if(md){if(mode!=md.dataset.mode){mode=md.dataset.mode;sel=null;seeds()}return}
  const sd=e.target.closest(".seed");if(sd){sel=sd.dataset.tag;document.querySelectorAll(".seed").forEach(b=>b.setAttribute("aria-pressed",b===sd));picked();return}
  const ar=e.target.closest(".arr");if(ar){const t=ar.parentElement.querySelector(".track");t.scrollBy({left:(ar.classList.contains("next")?1:-1)*t.clientWidth*.85});return}
