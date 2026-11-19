@@ -11,7 +11,7 @@
 <link rel="icon" href="../images/marca/favicon-32.png">
 <link rel="apple-touch-icon" href="../images/marca/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Literata:ital,opsz,wght@1,7..72,500;1,7..72,600&display=swap" rel="stylesheet">
 <style>
 /* VOICE  occasion: a bedtime-story catalogue for parents, warm and unhurried
    IDEA   a streaming shelf lit by a reading lamp; every book points to the classic it seeds
@@ -52,10 +52,16 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--bg) 0,color-mix(in srgb,var(--bg) 82%,transparent) calc(var(--hx) + 300px),color-mix(in srgb,var(--bg) 45%,transparent) calc(var(--hx) + 580px),transparent calc(var(--hx) + 820px)),linear-gradient(0deg,var(--bg) 0%,transparent 24%)}
 .hero{--hx:max(6vw,calc((100vw - 1240px) / 2 + 2vw))}
 .hero .txt{position:relative;z-index:2;margin-left:var(--hx);width:min(600px,calc(100% - 2 * var(--hx)));display:grid}
-.hero h1{font-size:clamp(42px,5.4vw,72px);margin-bottom:22px;text-shadow:0 2px 16px rgba(11,13,23,.85)}
-.hero .lead{color:var(--ink);font-size:clamp(19px,1.6vw,23px);line-height:1.45;max-width:none;margin-bottom:14px;text-shadow:0 1px 12px rgba(11,13,23,.9)}
-.hero .sub{color:var(--ink2);font-size:17px;line-height:1.55;margin-bottom:32px;max-width:52ch;text-shadow:0 1px 12px rgba(11,13,23,.9)}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.hero .eyebrow{font:700 13px Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.hero .eyebrow::before{content:"";width:28px;height:2px;background:var(--orange);border-radius:2px}
+.hero h1{font-size:clamp(44px,5.6vw,76px);line-height:1.02;margin-bottom:30px;text-shadow:0 2px 16px rgba(11,13,23,.85)}
+.hero h1 span{background:linear-gradient(100deg,#ffb25e,var(--orange) 60%,#ff7a3d);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 14px rgba(11,13,23,.8))}
+.hero .lead{color:var(--ink);font-size:clamp(20px,1.75vw,25px);line-height:1.4;max-width:24em;margin-bottom:26px;text-shadow:0 1px 12px rgba(11,13,23,.9)}
+.hero .lead em{font-family:Literata,Georgia,serif;font-style:italic;font-weight:600;color:#ffd9a8}
+.hero .sub{color:var(--mute);font-size:16px;line-height:1.6;max-width:50ch;margin-bottom:40px;padding-left:16px;border-left:2px solid color-mix(in srgb,var(--ink) 22%,transparent);text-shadow:0 1px 12px rgba(11,13,23,.9)}
+.hero .sub b{font-weight:700}
+.hero .sub b.v{color:#ffbf80}.hero .sub b.j{color:#9fdcf3}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
 .hero small{color:var(--mute);font-size:14px}
 /* catálogo */
 .shelf{padding-top:clamp(64px,8vw,104px)}
@@ -266,9 +272,11 @@ footer img{height:72px;width:auto}
  .hero{min-height:0;padding:0 0 40px;align-items:end;--hx:16px}
  .hero>img{position:relative;height:auto;aspect-ratio:4/3;object-position:72% 40%}
  .hero::before{background:linear-gradient(0deg,var(--bg) 40%,transparent 62%)}
- .hero .txt{margin-top:-56px}
- .hero h1{margin-bottom:14px}
- .hero .sub{font-size:16px;margin-bottom:24px}
+ .hero .txt{margin-top:-16px}
+ .hero .eyebrow{font-size:12px;margin-bottom:12px}
+ .hero h1{margin-bottom:18px}
+ .hero .lead{margin-bottom:18px}
+ .hero .sub{font-size:15px;margin-bottom:28px}
  .hero .ctas .btn{flex:1 1 auto}
  .price .wrap,.cur .cols{grid-template-columns:1fr}
  .peek{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
@@ -306,7 +314,7 @@ footer img{height:72px;width:auto}
 @keyframes sheetin{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:none}}
 .hero>img{animation:zoom 2.8s cubic-bezier(.2,.7,.2,1) both}
 .hero .txt>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) backwards}
-.hero .txt>:nth-child(2){animation-delay:.15s}.hero .txt>:nth-child(3){animation-delay:.3s}.hero .txt>:nth-child(4){animation-delay:.45s}.hero .txt>:nth-child(5){animation-delay:.6s}
+.hero .txt>:nth-child(2){animation-delay:.15s}.hero .txt>:nth-child(3){animation-delay:.3s}.hero .txt>:nth-child(4){animation-delay:.45s}.hero .txt>:nth-child(5){animation-delay:.6s}.hero .txt>:nth-child(6){animation-delay:.75s}
 .hero .btn-main{animation:glow 2.8s 1.6s ease-out infinite}
 .btn{transition:transform .2s,background .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px)}
@@ -357,14 +365,15 @@ details[open] summary::after{transform:rotate(180deg)}
 <header class="hero" id="topo">
   <img src="../images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
   <div class="txt">
-    <h1>Histórias para ler juntos</h1>
-    <p class="lead">Livros que plantam nas crianças a semente dos grandes clássicos da literatura e do cinema.</p>
-    <p class="sub">Em cada história, valores como coragem, criatividade e fé, e caminhos para o futuro como empreender, a medicina e o direito.</p>
+    <p class="eyebrow">Para crianças de 3 a 8 anos</p>
+    <h1>Histórias para ler <span>juntos</span></h1>
+    <p class="lead">Livros que plantam nas crianças a semente dos <em>grandes clássicos</em> da literatura e do cinema.</p>
+    <p class="sub">Em cada história, valores como <b class="v">coragem, criatividade e fé</b>, e caminhos para o futuro como <b class="j">empreender, a medicina e o direito</b>.</p>
     <div class="ctas">
       <a class="btn btn-main" href="#preco">Assinar por R$ 19,90/mês</a>
       <a class="btn btn-ghost" href="#catalogo">Ver o catálogo</a>
     </div>
-    <small>Para crianças de 3 a 8 anos. Uma assinatura para todos os seus filhos.</small>
+    <small>Uma assinatura para todos os seus filhos, cada um com o seu perfil.</small>
   </div>
 </header>
 
