@@ -74,6 +74,11 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .arr.prev{left:-14px}.arr.next{right:-14px}
 .arr[disabled]{opacity:0;pointer-events:none}
 @media(hover:none){.arr{display:none}}
+/* carrosséis de ponta a ponta: começam alinhados ao conteúdo e vão até a borda da tela */
+:root{--g:calc(max(5vw,16px) + max(0px,(100vw - 2 * max(5vw,16px) - 1240px) / 2))}
+#rows .track,#seeds{margin-inline:calc(-1 * var(--g));padding-inline:var(--g);scroll-padding-inline:var(--g)}
+#rows .arr.prev,#seedRail .arr.prev{left:calc(14px - var(--g))}
+#rows .arr.next,#seedRail .arr.next{right:calc(14px - var(--g))}
 .cover{flex:0 0 clamp(132px,14.5vw,186px);scroll-snap-align:start;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--card);border:0;padding:0;text-align:left;transition:transform .25s;box-shadow:var(--shadow)}
 .cover img{aspect-ratio:2/3;width:100%;object-fit:cover}
 .cover b{position:absolute;left:0;right:0;bottom:0;padding:36px 10px 10px;font:700 14px/1.2 Poppins,sans-serif;color:#fff;background:linear-gradient(0deg,rgba(8,9,16,.95) 30%,rgba(8,9,16,0))}
@@ -104,21 +109,42 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .origin .sign{color:var(--orange);font-weight:700;font-size:16px}
 /* plantar */
 .plant .head{display:grid;gap:12px;margin-bottom:24px}
-.mode{display:inline-flex;padding:5px;gap:4px;border-radius:999px;background:var(--card);border:1px solid var(--line);margin-bottom:22px}
-.mode button{border:0;background:none;color:var(--mute);font:700 15px Poppins,sans-serif;padding:10px 22px;border-radius:999px;cursor:pointer;min-height:44px}
-.mode button[aria-selected=true]{color:var(--on-orange);background:var(--orange)}
-.mode button[aria-selected=true][data-mode=jornadas]{background:var(--blue);color:#06202a}
-.mode-sub{color:var(--mute);font-size:15px;margin:-10px 0 18px}
+.step{display:flex;align-items:center;gap:12px;font:700 18px Poppins,sans-serif;margin:8px 0 16px}
+.step i{font-style:normal;width:32px;height:32px;flex:0 0 32px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--bg);font-size:15px}
+.step[hidden]{display:none}
+.choose{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:30px}
+.pick{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;align-items:center;padding:14px 22px 14px 14px;border-radius:20px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-align:left;transition:transform .3s,border-color .3s,opacity .3s,box-shadow .3s;box-shadow:var(--shadow)}
+.pick img{width:120px;aspect-ratio:4/5;object-fit:cover;border-radius:14px;transition:transform .4s}
+.pick.j img{border-radius:999px 999px 14px 14px}
+.pick span{display:grid;gap:6px}
+.pick b{font:700 clamp(20px,2vw,26px)/1.15 Poppins,sans-serif}
+.pick small{color:var(--mute);font-size:15px}
+.pick em{font-style:normal;font:700 15px Poppins,sans-serif;margin-top:6px;display:inline-flex;align-items:center;gap:8px}
+.pick em::after{content:"→";transition:transform .3s}
+.pick.v em{color:var(--orange)}.pick.j em{color:var(--blue)}
+.pick:hover{transform:translateY(-4px)}
+.pick:hover img{transform:scale(1.05) rotate(-1.5deg)}
+.pick:hover em::after{transform:translateX(5px)}
+.pick.v:hover,.pick.v[aria-selected=true]{border-color:var(--orange)}
+.pick.j:hover,.pick.j[aria-selected=true]{border-color:var(--blue)}
+.pick.v[aria-selected=true]{box-shadow:0 0 0 4px color-mix(in srgb,var(--orange) 25%,transparent),var(--shadow)}
+.pick.j[aria-selected=true]{box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 25%,transparent),var(--shadow)}
+.choose.done .pick[aria-selected=false]{opacity:.5}
+.choose.done .pick[aria-selected=false]:hover{opacity:1}
+.choose:not(.done) .pick{animation:call 2.6s ease-in-out infinite}
+.choose:not(.done) .pick.j{animation-delay:1.3s}
+@keyframes call{0%,100%{box-shadow:var(--shadow)}50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--ink) 10%,transparent),var(--shadow)}}
 .seeds{gap:14px;padding:10px 4px 10px}
 .seeds .seed{scroll-snap-align:start}
-.mode button[aria-selected=false]:hover{color:var(--ink)}
 .seed{flex:0 0 150px;border:0;padding:0;background:none;color:var(--ink);cursor:pointer;display:grid;gap:8px;justify-items:center;text-align:center}
 .seed img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .25s,box-shadow .25s;box-shadow:0 0 0 2px var(--line)}
 .seeds.val .seed img{border-radius:16px}
 .seeds.jor .seed img{border-radius:999px 999px 14px 14px}
 .seed span{font:700 14px/1.2 Poppins,sans-serif;min-height:2.4em}
 .seed{align-content:start}
-.seed[aria-pressed=true] img{transform:translateY(-3px);box-shadow:0 0 0 3px var(--orange)}
+.seed img{transition:transform .3s cubic-bezier(.3,1.6,.5,1),box-shadow .25s}
+.seed:hover img{transform:translateY(-4px) scale(1.03)}
+.seed[aria-pressed=true] img{transform:translateY(-3px) scale(1.04);box-shadow:0 0 0 3px var(--orange)}
 .seed[aria-pressed=true] span{color:var(--orange)}
 .seeds.jor .seed[aria-pressed=true] img{box-shadow:0 0 0 3px var(--blue)}
 .seeds.jor .seed[aria-pressed=true] span{color:var(--blue)}
@@ -249,8 +275,11 @@ footer img{height:72px;width:auto}
  .peek figure{flex:0 0 84%;scroll-snap-align:start}
  .seed{flex:0 0 112px}
  .seed span{font-size:13px}
- .mode{display:flex}
- .mode button{flex:1}
+ .choose{grid-template-columns:1fr;gap:12px}
+ .pick{grid-template-columns:84px minmax(0,1fr);gap:14px;padding:10px 14px 10px 10px}
+ .pick img{width:84px}
+ .pick small{font-size:14px}
+ .step{font-size:16px}
  .grp{flex-basis:82%}
  .sheet{grid-template-columns:1fr}
  .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
@@ -265,7 +294,51 @@ footer img{height:72px;width:auto}
  .cover{flex-basis:128px}
  footer{justify-content:center;text-align:center}
 }
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* movimento */
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes zoom{from{transform:scale(1.1)}to{transform:scale(1)}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--orange) 55%,transparent)}60%{box-shadow:0 0 0 12px color-mix(in srgb,var(--orange) 0%,transparent)}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes bounce{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes sheetin{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:none}}
+.hero>img{animation:zoom 2.8s cubic-bezier(.2,.7,.2,1) both}
+.hero .txt>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) backwards}
+.hero .txt>:nth-child(2){animation-delay:.15s}.hero .txt>:nth-child(3){animation-delay:.3s}.hero .txt>:nth-child(4){animation-delay:.45s}.hero .txt>:nth-child(5){animation-delay:.6s}
+.hero .btn-main{animation:glow 2.8s 1.6s ease-out infinite}
+.btn{transition:transform .2s,background .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.st>*{opacity:0}
+.st.in>*{opacity:1;animation:pop .6s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i,0) * 70ms)}
+.cover img{transition:transform .5s}
+.cover:hover img{transform:scale(1.06)}
+.cover:hover{box-shadow:0 22px 40px -18px rgba(0,0,0,.95),0 0 0 2px color-mix(in srgb,var(--ink) 20%,transparent)}
+.grp .art img{transition:transform .4s}
+.grp:hover .art img{transform:translateY(-3px)}
+.grp.box .art::before,.grp.box .art::after{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.grp.box:hover .art::before{transform:translate(22px,-18px) rotate(2deg)}
+.grp.box:hover .art::after{transform:translate(11px,-9px) rotate(1deg)}
+.pair img,.feat.wide img,.cur img,.origin img{transition:transform .8s}
+.pair:hover img,.feat.wide:hover img{transform:scale(1.04)}
+.pair,.feat,.plan{transition:transform .3s}
+.pair:hover,.plan:hover{transform:translateY(-4px)}
+.modal.on{animation:fadein .25s both}
+.modal.on .sheet{animation:sheetin .35s cubic-bezier(.2,.7,.2,1) both}
+.opts button.ok{animation:bounce .45s}
+.opts button.no{animation:shake .35s}
+.plan .amt{display:inline-block}
+.plan.in .amt{animation:bounce .7s .5s both}
+details p{animation:rise .4s both}
+summary::after{transition:transform .3s}
+details[open] summary::after{transform:rotate(180deg)}
+.final .btn-main{animation:glow 2.8s ease-out infinite}
+.arr{transition:opacity .2s,transform .2s}.arr:hover{transform:scale(1.1)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv,.st>*{opacity:1!important;transform:none!important}}
+
 </style>
 </head>
 <body>
@@ -297,7 +370,7 @@ footer img{height:72px;width:auto}
 
 <section class="band shelf" id="catalogo">
   <div class="wrap">
-    <div class="intro">
+    <div class="rv intro">
       <h2>Toda história é a semente de um clássico</h2>
       <p class="lead">Cada livro termina com uma indicação para quando a criança crescer: o livro ou o filme que aquela história preparou. Toque numa capa para ver.</p>
     </div>
@@ -319,16 +392,24 @@ footer img{height:72px;width:auto}
 
 <section class="band plant" id="plantar">
   <div class="wrap">
-    <div class="head">
+    <div class="rv head">
       <h2>Você escolhe o que plantar</h2>
-      <p class="lead">No perfil de cada filho, você escolhe o que quer cultivar, e a estante dele se organiza a partir disso. Experimente:</p>
+      <p class="lead">No perfil de cada filho, você escolhe o que quer cultivar, e a estante dele se organiza a partir disso. Experimente aqui.</p>
     </div>
-    <div class="mode" role="tablist" aria-label="Escolha entre valores e jornadas">
-      <button role="tab" data-mode="valores" aria-selected="false">Valores</button>
-      <button role="tab" data-mode="jornadas" aria-selected="false">Jornadas</button>
+    <p class="step" id="step1"><i>1</i>Primeiro, escolha o que você quer plantar</p>
+    <div class="choose" role="tablist" aria-label="Escolha entre valores e jornadas">
+      <button class="pick v" role="tab" data-mode="valores" aria-selected="false">
+        <img src="../images/cards/valor-fe.webp" alt="">
+        <span><b>Cultivar um valor</b><small>Fé, coragem, honestidade, amizade e outros</small><em>Ver os valores</em></span>
+      </button>
+      <button class="pick j" role="tab" data-mode="jornadas" aria-selected="false">
+        <img src="../images/cards/caminho-empreender.webp" alt="">
+        <span><b>Descobrir uma jornada</b><small>Empreender, medicina, direito, música e outras</small><em>Ver as jornadas</em></span>
+      </button>
     </div>
-    <p class="mode-sub" id="modeSub"></p>
+    <p class="step" id="step2" hidden><i>2</i><span id="modeSub"></span></p>
     <div class="rail" id="seedRail" hidden><button class="arr prev" aria-label="Anteriores" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="track seeds" id="seeds"></div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span></button></div>
+    <p class="step" id="step3" hidden><i>3</i>A estante dele fica assim</p>
     <div class="picked" id="picked" hidden><p id="pickedTxt"></p><div class="rail"><button class="arr prev" aria-label="Anteriores" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="track" id="pickedRow"></div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span></button></div></div>
   </div>
 </section>
@@ -337,14 +418,14 @@ footer img{height:72px;width:auto}
   <div class="wrap">
     <h2>Quando crescer, ela vai reconhecer a história</h2>
     <p class="lead" style="margin-top:12px">Cada livro do GBM é uma história nova, escrita para a idade da criança, que guarda a semente de uma obra sem copiar nem resumir. Anos depois, quando abrir Dom Casmurro, ela vai reencontrar a menina dos olhos grandes.</p>
-    <div class="pairs" id="pairs"></div>
+    <div class="pairs st" id="pairs"></div>
   </div>
 </section>
 
 <section class="band" id="como">
   <div class="wrap">
     <h2>Feito para ler junto</h2>
-    <div class="feats">
+    <div class="feats st">
       <div class="feat wide">
         <img src="../images/secoes/elo-avo.webp" alt="Avô contando uma história para dois netos sentados no tapete">
         <div>
@@ -365,7 +446,7 @@ footer img{height:72px;width:auto}
         </div>
       </div>
     </div>
-    <div class="peek">
+    <div class="peek st">
       <figure><img loading="lazy" src="../images/plataforma/estante.webp" alt="Tela da estante da Giovana com as fileiras Continue lendo e Indicados"><figcaption>A estante de cada filho</figcaption></figure>
       <figure><img loading="lazy" src="../images/plataforma/leitor.webp" alt="Tela do leitor com a ilustração de Moby Dick ao lado do texto"><figcaption>O livro aberto na tela</figcaption></figure>
       <figure><img loading="lazy" src="../images/plataforma/fim.webp" alt="Tela do fim do livro com o quiz e a indicação do clássico"><figcaption>No fim, o quiz e o clássico para quando crescer</figcaption></figure>
@@ -406,7 +487,7 @@ footer img{height:72px;width:auto}
       <h2>Um preço, a família inteira</h2>
       <p class="lead">Pense no GBM como o complemento da cartilha: ela ensina a ler, e ele dá motivo para a criança querer.</p>
     </div>
-    <div class="plan">
+    <div class="plan rv">
       <h3>Assinatura GBM</h3>
       <div class="amt">R$ 19,90 <small>/mês</small></div>
       <ul>
@@ -466,7 +547,7 @@ let mode=null, sel=null;
 const byId=id=>T.find(t=>t.id==id);
 const later=(o,cls)=>{const k=o.tipo=="livro"?"leia":"assista";return `<div class="${cls}"><small>Quando crescer, ${k}</small><strong>${o.titulo}</strong>${o.autor?`<small>${o.autor}</small>`:""}<small>Idade sugerida: ${o.idade}</small></div>`};
 const cover=(x,badge="")=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="${A}${x.capa}" alt="">${badge}<b>${x.titulo}</b></button>`;
-const rail=inner=>`<div class="rail"><button class="arr prev" aria-label="Anteriores" disabled>${ARR}</button><div class="track">${inner}</div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)">${ARR}</span></button></div>`;
+const rail=inner=>`<div class="rail rv"><button class="arr prev" aria-label="Anteriores" disabled>${ARR}</button><div class="track st">${inner}</div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)">${ARR}</span></button></div>`;
 const row=(title,color,count,inner,sub="")=>`<div class="row"><div class="row-h"><h3><i style="background:${color}"></i>${title}</h3><span>${count}</span></div>${sub?`<p class="row-sub">${sub}</p>`:""}${rail(inner)}</div>`;
 const boxCard=g=>{const n=g.titulos.length;return `<button class="grp box" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${g.arte}" alt=""><span class="badge b-box">${n} volumes · em ordem</span></div><b>${g.titulo}</b><span class="vols-mini">${g.titulos.map((_,i)=>`<i>${i+1}</i>`).join("<em>›</em>")}</span><small>${g.descricao}</small></button>`};
 const colCard=g=>`<button class="grp col" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${g.arte}" alt=""><span class="badge b-col">Coleção · ${g.titulos.length} títulos</span></div><b>${g.titulo}</b><small>${g.descricao}</small></button>`;
@@ -479,31 +560,37 @@ function rows(){
   +row("Boxes","var(--purple)",`${boxes.length} boxes`,boxes.map(boxCard).join(""),"Histórias com continuação: um volume depende do outro, e a leitura segue em ordem.")
   +row("Coleções","var(--blue)",`${cols.length} coleções`,cols.map(colCard).join(""),"Histórias do mesmo tema, para ler em qualquer ordem.");
  $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=byId(id);if(!x)return"";const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${A}${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
- seeds(); arrows();
+ seeds(); arrows(); watch();
 }
 /* plantar: escolha única */
-const SUB={none:"Comece escolhendo: um valor para cultivar ou uma jornada para conhecer.",valores:"O que você quer ver crescer dentro dele? Toque em um valor.",jornadas:"Que profissão ou mundo ele pode descobrir? Toque em uma jornada."};
+const SUB={valores:"Agora, toque no valor que você quer ver crescer nele",jornadas:"Agora, toque na jornada que ele vai descobrir"};
 function seeds(){
- document.querySelectorAll(".mode button").forEach(b=>b.setAttribute("aria-selected",b.dataset.mode==mode));
- $("#modeSub").textContent=SUB[mode||"none"];
+ document.querySelectorAll(".pick").forEach(b=>b.setAttribute("aria-selected",b.dataset.mode==mode));
+ $(".choose").classList.toggle("done",!!mode);
+ $("#step2").hidden=!mode; if(mode) $("#modeSub").textContent=SUB[mode];
  $("#seedRail").hidden=!mode;
  if(!mode){$("#picked").hidden=true;return}
  const list=mode=="valores"?cat.valores:cat.caminhos, kind=mode=="valores"?"valor":"caminho";
  if(!list.includes(sel)) sel=null;
  const el=$("#seeds"); el.className="track seeds "+(mode=="valores"?"val":"jor");
  el.innerHTML=list.map(n=>`<button class="seed" data-tag="${n}" aria-pressed="${n==sel}"><img src="${A}images/cards/${kind}-${slug(n)}.webp" alt=""><span>${n}</span></button>`).join("");
- el.scrollLeft=0; requestAnimationFrame(()=>upd($("#seedRail")));
+ el.scrollLeft=0; stag(el); requestAnimationFrame(()=>upd($("#seedRail")));
  picked();
 }
 function picked(){
- $("#picked").hidden=!sel; if(!sel) return;
+ $("#picked").hidden=!sel; $("#step3").hidden=!sel; if(!sel) return;
  const key=mode=="valores"?"valores":"caminhos";
  const l=T.filter(x=>x.capa&&x[key].includes(sel));
  $("#pickedTxt").innerHTML=`Estante do Bento com <b>${sel}</b>: ${l.length} ${l.length==1?"título":"títulos"}.`;
  $("#pickedRow").innerHTML=l.map(x=>cover(x)).join("");
- $("#pickedRow").scrollLeft=0;
+ $("#pickedRow").scrollLeft=0; stag($("#pickedRow"));
  requestAnimationFrame(()=>upd($("#pickedRow").parentElement));
 }
+/* movimento */
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function stag(el){[...el.children].forEach((c,i)=>c.style.setProperty("--i",i));if(RM)return;el.classList.remove("in");el.classList.add("st");void el.offsetWidth;el.classList.add("in")}
+const IO="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");IO.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.08}):null;
+function watch(root=document){root.querySelectorAll(".rv,.st").forEach(el=>{if(el.classList.contains("st"))[...el.children].forEach((c,i)=>c.style.setProperty("--i",i));if(IO&&!RM)IO.observe(el);else el.classList.add("in")})}
 /* setas dos carrosséis */
 function upd(r){const t=r.querySelector(".track"),p=r.querySelector(".prev"),n=r.querySelector(".next");if(!p)return;p.disabled=t.scrollLeft<4;n.disabled=t.scrollLeft+t.clientWidth>=t.scrollWidth-4}
 function arrows(){document.querySelectorAll("#rows .rail,.picked .rail,#seedRail").forEach(r=>{const t=r.querySelector(".track");t.addEventListener("scroll",()=>upd(r),{passive:true});upd(r)})}
@@ -524,7 +611,7 @@ function openGroup(g){const vols=g.titulos.map(byId).filter(Boolean);
   open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-col">Coleção · ${vols.length} títulos</span><span>Leia em qualquer ordem</span></div><p class="desc">${g.descricao}</p><div class="setgrid">${vols.map(v=>`<button data-id="${v.id}"><img src="${A}${v.capa}" alt=""><span>${v.titulo}</span></button>`).join("")}</div>${acts}</div>`,true);
  }}
 document.addEventListener("click",e=>{
- const md=e.target.closest(".mode button");if(md){if(mode!=md.dataset.mode){mode=md.dataset.mode;sel=null;seeds()}return}
+ const md=e.target.closest(".pick");if(md){if(mode!=md.dataset.mode){mode=md.dataset.mode;sel=null;seeds();setTimeout(()=>$("#step2").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"}),50)}return}
  const sd=e.target.closest(".seed");if(sd){sel=sd.dataset.tag;document.querySelectorAll(".seed").forEach(b=>b.setAttribute("aria-pressed",b===sd));picked();return}
  const ar=e.target.closest(".arr");if(ar){const t=ar.parentElement.querySelector(".track");t.scrollBy({left:(ar.classList.contains("next")?1:-1)*t.clientWidth*.85});return}
  const c=e.target.closest("[data-id]");if(c){openTitle(byId(c.dataset.id));return}
