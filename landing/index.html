@@ -203,9 +203,12 @@ footer img{height:72px;width:auto}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;opacity:0;visibility:hidden;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
 @media(max-width:900px){
- nav .links a{display:none}
- .seeds.val{grid-template-columns:repeat(4,minmax(0,1fr))}
- .seeds.cam{grid-template-columns:repeat(3,minmax(0,1fr))}
+ nav .links a:not(.btn){display:none}
+ .seeds{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+ .seeds .seed{scroll-snap-align:start}
+ .seeds.val .seed{flex:0 0 104px}
+ .seeds.cam .seed{flex:0 0 118px}
+ .seed span{font-size:13px}
  .pairs{grid-template-columns:1fr}
  .pair{grid-template-columns:minmax(0,140px) minmax(0,1fr);grid-template-rows:auto}
  .pair img{aspect-ratio:auto;height:100%}
