@@ -222,9 +222,35 @@ details p{color:var(--mute);padding:0 0 18px}
 footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--mute);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
 footer img{height:72px;width:auto}
 /* modal */
+html{scrollbar-gutter:stable}
+html.lock{overflow:hidden}
+html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important}
+.inbox{border-radius:14px;padding:14px;background:color-mix(in srgb,var(--purple) 16%,var(--card));border:1px solid color-mix(in srgb,var(--purple) 55%,transparent);display:grid;gap:12px}
+.inbox .ib-h{font-size:15px;color:var(--ink2)}
+.inbox .ib-h .tag{margin-right:8px;vertical-align:1px}
+.inbox .ib-h b{color:var(--ink)}
+.inbox .tag{font:700 12px Poppins,sans-serif;padding:3px 10px;border-radius:999px;background:var(--purple);color:#fff}
+.inbox .before{font-size:15px;color:var(--ink2)}
+.inbox .before button{border:0;background:none;padding:0;color:var(--orange);font:700 15px Poppins,sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.inbox .before.first{color:var(--orange);font-weight:700}
+.mini{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mini li{display:flex;align-items:center;gap:6px}
+.mini li+li::before{content:"›";color:var(--mute);font-weight:700}
+.mini button{border:0;padding:0;background:none;cursor:pointer;position:relative;border-radius:8px;transition:transform .2s}
+.mini button:hover{transform:translateY(-2px)}
+.mini img{width:46px;aspect-ratio:2/3;object-fit:cover;border-radius:7px;opacity:.55;box-shadow:0 0 0 2px transparent}
+.mini .now img{opacity:1;box-shadow:0 0 0 2px var(--orange)}
+.mini button:hover img{opacity:1}
+.mini i{position:absolute;left:-6px;top:-6px;width:20px;height:20px;border-radius:50%;background:var(--purple);color:#fff;font:800 11px/20px Poppins,sans-serif;font-style:normal;text-align:center}
+.mini .now i{background:var(--orange);color:var(--on-orange)}
+.inbox .all{justify-self:start;border:0;background:none;padding:0;color:var(--ink);font:700 14px Poppins,sans-serif;cursor:pointer}
+.inbox .all::after{content:" →"}
+.route button{border:0;background:none;padding:0;color:inherit;text-align:left;cursor:pointer;display:contents}
+
 .modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:16px;background:rgba(5,6,12,.72)}
 .modal.on{display:grid}
-.sheet{background:var(--bg2);color:var(--ink);border-radius:18px;max-width:780px;width:100%;max-height:92svh;overflow:auto;display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);position:relative}
+.frame{position:relative;max-width:780px;width:100%}
+.sheet{background:var(--bg2);color:var(--ink);border-radius:18px;width:100%;max-height:92svh;overflow:auto;overscroll-behavior:contain;display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);position:relative}
 .sheet.wide{grid-template-columns:1fr}
 .sheet>img{width:100%;height:100%;object-fit:cover}
 .sheet.wide>img{aspect-ratio:16/9;height:auto}
@@ -252,7 +278,7 @@ footer img{height:72px;width:auto}
 .setgrid span{font:700 13px/1.2 Poppins,sans-serif}
 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .acts .btn{min-height:44px;padding:0 18px;font-size:15px}
-.x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(11,13,23,.8);color:#fff4e0;font-size:24px;cursor:pointer;z-index:2}
+.x{position:absolute;top:10px;right:10px;box-shadow:0 4px 14px rgba(0,0,0,.5);width:44px;height:44px;border-radius:50%;border:0;background:rgba(11,13,23,.8);color:#fff4e0;font-size:24px;cursor:pointer;z-index:2}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);opacity:0;visibility:hidden;background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
 /* responsivo */
@@ -335,7 +361,7 @@ footer img{height:72px;width:auto}
 .pair,.feat,.plan{transition:transform .3s}
 .pair:hover,.plan:hover{transform:translateY(-4px)}
 .modal.on{animation:fadein .25s both}
-.modal.on .sheet{animation:sheetin .35s cubic-bezier(.2,.7,.2,1) both}
+.modal.on .frame{animation:sheetin .35s cubic-bezier(.2,.7,.2,1) both}
 .opts button.ok{animation:bounce .45s}
 .opts button.no{animation:shake .35s}
 .plan .amt{display:inline-block}
@@ -540,7 +566,7 @@ details[open] summary::after{transform:rotate(180deg)}
 </footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-  <div class="sheet" id="sheet"></div>
+  <div class="frame"><button class="x" aria-label="Fechar">×</button><div class="sheet" id="sheet"></div></div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
@@ -605,17 +631,21 @@ function upd(r){const t=r.querySelector(".track"),p=r.querySelector(".prev"),n=r
 function arrows(){document.querySelectorAll("#rows .rail,.picked .rail,#seedRail").forEach(r=>{const t=r.querySelector(".track");t.addEventListener("scroll",()=>upd(r),{passive:true});upd(r)})}
 addEventListener("resize",()=>document.querySelectorAll(".rail").forEach(upd));
 /* modal */
+
 const M=$("#modal"),S=$("#sheet");let last=null;
 const acts=`<div class="acts"><button class="btn btn-main" data-toast="Disponível para assinantes.">Ler agora</button><button class="btn btn-ghost" data-toast="Salvo em Tenho interesse.">Tenho interesse</button></div>`;
-function open(html,wide){S.className="sheet"+(wide?" wide":"");S.innerHTML=`<button class="x" aria-label="Fechar">×</button>`+html;M.classList.add("on");last=document.activeElement;S.querySelector(".x").focus();S.scrollTop=0}
-function close(){M.classList.remove("on");last&&last.focus()}
+function open(html,wide){S.className="sheet"+(wide?" wide":"");S.innerHTML=html;if(!M.classList.contains("on")){last=document.activeElement;M.classList.add("on");document.documentElement.classList.add("lock")}M.querySelector(".x").focus({preventScroll:true});S.scrollTop=0}
+function close(){M.classList.remove("on");document.documentElement.classList.remove("lock");last&&last.focus({preventScroll:true})}
 function openTitle(x){const tags=[...x.valores.map(v=>`<span>${v}</span>`),...x.caminhos.map(c=>`<span>${c}</span>`)].join("");
  const box=x.box?G.find(g=>g.id==x.box):null;
- const where=box?`<span class="m-box">${box.titulo} · volume ${box.titulos.indexOf(x.id)+1} de ${box.titulos.length}</span>`:"";
- open(`<img src="${A}${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>3 a 8 anos</span>${where}${tags}</div><p class="desc">${x.sinopse}</p>${later(x.obra_mae,"later")}${acts}</div>`)}
+ let inbox="",where="";
+ if(box){const vols=box.titulos.map(byId).filter(Boolean),n=box.titulos.indexOf(x.id),prev=vols[n-1];
+  where=`<span class="m-box">Box · volume ${n+1} de ${vols.length}</span>`;
+  inbox=`<div class="inbox"><p class="ib-h"><span class="tag">Box</span>Faz parte do box <b>${box.titulo}</b>, volume ${n+1} de ${vols.length}.</p>${prev?`<p class="before">Para uma melhor experiência, leia antes <button data-id="${prev.id}">${prev.titulo}</button>.</p>`:`<p class="before first">Este é o primeiro volume: comece por aqui.</p>`}<ol class="mini" aria-label="Ordem de leitura">${vols.map((v,i)=>`<li${i==n?' class="now"':""}><button data-id="${v.id}" aria-label="Volume ${i+1}: ${v.titulo}"${i==n?' aria-current="true"':""}><i>${i+1}</i><img src="${A}${v.capa}" alt=""></button></li>`).join("")}</ol><button class="all" data-grp="${box.id}">Ver o roteiro do box</button></div>`}
+ open(`<img src="${A}${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>3 a 8 anos</span>${where}${tags}</div><p class="desc">${x.sinopse}</p>${inbox}${later(x.obra_mae,"later")}${acts}</div>`)}
 function openGroup(g){const vols=g.titulos.map(byId).filter(Boolean);
  if(g.tipo=="box"){
-  open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-box">Box · ${vols.length} volumes</span><span>Leia em ordem</span></div><p class="desc">${g.descricao}</p><h3>Roteiro de leitura</h3><ol class="route">${vols.map((v,i)=>`<li><span class="n">${i+1}</span><img src="${A}${v.capa}" alt=""><div><b>${v.titulo}</b><small>${v.sinopse}</small>${i==0?'<span class="start">Comece por aqui</span>':""}</div></li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true);
+  open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-box">Box · ${vols.length} volumes</span><span>Leia em ordem</span></div><p class="desc">${g.descricao}</p><h3>Roteiro de leitura</h3><ol class="route">${vols.map((v,i)=>`<li><button data-id="${v.id}"><span class="n">${i+1}</span><img src="${A}${v.capa}" alt=""><div><b>${v.titulo}</b><small>${v.sinopse}</small>${i==0?'<span class="start">Comece por aqui</span>':""}</div></button></li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true);
  }else{
   open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-col">Coleção · ${vols.length} títulos</span><span>Leia em qualquer ordem</span></div><p class="desc">${g.descricao}</p><div class="setgrid">${vols.map(v=>`<button data-id="${v.id}"><img src="${A}${v.capa}" alt=""><span>${v.titulo}</span></button>`).join("")}</div>${acts}</div>`,true);
  }}
