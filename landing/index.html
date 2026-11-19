@@ -49,9 +49,11 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 /* hero */
 .hero{position:relative;min-height:min(86svh,800px);display:grid;align-items:center;padding:56px max(5vw,16px) 72px;overflow:hidden}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 88%,transparent) 32%,transparent 62%),linear-gradient(0deg,var(--bg) 0%,transparent 24%)}
-.hero .txt{position:relative;max-width:560px;display:grid;gap:22px}
-.hero .lead{color:var(--ink2)}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0,color-mix(in srgb,var(--bg) 96%,transparent) calc(5vw + 400px),color-mix(in srgb,var(--bg) 70%,transparent) calc(5vw + 560px),transparent calc(5vw + 820px)),linear-gradient(0deg,var(--bg) 0%,transparent 24%)}
+.hero .txt{position:relative;max-width:500px;display:grid;gap:22px}
+.hero .lead{color:var(--ink);font-size:20px;max-width:30ch;text-shadow:0 1px 12px rgba(11,13,23,.9)}
+.hero h1,.hero small{text-shadow:0 2px 16px rgba(11,13,23,.85)}
+.hero small{color:var(--ink2)}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
 .hero small{color:var(--mute);font-size:14px}
 /* catálogo */
@@ -279,7 +281,7 @@ footer img{height:72px;width:auto}
   <img src="../images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
   <div class="txt">
     <h1>Histórias para ler juntos</h1>
-    <p class="lead">Clássicos e grandes filmes recontados para crianças de 3 a 8 anos. Cada livro planta um valor, a fé ou uma futura profissão.</p>
+    <p class="lead">Clássicos e grandes filmes recontados para crianças de 3 a 8 anos. Hoje, a história no colo. Quando crescer, o clássico.</p>
     <div class="ctas">
       <a class="btn btn-main" href="#preco">Assinar por R$ 19,90/mês</a>
       <a class="btn btn-ghost" href="#catalogo">Ver o catálogo</a>
