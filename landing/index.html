@@ -1,140 +1,148 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GBM Histórias</title>
-<meta name="description" content="Clássicos, histórias da Bíblia, vidas de santos e aventuras reais recontados para crianças de 3 a 8 anos. Para pais e filhos lerem juntos.">
+<meta name="description" content="Histórias para ler juntos. Clássicos, grandes filmes e histórias de fé recontados para crianças de 3 a 8 anos, com valores para cultivar e jornadas para conhecer.">
 <meta property="og:title" content="GBM · Histórias para ler juntos">
-<meta property="og:description" content="As grandes histórias do mundo, do tamanho do colo.">
+<meta property="og:description" content="Histórias que plantam valores e apresentam caminhos, para pais e filhos lerem juntos.">
 <meta property="og:image" content="../images/marca/og-image.jpg">
 <link rel="icon" href="../images/marca/favicon-32.png">
 <link rel="apple-touch-icon" href="../images/marca/apple-touch-icon.png">
+<script>try{var t=localStorage.getItem("gbm-tema");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* VOICE  occasion: a bedtime-story catalogue for parents, warm and unhurried
-   IDEA   a streaming shelf at night, lit by the lamp; every book points to the classic it seeds
+   IDEA   a streaming shelf lit by a reading lamp; every book points to the classic it seeds
    PICTURE the full-bleed bedtime scene, then real shelves of covers you can open
-   COLOUR night navy from the logo, cream ink, the logo's three pages: purple, sky blue, orange
-   TYPE   Poppins (matches the rounded wordmark) + Nunito Sans
-   LAYOUT laptop: scene full-bleed, text in its dark left corner; phone: scene on top, text under */
-:root{color-scheme:dark;--bg:#0b0d17;--bg2:#121527;--card:#181c33;--ink:#fff4e0;--mute:#c9c0ae;--red:#9146b5;--teal:#62c8ed;--gold:#f28c28;--line:#272c4a}
+   COLOUR navy night or warm paper; the logo's three pages: purple, sky blue, orange
+   TYPE   Poppins (rounded wordmark) + Nunito Sans
+   LAYOUT laptop: scene full-bleed, text in its quiet left; phone: scene on top, text below */
+:root{color-scheme:dark;--bg:#0b0d17;--bg2:#121527;--card:#181c33;--ink:#fff4e0;--ink2:#e6dccb;--mute:#c4bba8;--line:#272c4a;--glass:rgba(11,13,23,.86);--purple:#9146b5;--blue:#62c8ed;--blue-ink:#62c8ed;--orange:#f28c28;--on-orange:#1d1003;--sky:url(../images/marca/fundo-ceu.svg);--shadow:0 18px 40px -24px rgba(0,0,0,.9)}
+:root[data-theme=light]{color-scheme:light;--bg:#fbf6ec;--bg2:#f3eadb;--card:#ffffff;--ink:#1b1a2b;--ink2:#34314a;--mute:#625d73;--line:#e4d9c5;--glass:rgba(251,246,236,.92);--blue-ink:#1b7fa6;--sky:url(../images/marca/fundo-ceu-claro.svg);--shadow:0 16px 36px -22px rgba(60,40,10,.35)}
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg) url(../images/marca/fundo-ceu.svg) repeat;background-size:1100px;color:var(--ink);font:17px/1.6 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
+body{margin:0;background:var(--bg) var(--sky) repeat;background-size:1100px;color:var(--ink);font:17px/1.6 "Nunito Sans",system-ui,sans-serif;overflow-x:clip;transition:background-color .3s,color .3s}
 img{max-width:100%;display:block}
 a{color:inherit}
 h1,h2,h3{font-family:Poppins,system-ui,sans-serif;line-height:1.08;letter-spacing:-.02em;margin:0;text-wrap:balance}
-h1{font-size:clamp(34px,5vw,58px);font-weight:800}
-h2{font-size:clamp(28px,3.6vw,42px);font-weight:700}
-h3{font-size:20px;font-weight:700}
+h1{font-size:clamp(38px,5.6vw,64px);font-weight:800}
+h2{font-size:clamp(27px,3.4vw,40px);font-weight:700}
+h3{font-size:19px;font-weight:700}
 p{margin:0}
 .wrap{max-width:1240px;margin:0 auto}
-.band{padding:clamp(40px,6vw,88px) max(5vw,16px)}
+.band{padding:clamp(48px,7vw,96px) max(5vw,16px)}
 .lead{color:var(--mute);font-size:18px;max-width:62ch}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font:700 16px Poppins,sans-serif;text-decoration:none;border:0;cursor:pointer;white-space:nowrap}
-.btn-main{background:var(--gold);color:#1a1205}
+.btn-main{background:var(--orange);color:var(--on-orange)}
 .btn-main:hover{background:#ff9f45}
-.btn-ghost{background:rgba(255,244,224,.1);color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(255,244,224,.35)}
-.btn-ghost:hover{background:rgba(255,244,224,.18)}
-.btn:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.btn-ghost{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ink) 35%,transparent)}
+.btn-ghost:hover{background:color-mix(in srgb,var(--ink) 15%,transparent)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.only-dark{display:block}.only-light{display:none}
+:root[data-theme=light] .only-dark{display:none}:root[data-theme=light] .only-light{display:block}
 /* nav */
-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px max(5vw,16px);background:rgba(11,13,23,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-nav .logo{height:46px;width:auto}
-nav .links{display:flex;gap:24px;align-items:center;font-weight:600;font-size:15px}
-nav .links a{text-decoration:none;color:var(--mute)}
-nav .links a:hover{color:var(--ink)}
-nav .links a.btn{color:#1a1205}
+nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px max(5vw,16px);background:var(--glass);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .logo{height:44px;width:auto}
+nav .links{display:flex;gap:22px;align-items:center;font-weight:600;font-size:15px}
+nav .links a:not(.btn){text-decoration:none;color:var(--mute)}
+nav .links a:not(.btn):hover{color:var(--ink)}
 nav .btn{min-height:40px;padding:0 18px;font-size:14px}
+.theme{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--mute);display:grid;place-items:center;cursor:pointer}
+.theme:hover{color:var(--ink);border-color:var(--mute)}
+.theme svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.theme .sun{display:none}
+:root[data-theme=light] .theme .sun{display:block}:root[data-theme=light] .theme .moon{display:none}
 /* hero */
-.hero{position:relative;min-height:min(88svh,820px);display:grid;align-items:center;padding:48px max(5vw,16px);overflow:hidden}
+.hero{position:relative;min-height:min(86svh,800px);display:grid;align-items:center;padding:56px max(5vw,16px) 72px;overflow:hidden}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,23,.97) 0%,rgba(11,13,23,.85) 32%,rgba(11,13,23,0) 62%),linear-gradient(0deg,var(--bg) 0%,rgba(11,13,23,0) 26%)}
-.hero .txt{position:relative;max-width:560px;display:grid;gap:20px}
-.hero .lead{color:#e6dccb}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 88%,transparent) 32%,transparent 62%),linear-gradient(0deg,var(--bg) 0%,transparent 24%)}
+.hero .txt{position:relative;max-width:560px;display:grid;gap:22px}
+.hero .lead{color:var(--ink2)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
 .hero small{color:var(--mute);font-size:14px}
-/* rows */
-.shelf{padding-top:12px}
-.shelf .intro{display:grid;gap:10px;margin-bottom:28px}
-.row{margin-bottom:34px}
-.row-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+/* catálogo */
+.shelf{padding-top:clamp(64px,8vw,104px)}
+.shelf .intro{display:grid;gap:12px;margin-bottom:34px}
+.row{margin-bottom:40px}
+.row-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
 .row-h h3{display:flex;align-items:center;gap:10px}
 .row-h h3 i{width:12px;height:12px;border-radius:3px;display:inline-block}
 .row-h span{color:var(--mute);font-size:14px}
-.track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
-.cover{flex:0 0 clamp(138px,15vw,190px);scroll-snap-align:start;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--card);border:0;padding:0;color:var(--ink);text-align:left;transition:transform .25s}
+.row-sub{color:var(--mute);font-size:15px;margin:-6px 0 12px}
+.rail{position:relative}
+.track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.arr{position:absolute;top:calc(50% - 30px);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--ink);display:grid;place-items:center;cursor:pointer;z-index:3;box-shadow:var(--shadow);transition:opacity .2s}
+.arr svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.arr.prev{left:-14px}.arr.next{right:-14px}
+.arr[disabled]{opacity:0;pointer-events:none}
+@media(hover:none){.arr{display:none}}
+.cover{flex:0 0 clamp(132px,14.5vw,186px);scroll-snap-align:start;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--card);border:0;padding:0;text-align:left;transition:transform .25s;box-shadow:var(--shadow)}
 .cover img{aspect-ratio:2/3;width:100%;object-fit:cover}
-.cover b{position:absolute;left:0;right:0;bottom:0;padding:36px 10px 10px;font:700 14px/1.2 Poppins,sans-serif;background:linear-gradient(0deg,rgba(8,9,16,.95) 30%,rgba(8,9,16,0))}
-.cover:hover{transform:translateY(-4px) scale(1.03)}
-.boxcard{flex:0 0 clamp(260px,30vw,380px)}
-.boxcard img{aspect-ratio:16/9}
-.badge{position:absolute;top:10px;left:10px;background:var(--gold);color:#1a1205;font:700 12px Poppins,sans-serif;padding:4px 10px;border-radius:999px}
-.badge.col{background:var(--teal);color:#04161b}
-.badge.box{background:var(--red);color:#fff}
-/* origin */
-.origin{background:rgba(18,21,39,.72)}
-.origin .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
-.origin img{border-radius:16px;width:100%}
+.cover b{position:absolute;left:0;right:0;bottom:0;padding:36px 10px 10px;font:700 14px/1.2 Poppins,sans-serif;color:#fff;background:linear-gradient(0deg,rgba(8,9,16,.95) 30%,rgba(8,9,16,0))}
+.cover:hover{transform:translateY(-4px)}
+.badge{position:absolute;top:10px;left:10px;font:700 12px Poppins,sans-serif;padding:4px 10px;border-radius:999px;z-index:2}
+.b-new{background:var(--orange);color:var(--on-orange)}
+.b-box{background:var(--purple);color:#fff}
+.b-col{background:var(--blue);color:#06202a}
+/* box: livros empilhados; coleção: cartão simples */
+.grp{flex:0 0 clamp(270px,30vw,380px);scroll-snap-align:start;border:0;padding:0;background:none;cursor:pointer;text-align:left;color:var(--ink);display:grid;gap:10px}
+.grp .art{position:relative;border-radius:12px;box-shadow:var(--shadow)}
+.grp .art img{aspect-ratio:16/9;width:100%;object-fit:cover;border-radius:12px;position:relative;z-index:1}
+.grp.box{padding-right:14px;padding-top:12px}
+.grp.box .art::before,.grp.box .art::after{content:"";position:absolute;inset:0;border-radius:12px;background:color-mix(in srgb,var(--purple) 55%,var(--card));border:1px solid color-mix(in srgb,var(--purple) 70%,transparent)}
+.grp.box .art::before{transform:translate(14px,-12px)}
+.grp.box .art::after{transform:translate(7px,-6px);background:color-mix(in srgb,var(--purple) 30%,var(--card))}
+.grp b{font:700 17px/1.2 Poppins,sans-serif}
+.grp small{color:var(--mute);font-size:14px;line-height:1.4}
+.vols-mini{display:flex;gap:6px;align-items:center;color:var(--mute);font-size:13px;font-weight:700}
+.vols-mini i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--purple) 25%,transparent);color:var(--ink);font-size:12px}
+.vols-mini em{font-style:normal;opacity:.6}
+/* origem */
+.origin{background:color-mix(in srgb,var(--bg2) 80%,transparent)}
+.origin .wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.origin img{border-radius:16px;width:100%;box-shadow:var(--shadow)}
 .origin .story{display:grid;gap:16px;font-size:18px}
-.origin .story p{color:#e6dccb}
-.origin .sign{color:var(--gold);font-weight:700}
-/* plant */
-.plant .head{display:grid;gap:10px;margin-bottom:28px}
-.grp{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:26px 0 12px}
-.grp p{color:var(--mute);font-size:15px}
-.seeds{display:grid;gap:12px}
-.seeds.val{grid-template-columns:repeat(7,minmax(0,1fr))}
-.seeds.cam{grid-template-columns:repeat(6,minmax(0,1fr))}
-.seed{border:0;padding:0;background:none;color:var(--ink);cursor:pointer;display:grid;gap:8px;justify-items:center;text-align:center}
-.seed img{width:100%;object-fit:cover;transition:transform .3s,box-shadow .3s;box-shadow:0 0 0 2px var(--line)}
-.val .seed img{aspect-ratio:1;border-radius:16px}
-.cam .seed img{aspect-ratio:3/4;border-radius:999px 999px 14px 14px}
-.seed span{font:700 14px/1.2 Poppins,sans-serif}
-.val .seed[aria-pressed=true] img{box-shadow:0 0 0 3px var(--gold)}
-.cam .seed[aria-pressed=true] img{box-shadow:0 0 0 3px var(--teal)}
-.seed[aria-pressed=true] img{transform:translateY(-3px)}
-.seed[aria-pressed=true] span{color:var(--gold)}
-.cam .seed[aria-pressed=true] span{color:var(--teal)}
-.picked{margin-top:26px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px}
-.chip{min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--mute);font:600 15px "Nunito Sans",sans-serif;cursor:pointer}
-.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.picked{background:var(--card);border-radius:16px;padding:20px}
+.origin .story p{color:var(--ink2)}
+.origin .sign{color:var(--orange);font-weight:700;font-size:16px}
+/* plantar */
+.plant .head{display:grid;gap:12px;margin-bottom:24px}
+.mode{display:inline-flex;padding:5px;gap:4px;border-radius:999px;background:var(--card);border:1px solid var(--line);margin-bottom:22px}
+.mode button{border:0;background:none;color:var(--mute);font:700 15px Poppins,sans-serif;padding:10px 22px;border-radius:999px;cursor:pointer;min-height:44px}
+.mode button[aria-selected=true]{color:var(--on-orange);background:var(--orange)}
+.mode button[aria-selected=true][data-mode=jornadas]{background:var(--blue);color:#06202a}
+.mode-sub{color:var(--mute);font-size:15px;margin:-10px 0 18px}
+.seeds{display:flex;flex-wrap:wrap;gap:14px}
+.seed{flex:0 0 132px;border:0;padding:0;background:none;color:var(--ink);cursor:pointer;display:grid;gap:8px;justify-items:center;text-align:center}
+.seed img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .25s,box-shadow .25s;box-shadow:0 0 0 2px var(--line)}
+.seeds.val .seed img{border-radius:16px}
+.seeds.jor .seed img{border-radius:999px 999px 14px 14px}
+.seed span{font:700 14px/1.2 Poppins,sans-serif;min-height:2.4em}
+.seed{align-content:start}
+.seed[aria-pressed=true] img{transform:translateY(-3px);box-shadow:0 0 0 3px var(--orange)}
+.seed[aria-pressed=true] span{color:var(--orange)}
+.seeds.jor .seed[aria-pressed=true] img{box-shadow:0 0 0 3px var(--blue)}
+.seeds.jor .seed[aria-pressed=true] span{color:var(--blue-ink)}
+.picked{margin-top:26px;background:var(--card);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
 .picked p{color:var(--mute);margin-bottom:14px;font-size:15px}
 .picked p b{color:var(--ink)}
-/* seed of a classic */
-.classic{background:linear-gradient(180deg,rgba(11,13,23,0) 0%,rgba(16,20,42,.75) 100%)}
+/* semente */
 .pairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
-.pair{background:var(--card);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.pair{background:var(--card);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;box-shadow:var(--shadow)}
 .pair img{aspect-ratio:4/3;width:100%;object-fit:cover;object-position:center 30%}
 .pair div{padding:18px;display:grid;gap:8px;align-content:start}
 .pair .later{border-top:1px dashed var(--line);padding-top:12px;margin-top:4px;font-size:15px;color:var(--mute)}
-.pair .later strong{color:var(--gold);display:block;font-family:Poppins,sans-serif;font-size:16px}
-/* features */
+.pair .later strong{color:var(--orange);display:block;font-family:Poppins,sans-serif;font-size:16px}
+/* como funciona */
 .feats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
-.feat{background:var(--card);border-radius:16px;padding:24px;display:grid;gap:12px;align-content:start}
+.feat{background:var(--card);border-radius:16px;padding:24px;display:grid;gap:12px;align-content:start;box-shadow:var(--shadow)}
 .feat p{color:var(--mute)}
 .feat.wide{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;padding:0;overflow:hidden}
 .feat.wide img{height:100%;object-fit:cover}
 .feat.wide>div{padding:24px;display:grid;gap:12px}
-.who{display:flex;flex-wrap:wrap;gap:18px;margin-top:4px}
-.who figure{margin:0;display:grid;justify-items:center;gap:6px;font-weight:700;font-size:15px}
-.who img{width:72px;height:72px;border-radius:50%}
-.who .add{width:72px;height:72px;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font-size:30px;color:var(--mute)}
-.note{background:#fff4e0;color:#2a2416;border-radius:10px;padding:14px 16px;font-size:15px;transform:rotate(-1deg)}
-.note b{display:block;font-family:Poppins,sans-serif;font-size:13px;color:#8a6a1e}
-.tabs{display:flex;gap:8px;flex-wrap:wrap}
-.peek{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
-.peek figure{margin:0;display:grid;gap:8px}
-.peek img{border-radius:12px;aspect-ratio:16/10;width:100%;object-fit:cover;box-shadow:0 0 0 1px var(--line),0 18px 40px -24px rgba(0,0,0,.9)}
-.peek figcaption{color:var(--mute);font-size:14px;text-align:center}
-.rate{display:flex;gap:10px;flex-wrap:wrap}
-.rate button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
-.rate svg{width:18px;height:18px;fill:currentColor}
-.rate button[aria-pressed=true][data-r="1"]{background:var(--teal);border-color:var(--teal);color:#04161b}
-.rate button[aria-pressed=true][data-r="0"]{border-color:var(--red);color:var(--red)}
 .feat.quiz{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
 .feat.quiz>div:first-child{display:grid;gap:12px}
 .qbox{background:var(--bg);border-radius:14px;padding:18px;display:grid;gap:10px}
@@ -142,90 +150,123 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .qbox b{font-family:Poppins,sans-serif;font-size:20px}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
 .opts button{min-height:44px;padding:0 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
-.opts button.ok{background:var(--teal);border-color:var(--teal);color:#04161b}
-.opts button.no{border-color:var(--red);color:var(--red)}
-.plan .fine{color:var(--mute);font-size:13px;text-align:center}
-.tabs span{padding:6px 14px;border-radius:999px;background:var(--bg);font-size:14px;font-weight:700}
-.tabs span:first-child{background:var(--teal);color:#04161b}
-/* curation */
+.opts button.ok{background:var(--blue);border-color:var(--blue);color:#06202a}
+.opts button.no{border-color:var(--purple);color:var(--purple)}
+.peek{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+.peek figure{margin:0;display:grid;gap:8px}
+.peek img{border-radius:12px;aspect-ratio:16/10;width:100%;object-fit:cover;box-shadow:0 0 0 1px var(--line),var(--shadow)}
+.peek figcaption{color:var(--mute);font-size:14px;text-align:center}
+/* curadoria */
 .cur .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(24px,4vw,56px);align-items:center}
-.cur img{border-radius:16px}
+.cur img{border-radius:16px;box-shadow:var(--shadow)}
 .cur .txt{display:grid;gap:22px}
 .cur .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .cur .cols>div{display:grid;gap:12px;align-content:start}
 .cur ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-.cur li{padding-left:28px;position:relative;color:#e6dccb}
-.cur li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;background:var(--teal)}
-.cur .cols>div:nth-child(2) li::before{background:var(--gold)}
-.cur li:nth-child(2)::before{background:var(--red)}
-/* price */
-.price{background:rgba(18,21,39,.72)}
+.cur li{padding-left:28px;position:relative;color:var(--ink2)}
+.cur li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;background:var(--blue)}
+.cur li:nth-child(2)::before{background:var(--purple)}
+.cur .cols>div:nth-child(2) li::before{background:var(--orange)}
+/* preço */
+.price{background:color-mix(in srgb,var(--bg2) 80%,transparent)}
 .price .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
-.plan{border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;gap:18px;border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(120deg,var(--red),var(--teal) 55%,var(--gold)) border-box}
+.plan{border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;gap:18px;border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(120deg,var(--purple),var(--blue) 55%,var(--orange)) border-box;box-shadow:var(--shadow)}
 .plan .amt{font:800 clamp(44px,6vw,64px)/1 Poppins,sans-serif;white-space:nowrap}
 .plan .amt small{font-size:18px;font-weight:600;color:var(--mute)}
 .plan ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 .plan li{padding-left:30px;position:relative}
-.plan li::before{content:"";position:absolute;left:2px;top:6px;width:16px;height:9px;border-left:3px solid var(--gold);border-bottom:3px solid var(--gold);transform:rotate(-45deg)}
+.plan li::before{content:"";position:absolute;left:2px;top:6px;width:16px;height:9px;border-left:3px solid var(--orange);border-bottom:3px solid var(--orange);transform:rotate(-45deg)}
 .plan .btn{width:100%}
+.plan .fine{color:var(--mute);font-size:13px;text-align:center}
 /* faq */
 .faq .wrap{max-width:860px}
 details{border-bottom:1px solid var(--line);padding:4px 0}
 summary{cursor:pointer;list-style:none;font:700 18px Poppins,sans-serif;padding:16px 36px 16px 0;position:relative}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:26px;color:var(--gold)}
+summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:26px;color:var(--orange)}
 details[open] summary::after{content:"–"}
 details p{color:var(--mute);padding:0 0 18px}
 /* final */
 .final{position:relative;overflow:hidden;min-height:420px;display:grid;align-items:center}
 .final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
-.final::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,23,.96) 0%,rgba(11,13,23,.7) 40%,rgba(11,13,23,.05) 75%)}
+.final::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 75%,transparent) 40%,transparent 75%)}
 .final .txt{position:relative;max-width:520px;display:grid;gap:18px}
 footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--mute);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
 footer img{height:72px;width:auto}
 /* modal */
-.modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:16px;background:rgba(5,6,12,.78)}
+.modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:16px;background:rgba(5,6,12,.72)}
 .modal.on{display:grid}
-.sheet{background:var(--bg2);border-radius:18px;max-width:760px;width:100%;max-height:92svh;overflow:auto;display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);position:relative}
+.sheet{background:var(--bg2);color:var(--ink);border-radius:18px;max-width:780px;width:100%;max-height:92svh;overflow:auto;display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);position:relative}
 .sheet.wide{grid-template-columns:1fr}
 .sheet>img{width:100%;height:100%;object-fit:cover}
 .sheet.wide>img{aspect-ratio:16/9;height:auto}
-.sheet .in{padding:24px;display:grid;gap:12px;align-content:start}
+.sheet .in{padding:24px;display:grid;gap:14px;align-content:start}
 .meta{display:flex;flex-wrap:wrap;gap:6px}
 .meta span{font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--card);white-space:nowrap}
-.sheet .later{background:var(--card);border-radius:12px;padding:14px;border-left:4px solid var(--gold)}
+.meta .m-box{background:var(--purple);color:#fff}
+.meta .m-col{background:var(--blue);color:#06202a}
+.sheet .later{background:var(--card);border-radius:12px;padding:14px;border-left:4px solid var(--orange)}
 .sheet .later small{color:var(--mute);display:block;font-size:13px}
 .sheet .later strong{font-family:Poppins,sans-serif}
-.vols{margin:0;padding-left:20px;color:#e6dccb}
-.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.desc{color:var(--ink2)}
+.route{margin:0;padding:0;list-style:none;display:grid;gap:0}
+.route li{display:grid;grid-template-columns:36px 64px minmax(0,1fr);gap:12px;align-items:center;padding:10px 0;position:relative}
+.route li::before{content:"";position:absolute;left:17px;top:0;bottom:0;width:2px;background:color-mix(in srgb,var(--purple) 45%,transparent)}
+.route li:first-child::before{top:50%}.route li:last-child::before{bottom:50%}
+.route .n{position:relative;z-index:1;width:36px;height:36px;border-radius:50%;background:var(--purple);color:#fff;display:grid;place-items:center;font:800 15px Poppins,sans-serif}
+.route img{width:64px;aspect-ratio:2/3;object-fit:cover;border-radius:6px}
+.route b{display:block;font-family:Poppins,sans-serif;font-size:15px;line-height:1.25}
+.route small{color:var(--mute);font-size:13px;line-height:1.35;display:block}
+.route .start{display:inline-block;margin-top:4px;font:700 11px Poppins,sans-serif;padding:2px 8px;border-radius:999px;background:var(--orange);color:var(--on-orange)}
+.setgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px}
+.setgrid button{border:0;padding:0;background:none;cursor:pointer;color:var(--ink);text-align:left;display:grid;gap:6px}
+.setgrid img{aspect-ratio:2/3;width:100%;object-fit:cover;border-radius:8px}
+.setgrid span{font:700 13px/1.2 Poppins,sans-serif}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .acts .btn{min-height:44px;padding:0 18px;font-size:15px}
-.x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(11,13,23,.8);color:var(--ink);font-size:24px;cursor:pointer;z-index:2}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;opacity:0;visibility:hidden;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}
+.x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(11,13,23,.8);color:#fff4e0;font-size:24px;cursor:pointer;z-index:2}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);opacity:0;visibility:hidden;background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
-@media(max-width:900px){
+/* responsivo */
+@media(max-width:1000px){
  nav .links a:not(.btn){display:none}
- .seeds{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
- .seeds .seed{scroll-snap-align:start}
- .seeds.val .seed{flex:0 0 104px}
- .seeds.cam .seed{flex:0 0 118px}
- .seed span{font-size:13px}
  .pairs{grid-template-columns:1fr}
- .pair{grid-template-columns:minmax(0,140px) minmax(0,1fr);grid-template-rows:auto}
+ .pair{grid-template-columns:minmax(0,160px) minmax(0,1fr);grid-template-rows:auto}
  .pair img{aspect-ratio:auto;height:100%}
+ .cur .wrap,.origin .wrap{grid-template-columns:1fr}
+ .cur img{max-height:360px;width:100%;object-fit:cover}
+ .feat.wide,.feat.quiz{grid-template-columns:1fr}
+ .feat.wide img{max-height:320px;width:100%}
 }
-@media(max-width:700px){
- .hero{min-height:0;padding:0 0 32px;align-items:end}
+@media(max-width:760px){
+ body{font-size:16px}
+ .lead{font-size:16px}
+ .hero{min-height:0;padding:0 0 40px;align-items:end}
  .hero>img{position:relative;height:auto;aspect-ratio:4/3;object-position:72% 40%}
- .hero::before{background:linear-gradient(0deg,var(--bg) 38%,rgba(11,13,23,0) 60%)}
- .hero .txt{padding:0 16px;margin-top:-60px}
- .origin .wrap,.cur .wrap,.price .wrap,.feat.wide,.cur .cols,.feat.quiz{grid-template-columns:1fr}
- .feats{grid-template-columns:1fr}
- .peek{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
- .peek figure{flex:0 0 82%;scroll-snap-align:start}
+ .hero::before{background:linear-gradient(0deg,var(--bg) 40%,transparent 62%)}
+ .hero .txt{padding:0 16px;margin-top:-56px;gap:18px}
+ .hero .ctas .btn{flex:1 1 auto}
+ .price .wrap,.cur .cols{grid-template-columns:1fr}
+ .peek{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+ .peek figure{flex:0 0 84%;scroll-snap-align:start}
+ .seeds{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px}
+ .seed{flex:0 0 108px;scroll-snap-align:start}
+ .seed span{font-size:13px}
+ .mode{display:flex}
+ .mode button{flex:1}
+ .grp{flex-basis:82%}
  .sheet{grid-template-columns:1fr}
  .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
- .final>img{opacity:.45}
- .pair{grid-template-columns:minmax(0,110px) minmax(0,1fr)}
+ .final{min-height:0;padding-top:0}
+ .final>img{position:relative;height:auto;aspect-ratio:16/10}
+ .final::before{background:linear-gradient(0deg,var(--bg) 45%,transparent 70%)}
+ .final .txt{margin-top:-60px}
+}
+@media(max-width:480px){
+ nav .logo{height:38px}
+ .pair{grid-template-columns:minmax(0,112px) minmax(0,1fr)}
+ .cover{flex-basis:128px}
+ footer{justify-content:center;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -233,13 +274,16 @@ footer img{height:72px;width:auto}
 <body>
 
 <nav>
-  <a href="#topo" aria-label="GBM, início"><img class="logo" src="../images/marca/logo-nav.png" alt="GBM"></a>
+  <a href="#topo" aria-label="GBM, início"><img class="logo only-dark" src="../images/marca/logo-nav.png" alt="GBM"><img class="logo only-light" src="../images/marca/logo-nav-claro.png" alt="GBM"></a>
   <div class="links">
     <a href="#catalogo">Catálogo</a>
-    <a href="#plantar">Valores</a>
+    <a href="#plantar">Valores e jornadas</a>
     <a href="#como">Como funciona</a>
-    <a href="#curadoria">Curadoria</a>
     <a href="#preco">Preço</a>
+    <button class="theme" id="theme" aria-label="Alternar entre tema claro e escuro" title="Tema claro ou escuro">
+      <svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
     <a class="btn btn-main" href="#preco">Assinar</a>
   </div>
 </nav>
@@ -247,8 +291,8 @@ footer img{height:72px;width:auto}
 <header class="hero" id="topo">
   <img src="../images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
   <div class="txt">
-    <h1>As grandes histórias do mundo, do tamanho do colo.</h1>
-    <p class="lead">Clássicos, histórias da Bíblia, vidas de santos e aventuras reais, recontados para crianças de 3 a 8 anos. O adulto tem gosto de contar, e a criança pede de novo.</p>
+    <h1>Histórias para ler juntos</h1>
+    <p class="lead">Clássicos, grandes filmes e histórias de fé recontados para crianças de 3 a 8 anos. Cada livro planta um valor e abre uma porta: a coragem de empreender, o cuidado de quem escolhe a medicina, a firmeza de quem defende o que é justo e a fé que sustenta tudo isso.</p>
     <div class="ctas">
       <a class="btn btn-main" href="#preco">Assinar por R$ 19,90/mês</a>
       <a class="btn btn-ghost" href="#catalogo">Ver o catálogo</a>
@@ -271,10 +315,9 @@ footer img{height:72px;width:auto}
   <div class="wrap">
     <img src="../images/secoes/origem-antes-e-depois.webp" alt="O mesmo pai e a mesma filha com o mesmo livro: à esquerda entediados, à direita encantados com uma baleia saindo das páginas">
     <div class="story">
-      <h2>Começou numa noite qualquer, com a Giovana</h2>
-      <p>Ela tinha 6 anos e estava aprendendo a ler. Eu sentava ao lado dela com aqueles livrinhos de sempre: frases curtas, repetidas, sem história nenhuma. Na terceira página, eu já estava bocejando. E ela também.</p>
-      <p>Ali eu entendi o que faltava: uma história que valesse a pena para nós dois.</p>
-      <p>Então comecei a contar outras: a baleia branca que ninguém alcançava, o menino pastor que enfrentou um gigante, o navio preso no gelo do fim do mundo. Ela pedia de novo, e pela primeira vez eu também queria.</p>
+      <h2>Começou com a Giovana</h2>
+      <p>Ela tinha 6 anos e estava aprendendo a ler. Os livrinhos de sempre davam sono nela e em mim.</p>
+      <p>Troquei por uma baleia branca, um gigante e um navio preso no gelo. Ela começou a pedir de novo.</p>
       <p class="sign">Cleber, pai da Giovana, do Bento e da Maria</p>
     </div>
   </div>
@@ -284,13 +327,15 @@ footer img{height:72px;width:auto}
   <div class="wrap">
     <div class="head">
       <h2>Você escolhe o que plantar</h2>
-      <p class="lead">No perfil de cada filho, você marca os valores e os caminhos que quer mostrar a ele, e a estante se organiza a partir disso. Teste aqui:</p>
+      <p class="lead">No perfil de cada filho, você escolhe o que quer cultivar, e a estante dele se organiza a partir disso. Experimente:</p>
     </div>
-    <div class="grp"><h3>Valores para cultivar</h3><p>O que você quer ver crescer dentro dele.</p></div>
-    <div class="seeds val" id="seedsV"></div>
-    <div class="grp"><h3>Caminhos para conhecer</h3><p>Profissões e mundos que ele pode descobrir lá fora.</p></div>
-    <div class="seeds cam" id="seedsC"></div>
-    <div class="picked"><p id="pickedTxt"></p><div class="track" id="pickedRow"></div></div>
+    <div class="mode" role="tablist" aria-label="Escolha entre valores e jornadas">
+      <button role="tab" data-mode="valores" aria-selected="true">Valores</button>
+      <button role="tab" data-mode="jornadas" aria-selected="false">Jornadas</button>
+    </div>
+    <p class="mode-sub" id="modeSub"></p>
+    <div class="seeds val" id="seeds"></div>
+    <div class="picked"><p id="pickedTxt"></p><div class="rail"><button class="arr prev" aria-label="Anteriores" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="track" id="pickedRow"></div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span></button></div></div>
   </div>
 </section>
 
@@ -344,7 +389,7 @@ footer img{height:72px;width:auto}
           <h3>Na escolha das obras</h3>
           <ul>
             <li>Só entra no catálogo uma obra que valha a pena reencontrar mais tarde: um clássico da literatura, uma passagem da Bíblia, a vida de um santo, uma história real ou um filme marcante.</li>
-            <li>Cada título carrega um valor ou um caminho que justifica estar ali, como coragem, fé, medicina ou empreender.</li>
+            <li>Cada título carrega um valor ou uma jornada que justifica estar ali, como coragem, fé, medicina ou empreender.</li>
           </ul>
         </div>
         <div>
@@ -371,9 +416,9 @@ footer img{height:72px;width:auto}
       <h3>Assinatura GBM</h3>
       <div class="amt">R$ 19,90 <small>/mês</small></div>
       <ul>
-        <li>Catálogo completo: clássicos, Bíblia, santos, aventuras reais</li>
+        <li>Catálogo completo: clássicos, grandes filmes, Bíblia e santos</li>
         <li>Perfis para todos os seus filhos</li>
-                <li>Quiz de compreensão no fim de cada história</li>
+        <li>Quiz de compreensão no fim de cada história</li>
         <li>Lançamentos frequentes</li>
       </ul>
       <button class="btn btn-main" data-toast="O cadastro abre em breve.">Assinar agora</button>
@@ -387,7 +432,8 @@ footer img{height:72px;width:auto}
     <h2 style="margin-bottom:16px">Perguntas frequentes</h2>
     <details><summary>Para que idade é o GBM?</summary><p>De 3 a 8 anos. Os textos são curtos e as ilustrações fazem boa parte do trabalho. Para os menores, a ideia é o adulto ler em voz alta. Os maiores podem acompanhar e ler trechos sozinhos.</p></details>
     <details><summary>As histórias são resumos dos clássicos?</summary><p>Não. São histórias novas, inspiradas nos temas das grandes obras e simplificadas para a idade da criança, sem os temas delicados do original. Cada uma termina com a indicação do clássico para ler ou assistir quando crescer.</p></details>
-    <details><summary>Como as histórias são escolhidas?</summary><p>Uma obra só entra no catálogo se valer a pena ser reencontrada mais tarde, e se tiver um valor ou um caminho claro para apresentar à criança. Depois disso, o texto é adaptado para a idade e cada página é revisada.</p></details>
+    <details><summary>Qual a diferença entre box e coleção?</summary><p>Um box é uma história com continuação: os volumes dependem um do outro e são lidos em ordem. Uma coleção reúne histórias do mesmo tema, que podem ser lidas em qualquer ordem.</p></details>
+    <details><summary>Como as histórias são escolhidas?</summary><p>Uma obra só entra no catálogo se valer a pena ser reencontrada mais tarde, e se tiver um valor ou uma jornada clara para apresentar à criança. Depois disso, o texto é adaptado para a idade e cada página é revisada.</p></details>
     <details><summary>Substitui os livros de alfabetização?</summary><p>Não, complementa. Os livros de alfabetização treinam a decodificação. O GBM cuida da outra parte: a vontade de abrir um livro.</p></details>
     <details><summary>Como sei se meu filho entendeu a história?</summary><p>Cada livro termina com um quiz de 5 a 10 perguntas. Para os menores, as respostas são desenhos, e o adulto lê as perguntas em voz alta. A última pergunta é aberta, para vocês conversarem sobre a história.</p></details>
     <details><summary>Posso baixar os livros?</summary><p>Sim. Cada e-book também está disponível em PDF.</p></details>
@@ -405,7 +451,8 @@ footer img{height:72px;width:auto}
 </section>
 
 <footer>
-  <img src="../images/marca/logo-web.png" alt="GBM, Histórias para ler juntos">
+  <img class="only-dark" src="../images/marca/logo-web.png" alt="GBM, Histórias para ler juntos">
+  <img class="only-light" src="../images/marca/logo-web-claro.png" alt="GBM, Histórias para ler juntos">
   <span>© 2026 GBM · Histórias para ler juntos</span>
 </footer>
 
@@ -417,50 +464,82 @@ footer img{height:72px;width:auto}
 <script>
 {
 const $=s=>document.querySelector(s);
-const COL={"Clássicos da literatura":"#62c8ed","Do cinema e das séries":"#9146b5","Histórias reais e de fé":"#f28c28"};
-const slug=t=>t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ /g,"-");
-const seed=(n,k)=>`<button class="seed" data-tag="${n}" aria-pressed="false"><img src="../images/cards/${k}-${slug(n)}.webp" alt=""><span>${n}</span></button>`;
-const sel=new Set(["Coragem","Empreender"]);
-let T=[],G=[];
+const A="../";
+const COL={"Clássicos da literatura":"var(--blue)","Do cinema e das séries":"var(--purple)","Histórias reais e de fé":"var(--orange)"};
+const slug=t=>t.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/ /g,"-");
+const ARR='<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>';
+let T=[],G=[],cat={};
+let mode="valores", sel="Coragem";
+const byId=id=>T.find(t=>t.id==id);
 const later=(o,cls)=>{const k=o.tipo=="livro"?"leia":"assista";return `<div class="${cls}"><small>Quando crescer, ${k}</small><strong>${o.titulo}</strong>${o.autor?`<small>${o.autor}</small>`:""}<small>Idade sugerida: ${o.idade}</small></div>`};
-const cover=x=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="../${x.capa}" alt=""><b>${x.titulo}</b></button>`;
-const boxc=x=>`<button class="cover boxcard" data-box="${x.id}"><img loading="lazy" src="../${x.arte}" alt=""><span class="badge ${x.tipo=="colecao"?"col":"box"}">${x.tipo=="colecao"?"Coleção":x.titulos.length+" volumes"}</span><b>${x.titulo}</b></button>`;
-const has=(x,n)=>x.valores.includes(n)||x.caminhos.includes(n);
-function rows(cat){
- const vit=T.filter(x=>x.vitrine&&x.capa), gv=G.filter(g=>g.vitrine);
- const lan=(cat.lancamentos_ordem||[]).map(id=>T.find(t=>t.id==id)).filter(x=>x&&x.capa);
- $("#rows").innerHTML=`<div class="row"><div class="row-h"><h3><i style="background:var(--gold)"></i>Lançamentos</h3><span>${lan.length} títulos</span></div><div class="track">${lan.map(x=>cover(x).replace('<b>','<span class="badge">Novo</span><b>')).join("")}</div></div>`+cat.fileiras_landing.map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return `<div class="row"><div class="row-h"><h3><i style="background:${COL[n]||"var(--ink)"}"></i>${n}</h3><span>${l.length} títulos</span></div><div class="track">${l.map(cover).join("")}</div></div>`}).join("")
- +`<div class="row"><div class="row-h"><h3><i style="background:var(--ink)"></i>Boxes e coleções</h3><span>${gv.length} conjuntos</span></div><div class="track">${gv.map(boxc).join("")}</div></div>`;
- $("#seedsV").innerHTML=cat.valores.map(n=>seed(n,"valor")).join("");
- $("#seedsC").innerHTML=cat.caminhos.map(n=>seed(n,"caminho")).join("");
- $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=T.find(y=>y.id==id);const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="../${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
- paint();
+const cover=(x,badge="")=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="${A}${x.capa}" alt="">${badge}<b>${x.titulo}</b></button>`;
+const rail=inner=>`<div class="rail"><button class="arr prev" aria-label="Anteriores" disabled>${ARR}</button><div class="track">${inner}</div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)">${ARR}</span></button></div>`;
+const row=(title,color,count,inner,sub="")=>`<div class="row"><div class="row-h"><h3><i style="background:${color}"></i>${title}</h3><span>${count}</span></div>${sub?`<p class="row-sub">${sub}</p>`:""}${rail(inner)}</div>`;
+const boxCard=g=>{const n=g.titulos.length;return `<button class="grp box" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${g.arte}" alt=""><span class="badge b-box">${n} volumes · em ordem</span></div><b>${g.titulo}</b><span class="vols-mini">${g.titulos.map((_,i)=>`<i>${i+1}</i>`).join("<em>›</em>")}</span><small>${g.descricao}</small></button>`};
+const colCard=g=>`<button class="grp col" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${g.arte}" alt=""><span class="badge b-col">Coleção · ${g.titulos.length} títulos</span></div><b>${g.titulo}</b><small>${g.descricao}</small></button>`;
+function rows(){
+ const vit=T.filter(x=>x.vitrine&&x.capa);
+ const lan=(cat.lancamentos_ordem||[]).map(byId).filter(x=>x&&x.capa);
+ const boxes=G.filter(g=>g.vitrine&&g.tipo=="box"), cols=G.filter(g=>g.vitrine&&g.tipo=="colecao");
+ $("#rows").innerHTML=row("Lançamentos","var(--orange)",`${lan.length} títulos`,lan.map(x=>cover(x,'<span class="badge b-new">Novo</span>')).join(""))
+  +cat.fileiras_landing.map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return row(n,COL[n]||"var(--ink)",`${l.length} títulos`,l.map(x=>cover(x)).join(""))}).join("")
+  +row("Boxes","var(--purple)",`${boxes.length} boxes`,boxes.map(boxCard).join(""),"Histórias com continuação: um volume depende do outro, e a leitura segue em ordem.")
+  +row("Coleções","var(--blue)",`${cols.length} coleções`,cols.map(colCard).join(""),"Histórias do mesmo tema, para ler em qualquer ordem.");
+ $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=byId(id);if(!x)return"";const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${A}${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
+ seeds(); arrows();
 }
-function paint(){
- document.querySelectorAll("[data-tag]").forEach(b=>b.setAttribute("aria-pressed",sel.has(b.dataset.tag)));
- const l=T.filter(x=>x.capa&&[...sel].some(n=>has(x,n)));
- const names=[...sel];
- $("#pickedTxt").innerHTML=names.length?`Estante do Bento com <b>${names.join(", ").replace(/, ([^,]*)$/," e $1")}</b>: ${l.length} ${l.length==1?"título":"títulos"}.`:"Marque pelo menos um valor ou caminho para montar a estante.";
- $("#pickedRow").innerHTML=l.map(cover).join("");
+/* plantar: escolha única */
+const SUB={valores:"O que você quer ver crescer dentro dele.",jornadas:"Profissões e mundos que ele pode descobrir lá fora."};
+function seeds(){
+ const list=mode=="valores"?cat.valores:cat.caminhos, kind=mode=="valores"?"valor":"caminho";
+ if(!list.includes(sel)) sel=mode=="valores"?"Coragem":"Empreender";
+ document.querySelectorAll(".mode button").forEach(b=>b.setAttribute("aria-selected",b.dataset.mode==mode));
+ $("#modeSub").textContent=SUB[mode];
+ const el=$("#seeds"); el.className="seeds "+(mode=="valores"?"val":"jor");
+ el.innerHTML=list.map(n=>`<button class="seed" data-tag="${n}" aria-pressed="${n==sel}"><img src="${A}images/cards/${kind}-${slug(n)}.webp" alt=""><span>${n}</span></button>`).join("");
+ picked();
 }
+function picked(){
+ const key=mode=="valores"?"valores":"caminhos";
+ const l=T.filter(x=>x.capa&&x[key].includes(sel));
+ $("#pickedTxt").innerHTML=`Estante do Bento com <b>${sel}</b>: ${l.length} ${l.length==1?"título":"títulos"}.`;
+ $("#pickedRow").innerHTML=l.map(x=>cover(x)).join("");
+ $("#pickedRow").scrollLeft=0;
+ requestAnimationFrame(()=>upd($("#pickedRow").parentElement));
+}
+/* setas dos carrosséis */
+function upd(r){const t=r.querySelector(".track"),p=r.querySelector(".prev"),n=r.querySelector(".next");if(!p)return;p.disabled=t.scrollLeft<4;n.disabled=t.scrollLeft+t.clientWidth>=t.scrollWidth-4}
+function arrows(){document.querySelectorAll("#rows .rail,.picked .rail").forEach(r=>{const t=r.querySelector(".track");t.addEventListener("scroll",()=>upd(r),{passive:true});upd(r)})}
+addEventListener("resize",()=>document.querySelectorAll(".rail").forEach(upd));
+/* modal */
 const M=$("#modal"),S=$("#sheet");let last=null;
 const acts=`<div class="acts"><button class="btn btn-main" data-toast="Disponível para assinantes.">Ler agora</button><button class="btn btn-ghost" data-toast="Salvo em Tenho interesse.">Tenho interesse</button></div>`;
-function open(html,wide){S.className="sheet"+(wide?" wide":"");S.innerHTML=`<button class="x" aria-label="Fechar">×</button>`+html;M.classList.add("on");last=document.activeElement;S.querySelector(".x").focus()}
+function open(html,wide){S.className="sheet"+(wide?" wide":"");S.innerHTML=`<button class="x" aria-label="Fechar">×</button>`+html;M.classList.add("on");last=document.activeElement;S.querySelector(".x").focus();S.scrollTop=0}
 function close(){M.classList.remove("on");last&&last.focus()}
+function openTitle(x){const tags=[...x.valores.map(v=>`<span>${v}</span>`),...x.caminhos.map(c=>`<span>${c}</span>`)].join("");
+ const box=x.box?G.find(g=>g.id==x.box):null;
+ const where=box?`<span class="m-box">${box.titulo} · volume ${box.titulos.indexOf(x.id)+1} de ${box.titulos.length}</span>`:"";
+ open(`<img src="${A}${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>3 a 8 anos</span>${where}${tags}</div><p class="desc">${x.sinopse}</p>${later(x.obra_mae,"later")}${acts}</div>`)}
+function openGroup(g){const vols=g.titulos.map(byId).filter(Boolean);
+ if(g.tipo=="box"){
+  open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-box">Box · ${vols.length} volumes</span><span>Leia em ordem</span></div><p class="desc">${g.descricao}</p><h3>Roteiro de leitura</h3><ol class="route">${vols.map((v,i)=>`<li><span class="n">${i+1}</span><img src="${A}${v.capa}" alt=""><div><b>${v.titulo}</b><small>${v.sinopse}</small>${i==0?'<span class="start">Comece por aqui</span>':""}</div></li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true);
+ }else{
+  open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-col">Coleção · ${vols.length} títulos</span><span>Leia em qualquer ordem</span></div><p class="desc">${g.descricao}</p><div class="setgrid">${vols.map(v=>`<button data-id="${v.id}"><img src="${A}${v.capa}" alt=""><span>${v.titulo}</span></button>`).join("")}</div>${acts}</div>`,true);
+ }}
 document.addEventListener("click",e=>{
- const tg=e.target.closest("[data-tag]");if(tg){const n=tg.dataset.tag;sel.has(n)?sel.delete(n):sel.add(n);paint();return}
- const c=e.target.closest("[data-id]"),b=e.target.closest("[data-box]");
- if(c){const x=T.find(y=>y.id==c.dataset.id);const tags=[...x.valores,...x.caminhos].map(t=>`<span>${t}</span>`).join("");
-  open(`<img src="../${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>3 a 8 anos</span>${tags}</div><p style="color:#e6dccb">${x.sinopse}</p>${later(x.obra_mae,"later")}${acts}</div>`)}
- if(b){const g=G.find(y=>y.id==b.dataset.box);const vols=g.titulos.map(id=>T.find(t=>t.id==id).titulo);
-  open(`<img src="../${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span>${g.tipo=="colecao"?"Coleção":vols.length+" volumes"}</span><span>${g.tipo=="colecao"?"Leia em qualquer ordem":"Leia em ordem"}</span></div><ol class="vols">${vols.map(v=>`<li>${v}</li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true)}
- if(e.target.closest(".x")||e.target===M)close();
+ const md=e.target.closest(".mode button");if(md){mode=md.dataset.mode;sel=mode=="valores"?"Coragem":"Empreender";seeds();return}
+ const sd=e.target.closest(".seed");if(sd){sel=sd.dataset.tag;document.querySelectorAll(".seed").forEach(b=>b.setAttribute("aria-pressed",b===sd));picked();return}
+ const ar=e.target.closest(".arr");if(ar){const t=ar.parentElement.querySelector(".track");t.scrollBy({left:(ar.classList.contains("next")?1:-1)*t.clientWidth*.85});return}
+ const c=e.target.closest("[data-id]");if(c){openTitle(byId(c.dataset.id));return}
+ const g=e.target.closest("[data-grp]");if(g){openGroup(G.find(y=>y.id==g.dataset.grp));return}
+ if(e.target.closest(".x")||e.target===M){close();return}
  const t=e.target.closest("[data-toast]");if(t){const el=$("#toast");el.textContent=t.dataset.toast;el.classList.add("on");clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("on"),2200)}
 });
-document.querySelectorAll("#opts button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#opts button").forEach(x=>x.className="");const ok=b.dataset.ok=="1";b.className=ok?"ok":"no";$("#qfb").textContent=ok?"Isso! A baleia era branca, por isso todo mundo a reconhecia de longe.":"Quase. Lembra do que o marinheiro viu no mar?"}));
-document.querySelectorAll("#rate button").forEach(b=>b.addEventListener("click",()=>document.querySelectorAll("#rate button").forEach(x=>x.setAttribute("aria-pressed",x===b))));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
-fetch("../data/catalogo.json").then(r=>r.json()).then(cat=>{T=cat.titulos;G=cat.grupos;rows(cat)}).catch(()=>{$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>'});
+$("#opts").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("#opts").querySelectorAll("button").forEach(x=>x.className="");const ok=b.dataset.ok=="1";b.className=ok?"ok":"no";$("#qfb").textContent=ok?"Isso! A baleia era branca, por isso todo mundo a reconhecia de longe.":"Quase. Lembra do que o marinheiro viu no mar?"});
+/* tema */
+$("#theme").addEventListener("click",()=>{const r=document.documentElement,n=r.dataset.theme=="light"?"dark":"light";r.dataset.theme=n;try{localStorage.setItem("gbm-tema",n)}catch(e){}});
+fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{cat=c;T=c.titulos;G=c.grupos;rows()}).catch(()=>{$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>'});
 }
 </script>
 </body>

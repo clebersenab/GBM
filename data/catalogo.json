@@ -1677,7 +1677,8 @@
     "a-familia-1-enzo-chega-a-santos",
     "a-familia-2-pietro-e-a-venda",
     "a-familia-3-a-chave-do-vovo-pietro"
-   ]
+   ],
+   "descricao": "Três gerações de uma família de imigrantes italianos em São Paulo: o menino que chegou de navio, o filho que assumiu a venda e o avô que passa a chave adiante."
   },
   {
    "id": "box-a-grande-viagem-de-dante",
@@ -1695,7 +1696,8 @@
     "dante-1-inferno",
     "dante-2-purgatorio",
     "dante-3-paraiso"
-   ]
+   ],
+   "descricao": "Um jovem poeta e seu velho guia atravessam três reinos, do escuro da caverna até o céu cheio de luz."
   },
   {
    "id": "box-jesus",
@@ -1713,7 +1715,8 @@
     "jesus-1-o-nascimento",
     "jesus-2-os-milagres",
     "jesus-3-a-paixao-e-a-ressurreicao"
-   ]
+   ],
+   "descricao": "A vida de Jesus contada para os pequenos, do estábulo em Belém à manhã de domingo."
   },
   {
    "id": "box-william-wallace",
@@ -1730,7 +1733,8 @@
    "titulos": [
     "william-wallace-1",
     "william-wallace-2"
-   ]
+   ],
+   "descricao": "O menino das colinas da Escócia que cresceu para proteger o seu povo."
   },
   {
    "id": "box-herois-de-israel",
@@ -1743,12 +1747,13 @@
     "idade": "livre"
    },
    "arte": "images/boxes/box-herois-de-israel.webp",
-   "vitrine": false,
+   "vitrine": true,
    "titulos": [
     "sansao",
     "davi-e-o-gigante",
     "salomao"
-   ]
+   ],
+   "descricao": "Três heróis do Antigo Testamento, em ordem: a força de Sansão, a coragem de Davi e a sabedoria de Salomão."
   },
   {
    "id": "box-os-tres-amigos",
@@ -1761,12 +1766,13 @@
     "idade": "12+"
    },
    "arte": "images/boxes/box-os-tres-amigos.webp",
-   "vitrine": false,
+   "vitrine": true,
    "titulos": [
     "os-tres-amigos-1",
     "os-tres-amigos-2",
     "os-tres-amigos-3"
-   ]
+   ],
+   "descricao": "Três amigos, uma bússola dourada que facilita tudo e uma amizade posta à prova do vale até o alto da montanha."
   },
   {
    "id": "colecao-machado-de-assis",
@@ -1783,7 +1789,8 @@
    "titulos": [
     "bentinho-e-capitu",
     "memorias-de-bras-cubas"
-   ]
+   ],
+   "descricao": "Dois clássicos de Machado de Assis para o primeiro encontro com o maior escritor brasileiro."
   },
   {
    "id": "colecao-jose-de-alencar",
@@ -1800,7 +1807,8 @@
    "titulos": [
     "cinco-minutos",
     "iracema"
-   ]
+   ],
+   "descricao": "As paisagens e os personagens de José de Alencar, da lagoa de Iracema ao Rio antigo."
   },
   {
    "id": "colecao-santos-da-igreja",
@@ -1821,7 +1829,8 @@
     "padre-pio",
     "irma-dulce",
     "paulo-e-o-naufragio"
-   ]
+   ],
+   "descricao": "Vidas de santos contadas a partir da infância: o que eles faziam quando eram crianças como a sua."
   },
   {
    "id": "colecao-herois-de-farda",
@@ -1838,7 +1847,8 @@
    "titulos": [
     "o-bombeiro",
     "o-policial"
-   ]
+   ],
+   "descricao": "O bombeiro e o policial: quem protege a cidade, e o que é preciso para fazer o certo."
   },
   {
    "id": "colecao-ritmo",
@@ -1851,11 +1861,12 @@
     "idade": "16+"
    },
    "arte": "images/boxes/colecao-ritmo.webp",
-   "vitrine": false,
+   "vitrine": true,
    "titulos": [
     "a-banda-da-garagem",
     "as-baquetas-de-teo"
-   ]
+   ],
+   "descricao": "Duas histórias sobre música: a banda de amigos que vai parar no rádio e o menino que treina até o braço cansar."
   },
   {
    "id": "colecao-justica",
@@ -1868,12 +1879,13 @@
     "idade": "14+"
    },
    "arte": "images/boxes/colecao-justica.webp",
-   "vitrine": false,
+   "vitrine": true,
    "titulos": [
     "lia-e-o-julgamento",
     "a-causa-de-caio",
     "rui-barbosa"
-   ]
+   ],
+   "descricao": "Histórias sobre fazer o que é justo, de uma briga no recreio a um advogado que defendeu o Brasil diante do mundo."
   },
   {
    "id": "colecao-fabulas",
@@ -1889,7 +1901,8 @@
    "vitrine": false,
    "titulos": [
     "a-cigarra-e-a-formiga"
-   ]
+   ],
+   "descricao": "Fábulas de La Fontaine, curtas e cheias de bichos, cada uma com uma lição para conversar depois."
   },
   {
    "id": "colecao-shakespeare",
@@ -1907,7 +1920,8 @@
     "julio-cesar",
     "hamlet",
     "rei-lear"
-   ]
+   ],
+   "descricao": "Três peças de Shakespeare para os pequenos: um general romano, um príncipe em dúvida e um rei com três filhas."
   },
   {
    "id": "colecao-historias-biblicas",
@@ -1930,7 +1944,8 @@
     "jesus-3-a-paixao-e-a-ressurreicao",
     "as-parabolas-de-jesus",
     "paulo-e-o-naufragio"
-   ]
+   ],
+   "descricao": "Do Antigo ao Novo Testamento: Sansão, Davi, Salomão, Jesus, as parábolas e o naufrágio de Paulo."
   }
  ],
  "lancamentos_ordem": [
