@@ -171,25 +171,47 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .pair .later{border-top:1px dashed var(--line);padding-top:12px;margin-top:4px;font-size:15px;color:var(--mute)}
 .pair .later strong{color:var(--orange);display:block;font-family:Poppins,sans-serif;font-size:16px}
 /* como funciona */
-.feats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:30px}
-.feat{background:var(--card);border-radius:16px;padding:24px;display:grid;gap:12px;align-content:start;box-shadow:var(--shadow)}
-.feat p{color:var(--mute)}
-.feat.wide{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;padding:0;overflow:hidden}
-.feat.wide img{height:100%;object-fit:cover}
-.feat.wide>div{padding:24px;display:grid;gap:12px}
-.feat.quiz{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
-.feat.quiz>div:first-child{display:grid;gap:12px}
-.qbox{background:var(--bg);border-radius:14px;padding:18px;display:grid;gap:10px}
+.qbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px}
 .qbox small{color:var(--mute);font-size:13px}
 .qbox b{font-family:Poppins,sans-serif;font-size:20px}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
 .opts button{min-height:44px;padding:0 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
 .opts button.ok{background:var(--blue);border-color:var(--blue);color:#06202a}
 .opts button.no{border-color:var(--purple);color:var(--purple)}
-.peek{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
-.peek figure{margin:0;display:grid;gap:8px}
-.peek img{border-radius:12px;aspect-ratio:16/10;width:100%;object-fit:cover;box-shadow:0 0 0 1px var(--line),var(--shadow)}
-.peek figcaption{color:var(--mute);font-size:14px;text-align:center}
+/* produto */
+.prod-head{display:grid;gap:14px;max-width:720px;margin-bottom:40px}
+.eyebrow{font:700 13px Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:12px;margin:0}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--orange);border-radius:2px}
+.prod-head h2 span{color:var(--orange)}
+.tour{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(24px,4vw,56px);align-items:center}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.tstep{position:relative;overflow:hidden;width:100%;display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:start;text-align:left;padding:18px 20px;border-radius:16px;border:1px solid transparent;background:transparent;color:var(--ink);cursor:pointer;transition:background .3s,border-color .3s}
+.tstep i{font-style:normal;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:800 16px Poppins,sans-serif;background:var(--card);color:var(--mute);border:1px solid var(--line);transition:background .3s,color .3s}
+.tstep span{display:grid;gap:8px}
+.tstep b{font:700 19px/1.25 Poppins,sans-serif;color:var(--mute);transition:color .3s}
+.tstep small{font-size:15.5px;line-height:1.55;color:var(--mute);opacity:0;transition:opacity .4s}
+.tstep:hover b{color:var(--ink)}
+.tstep.on{background:var(--card);border-color:var(--line);box-shadow:var(--shadow)}
+.tstep.on i{background:var(--orange);color:var(--on-orange);border-color:var(--orange)}
+.tstep.on b{color:var(--ink)}
+.tstep.on small{opacity:1}
+.tstep:not(.on) small{display:none}
+.tstep .bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--orange)}
+.tour.play .tstep.on .bar{animation:fill var(--dur,7s) linear forwards}
+@keyframes fill{to{width:100%}}
+.steps .qbox{display:none;margin:10px 0 4px 56px}
+.steps li.q-on .qbox{display:grid;animation:rise .4s both}
+.mshot{display:none}
+.stage{position:relative}
+.stage::before{content:"";position:absolute;inset:8% 6%;background:radial-gradient(closest-side,color-mix(in srgb,var(--orange) 28%,transparent),transparent);filter:blur(40px);z-index:0}
+.device{position:relative;z-index:1;border-radius:18px;padding:30px 10px 10px;background:linear-gradient(180deg,#22264a,#14172b);box-shadow:0 0 0 1px var(--line),0 40px 80px -30px rgba(0,0,0,.9);transform:perspective(1600px) rotateY(-6deg) rotateX(2deg);transition:transform .6s}
+.device:hover{transform:perspective(1600px) rotateY(0) rotateX(0)}
+.dots{position:absolute;top:11px;left:16px;display:flex;gap:6px}
+.dots i{width:9px;height:9px;border-radius:50%;background:#3a3f6b}
+.dots i:first-child{background:var(--purple)}.dots i:nth-child(2){background:var(--blue)}.dots i:nth-child(3){background:var(--orange)}
+.screens{position:relative;aspect-ratio:16/10;border-radius:10px;overflow:hidden;background:var(--bg)}
+.screens img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity .6s,transform 1.2s}
+.screens img.on{opacity:1;transform:none}
 /* curadoria */
 .cur .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(24px,4vw,56px);align-items:center}
 .cur img{border-radius:16px;box-shadow:var(--shadow)}
@@ -294,9 +316,21 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .pair{grid-template-columns:minmax(0,160px) minmax(0,1fr);grid-template-rows:auto}
  .pair img{aspect-ratio:auto;height:100%}
  .cur .wrap,.origin .wrap{grid-template-columns:1fr}
+ .tour{grid-template-columns:1fr}
+ .stage{display:none}
+ .tstep small{display:grid!important;opacity:1}
+ .tstep{background:var(--card);border-color:var(--line);cursor:default}
+ .tstep i{background:var(--orange);color:var(--on-orange);border-color:var(--orange)}
+ .tstep b{color:var(--ink)}
+ .tstep .bar{display:none}
+ .steps{gap:22px}
+ .steps .qbox{display:grid;margin:12px 0 0}
+ .steps li:nth-child(2) .mshot{display:none!important}
+ .tstep{grid-template-columns:32px minmax(0,1fr);gap:12px;padding:16px}
+ .tstep i{width:32px;height:32px;font-size:14px}
+ .tstep b{font-size:18px}
+ .mshot{display:block;margin-top:12px;border-radius:12px;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;box-shadow:0 0 0 1px var(--line),var(--shadow)}
  .cur img{max-height:360px;width:100%;object-fit:cover}
- .feat.wide,.feat.quiz{grid-template-columns:1fr}
- .feat.wide img{max-height:320px;width:100%}
 }
 @media(max-width:760px){
  body{font-size:16px}
@@ -311,8 +345,6 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .hero .sub{font-size:15px;margin-bottom:28px}
  .hero .ctas .btn{flex:1 1 auto}
  .price .wrap,.cur .cols{grid-template-columns:1fr}
- .peek{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
- .peek figure{flex:0 0 84%;scroll-snap-align:start}
  .seed{flex:0 0 112px}
  .seed span{font-size:13px}
  .choose{grid-template-columns:1fr;gap:12px}
@@ -362,9 +394,9 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
 .grp.box .art::before,.grp.box .art::after{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
 .grp.box:hover .art::before{transform:translate(22px,-18px) rotate(2deg)}
 .grp.box:hover .art::after{transform:translate(11px,-9px) rotate(1deg)}
-.pair img,.feat.wide img,.cur img,.origin img{transition:transform .8s}
-.pair:hover img,.feat.wide:hover img{transform:scale(1.04)}
-.pair,.feat,.plan{transition:transform .3s}
+.pair img,.cur img,.origin img{transition:transform .8s}
+.pair:hover img{transform:scale(1.04)}
+.pair,.plan{transition:transform .3s}
 .pair:hover,.plan:hover{transform:translateY(-4px)}
 .modal.on{animation:fadein .25s both}
 .modal.on .frame{animation:sheetin .35s cubic-bezier(.2,.7,.2,1) both}
@@ -462,34 +494,46 @@ details[open] summary::after{transform:rotate(180deg)}
   </div>
 </section>
 
-<section class="band" id="como">
+<section class="band prod" id="como">
   <div class="wrap">
-    <h2>Feito para ler junto</h2>
-    <div class="feats st">
-      <div class="feat wide">
-        <img src="../images/secoes/elo-avo.webp" alt="Avô contando uma história para dois netos sentados no tapete">
-        <div>
-          <h3>Um ou dois parágrafos por página, e uma ilustração que prende</h3>
-          <p>O texto é curto para caber na atenção da criança e bom o bastante para o adulto querer ler em voz alta, seja pai, mãe, avó ou babá.</p>
-        </div>
-      </div>
-      <div class="feat quiz">
-        <div>
-          <h3>Um quiz no fim de cada história</h3>
-          <p>De 5 a 10 perguntas para ver se a criança entendeu o que leu. Com os menores, o adulto lê a pergunta e a criança responde apontando. A última pergunta não tem resposta certa: é ela que puxa a conversa.</p>
-        </div>
-        <div class="qbox">
-          <small>Moby Dick · pergunta 3 de 6</small>
-          <b>De que cor era a baleia?</b>
-          <div class="opts" id="opts"><button data-ok="0">Azul</button><button data-ok="1">Branca</button><button data-ok="0">Cinza</button></div>
-          <small id="qfb">Toque numa resposta.</small>
-        </div>
-      </div>
+    <div class="prod-head rv">
+      <p class="eyebrow">Por dentro do GBM</p>
+      <h2>Como é um livro <span>GBM</span></h2>
+      <p class="lead">Do primeiro parágrafo ao quiz do fim, cada parte foi pensada para o adulto e a criança lerem juntos.</p>
     </div>
-    <div class="peek st">
-      <figure><img loading="lazy" src="../images/plataforma/estante.webp" alt="Tela da estante da Giovana com as fileiras Continue lendo e Indicados"><figcaption>A estante de cada filho</figcaption></figure>
-      <figure><img loading="lazy" src="../images/plataforma/leitor.webp" alt="Tela do leitor com a ilustração de Moby Dick ao lado do texto"><figcaption>O livro aberto na tela</figcaption></figure>
-      <figure><img loading="lazy" src="../images/plataforma/fim.webp" alt="Tela do fim do livro com o quiz e a indicação do clássico"><figcaption>No fim, o quiz e o clássico para quando crescer</figcaption></figure>
+    <div class="tour rv" id="tour">
+      <ol class="steps" role="tablist" aria-label="Partes do produto">
+        <li><button class="tstep on" role="tab" aria-selected="true" data-i="0">
+          <i>1</i><span><b>Página curta, ilustração grande</b>
+          <small>Um ou dois parágrafos por página, numa história que prende a criança e interessa a quem lê em voz alta. E cada livro é sempre a semente de um clássico da literatura ou do cinema.</small></span>
+          <em class="bar"></em></button>
+          <img class="mshot" loading="lazy" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos"></li>
+        <li><button class="tstep" role="tab" aria-selected="false" data-i="1">
+          <i>2</i><span><b>Um quiz no fim de cada história</b>
+          <small>De 5 a 10 perguntas para ver se a criança entendeu. Os menores respondem apontando, e a última pergunta não tem resposta certa: é ela que puxa a conversa.</small></span>
+          <em class="bar"></em></button>
+          <div class="qbox" id="qbox">
+            <small>Experimente · Moby Dick, pergunta 3 de 6</small>
+            <b>De que cor era a baleia?</b>
+            <div class="opts" id="opts"><button data-ok="0">Azul</button><button data-ok="1">Branca</button><button data-ok="0">Cinza</button></div>
+            <small id="qfb">Toque numa resposta.</small>
+          </div>
+          <img class="mshot" loading="lazy" src="../images/plataforma/fim.webp" alt="Tela do fim do livro com o quiz, a avaliação e a indicação do clássico"></li>
+        <li><button class="tstep" role="tab" aria-selected="false" data-i="2">
+          <i>3</i><span><b>Uma estante para cada filho</b>
+          <small>Cada filho tem o seu perfil, continua de onde parou e recebe indicações a partir do que gostou e do que você escolheu cultivar.</small></span>
+          <em class="bar"></em></button>
+          <img class="mshot" loading="lazy" src="../images/plataforma/estante.webp" alt="Tela da estante da Giovana com Continue lendo e Indicados para a Giovana"></li>
+      </ol>
+      <div class="stage" aria-hidden="true">
+        <div class="device"><span class="dots"><i></i><i></i><i></i></span>
+          <div class="screens">
+            <img class="on" src="../images/plataforma/leitor.webp" alt="">
+            <img loading="lazy" src="../images/plataforma/fim.webp" alt="">
+            <img loading="lazy" src="../images/plataforma/estante.webp" alt="">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -665,6 +709,13 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
 $("#opts").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("#opts").querySelectorAll("button").forEach(x=>x.className="");const ok=b.dataset.ok=="1";b.className=ok?"ok":"no";$("#qfb").textContent=ok?"Isso! A baleia era branca, por isso todo mundo a reconhecia de longe.":"Quase. Lembra do que o marinheiro viu no mar?"});
+/* tour do produto */
+{const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],ims=[...tour.querySelectorAll(".screens img")],lis=[...tour.querySelectorAll(".steps li")];let cur=0,tm=null,paused=false;const DUR=7000;
+ function go(i,user){cur=i;bs.forEach((b,k)=>{b.classList.toggle("on",k==i);b.setAttribute("aria-selected",k==i)});ims.forEach((m,k)=>m.classList.toggle("on",k==i));lis.forEach((l,k)=>l.classList.toggle("q-on",k==i&&k==1));
+  tour.classList.remove("play");void tour.offsetWidth;clearTimeout(tm);if(user)paused=true;if(!paused&&!RM&&matchMedia("(min-width:1001px)").matches){tour.classList.add("play");tm=setTimeout(()=>go((cur+1)%bs.length),DUR)}}
+ bs.forEach((b,k)=>b.addEventListener("click",()=>go(k,true)));
+ tour.style.setProperty("--dur",DUR+"ms");
+ if(IO){const o=new IntersectionObserver(es=>{if(es[0].isIntersecting){go(cur);o.disconnect()}},{threshold:.35});o.observe(tour)}else go(0);}
 fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{cat=c;T=c.titulos;G=c.grupos;rows()}).catch(()=>{$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>'});
 }
 </script>
