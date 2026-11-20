@@ -752,7 +752,7 @@ function rows(){
 /* plantar: escolha única */
 const SUB={valores:"Agora, toque no valor que você quer ver crescer nele",jornadas:"Agora, toque na jornada que ele vai descobrir"};
 const GHOST_V=["Coragem","Fé","Amizade","Família"],GHOST_J=["Medicina","Empreender","Música"];
-function fog(z,on){const el=$(z),was=el.classList.contains("fog");el.classList.toggle("fog",on);if(was&&!on&&!RM){el.classList.remove("reveal");void el.offsetWidth;el.classList.add("reveal")}}
+function fog(z,on){const el=$(z),was=el.classList.contains("fog");el.classList.toggle("fog",on);if(on){el.classList.remove("reveal");return}if(was&&!RM){el.classList.remove("reveal");void el.offsetWidth;el.classList.add("reveal")}}
 function seeds(){
  document.querySelectorAll(".pick").forEach(b=>b.setAttribute("aria-selected",b.dataset.mode==mode));
  $(".choose").classList.toggle("done",!!mode);
@@ -773,7 +773,7 @@ function seeds(){
 function picked(){
  if(!sel){
   $("#step3t").textContent="A estante dele aparece aqui";
-  $("#hint3").textContent=mode?"Toque num item do passo 2":"Escolha acima para revelar";
+  $("#hint3").textContent=mode?"Toque em um item do passo 2":"Escolha acima para revelar";
   $("#pickedTxt").innerHTML="Estante do Bento: ? títulos.";
   $("#pickedRow").innerHTML=T.filter(x=>x.vitrine&&x.capa).slice(0,9).map(x=>`<div class="cover" aria-hidden="true"><img src="${A}${x.capa}" alt=""></div>`).join("");
   fog("#zone3",true);return}
