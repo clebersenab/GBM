@@ -77,11 +77,15 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .rail{position:relative}
 .track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px;scrollbar-width:none}
 .track::-webkit-scrollbar{display:none}
-.arr{position:absolute;top:4px;height:calc(100% - 18px);width:40px;border-radius:10px;border:0;background:color-mix(in srgb,var(--card) 72%,transparent);backdrop-filter:blur(6px);color:var(--ink);display:grid;place-items:center;cursor:pointer;z-index:3;transition:opacity .2s,background .2s}
-.arr:hover{background:color-mix(in srgb,var(--card) 92%,transparent)}
+@property --fl{syntax:"<length>";inherits:false;initial-value:0px}
+@property --fr{syntax:"<length>";inherits:false;initial-value:0px}
+.rail .track{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%);transition:--fl .35s,--fr .35s}
+.rail.more-r .track{--fr:110px}.rail.more-l .track{--fl:110px}
+.arr{position:absolute;top:4px;height:calc(100% - 18px);width:44px;border-radius:12px;border:1px solid color-mix(in srgb,var(--ink) 10%,transparent);background:color-mix(in srgb,var(--bg) 35%,transparent);backdrop-filter:blur(3px);color:var(--ink);display:grid;place-items:center;cursor:pointer;z-index:3;transition:opacity .2s,background .2s}
+.arr:hover{background:color-mix(in srgb,var(--bg) 65%,transparent);border-color:color-mix(in srgb,var(--ink) 25%,transparent)}
 .rail.grps .arr{top:12px;height:calc(clamp(270px,30vw,380px) * 9 / 16)}
 .arr svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;stroke-linecap:round;stroke-linejoin:round}
-.arr.prev{left:-50px}.arr.next{right:-50px}
+.arr.prev{left:-30px}.arr.next{right:-30px}
 .arr.prev:hover svg{transform:translateX(-2px) scale(1.15)}.arr.next:hover svg{transform:translateX(2px) scale(1.15)}
 @media(max-width:1060px){.arr.prev{left:0}.arr.next{right:0}}
 .picked .arr.prev,#seedRail .arr.prev{left:0}.picked .arr.next,#seedRail .arr.next{right:0}
@@ -628,7 +632,7 @@ function stag(el){[...el.children].forEach((c,i)=>c.style.setProperty("--i",i));
 const IO="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");IO.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.08}):null;
 function watch(root=document){root.querySelectorAll(".rv,.st").forEach(el=>{if(el.classList.contains("st"))[...el.children].forEach((c,i)=>c.style.setProperty("--i",i));if(IO&&!RM)IO.observe(el);else el.classList.add("in")})}
 /* setas dos carrosséis */
-function upd(r){const t=r.querySelector(".track"),p=r.querySelector(".prev"),n=r.querySelector(".next");if(!p)return;p.disabled=t.scrollLeft<4;n.disabled=t.scrollLeft+t.clientWidth>=t.scrollWidth-4}
+function upd(r){const t=r.querySelector(".track"),p=r.querySelector(".prev"),n=r.querySelector(".next");if(!p)return;const L=t.scrollLeft>4,R=t.scrollLeft+t.clientWidth<t.scrollWidth-4;p.disabled=!L;n.disabled=!R;r.classList.toggle("more-l",L);r.classList.toggle("more-r",R)}
 function arrows(){document.querySelectorAll("#rows .rail,.picked .rail,#seedRail").forEach(r=>{const t=r.querySelector(".track");t.addEventListener("scroll",()=>upd(r),{passive:true});upd(r)})}
 addEventListener("resize",()=>document.querySelectorAll(".rail").forEach(upd));
 /* modal */
