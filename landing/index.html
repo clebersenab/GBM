@@ -236,6 +236,12 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .qa-rate button.on[data-r="0"]{background:var(--purple);border-color:var(--purple);color:#fff}
 .qa-later{background:var(--bg);border-left:calc(.4*var(--u)) solid var(--orange);border-radius:calc(1*var(--u));padding:calc(1.4*var(--u)) calc(1.8*var(--u));display:grid;gap:calc(.3*var(--u))}
 .qa-later small{color:var(--mute);font-size:calc(1.2*var(--u))}.qa-later b{font:700 calc(1.9*var(--u)) Poppins,sans-serif}
+.qa-vals{display:grid;gap:calc(.8*var(--u))}
+.qa-vals small{color:var(--mute);font-size:calc(1.2*var(--u))}
+#qaVals{display:flex;flex-wrap:wrap;gap:calc(.6*var(--u))}
+.qa-val{display:inline-flex;align-items:center;gap:calc(.5*var(--u));padding:calc(.3*var(--u)) calc(1.1*var(--u)) calc(.3*var(--u)) calc(.3*var(--u));border-radius:99px;font:700 calc(1.15*var(--u)) Poppins,sans-serif;color:#ffc58a;box-shadow:inset 0 0 0 2px var(--orange)}
+.qa-val img{width:calc(2.2*var(--u));height:calc(2.2*var(--u));border-radius:50%;object-fit:cover}
+.qa-val.j{color:#a9e3f7;box-shadow:inset 0 0 0 2px var(--blue)}
 .mquiz{display:none}
 /* curadoria */
 .cur-head{display:grid;gap:14px;margin-bottom:44px}
@@ -593,6 +599,7 @@ details[open] summary::after{transform:rotate(180deg)}
                   <b class="qa-h">O que vocês acharam?</b>
                   <div class="qa-rate"><button data-r="1">👍 Gostei</button><button data-r="0">👎 Não gostei</button></div>
                   <div class="qa-later"><small>Quando crescer, leia</small><b>Moby Dick</b><small>Herman Melville · idade sugerida: 14+</small></div>
+                  <div class="qa-vals"><small>Esta história plantou</small><div id="qaVals"></div></div>
                 </div>
               </div>
             </div>
@@ -716,6 +723,7 @@ function rows(){
   +row("Coleções","var(--blue)",`${cols.length} coleções`,cols.map(colCard).join(""),"Histórias do mesmo tema, para ler em qualquer ordem.");
  $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=byId(id);if(!x)return"";const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${A}${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
  seeds(); arrows(); watch();
+ {const m=byId("moby-dick");if(m)$("#qaVals").innerHTML=[...m.valores.map(v=>`<span class="qa-val"><img src="${A}images/cards/valor-${slug(v)}.webp" alt="">${v}</span>`),...m.caminhos.map(c=>`<span class="qa-val j"><img src="${A}images/cards/caminho-${slug(c)}.webp" alt="">${c}</span>`)].join("")}
 }
 /* plantar: escolha única */
 const SUB={valores:"Agora, toque no valor que você quer ver crescer nele",jornadas:"Agora, toque na jornada que ele vai descobrir"};
