@@ -172,6 +172,24 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .pair .later strong{color:var(--orange);display:block;font-family:Poppins,sans-serif;font-size:16px}
 /* como funciona */
 .plant .head .lead,.classic .lead,.prod-head .lead{max-width:none}
+/* névoa: passos que dependem de uma escolha ainda não feita */
+.zone{position:relative;margin-top:6px}
+.zone+.zone{margin-top:22px}
+.zone .zc{transition:filter 1.1s ease,opacity 1.1s ease}
+.zone .step{transition:opacity .8s,filter .8s}
+.zone.fog .zc{filter:blur(7px) grayscale(1) brightness(.75);opacity:.55;pointer-events:none;user-select:none;-webkit-mask-image:radial-gradient(ellipse 70% 75% at 50% 50%,#000 45%,transparent 100%);mask-image:radial-gradient(ellipse 70% 75% at 50% 50%,#000 45%,transparent 100%)}
+.zone.fog .step{opacity:.4;filter:grayscale(1)}
+.zone::after{content:"";position:absolute;inset:-20px -2% -10px;pointer-events:none;border-radius:40px;opacity:0;transition:opacity 1.2s ease;
+ background:radial-gradient(40% 60% at 20% 55%,rgba(200,205,230,.16),transparent 70%),radial-gradient(35% 55% at 55% 45%,rgba(200,205,230,.13),transparent 70%),radial-gradient(45% 65% at 85% 60%,rgba(200,205,230,.15),transparent 70%);
+ background-size:200% 100%;animation:mist 14s ease-in-out infinite alternate}
+.zone.fog::after{opacity:1}
+@keyframes mist{from{background-position:0% 0,30% 0,60% 0}to{background-position:100% 0,0% 0,20% 0}}
+.fog-hint{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%) scale(.96);z-index:2;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:99px;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(6px);border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);font:700 14px Poppins,sans-serif;color:var(--ink2);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .6s,transform .6s}
+.fog-hint::before{content:"↑";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--orange);color:var(--on-orange);font-size:13px;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.zone.fog .fog-hint{opacity:1;transform:translate(-50%,-50%)}
+.zone.reveal .zc{animation:clear 1.1s ease both}
+@keyframes clear{from{filter:blur(7px) grayscale(1);opacity:.55}to{filter:none;opacity:1}}
 /* produto */
 .prod-head{display:grid;gap:14px;margin-bottom:40px}
 .eyebrow{font:700 13px Poppins,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:12px;margin:0}
@@ -549,10 +567,16 @@ details[open] summary::after{transform:rotate(180deg)}
         <span><b>Descobrir uma jornada</b><small>Empreender, medicina, direito, música e outras</small><em>Ver as jornadas</em></span>
       </button>
     </div>
-    <p class="step" id="step2" hidden><i>2</i><span id="modeSub"></span></p>
-    <div class="rail" id="seedRail" hidden><button class="arr prev" aria-label="Anteriores" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="track seeds" id="seeds"></div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span></button></div>
-    <p class="step" id="step3" hidden><i>3</i>A estante dele fica assim</p>
-    <div class="picked" id="picked" hidden><p id="pickedTxt"></p><div class="rail"><button class="arr prev" aria-label="Anteriores" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="track" id="pickedRow"></div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span></button></div></div>
+    <div class="zone fog" id="zone2">
+    <p class="step" id="step2"><i>2</i><span id="modeSub"></span></p>
+    <div class="zc"><div class="rail" id="seedRail"><button class="arr prev" aria-label="Anteriores" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="track seeds" id="seeds"></div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span></button></div></div>
+    <span class="fog-hint" id="hint2">Escolha acima para revelar</span>
+    </div>
+    <div class="zone fog" id="zone3">
+    <p class="step" id="step3"><i>3</i><span id="step3t">A estante dele aparece aqui</span></p>
+    <div class="zc"><div class="picked" id="picked"><p id="pickedTxt"></p><div class="rail"><button class="arr prev" aria-label="Anteriores" disabled><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="track" id="pickedRow"></div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span></button></div></div></div>
+    <span class="fog-hint" id="hint3">Escolha acima para revelar</span>
+    </div>
   </div>
 </section>
 
@@ -727,26 +751,38 @@ function rows(){
 }
 /* plantar: escolha única */
 const SUB={valores:"Agora, toque no valor que você quer ver crescer nele",jornadas:"Agora, toque na jornada que ele vai descobrir"};
+const GHOST_V=["Coragem","Fé","Amizade","Família"],GHOST_J=["Medicina","Empreender","Música"];
+function fog(z,on){const el=$(z),was=el.classList.contains("fog");el.classList.toggle("fog",on);if(was&&!on&&!RM){el.classList.remove("reveal");void el.offsetWidth;el.classList.add("reveal")}}
 function seeds(){
  document.querySelectorAll(".pick").forEach(b=>b.setAttribute("aria-selected",b.dataset.mode==mode));
  $(".choose").classList.toggle("done",!!mode);
- $("#step2").hidden=!mode; if(mode) $("#modeSub").textContent=SUB[mode];
- $("#seedRail").hidden=!mode;
- if(!mode){$("#picked").hidden=true;return}
+ const el=$("#seeds");
+ if(!mode){
+  $("#modeSub").textContent="Depois, escolha um valor ou uma jornada";
+  el.className="track seeds val";
+  el.innerHTML=GHOST_V.map((n,i)=>[`<button class="seed" tabindex="-1" aria-hidden="true"><img src="${A}images/cards/valor-${slug(n)}.webp" alt=""><span>${n}</span></button>`,GHOST_J[i]?`<button class="seed" tabindex="-1" aria-hidden="true"><img style="border-radius:999px 999px 14px 14px" src="${A}images/cards/caminho-${slug(GHOST_J[i])}.webp" alt=""><span>${GHOST_J[i]}</span></button>`:""].join("")).join("");
+  fog("#zone2",true);sel=null;picked();return}
  const list=mode=="valores"?cat.valores:cat.caminhos, kind=mode=="valores"?"valor":"caminho";
  if(!list.includes(sel)) sel=null;
- const el=$("#seeds"); el.className="track seeds "+(mode=="valores"?"val":"jor");
+ $("#modeSub").textContent=SUB[mode];
+ el.className="track seeds "+(mode=="valores"?"val":"jor");
  el.innerHTML=list.map(n=>`<button class="seed" data-tag="${n}" aria-pressed="${n==sel}"><img src="${A}images/cards/${kind}-${slug(n)}.webp" alt=""><span>${n}</span></button>`).join("");
- el.scrollLeft=0; stag(el); requestAnimationFrame(()=>upd($("#seedRail")));
+ el.scrollLeft=0; fog("#zone2",false); stag(el); requestAnimationFrame(()=>upd($("#seedRail")));
  picked();
 }
 function picked(){
- $("#picked").hidden=!sel; $("#step3").hidden=!sel; if(!sel) return;
+ if(!sel){
+  $("#step3t").textContent="A estante dele aparece aqui";
+  $("#hint3").textContent=mode?"Toque num item do passo 2":"Escolha acima para revelar";
+  $("#pickedTxt").innerHTML="Estante do Bento: ? títulos.";
+  $("#pickedRow").innerHTML=T.filter(x=>x.vitrine&&x.capa).slice(0,9).map(x=>`<div class="cover" aria-hidden="true"><img src="${A}${x.capa}" alt=""></div>`).join("");
+  fog("#zone3",true);return}
  const key=mode=="valores"?"valores":"caminhos";
  const l=T.filter(x=>x.capa&&x[key].includes(sel));
+ $("#step3t").textContent="A estante dele fica assim";
  $("#pickedTxt").innerHTML=`Estante do Bento com <b>${sel}</b>: ${l.length} ${l.length==1?"título":"títulos"}.`;
  $("#pickedRow").innerHTML=l.map(x=>cover(x)).join("");
- $("#pickedRow").scrollLeft=0; stag($("#pickedRow"));
+ $("#pickedRow").scrollLeft=0; fog("#zone3",false); stag($("#pickedRow"));
  requestAnimationFrame(()=>upd($("#pickedRow").parentElement));
 }
 /* movimento */
@@ -778,8 +814,8 @@ function openGroup(g){const vols=g.titulos.map(byId).filter(Boolean);
   open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-col">Coleção · ${vols.length} títulos</span><span>Leia em qualquer ordem</span></div><p class="desc">${g.descricao}</p><div class="setgrid">${vols.map(v=>`<button data-id="${v.id}"><img src="${A}${v.capa}" alt=""><span>${v.titulo}</span></button>`).join("")}</div>${acts}</div>`,true);
  }}
 document.addEventListener("click",e=>{
- const md=e.target.closest(".pick");if(md){if(mode!=md.dataset.mode){mode=md.dataset.mode;sel=null;seeds();setTimeout(()=>$("#step2").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"}),50)}return}
- const sd=e.target.closest(".seed");if(sd){sel=sd.dataset.tag;document.querySelectorAll(".seed").forEach(b=>b.setAttribute("aria-pressed",b===sd));picked();return}
+ const md=e.target.closest(".pick");if(md){if(mode!=md.dataset.mode){mode=md.dataset.mode;sel=null;seeds();setTimeout(()=>$("#zone2").scrollIntoView({behavior:RM?"auto":"smooth",block:"nearest"}),80)}return}
+ const sd=e.target.closest(".seed[data-tag]");if(sd){sel=sd.dataset.tag;document.querySelectorAll(".seed").forEach(b=>b.setAttribute("aria-pressed",b===sd));picked();return}
  const ar=e.target.closest(".arr");if(ar){const t=ar.parentElement.querySelector(".track");t.scrollBy({left:(ar.classList.contains("next")?1:-1)*t.clientWidth*.85});return}
  const c=e.target.closest("[data-id]");if(c){openTitle(byId(c.dataset.id));return}
  const g=e.target.closest("[data-grp]");if(g){openGroup(G.find(y=>y.id==g.dataset.grp));return}
