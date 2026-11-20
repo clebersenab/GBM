@@ -77,16 +77,16 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .rail{position:relative}
 .track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px;scrollbar-width:none}
 .track::-webkit-scrollbar{display:none}
-.arr{position:absolute;top:calc(50% - 30px);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--ink);display:grid;place-items:center;cursor:pointer;z-index:3;box-shadow:var(--shadow);transition:opacity .2s}
-.arr svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.arr.prev{left:-14px}.arr.next{right:-14px}
+.arr{position:absolute;top:4px;height:calc(100% - 18px);width:40px;border-radius:10px;border:0;background:color-mix(in srgb,var(--card) 72%,transparent);backdrop-filter:blur(6px);color:var(--ink);display:grid;place-items:center;cursor:pointer;z-index:3;transition:opacity .2s,background .2s}
+.arr:hover{background:color-mix(in srgb,var(--card) 92%,transparent)}
+.rail.grps .arr{top:12px;height:calc(clamp(270px,30vw,380px) * 9 / 16)}
+.arr svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .2s;stroke-linecap:round;stroke-linejoin:round}
+.arr.prev{left:-50px}.arr.next{right:-50px}
+.arr.prev:hover svg{transform:translateX(-2px) scale(1.15)}.arr.next:hover svg{transform:translateX(2px) scale(1.15)}
+@media(max-width:1060px){.arr.prev{left:0}.arr.next{right:0}}
+.picked .arr.prev,#seedRail .arr.prev{left:0}.picked .arr.next,#seedRail .arr.next{right:0}
 .arr[disabled]{opacity:0;pointer-events:none}
 @media(hover:none){.arr{display:none}}
-/* carrosséis de ponta a ponta: começam alinhados ao conteúdo e vão até a borda da tela */
-:root{--g:calc(max(5vw,16px) + max(0px,(100vw - 2 * max(5vw,16px) - 1240px) / 2))}
-#rows .track,#seeds{margin-inline:calc(-1 * var(--g));padding-inline:var(--g);scroll-padding-inline:var(--g)}
-#rows .arr.prev,#seedRail .arr.prev{left:calc(14px - var(--g))}
-#rows .arr.next,#seedRail .arr.next{right:calc(14px - var(--g))}
 .cover{flex:0 0 clamp(132px,14.5vw,186px);scroll-snap-align:start;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--card);border:0;padding:0;text-align:left;transition:transform .25s;box-shadow:var(--shadow)}
 .cover img{aspect-ratio:2/3;width:100%;object-fit:cover}
 .cover b{position:absolute;left:0;right:0;bottom:0;padding:36px 10px 10px;font:700 14px/1.2 Poppins,sans-serif;color:#fff;background:linear-gradient(0deg,rgba(8,9,16,.95) 30%,rgba(8,9,16,0))}
@@ -372,7 +372,6 @@ details p{animation:rise .4s both}
 summary::after{transition:transform .3s}
 details[open] summary::after{transform:rotate(180deg)}
 .final .btn-main{animation:glow 2.8s ease-out infinite}
-.arr{transition:opacity .2s,transform .2s}.arr:hover{transform:scale(1.1)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv,.st>*{opacity:1!important;transform:none!important}}
 
 </style>
@@ -584,8 +583,8 @@ let mode=null, sel=null;
 const byId=id=>T.find(t=>t.id==id);
 const later=(o,cls)=>{const k=o.tipo=="livro"?"leia":"assista";return `<div class="${cls}"><small>Quando crescer, ${k}</small><strong>${o.titulo}</strong>${o.autor?`<small>${o.autor}</small>`:""}<small>Idade sugerida: ${o.idade}</small></div>`};
 const cover=(x,badge="")=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="${A}${x.capa}" alt="">${badge}<b>${x.titulo}</b></button>`;
-const rail=inner=>`<div class="rail rv"><button class="arr prev" aria-label="Anteriores" disabled>${ARR}</button><div class="track st">${inner}</div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)">${ARR}</span></button></div>`;
-const row=(title,color,count,inner,sub="")=>`<div class="row"><div class="row-h"><h3><i style="background:${color}"></i>${title}</h3><span>${count}</span></div>${sub?`<p class="row-sub">${sub}</p>`:""}${rail(inner)}</div>`;
+const rail=(inner,c="")=>`<div class="rail rv${c}"><button class="arr prev" aria-label="Anteriores" disabled>${ARR}</button><div class="track st">${inner}</div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)">${ARR}</span></button></div>`;
+const row=(title,color,count,inner,sub="")=>`<div class="row"><div class="row-h"><h3><i style="background:${color}"></i>${title}</h3><span>${count}</span></div>${sub?`<p class="row-sub">${sub}</p>`:""}${rail(inner,sub?" grps":"")}</div>`;
 const boxCard=g=>{const n=g.titulos.length;return `<button class="grp box" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${g.arte}" alt=""><span class="badge b-box">${n} volumes · em ordem</span></div><b>${g.titulo}</b><span class="vols-mini">${g.titulos.map((_,i)=>`<i>${i+1}</i>`).join("<em>›</em>")}</span><small>${g.descricao}</small></button>`};
 const colCard=g=>`<button class="grp col" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${g.arte}" alt=""><span class="badge b-col">Coleção · ${g.titulos.length} títulos</span></div><b>${g.titulo}</b><small>${g.descricao}</small></button>`;
 function rows(){
