@@ -365,6 +365,9 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
 .sheet.wide{grid-template-columns:1fr}
 .sheet>img{width:100%;height:100%;object-fit:cover}
 .sheet.wide>img{aspect-ratio:16/9;height:auto}
+.cv{position:relative;overflow:hidden;background:var(--bg)}
+.cv-bg{position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;filter:blur(22px) brightness(.55) saturate(1.2)}
+.cv-fg{position:relative;width:100%;height:100%;object-fit:cover}
 .sheet .in{padding:24px;display:grid;gap:14px;align-content:start}
 .meta{display:flex;flex-wrap:wrap;gap:6px}
 .meta span{font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--card);white-space:nowrap}
@@ -447,6 +450,8 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .grp{flex-basis:82%}
  .sheet{grid-template-columns:1fr}
  .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
+ .cv{display:grid;place-items:center;padding:22px 0 18px}
+ .cv-fg{width:auto;height:min(52svh,360px);aspect-ratio:2/3;border-radius:12px;box-shadow:0 18px 40px -12px rgba(0,0,0,.85)}
  .final{min-height:0;padding-top:0}
  .final>img{position:relative;height:auto;aspect-ratio:16/10}
  .final::before{background:linear-gradient(0deg,var(--bg) 45%,transparent 70%)}
@@ -808,7 +813,7 @@ function openTitle(x){const tags=[...x.valores.map(v=>`<span>${v}</span>`),...x.
  if(box){const vols=box.titulos.map(byId).filter(Boolean),n=box.titulos.indexOf(x.id),prev=vols[n-1];
   where=`<span class="m-box">Box · volume ${n+1} de ${vols.length}</span>`;
   inbox=`<div class="inbox"><p class="ib-h"><span class="tag">Box</span>Faz parte do box <b>${box.titulo}</b>, volume ${n+1} de ${vols.length}.</p>${prev?`<p class="before">Para uma melhor experiência, leia antes <button data-id="${prev.id}">${prev.titulo}</button>.</p>`:`<p class="before first">Este é o primeiro volume: comece por aqui.</p>`}<ol class="mini" aria-label="Ordem de leitura">${vols.map((v,i)=>`<li${i==n?' class="now"':""}><button data-id="${v.id}" aria-label="Volume ${i+1}: ${v.titulo}"${i==n?' aria-current="true"':""}><i>${i+1}</i><img src="${A}${v.capa}" alt=""></button></li>`).join("")}</ol><button class="all" data-grp="${box.id}">Ver o roteiro do box</button></div>`}
- open(`<img src="${A}${x.capa}" alt=""><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>3 a 8 anos</span>${where}${tags}</div><p class="desc">${x.sinopse}</p>${inbox}${later(x.obra_mae,"later")}${acts}</div>`)}
+ open(`<div class="cv"><img class="cv-bg" src="${A}${x.capa}" alt=""><img class="cv-fg" src="${A}${x.capa}" alt="Capa de ${x.titulo}"></div><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>3 a 8 anos</span>${where}${tags}</div><p class="desc">${x.sinopse}</p>${inbox}${later(x.obra_mae,"later")}${acts}</div>`)}
 function openGroup(g){const vols=g.titulos.map(byId).filter(Boolean);
  if(g.tipo=="box"){
   open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-box">Box · ${vols.length} volumes</span><span>Leia em ordem</span></div><p class="desc">${g.descricao}</p><h3>Roteiro de leitura</h3><ol class="route">${vols.map((v,i)=>`<li><button data-id="${v.id}"><span class="n">${i+1}</span><img src="${A}${v.capa}" alt=""><div><b>${v.titulo}</b><small>${v.sinopse}</small>${i==0?'<span class="start">Comece por aqui</span>':""}</div></button></li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true);
