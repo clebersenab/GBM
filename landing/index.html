@@ -388,7 +388,9 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
 .setgrid img{aspect-ratio:2/3;width:100%;object-fit:cover;border-radius:8px}
 .setgrid span{font:700 13px/1.2 Poppins,sans-serif}
 .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
-.acts .btn{min-height:44px;padding:0 18px;font-size:15px}
+.acts{align-items:center}
+.acts .btn{min-height:48px;padding:0 24px;font-size:16px}
+.acts small{color:var(--mute);font-size:13.5px;flex:1 1 180px}
 .x{position:absolute;top:10px;right:10px;box-shadow:0 4px 14px rgba(0,0,0,.5);width:44px;height:44px;border-radius:50%;border:0;background:rgba(11,13,23,.8);color:#fff4e0;font-size:24px;cursor:pointer;z-index:2}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);opacity:0;visibility:hidden;background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
@@ -797,7 +799,7 @@ addEventListener("resize",()=>document.querySelectorAll(".rail").forEach(upd));
 /* modal */
 
 const M=$("#modal"),S=$("#sheet");let last=null;
-const acts=`<div class="acts"><button class="btn btn-main" data-toast="Disponível para assinantes.">Ler agora</button><button class="btn btn-ghost" data-toast="Salvo em Tenho interesse.">Tenho interesse</button></div>`;
+const acts=`<div class="acts"><a class="btn btn-main" href="#preco" data-close>Assinar por R$ 19,90/mês</a><small>Este livro e o catálogo inteiro, para todos os seus filhos.</small></div>`;
 function open(html,wide){S.className="sheet"+(wide?" wide":"");S.innerHTML=html;if(!M.classList.contains("on")){last=document.activeElement;M.classList.add("on");document.documentElement.classList.add("lock")}M.querySelector(".x").focus({preventScroll:true});S.scrollTop=0}
 function close(){M.classList.remove("on");document.documentElement.classList.remove("lock");last&&last.focus({preventScroll:true})}
 function openTitle(x){const tags=[...x.valores.map(v=>`<span>${v}</span>`),...x.caminhos.map(c=>`<span>${c}</span>`)].join("");
@@ -814,6 +816,7 @@ function openGroup(g){const vols=g.titulos.map(byId).filter(Boolean);
   open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-col">Coleção · ${vols.length} títulos</span><span>Leia em qualquer ordem</span></div><p class="desc">${g.descricao}</p><div class="setgrid">${vols.map(v=>`<button data-id="${v.id}"><img src="${A}${v.capa}" alt=""><span>${v.titulo}</span></button>`).join("")}</div>${acts}</div>`,true);
  }}
 document.addEventListener("click",e=>{
+ if(e.target.closest("[data-close]")){close();return}
  const md=e.target.closest(".pick");if(md){if(mode!=md.dataset.mode){mode=md.dataset.mode;sel=null;seeds();setTimeout(()=>$("#zone2").scrollIntoView({behavior:RM?"auto":"smooth",block:"nearest"}),80)}return}
  const sd=e.target.closest(".seed[data-tag]");if(sd){sel=sd.dataset.tag;document.querySelectorAll(".seed").forEach(b=>b.setAttribute("aria-pressed",b===sd));picked();return}
  const ar=e.target.closest(".arr");if(ar){const t=ar.parentElement.querySelector(".track");t.scrollBy({left:(ar.classList.contains("next")?1:-1)*t.clientWidth*.85});return}
