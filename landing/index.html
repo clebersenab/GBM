@@ -238,16 +238,50 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .qa-later small{color:var(--mute);font-size:calc(1.2*var(--u))}.qa-later b{font:700 calc(1.9*var(--u)) Poppins,sans-serif}
 .mquiz{display:none}
 /* curadoria */
-.cur .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(24px,4vw,56px);align-items:center}
-.cur img{border-radius:16px;box-shadow:var(--shadow)}
-.cur .txt{display:grid;gap:22px}
-.cur .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.cur .cols>div{display:grid;gap:12px;align-content:start}
-.cur ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-.cur li{padding-left:28px;position:relative;color:var(--ink2)}
-.cur li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:4px;background:var(--blue)}
-.cur li:nth-child(2)::before{background:var(--purple)}
-.cur .cols>div:nth-child(2) li::before{background:var(--orange)}
+.cur-head{display:grid;gap:14px;margin-bottom:44px}
+.cur-head h2 span{color:var(--orange)}
+.cur-head .lead{max-width:none}
+.cur-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+.cur-fig{margin:0;position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);position:sticky;top:96px}
+.cur-fig>img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:30% center}
+.cur-fig::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,9,16,.96) 0%,rgba(8,9,16,.7) 38%,transparent 62%);pointer-events:none}
+.ex{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:22px;display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1.2fr);gap:10px 12px;align-items:center;color:#fff4e0}
+.ex-tag{grid-column:1/-1;font:700 12px Poppins,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.ex-from,.ex-to{display:grid;gap:2px;align-content:center}
+.ex-from{padding:12px 14px;border-radius:12px;border:1px dashed rgba(255,244,224,.3)}
+.ex-to{grid-template-columns:44px minmax(0,1fr);column-gap:12px;padding:10px 14px 10px 10px;border-radius:12px;background:rgba(242,140,40,.14);border:1px solid rgba(242,140,40,.55)}
+.ex-to img{grid-row:1/4;width:44px;aspect-ratio:2/3;object-fit:cover;border-radius:6px}
+.ex span{font-size:12px;color:#c4bba8}
+.ex b{font:700 17px/1.15 Poppins,sans-serif}
+.ex em{font-style:normal;font-size:12.5px;color:#c4bba8}
+.ex-arrow{height:2px;background:var(--orange);position:relative}
+.ex-arrow::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left:8px solid var(--orange);border-right:0}
+.ex-keep{grid-column:1/-1;margin:4px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.ex-keep li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:baseline;font-size:14.5px;line-height:1.45;color:#e6dccb}
+.ex-keep b{font:700 11px Poppins,sans-serif;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:3px 0;border-radius:99px}
+.ex-keep .out b{background:rgba(145,70,181,.3);color:#e3c4f2}
+.ex-keep s{text-decoration-color:rgba(230,220,203,.5);color:#c4bba8}
+.ex-keep .in b{background:rgba(98,200,237,.25);color:#bfeaf8}
+.flow{list-style:none;margin:0;padding:0;display:grid;position:relative}
+.flow li:not(:last-child)::before{content:"";position:absolute;left:21px;top:44px;bottom:0;width:2px;background:linear-gradient(180deg,var(--c1),var(--c2))}
+.flow li:nth-child(1){--c1:var(--purple);--c2:color-mix(in srgb,var(--purple) 50%,var(--blue))}
+.flow li:nth-child(2){--c1:color-mix(in srgb,var(--purple) 50%,var(--blue));--c2:var(--blue)}
+.flow li:nth-child(3){--c1:var(--blue);--c2:color-mix(in srgb,var(--blue) 50%,var(--orange))}
+.flow li:nth-child(4){--c1:color-mix(in srgb,var(--blue) 50%,var(--orange));--c2:var(--orange)}
+.flow li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:20px;padding:0 0 30px;position:relative}
+.flow li:last-child{padding-bottom:0}
+.flow i{font-style:normal;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:800 17px Poppins,sans-serif;background:var(--bg);border:2px solid var(--purple);color:var(--ink);position:relative;z-index:1;transition:transform .3s,background .3s}
+.flow li:nth-child(2) i{border-color:color-mix(in srgb,var(--purple) 50%,var(--blue))}
+.flow li:nth-child(3) i{border-color:var(--blue)}
+.flow li:nth-child(4) i{border-color:color-mix(in srgb,var(--blue) 50%,var(--orange))}
+.flow li:nth-child(5) i{border-color:var(--orange)}
+.flow li:hover i{transform:scale(1.1);background:var(--card)}
+.flow b{display:block;font:700 20px/1.25 Poppins,sans-serif;margin:9px 0 6px}
+.flow p{color:var(--mute);font-size:16px;line-height:1.6;margin:0}
+.flow .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.flow .tags em{font-style:normal;font:700 13px Poppins,sans-serif;padding:4px 12px;border-radius:99px}
+.flow .tags .v{color:#ffc58a;box-shadow:inset 0 0 0 1.5px var(--orange)}
+.flow .tags .j{color:#a9e3f7;box-shadow:inset 0 0 0 1.5px var(--blue)}
 /* preço */
 .price{background:color-mix(in srgb,var(--bg2) 80%,transparent)}
 .price .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
@@ -340,7 +374,9 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .pairs{grid-template-columns:1fr}
  .pair{grid-template-columns:minmax(0,160px) minmax(0,1fr);grid-template-rows:auto}
  .pair img{aspect-ratio:auto;height:100%}
- .cur .wrap,.origin .wrap{grid-template-columns:1fr}
+ .origin .wrap{grid-template-columns:1fr}
+ .cur-grid{grid-template-columns:1fr}
+ .cur-fig{position:relative;top:auto;max-width:560px}
  .tour{grid-template-columns:1fr}
  .stage{display:none}
  .tstep small{display:grid!important;opacity:1}
@@ -355,7 +391,6 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .tstep i{width:32px;height:32px;font-size:14px}
  .tstep b{font-size:18px}
  .mshot{display:block;margin-top:12px;border-radius:12px;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;box-shadow:0 0 0 1px var(--line),var(--shadow)}
- .cur img{max-height:360px;width:100%;object-fit:cover}
 }
 @media(max-width:760px){
  body{font-size:16px}
@@ -369,7 +404,13 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .hero .lead{margin-bottom:18px}
  .hero .sub{font-size:15px;margin-bottom:28px}
  .hero .ctas .btn{flex:1 1 auto}
- .price .wrap,.cur .cols{grid-template-columns:1fr}
+ .price .wrap{grid-template-columns:1fr}
+ .cur-fig{background:var(--card)}
+ .cur-fig::after{display:none}
+ .cur-fig>img{aspect-ratio:16/10}
+ .ex{position:static;grid-template-columns:1fr;padding:16px}
+ .ex-arrow{display:none}
+ .flow b{font-size:18px}
  .seed{flex:0 0 112px}
  .seed span{font-size:13px}
  .choose{grid-template-columns:1fr;gap:12px}
@@ -419,7 +460,7 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
 .grp.box .art::before,.grp.box .art::after{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
 .grp.box:hover .art::before{transform:translate(22px,-18px) rotate(2deg)}
 .grp.box:hover .art::after{transform:translate(11px,-9px) rotate(1deg)}
-.pair img,.cur img,.origin img{transition:transform .8s}
+.pair img,.origin img{transition:transform .8s}
 .pair:hover img{transform:scale(1.04)}
 .pair,.plan{transition:transform .3s}
 .pair:hover,.plan:hover{transform:translateY(-4px)}
@@ -565,27 +606,32 @@ details[open] summary::after{transform:rotate(180deg)}
 
 <section class="band cur" id="curadoria">
   <div class="wrap">
-    <img src="../images/secoes/curadoria.webp" alt="Mesa de trabalho à noite com livros clássicos, anotações a lápis e esboços de uma baleia e de um castelo">
-    <div class="txt">
-      <h2>Cada história é escolhida e escrita com cuidado de professor</h2>
-      <div class="cols">
-        <div>
-          <h3>Na escolha das obras</h3>
-          <ul>
-            <li>Só entra no catálogo uma obra que valha a pena reencontrar mais tarde: um clássico da literatura, uma passagem da Bíblia, a vida de um santo, uma história real ou um filme marcante.</li>
-            <li>Cada título carrega um valor ou uma jornada que justifica estar ali, como coragem, fé, medicina ou empreender.</li>
+    <div class="cur-head rv">
+      <p class="eyebrow">Curadoria</p>
+      <h2>Do clássico ao colo, com <span>cuidado de professor</span></h2>
+      <p class="lead">Nenhuma história chega ao seu filho por acaso. Antes de entrar na estante, cada uma passa por cinco etapas.</p>
+    </div>
+    <div class="cur-grid">
+      <figure class="cur-fig rv">
+        <img loading="lazy" src="../images/secoes/curadoria.webp" alt="Mesa de trabalho à noite com livros clássicos, anotações a lápis e esboços de uma baleia e de um castelo">
+        <figcaption class="ex">
+          <small class="ex-tag">Exemplo</small>
+          <div class="ex-from"><span>O original</span><b>Hamlet</b><em>Shakespeare · 14+</em></div>
+          <i class="ex-arrow" aria-hidden="true"></i>
+          <div class="ex-to"><img loading="lazy" src="../images/capas/hamlet.webp" alt=""><span>No GBM</span><b>Hamlet</b><em>3 a 8 anos · Coragem, Honestidade</em></div>
+          <ul class="ex-keep">
+            <li class="out"><b>Sai</b><s>vingança, mortes e loucura</s></li>
+            <li class="in"><b>Fica</b>um príncipe em dúvida que precisa ter coragem para fazer o certo</li>
           </ul>
-        </div>
-        <div>
-          <h3>No texto de cada livro</h3>
-          <ul>
-            <li>Vocabulário e frases do tamanho de quem tem de 3 a 8 anos, em um ou dois parágrafos por página.</li>
-            <li>Os temas delicados do original ficam de fora. A semente da obra fica.</li>
-            <li>Cada página é revisada e corrigida antes de chegar ao seu filho.</li>
-            <li>No fim, um quiz de 5 a 10 perguntas confere se a história foi entendida.</li>
-          </ul>
-        </div>
-      </div>
+        </figcaption>
+      </figure>
+      <ol class="flow st">
+        <li><i>1</i><div><b>Passa pelo crivo</b><p>Só entra uma obra que valha reencontrar mais tarde: um clássico da literatura, uma passagem da Bíblia, a vida de um santo, uma história real ou um grande filme.</p></div></li>
+        <li><i>2</i><div><b>Ganha um propósito</b><p>Cada título planta um valor ou abre uma jornada que justifica estar ali.</p><span class="tags"><em class="v">Coragem</em><em class="v">Fé</em><em class="j">Medicina</em><em class="j">Empreender</em></span></div></li>
+        <li><i>3</i><div><b>É reescrita para a idade</b><p>Vocabulário e frases de quem tem de 3 a 8 anos, em um ou dois parágrafos por página.</p></div></li>
+        <li><i>4</i><div><b>Fica só a semente</b><p>Os temas delicados do original saem. O que faz a obra ser grande permanece.</p></div></li>
+        <li><i>5</i><div><b>É revisada página por página</b><p>Cada página é lida e corrigida antes de chegar ao seu filho, e o livro termina com o quiz e o clássico para quando crescer.</p></div></li>
+      </ol>
     </div>
   </div>
 </section>
