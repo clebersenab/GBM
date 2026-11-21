@@ -1,49 +1,62 @@
 require "test_helper"
 
 class AuthTest < ActionDispatch::IntegrationTest
-  test "login por código cria a conta no primeiro acesso" do
-    assert_difference -> { Account.count }, 1 do
-      login("nova@exemplo.com")
-    end
+  test "cadastro cria a conta sem acesso aos livros" do
+    login("nova@exemplo.com")
     get "/me", headers: auth
     assert_response :ok
-    assert_equal "nova@exemplo.com", response.parsed_body["email"]
+    body = response.parsed_body
+    assert_equal "nova@exemplo.com", body["email"]
+    assert_equal false, body["access"]["full_access"]
+    assert_equal "sem_acesso", body["access"]["reason"]
+    assert Account.last.terms_accepted_at.present?
   end
 
-  test "pedir código não revela se o e-mail existe" do
-    post "/auth/code", params: { email: "ninguem@exemplo.com" }
+  test "cadastro exige aceite dos termos, senha de 8 caracteres e e-mail único" do
+    post "/auth/signup", params: { email: "x@exemplo.com", password: "senha-segura" }
+    assert_response :unprocessable_entity
+    post "/auth/signup", params: { email: "x@exemplo.com", password: "curta", accept_terms: true }
+    assert_response :unprocessable_entity
+    login("x@exemplo.com")
+    post "/auth/signup", params: { email: "X@Exemplo.com", password: "outra-senha", accept_terms: true }
+    assert_response :conflict
+  end
+
+  test "login com senha" do
+    login("pai@exemplo.com", password: "Cbs123!xyz")
+    post "/auth/login", params: { email: "PAI@exemplo.com", password: "errada" }
+    assert_response :unauthorized
+    post "/auth/login", params: { email: "PAI@exemplo.com", password: "Cbs123!xyz" }
+    assert_response :ok
+    assert response.parsed_body["token"].present?
+  end
+
+  test "esqueci a senha: código por e-mail troca a senha e derruba as outras sessões" do
+    login("mae@exemplo.com", password: "senha-antiga")
+    old_token = @token
+    perform_enqueued_jobs { post "/auth/password/forgot", params: { email: "mae@exemplo.com" } }
     assert_response :accepted
-  end
-
-  test "código errado é recusado e conta tentativa" do
-    post "/auth/code", params: { email: "a@exemplo.com" }
-    post "/auth/verify", params: { email: "a@exemplo.com", code: "000000" }
-    assert_response :unauthorized
-    assert_equal 1, LoginCode.last.attempts
-  end
-
-  test "código não pode ser usado duas vezes" do
-    perform_enqueued_jobs { post "/auth/code", params: { email: "b@exemplo.com" } }
     code = ActionMailer::Base.deliveries.last.body.to_s[/\b(\d{6})\b/, 1]
-    post "/auth/verify", params: { email: "b@exemplo.com", code: code }
-    assert_response :created
-    post "/auth/verify", params: { email: "b@exemplo.com", code: code }
+    post "/auth/password/reset", params: { email: "mae@exemplo.com", code: "000000", password: "senha-nova-123" }
     assert_response :unauthorized
+    post "/auth/password/reset", params: { email: "mae@exemplo.com", code: code, password: "senha-nova-123" }
+    assert_response :ok
+    get "/me", headers: { "Authorization" => "Bearer #{old_token}" }
+    assert_response :unauthorized
+    post "/auth/login", params: { email: "mae@exemplo.com", password: "senha-nova-123" }
+    assert_response :ok
   end
 
-  test "código expira" do
-    perform_enqueued_jobs { post "/auth/code", params: { email: "c@exemplo.com" } }
-    code = ActionMailer::Base.deliveries.last.body.to_s[/\b(\d{6})\b/, 1]
-    travel 11.minutes
-    post "/auth/verify", params: { email: "c@exemplo.com", code: code }
-    assert_response :unauthorized
-  end
+  test "esqueci a senha não revela se o e-mail existe e o código expira" do
+    perform_enqueued_jobs { post "/auth/password/forgot", params: { email: "ninguem@exemplo.com" } }
+    assert_response :accepted
+    assert_empty ActionMailer::Base.deliveries
 
-  test "depois de 5 tentativas erradas o código certo também é recusado" do
-    perform_enqueued_jobs { post "/auth/code", params: { email: "d@exemplo.com" } }
+    login("e@exemplo.com")
+    perform_enqueued_jobs { post "/auth/password/forgot", params: { email: "e@exemplo.com" } }
     code = ActionMailer::Base.deliveries.last.body.to_s[/\b(\d{6})\b/, 1]
-    5.times { post "/auth/verify", params: { email: "d@exemplo.com", code: "999999" } }
-    post "/auth/verify", params: { email: "d@exemplo.com", code: code }
+    travel 31.minutes
+    post "/auth/password/reset", params: { email: "e@exemplo.com", code: code, password: "senha-nova-123" }
     assert_response :unauthorized
   end
 

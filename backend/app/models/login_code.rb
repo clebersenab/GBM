@@ -1,6 +1,6 @@
-# Código de 6 dígitos enviado por e-mail. Guardamos só o HMAC do código.
+# Código de 6 dígitos enviado por e-mail para redefinir a senha. Guardamos só o HMAC do código.
 class LoginCode < ApplicationRecord
-  TTL = 10.minutes
+  TTL = 30.minutes
   MAX_ATTEMPTS = 5
   MAX_PER_HOUR = 5
 
