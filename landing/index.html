@@ -47,6 +47,8 @@ nav .logo{height:44px;width:auto}
 nav .links{display:flex;gap:22px;align-items:center;font-weight:600;font-size:15px}
 nav .links a:not(.btn){text-decoration:none;color:var(--mute)}
 nav .links a:not(.btn):hover{color:var(--ink)}
+nav .links .nav-in{margin-left:6px}
+nav .links .nav-in+.btn{margin-left:-12px}
 nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 /* hero */
 .hero{position:relative;min-height:min(88svh,820px);display:grid;align-items:center;padding:64px 0 80px;overflow:hidden}
@@ -400,6 +402,9 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
 /* responsivo */
 @media(max-width:1000px){
  nav .links a:not(.btn){display:none}
+ nav .links{gap:8px}
+ nav .links .nav-in{margin-left:0;padding:0 14px}
+ nav .links .nav-in+.btn{margin-left:0}
  .pairs{grid-template-columns:1fr}
  .pair{grid-template-columns:minmax(0,160px) minmax(0,1fr);grid-template-rows:auto}
  .pair img{aspect-ratio:auto;height:100%}
@@ -516,6 +521,7 @@ details[open] summary::after{transform:rotate(180deg)}
     <a href="#plantar">Valores e jornadas</a>
     <a href="#como">Como funciona</a>
     <a href="#preco">Preço</a>
+    <a class="btn btn-ghost nav-in" href="../app/">Entrar</a>
     <a class="btn btn-main" href="#preco">Assinar</a>
   </div>
 </nav>
