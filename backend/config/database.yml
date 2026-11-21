@@ -17,3 +17,5 @@ test:
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
+  # O Neon usa pool de conexões (PgBouncer), que não aceita prepared statements.
+  prepared_statements: false

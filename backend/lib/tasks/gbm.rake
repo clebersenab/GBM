@@ -14,4 +14,16 @@ namespace :gbm do
     account.save!
     puts "#{account.email}: liberado de #{account.access_from} até #{account.access_until}"
   end
+
+  # Usada na inicialização do servidor: só age se LIBERAR_EMAIL estiver definido no painel.
+  desc "Cria a conta liberada definida por LIBERAR_EMAIL, LIBERAR_PASSWORD e LIBERAR_UNTIL"
+  task liberar_from_env: :environment do
+    next if ENV["LIBERAR_EMAIL"].blank?
+    ENV["EMAIL"] = ENV["LIBERAR_EMAIL"]
+    ENV["PASSWORD"] = ENV["LIBERAR_PASSWORD"]
+    ENV["UNTIL"] = ENV.fetch("LIBERAR_UNTIL", "2050-12-31")
+    ENV["NAME"] = ENV["LIBERAR_NAME"]
+    ENV["ADMIN"] = ENV["LIBERAR_ADMIN"]
+    Rake::Task["gbm:liberar"].invoke
+  end
 end
