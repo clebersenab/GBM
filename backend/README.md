@@ -1,11 +1,11 @@
-# GBM API
+# GBM backend (API)
 
 Rails 8 (modo API) + PostgreSQL. Por enquanto cobre o controle de acesso.
 
 ## Rodar localmente
 
 ```bash
-cd api
+cd backend
 bundle install
 # Postgres local com usuário gbm/gbm, ou DB_HOST, DB_USER e DB_PASSWORD
 bin/rails db:prepare db:seed   # o seed carrega os títulos de ../data/catalogo.json
