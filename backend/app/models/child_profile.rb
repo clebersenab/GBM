@@ -1,6 +1,6 @@
 class ChildProfile < ApplicationRecord
   AGE_BANDS = %w[0-2 3-5 6-8].freeze
-  AVATARS = %w[raposa leao baleia coruja tartaruga elefante].freeze
+  AVATARS = %w[raposa leao baleia coruja tartaruga cabra onca papagaio].freeze
 
   belongs_to :account
 
