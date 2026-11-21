@@ -329,11 +329,11 @@ summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:26px;c
 details[open] summary::after{content:"–"}
 details p{color:var(--mute);padding:0 0 18px}
 /* final */
-.final{position:relative;overflow:hidden;min-height:420px;display:grid;align-items:center}
+.final{position:relative;overflow:hidden;min-height:clamp(460px,42vw,620px);display:grid;align-items:center}
 .final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
-.final::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 75%,transparent) 40%,transparent 75%)}
-.final .txt{position:relative;max-width:520px;display:grid;gap:18px}
-footer{padding:28px max(5vw,16px);border-top:1px solid var(--line);color:var(--mute);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+.final::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--bg) 0%,transparent 26%),linear-gradient(0deg,var(--bg) 0%,transparent 30%),linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 75%,transparent) 40%,transparent 75%)}
+.final .txt{position:relative;z-index:2;max-width:520px;display:grid;gap:18px}
+footer{padding:28px max(5vw,16px);color:var(--mute);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
 footer img{height:72px;width:auto}
 /* modal */
 html{scrollbar-gutter:stable}
@@ -458,9 +458,10 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
  .cv{display:grid;place-items:center;padding:22px 0 18px}
  .cv-fg{width:auto;height:min(52svh,360px);aspect-ratio:2/3;border-radius:12px;box-shadow:0 18px 40px -12px rgba(0,0,0,.85)}
- .final{min-height:0;padding-top:0}
+ .final{min-height:0;padding-top:0;padding-left:0;padding-right:0}
+ .final .txt{padding:0 16px}
  .final>img{position:relative;height:auto;aspect-ratio:16/10}
- .final::before{background:linear-gradient(0deg,var(--bg) 45%,transparent 70%)}
+ .final::before{background:linear-gradient(180deg,var(--bg) 0%,transparent 22%),linear-gradient(0deg,var(--bg) 45%,transparent 70%)}
  .final .txt{margin-top:-60px}
 }
 @media(max-width:480px){
