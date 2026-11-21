@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
+  username: <%= ENV.fetch("DB_USER") { "gbm" } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { "gbm" } %>
+
+development:
+  <<: *default
+  database: gbm_development
+
+test:
+  <<: *default
+  database: gbm_test
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
