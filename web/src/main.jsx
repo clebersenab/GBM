@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './index.css'
 import { SessionProvider, useSession } from './session'
+import { ThemeProvider } from './theme'
 import Entrar from './pages/Entrar'
 import Cadastro from './pages/Cadastro'
 import Esqueci from './pages/Esqueci'
@@ -35,6 +36,7 @@ function PinRoute() {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ThemeProvider>
     <SessionProvider>
       <HashRouter>
         <Routes>
@@ -48,5 +50,6 @@ createRoot(document.getElementById('root')).render(
         </Routes>
       </HashRouter>
     </SessionProvider>
+    </ThemeProvider>
   </StrictMode>,
 )

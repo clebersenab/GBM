@@ -4,6 +4,7 @@ import { api } from '../api'
 import { useSession } from '../session'
 import { IMG, FormError, Submit } from '../ui'
 import PinInput from '../PinInput'
+import { Logo, ThemeToggle } from '../theme'
 
 export const AVATARS = ['raposa', 'leao', 'baleia', 'coruja', 'tartaruga', 'cabra', 'onca', 'papagaio']
 const BANDS = [['0-2', '0 a 2 anos'], ['3-5', '3 a 5 anos'], ['6-8', '6 a 8 anos']]
@@ -18,7 +19,8 @@ export default function Perfis() {
 
   return (
     <main className="perfis">
-      <img className="perfis-logo" src={`${IMG}/marca/logo-nav.png`} alt="GBM" />
+      <div className="corner"><ThemeToggle /></div>
+      <Logo className="perfis-logo" />
       <h1>{me.profiles.length ? 'Quem vai ler hoje?' : 'Vamos criar o perfil das crianças'}</h1>
       <div className="who">
         {me.profiles.map((p) => (
