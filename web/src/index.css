@@ -93,3 +93,10 @@ h1,h2{font-family:Poppins,system-ui,sans-serif;margin:0;letter-spacing:-.02em;li
 .later b{font-family:Poppins,sans-serif}
 .acts{display:flex;flex-wrap:wrap;gap:10px}
 @media(max-width:560px){.titulo{grid-template-columns:1fr}.titulo>img{width:140px}}
+.plantou{display:grid;gap:10px}
+.plantou small{display:block;color:var(--mute);font-size:13px;font-weight:700;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:4px 14px 4px 4px;border-radius:999px;font:700 14px Poppins,sans-serif}
+.chip img{width:28px;height:28px;border-radius:50%;object-fit:cover}
+.chip.v{color:#ffc58a;box-shadow:inset 0 0 0 2px var(--orange)}
+.chip.j{color:#a9e3f7;box-shadow:inset 0 0 0 2px var(--blue)}
