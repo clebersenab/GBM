@@ -270,6 +270,7 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .cur-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
 .cur-fig{margin:0;position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);position:sticky;top:96px}
 .cur-fig>img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:30% center}
+@media(min-width:1001px){.cur-grid{align-items:stretch}.cur-fig{position:relative;top:auto;min-height:560px}.cur-fig>img{position:absolute;inset:0;height:100%;aspect-ratio:auto}}
 .cur-fig::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,9,16,.96) 0%,rgba(8,9,16,.7) 38%,transparent 62%);pointer-events:none}
 .ex{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:22px;display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1.2fr);gap:10px 12px;align-items:center;color:#fff4e0}
 .ex-tag{grid-column:1/-1;font:700 12px Poppins,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
