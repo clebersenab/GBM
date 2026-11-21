@@ -7,6 +7,7 @@ import { IMG } from '../ui'
 import { Modal } from './Perfis'
 
 const byId = Object.fromEntries(catalogo.titulos.map((t) => [t.id, t]))
+const slug = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/ /g, '-')
 const ROW_COLOR = { 'Clássicos da literatura': 'var(--blue)', 'Do cinema e das séries': 'var(--purple)', 'Histórias reais e de fé': 'var(--orange)' }
 
 export default function Estante() {
@@ -90,6 +91,20 @@ function Titulo({ t, onClose }) {
         <img src={`/${t.capa}`} alt="" />
         <div className="stack">
           <p>{t.sinopse}</p>
+          {(t.valores?.length > 0 || t.caminhos?.length > 0) && (
+            <div className="plantou">
+              {t.valores?.length > 0 && (
+                <div><small>Valores</small><div className="chips">
+                  {t.valores.map((v) => <span className="chip v" key={v}><img src={`${IMG}/cards/valor-${slug(v)}.webp`} alt="" />{v}</span>)}
+                </div></div>
+              )}
+              {t.caminhos?.length > 0 && (
+                <div><small>Jornadas</small><div className="chips">
+                  {t.caminhos.map((c) => <span className="chip j" key={c}><img src={`${IMG}/cards/caminho-${slug(c)}.webp`} alt="" />{c}</span>)}
+                </div></div>
+              )}
+            </div>
+          )}
           {o && <p className="later"><small>Quando crescer, {o.tipo === 'livro' ? 'leia' : 'assista'}</small><b>{o.titulo}</b></p>}
           <div className="acts">
             <button className="btn btn-main" onClick={() => run('ler')} disabled={!!busy}>{busy === 'ler' ? 'Abrindo…' : 'Ler agora'}</button>
