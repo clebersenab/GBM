@@ -13,7 +13,15 @@ bin/rails test
 bin/rails s
 ```
 
-Em produção: `DATABASE_URL`, `SECRET_KEY_BASE`, `MAIL_FROM`, `CORS_ORIGINS` e um servidor SMTP para o e-mail do código.
+## Produção (Render + Neon)
+
+- Banco: Neon, criado pela Vercel (Storage). A API usa a `DATABASE_URL` dele.
+- API: Render, configurado pelo `render.yaml` da raiz (Blueprint). A cada inicialização,
+  `bin/render-start` migra o banco, carrega o catálogo e, se `LIBERAR_EMAIL` estiver definido,
+  cria ou atualiza essa conta liberada.
+- Variáveis: `DATABASE_URL`, `SECRET_KEY_BASE` (gerada pelo Render), `CORS_ORIGINS`, `MAIL_FROM`,
+  `LIBERAR_EMAIL`/`LIBERAR_PASSWORD`/`LIBERAR_UNTIL` e, quando houver, `SMTP_ADDRESS`, `SMTP_PORT`,
+  `SMTP_USERNAME`, `SMTP_PASSWORD`. Sem SMTP, o e-mail de redefinir senha só aparece no log.
 
 ## Regras de acesso (decididas em nov/2026)
 

@@ -1,0 +1,28 @@
+# Blueprint do Render para a API do GBM (pasta backend/).
+# O banco é o Neon criado pela Vercel: copie a DATABASE_URL de lá para o painel do Render.
+services:
+  - type: web
+    name: gbm-api
+    runtime: ruby
+    plan: free
+    rootDir: backend
+    buildCommand: bundle install
+    startCommand: bin/render-start
+    healthCheckPath: /up
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://gbm-six.vercel.app,http://localhost:5173
+      - key: MAIL_FROM
+        value: GBM <nao-responda@gbm.com.br>
+      - key: LIBERAR_EMAIL
+        sync: false
+      - key: LIBERAR_PASSWORD
+        sync: false
+      - key: LIBERAR_UNTIL
+        value: "2050-12-31"
