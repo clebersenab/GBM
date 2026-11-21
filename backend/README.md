@@ -19,20 +19,32 @@ Em produção: `DATABASE_URL`, `SECRET_KEY_BASE`, `MAIL_FROM`, `CORS_ORIGINS` e 
 
 | Ação | Quem pode |
 |---|---|
-| Ler um livro no app | Só com assinatura ativa |
+| Ler um livro no app | Só com acesso pleno (assinatura ativa ou liberação do admin) |
 | Baixar o PDF | Assinatura ativa; o download registra a posse para sempre |
 | Depois de cancelar | Só baixar de novo os PDFs que já tinha baixado; o app de leitura fecha |
 | Criar ou apagar perfil, resgatar código, sair de todos os aparelhos | Só com o PIN dos pais (vale 10 minutos) |
 
 As regras ficam em `app/policies/access_policy.rb`.
 
-## Login
+## Cadastro e login
 
-Sem senha: o responsável recebe um código de 6 dígitos por e-mail (vale 10 minutos, 5 tentativas,
-5 códigos por hora). No primeiro acesso a conta é criada. Cada aparelho recebe um token próprio
-(Bearer), guardado no banco só como hash, que vale 60 dias e pode ser revogado.
+Cadastro com nome, e-mail, senha (mínimo de 8 caracteres), WhatsApp opcional, aceite dos termos
+e da política de privacidade (obrigatório, LGPD) e opt-in de novidades. A conta nasce **sem acesso**
+aos livros. Login por e-mail e senha. "Esqueci a senha" envia um código de 6 dígitos por e-mail
+(vale 30 minutos); trocar a senha encerra as sessões dos outros aparelhos.
 
-As crianças não têm login: são perfis da conta, sem sobrenome nem data de nascimento (LGPD).
+Cada aparelho recebe um token próprio (Bearer), guardado no banco só como hash, que vale 60 dias e
+pode ser revogado. As crianças não têm login: são perfis da conta, sem sobrenome nem data de
+nascimento (LGPD).
+
+## Acesso pleno
+
+Uma conta lê e baixa livros quando tem **liberação do admin vigente** ou **assinatura ativa**.
+Status da conta: `cadastrado` (padrão), `liberado` (com início e fim) ou `bloqueado` (perde tudo).
+
+```bash
+EMAIL=... PASSWORD=... UNTIL=2050-12-31 bin/rails gbm:liberar   # cria ou atualiza uma conta liberada
+```
 
 ## Assinatura
 
@@ -44,11 +56,13 @@ Ainda sem gateway de pagamento. A assinatura é alimentada pelo admin
 
 | Método | Caminho | Observação |
 |---|---|---|
-| POST | /auth/code | `{ email }`, sempre 202 |
-| POST | /auth/verify | `{ email, code }` → `{ token, account }` |
+| POST | /auth/signup | `{ name, email, password, phone?, accept_terms, marketing_opt_in? }` |
+| POST | /auth/login | `{ email, password }` → `{ token, account }` |
+| POST | /auth/password/forgot | `{ email }`, sempre 202 |
+| POST | /auth/password/reset | `{ email, code, password }` |
 | DELETE | /auth/session | sai deste aparelho |
 | DELETE | /auth/sessions | sai de todos (PIN) |
-| GET | /me | conta, perfis, assinatura |
+| GET | /me | conta, perfis e situação de acesso |
 | POST | /parent/pin | cria o PIN logo após o login, ou troca com `current_pin` |
 | POST | /parent/unlock, /parent/lock | abre e fecha a janela do PIN |
 | GET/POST/PATCH/DELETE | /profiles | escrita exige PIN |
@@ -58,6 +72,7 @@ Ainda sem gateway de pagamento. A assinatura é alimentada pelo admin
 | GET | /downloads | livros da família |
 | POST | /codes/redeem | `{ code }` (PIN) |
 | PUT | /admin/accounts/:id/subscription | admin |
+| PUT | /admin/accounts/:id/access | `{ status, from?, until }` (admin) |
 | POST | /admin/activation_codes | `{ months, store, quantity }` (admin) |
 
 ## Ainda falta
