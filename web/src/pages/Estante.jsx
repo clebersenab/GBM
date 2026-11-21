@@ -5,6 +5,8 @@ import { api } from '../api'
 import { useSession } from '../session'
 import { IMG } from '../ui'
 import { Modal } from './Perfis'
+import Rail from '../Rail'
+import { Logo, ThemeToggle } from '../theme'
 
 const byId = Object.fromEntries(catalogo.titulos.map((t) => [t.id, t]))
 const slug = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/ /g, '-')
@@ -27,11 +29,14 @@ export default function Estante() {
   return (
     <div className="estante">
       <header className="top">
-        <img className="logo" src={`${IMG}/marca/logo-nav.png`} alt="GBM" />
+        <Logo className="logo" />
+        <div className="top-r">
+        <ThemeToggle />
         <button className="me" onClick={() => { setProfileId(null); nav('/perfis') }} title="Trocar de perfil">
           <img src={`${IMG}/avatares/avatar-${profile.avatar}.webp`} alt="" />
           <span>{profile.name}</span>
         </button>
+        </div>
       </header>
       <main className="wrap">
         <h1 className="hello">Oi, {profile.name}!</h1>
@@ -47,14 +52,14 @@ export default function Estante() {
         {rows.map((r) => (
           <section className="row" key={r.nome}>
             <h2><i style={{ background: r.cor }} />{r.nome}</h2>
-            <div className="track">
+            <Rail>
               {r.itens.map((t) => (
                 <button className="cv" key={t.id} onClick={() => setOpen(t)}>
                   <img loading="lazy" src={`/${t.capa}`} alt="" />
                   <b>{t.titulo}</b>
                 </button>
               ))}
-            </div>
+            </Rail>
           </section>
         ))}
       </main>

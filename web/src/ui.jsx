@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Logo, ThemeToggle } from './theme'
 
 export const IMG = '/images'
 
 export function AuthShell({ title, subtitle, children, footer }) {
   return (
     <main className="auth">
+      <div className="corner"><ThemeToggle /></div>
       <a href="/" className="auth-logo" aria-label="GBM, voltar ao site">
-        <img src={`${IMG}/marca/logo-nav.png`} alt="GBM" />
+        <Logo />
       </a>
       <section className="auth-card">
         <h1>{title}</h1>
