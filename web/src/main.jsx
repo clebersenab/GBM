@@ -36,8 +36,8 @@ function PinRoute() {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider>
     <SessionProvider>
+    <ThemeProvider>
       <HashRouter>
         <Routes>
           <Route path="/entrar" element={<PublicOnly><Entrar /></PublicOnly>} />
@@ -49,7 +49,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="*" element={<Navigate to="/perfis" replace />} />
         </Routes>
       </HashRouter>
-    </SessionProvider>
     </ThemeProvider>
+    </SessionProvider>
   </StrictMode>,
 )

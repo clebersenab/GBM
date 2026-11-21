@@ -1,22 +1,44 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { api, getToken } from './api'
+import { useSession } from './session'
 
 const Ctx = createContext(null)
 const KEY = 'gbm-tema-app'
 
-// Tema da plataforma: começa pelo do sistema e lembra a escolha da família.
+const readLocal = () => {
+  try {
+    const saved = localStorage.getItem(KEY)
+    if (saved === 'light' || saved === 'dark') return saved
+  } catch { /* sem storage */ }
+  return 'dark'
+}
+
+// Tema da plataforma: escuro por padrão. A escolha fica salva neste aparelho
+// e, com a conta logada, nas configurações da conta (vale em outros aparelhos).
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    try {
-      const saved = localStorage.getItem(KEY)
-      if (saved === 'light' || saved === 'dark') return saved
-    } catch { /* sem storage */ }
-    return window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
-  })
+  const { me } = useSession()
+  const [theme, setTheme] = useState(readLocal)
+  const synced = useRef(null)
+
+  // Ao entrar na conta, a preferência salva nela prevalece.
+  useEffect(() => {
+    if (me?.theme && synced.current !== me.email) {
+      synced.current = me.email
+      setTheme(me.theme)
+    }
+    if (!me) synced.current = null
+  }, [me])
+
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     try { localStorage.setItem(KEY, theme) } catch { /* sem storage */ }
   }, [theme])
-  const toggle = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'))
+
+  const toggle = () => {
+    const next = theme === 'light' ? 'dark' : 'light'
+    setTheme(next)
+    if (getToken()) api('/me/preferences', { method: 'PATCH', body: { theme: next } }).catch(() => { /* fica salvo no aparelho */ })
+  }
   return <Ctx.Provider value={{ theme, toggle }}>{children}</Ctx.Provider>
 }
 
