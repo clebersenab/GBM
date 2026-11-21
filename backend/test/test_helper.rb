@@ -9,11 +9,9 @@ end
 class ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
-  # Faz o fluxo real de login: pede o código, lê o e-mail e confirma.
-  def login(email = "pai@exemplo.com")
-    perform_enqueued_jobs { post "/auth/code", params: { email: email } }
-    code = ActionMailer::Base.deliveries.last.body.to_s[/\b(\d{6})\b/, 1]
-    post "/auth/verify", params: { email: email, code: code }
+  # Cadastro real pela API; devolve a conta.
+  def login(email = "pai@exemplo.com", password: "senha-segura")
+    post "/auth/signup", params: { name: "Responsável", email: email, password: password, accept_terms: true }
     assert_response :created
     @token = response.parsed_body["token"]
     Account.find_by!(email: email)

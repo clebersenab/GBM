@@ -10,10 +10,10 @@ class AdminTest < ActionDispatch::IntegrationTest
     admin.update!(admin: true)
     put "/admin/accounts/#{family.id}/subscription", params: { plan: "mensal", status: "active", current_period_end: 1.month.from_now }, headers: auth
     assert_response :ok
-    assert family.reload.subscription_active?
+    assert family.reload.full_access?
 
     put "/admin/accounts/#{family.id}/subscription", params: { status: "canceled" }, headers: auth
-    assert_not family.reload.subscription_active?
+    assert_not family.reload.full_access?
 
     post "/admin/activation_codes", params: { months: 12, store: "Loja Teste", quantity: 3 }, headers: auth
     assert_response :created

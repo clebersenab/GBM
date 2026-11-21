@@ -8,7 +8,7 @@ class ActivationCodesTest < ActionDispatch::IntegrationTest
     post "/codes/redeem", params: { code: code.code.downcase.delete("-") }, headers: auth
     assert_response :ok
     assert_equal "anual", response.parsed_body["plan"]
-    assert account.reload.subscription_active?
+    assert account.reload.full_access?
     assert_in_delta 12.months.from_now, account.subscription.current_period_end, 1.minute
 
     login("outro@exemplo.com")

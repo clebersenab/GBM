@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_21_000001) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_21_000002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000001) do
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "phone"
+    t.datetime "terms_accepted_at"
+    t.boolean "marketing_opt_in", default: false, null: false
+    t.string "access_status", default: "cadastrado", null: false
+    t.datetime "access_from"
+    t.datetime "access_until"
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
@@ -69,6 +76,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000001) do
     t.datetime "consumed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "purpose", default: "password_reset", null: false
     t.index ["email", "created_at"], name: "index_login_codes_on_email_and_created_at"
   end
 

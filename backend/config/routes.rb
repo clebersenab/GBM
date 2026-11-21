@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
-  post "auth/code", to: "auth#request_code"
-  post "auth/verify", to: "auth#verify"
+  post "auth/signup", to: "auth#signup"
+  post "auth/login", to: "auth#login"
+  post "auth/password/forgot", to: "auth#forgot_password"
+  post "auth/password/reset", to: "auth#reset_password"
   delete "auth/session", to: "auth#destroy"
   delete "auth/sessions", to: "auth#destroy_all"
 
@@ -24,6 +26,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     put "accounts/:account_id/subscription", to: "subscriptions#update"
+    put "accounts/:account_id/access", to: "access#update"
     post "activation_codes", to: "activation_codes#create"
   end
 end
