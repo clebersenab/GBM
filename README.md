@@ -9,12 +9,14 @@ Histórias para ler juntos
 ├── app/          plataforma do assinante (app/index.html), hoje um protótipo navegável
 ├── images/       imagens compartilhadas pela landing e pelo app
 ├── data/         catálogo (catalogo.json), lido pela landing e pelo app
+├── backend/      API em Rails 8 + Postgres (controle de acesso); veja backend/README.md
 ├── vercel.json   faz a raiz do site abrir a landing
 └── README.md
 ```
 
 - A raiz não guarda arquivos soltos. Imagem nova vai direto para a pasta certa em `/images`.
 - `data/` fica fora de `landing/` e `app/` porque os dois leem o mesmo catálogo.
+- A API fica em `backend/`, e não em `api/`, porque a Vercel trata a pasta `api/` como funções serverless e quebra o deploy. O `.vercelignore` tira o backend do deploy da Vercel; ele roda em outro servidor.
 - As páginas usam caminhos relativos (`../images`, `../data`), então funcionam no Vercel e localmente.
 - Quando o app crescer (login, banco, build), ele ganha o próprio `package.json` dentro de `app/`, sem mexer na landing.
 
