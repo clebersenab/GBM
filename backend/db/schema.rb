@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_21_000002) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000002) do
     t.string "access_status", default: "cadastrado", null: false
     t.datetime "access_from"
     t.datetime "access_until"
+    t.string "theme"
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 

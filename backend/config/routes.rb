@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   delete "auth/sessions", to: "auth#destroy_all"
 
   get "me", to: "me#show"
+  patch "me/preferences", to: "me#preferences"
 
   post "parent/pin", to: "parent#set_pin"
   post "parent/unlock", to: "parent#unlock"

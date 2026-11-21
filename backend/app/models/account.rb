@@ -1,4 +1,5 @@
 class Account < ApplicationRecord
+  THEMES = %w[dark light].freeze
   has_secure_password :password, validations: false
   has_secure_password :pin, validations: false
 
@@ -15,6 +16,7 @@ class Account < ApplicationRecord
   validates :password, length: { minimum: 8, message: "deve ter pelo menos 8 caracteres" }, allow_nil: true
   validates :pin, format: { with: /\A\d{4}\z/, message: "deve ter 4 dígitos" }, allow_nil: true
   validates :access_status, inclusion: { in: ACCESS_STATUSES }
+  validates :theme, inclusion: { in: THEMES }, allow_nil: true
   validate :release_period, if: -> { access_status == "liberado" }
 
   normalizes :email, with: ->(e) { e.to_s.strip.downcase }
