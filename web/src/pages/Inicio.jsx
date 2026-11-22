@@ -5,9 +5,9 @@ import { useLibrary } from '../library'
 import { useShell } from '../Shell'
 import Rail from '../Rail'
 import BookAnim from '../BookAnim'
-import { Card, Cover, Empty, Icon, Progress, Ring, Stat, Tag } from '../ds'
-import { CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
-import { doorsState, newDoors, recommend, themeRow, valueThemes } from '../recommend'
+import { Card, Cover, Empty, Icon, Progress, Stat, Tag } from '../ds'
+import { DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, byId, valorImg, caminhoImg } from '../catalog'
+import { emphasis, newDoors, recommend, themeRow, valueThemes } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
 
@@ -23,13 +23,9 @@ export default function Inicio() {
   const quero = entries.filter((e) => e.status === 'quero_ler')
   const recs = useMemo(() => recommend(ctx, 14), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const themes = useMemo(() => valueThemes(ctx, 2), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
-  const doors = useMemo(() => doorsState(ctx), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const enf = useMemo(() => emphasis(entries), [entries])
   const nextDoors = useMemo(() => newDoors(ctx, 6), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
-  const abertas = doors.filter((d) => d.opened).length
 
-  // Valores que já foram plantados pelas leituras concluídas.
-  const jardim = VALORES.map((v) => ({ v, n: lidos.filter((e) => byId[e.slug]?.valores?.includes(v)).length }))
-  const cultivados = jardim.filter((x) => x.n > 0).length
   const boxes = GRUPOS.filter((g) => g.tipo === 'box').map((g) => ({ g, lidos: g.titulos.filter((id) => bySlug[id]?.status === 'lido').length,
     started: g.titulos.some((id) => bySlug[id]) })).filter((b) => b.started)
   // Banner: um lançamento em destaque (o primeiro da ordem de lançamentos).
@@ -68,12 +64,10 @@ export default function Inicio() {
         <div className="aviso"><b>Seu cadastro está pronto.</b> As assinaturas abrem em breve, e avisaremos você. Enquanto isso, explore e monte a lista.</div>
       )}
 
-      <div className="stats stats-5">
+      <div className="stats stats-3">
         <Stat icon="check" tone="green" value={lidos.length} label="Lidos" onClick={() => nav('/lista?f=lido')} />
         <Stat icon="book" tone="purple" value={lendo.length} label="Lendo" onClick={() => nav('/lista?f=lendo')} />
         <Stat icon="bookmark" tone="blue" value={quero.length} label="Quero ler" onClick={() => nav('/lista?f=quero_ler')} />
-        <Stat icon="sprout" tone="orange" value={`${cultivados}/${VALORES.length}`} label="Valores plantados" onClick={() => nav('/cultivar')} />
-        <Stat icon="door" tone="blue" value={`${abertas}/${CAMINHOS.length}`} label="Jornadas descobertas" onClick={() => nav('/cultivar')} />
       </div>
 
       {lendo.length > 0 && (
@@ -111,27 +105,18 @@ export default function Inicio() {
       )}
 
       <div className="grid-2">
-        <Card title="Jardim de valores" sub="O que as leituras concluídas já plantaram">
-          <div className="jardim">
-            <Ring value={cultivados} max={VALORES.length} label="plantados" size={132} />
-            <div className="jardim-l">
-              {jardim.map(({ v, n }) => (
-                <div key={v} className={`jv${n ? '' : ' off'}`}><img src={valorImg(v)} alt="" /><span>{v}</span><b>{n}</b></div>
-              ))}
-            </div>
-          </div>
+        <Card title="Valores que mais vêm sendo cultivados" sub={`O peso de cada valor nas leituras recentes de ${profile.name}`}>
+          <Emphasis rows={enf.valores} tone="orange" img={valorImg}
+            lead={(r) => <><b>{r.key}</b> é o valor que mais tem aparecido nas leituras de {profile.name}.</>}
+            empty="Quando vocês lerem alguns livros, aparece aqui quais valores vêm ganhando mais espaço."
+            foot={(r) => `${r.read} ${r.read === 1 ? 'livro' : 'livros'}`} />
         </Card>
 
-        <Card title="Portas abertas" sub="Jornadas que as leituras já apresentaram">
-          <div className="doors">
-            {doors.map((d) => (
-              <Link key={d.key} to="/cultivar" className={`door${d.opened ? ' open' : ''}`} title={d.opened ? `${d.opened} ${d.opened === 1 ? 'livro lido' : 'livros lidos'}` : 'Porta ainda fechada'}>
-                <img src={caminhoImg(d.key)} alt="" />
-                <b>{d.key}</b>
-                <small>{d.opened ? 'Aberta' : d.chosen ? 'Para apresentar' : 'Fechada'}</small>
-              </Link>
-            ))}
-          </div>
+        <Card title="Jornadas com que mais se identifica" sub="Pelo que leu e, principalmente, pelo que gostou">
+          <Emphasis rows={enf.caminhos} tone="blue" img={caminhoImg} arch
+            lead={(r) => <><b>{r.key}</b> é a jornada que mais tem despertado interesse{r.liked ? ` (gostou de ${r.liked} de ${r.read})` : ''}.</>}
+            empty="Ainda não há leituras de jornadas suficientes. As sugestões de “Novas portas” ajudam a descobrir."
+            foot={(r) => (r.liked ? `gostou de ${r.liked} de ${r.read}` : `${r.read} ${r.read === 1 ? 'livro' : 'livros'}`)} />
         </Card>
 
         <Card title="Boxes em andamento" sub="A ordem certa faz diferença">
@@ -176,4 +161,25 @@ export function quando(iso) {
   if (d < 2) return 'ontem'
   if (d < 30) return `há ${Math.round(d)} dias`
   return new Date(iso).toLocaleDateString('pt-BR')
+}
+
+// Ranking de ênfase: o primeiro em destaque com uma frase; barras relativas ao maior.
+function Emphasis({ rows, tone, img, arch, lead, empty, foot }) {
+  if (!rows.length) return <Empty icon={tone === 'orange' ? 'sprout' : 'door'} title="Ainda sem leituras">{empty}</Empty>
+  const max = rows[0].w
+  return (
+    <div className={`enf t-${tone}`}>
+      <p className="enf-lead">{lead(rows[0])}</p>
+      <ol className="enf-list">
+        {rows.slice(0, 6).map((r, i) => (
+          <li key={r.key} className={i === 0 ? 'top' : ''}>
+            <img src={img(r.key)} alt="" className={arch ? 'arch' : ''} />
+            <span className="enf-n"><b>{r.key}</b><small>{foot(r)}</small></span>
+            <span className="enf-bar"><i style={{ width: `${Math.max(6, (r.w / max) * 100)}%` }} /></span>
+            <em>{Math.round(r.pct * 100)}%</em>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
 }
