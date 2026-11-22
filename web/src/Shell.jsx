@@ -17,8 +17,8 @@ export const useShell = () => useContext(ShellCtx)
 const NAV = [
   { to: '/inicio', icon: 'home', label: 'Início' },
   { to: '/explorar', icon: 'compass', label: 'Explorar' },
-  { to: '/lista', icon: 'bookmark', label: 'Minha lista', badge: true },
   { to: '/cultivar', icon: 'sprout', label: 'Plantar e cultivar', short: 'Cultivar' },
+  { to: '/lista', icon: 'bookmark', label: 'Minha lista', badge: true },
 ]
 
 export default function Shell() {
