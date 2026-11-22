@@ -9,7 +9,7 @@ class ParentAndProfilesTest < ActionDispatch::IntegrationTest
     patch "/profiles/#{id}", params: { profile: { name: "Bentinho", focus_valores: %w[Coragem Fé], focus_caminhos: ["Medicina"] } }, headers: auth
     assert_response :ok
     assert_equal %w[Coragem Fé], response.parsed_body["focus_valores"]
-    patch "/profiles/#{id}", params: { profile: { focus_valores: %w[A B C D] } }, headers: auth
+    patch "/profiles/#{id}", params: { profile: { focus_valores: %w[A B C D E F] } }, headers: auth
     assert_response :unprocessable_entity
     delete "/profiles/#{id}", headers: auth
     assert_response :no_content

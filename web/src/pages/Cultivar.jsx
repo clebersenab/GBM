@@ -10,6 +10,7 @@ import { doorsState, scoreAll } from '../recommend'
 // Um passo de cada vez, sempre na mesma tela:
 // 1. Plantar um valor ou descobrir uma jornada?  2. Qual?  3. Os livros.
 // Os passos seguintes ficam apagados até a escolha anterior; mudar um passo limpa os seguintes.
+const MAX = 5
 const KIND = {
   valor: { list: VALORES, field: 'valores', focus: 'focus_valores', img: valorImg, tone: 'orange', q: 'Qual valor?', one: 'valor' },
   caminho: { list: CAMINHOS, field: 'caminhos', focus: 'focus_caminhos', img: caminhoImg, tone: 'blue', q: 'Qual jornada?', one: 'jornada' },
@@ -43,11 +44,17 @@ export default function Cultivar() {
   useEffect(() => { setErr(null) }, [item])
 
   const focus = k && item && (profile[k.focus] || []).includes(item)
+  async function removeFocus(kd, x) {
+    const f = KIND[kd].focus
+    try { await api(`/profiles/${profile.id}`, { method: 'PATCH', body: { profile: { [f]: (profile[f] || []).filter((y) => y !== x) } } }); await refresh() }
+    catch (e) { setErr(e.message) }
+  }
+
   async function toggleFocus() {
     setErr(null)
     const cur = profile[k.focus] || []
     const next = focus ? cur.filter((y) => y !== item) : [...cur, item]
-    if (next.length > 3) { setErr(kind === 'valor' ? 'Até 3 valores em foco. Tire um em Editar perfil para incluir outro.' : 'Até 3 jornadas para apresentar. Tire uma em Editar perfil para incluir outra.'); return }
+    if (next.length > MAX) { setErr(kind === 'valor' ? `Até ${MAX} valores em foco. Tire um no painel acima para incluir outro.` : `Até ${MAX} jornadas para apresentar. Tire uma no painel acima para incluir outra.`); return }
     try { await api(`/profiles/${profile.id}`, { method: 'PATCH', body: { profile: { [k.focus]: next } } }); await refresh() }
     catch (e) { setErr(e.message) }
   }
@@ -55,6 +62,28 @@ export default function Cultivar() {
   return (
     <div className="page steps-page">
       <header className="page-h"><div><h1>Plantar e cultivar</h1><p className="muted">Um passo de cada vez, para encontrar a história certa para {profile.name}.</p></div></header>
+
+      <section className="now">
+        <div className="now-col v">
+          <h3><Icon name="star" size={16} />Valores em foco</h3>
+          {(profile.focus_valores || []).length ? (
+            <div className="now-chips">{profile.focus_valores.map((x) => (
+              <span key={x} className="now-chip"><img src={valorImg(x)} alt="" />{x}
+                <button onClick={() => removeFocus('valor', x)} aria-label={`Tirar ${x} do foco`}><Icon name="x" size={13} /></button></span>
+            ))}</div>
+          ) : <p className="muted sm">Nenhum ainda. Escolha um valor abaixo e coloque em foco.</p>}
+        </div>
+        <div className="now-col j">
+          <h3><Icon name="door" size={16} />Jornadas para apresentar</h3>
+          {(profile.focus_caminhos || []).length ? (
+            <div className="now-chips">{profile.focus_caminhos.map((x) => (
+              <span key={x} className="now-chip"><img className="arch" src={caminhoImg(x)} alt="" />{x}
+                <button onClick={() => removeFocus('caminho', x)} aria-label={`Não apresentar ${x}`}><Icon name="x" size={13} /></button></span>
+            ))}</div>
+          ) : <p className="muted sm">Nenhuma ainda. Escolha uma jornada abaixo e marque para apresentar.</p>}
+        </div>
+        <p className="now-note muted sm">Pode ter vários de cada (até {MAX} valores e {MAX} jornadas). Tudo o que estiver aqui ganha destaque no Início.</p>
+      </section>
 
       <section className="stp is-on">
         <h2 className="stp-h"><i>1</i>O que vocês querem plantar em {profile.name}?</h2>
@@ -94,8 +123,8 @@ export default function Cultivar() {
           <>
             <div className={`stp-focus t-${k.tone}`}>
               <span>{kind === 'valor'
-                ? <>Quer trabalhar <b>{item}</b> com {profile.name} por um tempo? Em foco, o Início mostra sempre um carrossel deste valor.</>
-                : <>Quer apresentar <b>{item}</b> a {profile.name}? O Início vai sugerir a primeira história desta jornada.</>}</span>
+                ? <>Quer trabalhar <b>{item}</b> com {profile.name} por um tempo? Em foco, o Início mostra um carrossel dele. Pode ter vários valores em foco.</>
+                : <>Quer apresentar <b>{item}</b> a {profile.name}? O Início mostra um carrossel dela. Pode apresentar várias jornadas.</>}</span>
               <button className={`btn btn-sm ${focus ? 'btn-ghost' : 'btn-main'}`} onClick={toggleFocus}>
                 <Icon name={focus ? 'check' : kind === 'valor' ? 'star' : 'door'} size={16} />
                 {kind === 'valor' ? (focus ? 'Em foco' : 'Colocar em foco') : (focus ? 'Vamos apresentar' : 'Apresentar')}

@@ -124,7 +124,7 @@ export function recommend(ctx, k = 12) {
 
 // Valores se CULTIVAM (repetição): carrosséis "Para cultivar X" com o foco dos pais,
 // ou com o que eles mais exploram em Plantar e cultivar.
-export function valueThemes({ entries = [], profile, signals = [] }, max = 3) {
+export function valueThemes({ entries = [], profile, signals = [] }, max = 5) {
   // A escolha dos pais manda: com valores em foco, só eles aparecem.
   const explicit = profile?.focus_valores || []
   if (explicit.length) return explicit.slice(0, max).map((key) => ({ kind: 'valor', key, explicit: true }))

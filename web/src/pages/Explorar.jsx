@@ -4,7 +4,7 @@ import { useLibrary } from '../library'
 import { useShell } from '../Shell'
 import Rail from '../Rail'
 import { Card, Cover, Empty, PageHead, Tag } from '../ds'
-import { FILEIRAS, GRUPOS, LANCAMENTOS, TITULOS, byId } from '../catalog'
+import { CATEGORIAS, GRUPOS, LANCAMENTOS, TITULOS, byId } from '../catalog'
 import { search } from '../search'
 import { GroupArt } from '../GroupModal'
 
@@ -17,7 +17,7 @@ export default function Explorar() {
 
   const rows = useMemo(() => [
     { nome: 'Lançamentos', itens: LANCAMENTOS.map((id) => byId[id]).filter(Boolean) },
-    ...FILEIRAS.map((nome) => ({ nome, itens: TITULOS.filter((t) => t.fileiras?.includes(nome)) })),
+    ...CATEGORIAS.map((nome) => ({ nome, itens: TITULOS.filter((t) => t.fileiras?.includes(nome)) })),
   ], [])
 
   if (results) {
@@ -37,7 +37,7 @@ export default function Explorar() {
     <div className="page">
       <PageHead title="Explorar" sub={`${TITULOS.length} livros, das grandes obras às histórias de fé`} />
       {rows.map((r) => (
-        <Card key={r.nome} title={r.nome} pad={false}>
+        <Card key={r.nome} title={r.nome} sub={r.nome === 'Lançamentos' ? null : `${r.itens.length} livros`} pad={false}>
           <Rail>{r.itens.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
         </Card>
       ))}
