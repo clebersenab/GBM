@@ -3,7 +3,8 @@
 // coleção = livros independentes reunidos por autor ou tema, em qualquer ordem.
 import { useLibrary } from './library'
 import { useShell } from './Shell'
-import { Icon, Modal, StatusTag, Tag } from './ds'
+import { Cover, Icon, Modal, StatusTag, Tag } from './ds'
+import Rail from './Rail'
 import { byId } from './catalog'
 
 // Arte do grupo; sem arte própria, um mosaico com as capas das obras.
@@ -59,16 +60,8 @@ export default function GroupModal({ g, onClose }) {
       ) : (
         <>
           <h3 className="gm-h">Livros da coleção</h3>
-          <div className="setgrid">
-            {vols.map((v) => (
-              <button key={v.id} onClick={() => open(v)}>
-                <span className="cv-img">
-                  <img src={`/${v.capa}`} alt="" />
-                  {bySlug[v.id] && <span className="cv-tag"><StatusTag status={bySlug[v.id].status} /></span>}
-                </span>
-                <span>{v.titulo}</span>
-              </button>
-            ))}
+          <div className="gm-rail">
+            <Rail>{vols.map((v) => <Cover key={v.id} t={v} status={bySlug[v.id]?.status} onClick={open} />)}</Rail>
           </div>
         </>
       )}
