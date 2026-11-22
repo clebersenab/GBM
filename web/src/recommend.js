@@ -1,7 +1,7 @@
 // Recomendação por perfil (híbrida, baseada em conteúdo).
 //
 // 1. Cada livro vira um vetor de características: valores, jornadas, fileira (literatura,
-//    cinema, fé), box e tipo da obra semente.
+//    cinema, fé), box, coleção (separados) e tipo da obra semente.
 // 2. O gosto da criança é a soma ponderada dos vetores dos livros com que ela interagiu:
 //    lido e gostou 3 · lido 1,5 · lendo 1,2 · quero ler 1 · não gostou -2,
 //    com peso que cai pela metade a cada 45 dias (o gosto muda com a idade).
@@ -27,7 +27,7 @@ function features(t) {
   for (const x of t.caminhos || []) v['c:' + x] = 1
   for (const x of t.fileiras || []) v['f:' + x] = 0.5
   if (t.box) v['b:' + t.box] = 0.8
-  for (const x of t.colecoes || []) v['b:' + x] = 0.6
+  for (const x of t.colecoes || []) v['k:' + x] = 0.6 // coleção: chave própria, nunca misturada com box
   if (t.obra_mae?.tipo) v['o:' + t.obra_mae.tipo] = 0.3
   return v
 }

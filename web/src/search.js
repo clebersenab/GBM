@@ -6,7 +6,7 @@
 // Prioridade (cada campo tem um peso; o melhor campo de cada título decide a ordem):
 //   1. Título ................ 100 começa com a busca · 85 alguma palavra começa · 70 contém · 55 com 1 erro de digitação
 //   2. Obra semente e autor .. 60 / 50 / 40
-//   3. Box ou coleção ........ 45
+//   3. Box (volumes em ordem) e coleção (livros independentes), campos separados .. 45
 //   4. Valores e jornadas .... 35
 //   5. Sinopse ............... 20 + 4 por palavra encontrada
 // Todas as palavras digitadas precisam aparecer (em qualquer campo); com 2 ou mais palavras, quem
@@ -27,7 +27,8 @@ const INDEX = TITULOS.map((t) => {
     titulo: norm(t.titulo),
     semente: norm(t.obra_mae?.titulo),
     autor: norm(t.obra_mae?.autor),
-    grupo: norm([g?.titulo, ...cols].filter(Boolean).join(' ')),
+    box: norm(g?.titulo),
+    colecao: norm(cols.join(' ')),
     temas: norm([...(t.valores || []), ...(t.caminhos || [])].join(' ')),
     sinopse: norm(t.sinopse),
   }
@@ -56,7 +57,7 @@ function fieldScore(text, q, [start, word, contains]) {
   return 0
 }
 
-const WHY = { titulo: 'Título', semente: 'Obra semente', autor: 'Obra semente', grupo: 'Box ou coleção', temas: 'Valores e jornadas', sinopse: 'Sinopse' }
+const WHY = { titulo: 'Título', semente: 'Obra semente', autor: 'Obra semente', box: 'Box', colecao: 'Coleção', temas: 'Valores e jornadas', sinopse: 'Sinopse' }
 
 export function search(raw, limit = 8) {
   const q = norm(raw).trim()
@@ -77,7 +78,8 @@ export function search(raw, limit = 8) {
       titulo: fieldScore(f.titulo, q, [100, 85, 70]),
       semente: fieldScore(f.semente, q, [60, 50, 40]),
       autor: fieldScore(f.autor, q, [50, 45, 40]),
-      grupo: fieldScore(f.grupo, q, [45, 45, 40]),
+      box: fieldScore(f.box, q, [45, 45, 40]),
+      colecao: fieldScore(f.colecao, q, [45, 45, 40]),
       temas: fieldScore(f.temas, q, [35, 35, 30]),
       sinopse: 0,
     }
