@@ -79,13 +79,15 @@ export default function Inicio() {
         {ready && <Rail>{recs.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} note={r.reason} onClick={openTitle} />)}</Rail>}
       </Card>
 
-      {ready && <PlantBlock />}
+      {ready && <PlantBlock kind="valor" />}
 
       {lendo.length > 0 && (
         <Card title="Continue lendo" pad={false}>
           <Rail>{lendo.map((e) => byId[e.slug] && <Cover key={e.slug} t={byId[e.slug]} status="lendo" onClick={openTitle} />)}</Rail>
         </Card>
       )}
+
+      {ready && <PlantBlock kind="caminho" />}
 
 
 
