@@ -8,6 +8,7 @@ import { Icon, Badge, useDismiss } from './ds'
 import { avatarImg } from './catalog'
 import { search } from './search'
 import TitleModal from './TitleModal'
+import GroupModal from './GroupModal'
 
 const ShellCtx = createContext(null)
 export const useShell = () => useContext(ShellCtx)
@@ -22,6 +23,7 @@ const NAV = [
 
 export default function Shell() {
   const [title, setTitle] = useState(null)
+  const [group, setGroup] = useState(null)
   const [scrolled, setScrolled] = useState(false)
   const loc = useLocation()
   useEffect(() => { window.scrollTo(0, 0) }, [loc.pathname])
@@ -31,7 +33,7 @@ export default function Shell() {
     return () => window.removeEventListener('scroll', on)
   }, [])
 
-  const ctx = useMemo(() => ({ openTitle: setTitle }), [])
+  const ctx = useMemo(() => ({ openTitle: setTitle, openGroup: setGroup }), [])
   return (
     <ShellCtx.Provider value={ctx}>
       <div className="shell">
@@ -49,7 +51,8 @@ export default function Shell() {
         <main className="content"><Outlet /></main>
         <Nav className="tabbar" mobile />
       </div>
-      {title && <TitleModal t={title} onClose={() => setTitle(null)} />}
+      {group && <GroupModal g={group} onClose={() => setGroup(null)} />}
+      {title && <TitleModal key={title.id} t={title} onClose={() => setTitle(null)} />}
     </ShellCtx.Provider>
   )
 }

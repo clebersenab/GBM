@@ -6,12 +6,13 @@ import Rail from '../Rail'
 import { Card, Cover, Empty, PageHead, Tag } from '../ds'
 import { FILEIRAS, GRUPOS, LANCAMENTOS, TITULOS, byId } from '../catalog'
 import { search } from '../search'
+import { GroupArt } from '../GroupModal'
 
 export default function Explorar() {
   const [params] = useSearchParams()
   const q = params.get('q') || ''
   const { bySlug } = useLibrary()
-  const { openTitle } = useShell()
+  const { openTitle, openGroup } = useShell()
   const results = useMemo(() => (q ? search(q, 60) : null), [q])
 
   const rows = useMemo(() => [
@@ -43,8 +44,8 @@ export default function Explorar() {
       <Card title="Boxes" sub="Uma história contada em volumes. Leia na ordem." pad={false}>
         <Rail>
           {GRUPOS.filter((g) => g.tipo === 'box').map((g) => (
-            <button key={g.id} className="grp" onClick={() => openTitle(byId[g.titulos[0]])}>
-              <img loading="lazy" src={`/${g.arte}`} alt="" />
+            <button key={g.id} className="grp" onClick={() => openGroup(g)}>
+              <GroupArt g={g} />
               <span><Tag tone="purple">Box · {g.titulos.length} volumes, em ordem</Tag><b>{g.titulo}</b></span>
             </button>
           ))}
@@ -53,8 +54,8 @@ export default function Explorar() {
       <Card title="Coleções" sub="Livros independentes reunidos por autor ou tema. Leia em qualquer ordem." pad={false}>
         <Rail>
           {GRUPOS.filter((g) => g.tipo === 'colecao').map((g) => (
-            <button key={g.id} className="grp" onClick={() => openTitle(byId[g.titulos[0]])}>
-              <img loading="lazy" src={`/${g.arte}`} alt="" />
+            <button key={g.id} className="grp" onClick={() => openGroup(g)}>
+              <GroupArt g={g} />
               <span><Tag tone="blue">Coleção · {g.titulos.length} {g.titulos.length === 1 ? 'livro' : 'livros'}</Tag><b>{g.titulo}</b></span>
             </button>
           ))}
