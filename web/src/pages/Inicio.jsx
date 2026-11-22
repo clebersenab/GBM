@@ -80,7 +80,7 @@ export default function Inicio() {
       </Card>
 
       {top.length > 0 && (
-        <Card title="Top 10 no GBM" sub="Os livros mais lidos pelas famílias nos últimos 30 dias" pad={false} className="top10">
+        <Card title="Top 10 no GBM" sub="As obras mais lidas pelas famílias do GBM" pad={false} className="top10">
           <Rail>{top.map(({ t }, i) => (
             <button key={t.id} className="t10" onClick={() => openTitle(t)} aria-label={`${i + 1}º lugar: ${t.titulo}`}>
               <span className="t10-n" aria-hidden="true">{i + 1}</span>
