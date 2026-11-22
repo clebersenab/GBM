@@ -167,3 +167,39 @@ export function newDoors(ctx, k = 6) {
     .filter(Boolean)
     .slice(0, k)
 }
+
+// Ênfase, não cobertura: o que vem ocupando mais espaço nas leituras da criança.
+// Valores: peso de cada leitura = lido 1 · lendo 0,5 · gostou +0,5 · não gostou −0,5,
+//   com o mesmo decaimento de 45 dias (o que vem sendo trabalhado agora pesa mais).
+// Jornadas (afinidade): o "gostei" pesa mais que o simples contato, porque indica identificação:
+//   lido 1 · lendo 0,5 · gostou +1,5 · não gostou −1 (nunca abaixo de zero).
+// É uma leitura dos sinais disponíveis, não um diagnóstico de aptidão.
+export function emphasis(entries = []) {
+  const now = Date.now()
+  const acc = { valores: {}, caminhos: {} }
+  const ev = { valores: {}, caminhos: {} }
+  for (const e of entries) {
+    const t = byId[e.slug]
+    if (!t || (e.status !== 'lido' && e.status !== 'lendo')) continue
+    const decay = Math.pow(0.5, (now - new Date(e.updated_at || now)) / 864e5 / HALF_LIFE_DAYS)
+    const base = e.status === 'lido' ? 1 : 0.5
+    const wv = Math.max(0, base + (e.liked === true ? 0.5 : e.liked === false ? -0.5 : 0)) * decay
+    const wc = Math.max(0, base + (e.liked === true ? 1.5 : e.liked === false ? -1 : 0)) * decay
+    for (const v of t.valores || []) {
+      acc.valores[v] = (acc.valores[v] || 0) + wv
+      ev.valores[v] = ev.valores[v] || { read: 0, liked: 0 }
+      ev.valores[v].read++; if (e.liked) ev.valores[v].liked++
+    }
+    for (const c of t.caminhos || []) {
+      acc.caminhos[c] = (acc.caminhos[c] || 0) + wc
+      ev.caminhos[c] = ev.caminhos[c] || { read: 0, liked: 0 }
+      ev.caminhos[c].read++; if (e.liked) ev.caminhos[c].liked++
+    }
+  }
+  const rank = (kind) => {
+    const total = Object.values(acc[kind]).reduce((s, x) => s + x, 0)
+    return Object.entries(acc[kind]).filter(([, w]) => w > 0).sort((a, b) => b[1] - a[1])
+      .map(([key, w]) => ({ key, w, pct: total ? w / total : 0, ...ev[kind][key] }))
+  }
+  return { valores: rank('valores'), caminhos: rank('caminhos') }
+}
