@@ -13,7 +13,7 @@ const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom d
 
 export default function Inicio() {
   const { me, profile } = useSession()
-  const { entries, bySlug, signals, ready } = useLibrary()
+  const { entries, bySlug, signals, ready, save, remove } = useLibrary()
   const { openTitle } = useShell()
   const nav = useNavigate()
   const ctx = { entries, profile, signals }
@@ -52,6 +52,12 @@ export default function Inicio() {
             {destaque.obra_mae && <p className="hero-seed">Semente: <b>{destaque.obra_mae.titulo}</b>{destaque.obra_mae.autor && `, ${destaque.obra_mae.autor}`}</p>}
             <div className="acts">
               <button className="btn btn-main" onClick={() => openTitle(destaque)}><Icon name="play" size={18} />{bySlug[destaque.id]?.status === 'lendo' ? 'Continuar lendo' : 'Ler agora'}</button>
+              {(!bySlug[destaque.id] || bySlug[destaque.id].status === 'quero_ler') && (
+                <button className="btn btn-ghost" aria-pressed={!!bySlug[destaque.id]}
+                  onClick={() => (bySlug[destaque.id] ? remove(destaque.id) : save(destaque.id, { status: 'quero_ler' })).catch(() => {})}>
+                  <Icon name={bySlug[destaque.id] ? 'check' : 'bookmark'} size={18} />{bySlug[destaque.id] ? 'Na sua lista' : 'Ler depois'}
+                </button>
+              )}
             </div>
           </div>
           <BookAnim img={`/${DESTAQUE_IMG.has(destaque.id) ? `images/destaques/${destaque.id}.webp` : destaque.capa}`} />
