@@ -81,7 +81,7 @@ export default function Inicio() {
             <div className="pb-chips">
               {(profile.focus_valores || []).map((x) => <Tag key={'v' + x} tone="orange" icon="star">{x}</Tag>)}
               {(profile.focus_caminhos || []).map((x) => <Tag key={'c' + x} tone="blue" icon="door">{x}</Tag>)}
-              <Link className="btn btn-sm btn-ghost" to="/cultivar">{themes.some((t) => t.explicit) || journeys.length ? 'Ajustar' : 'Escolher'}</Link>
+              <Link className="btn btn-sm btn-ghost" to="/cultivar">{themes.length || journeys.length ? 'Ajustar' : 'Escolher'}</Link>
             </div>
           </header>
           {!themes.length && !journeys.length && (
@@ -95,7 +95,7 @@ export default function Inicio() {
               <div key={th.kind + th.key} className={`pb-row t-${v ? 'orange' : 'blue'}`}>
                 <h3 className="th-t"><img className={v ? '' : 'door-ic'} src={v ? valorImg(th.key) : caminhoImg(th.key)} alt="" />
                   {v ? `Para cultivar ${th.key}` : `Apresentando ${th.key}`}
-                  {!th.explicit && <small className="pb-hint">sugestão pelo que vocês têm buscado</small>}</h3>
+</h3>
                 <Rail>{row.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
               </div>
             )

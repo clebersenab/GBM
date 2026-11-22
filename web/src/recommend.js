@@ -124,16 +124,10 @@ export function recommend(ctx, k = 12) {
 
 // Valores se CULTIVAM (repetição): carrosséis "Para cultivar X" com o foco dos pais,
 // ou com o que eles mais exploram em Plantar e cultivar.
-export function valueThemes({ entries = [], profile, signals = [] }, max = 5) {
-  // A escolha dos pais manda: com valores em foco, só eles aparecem.
-  const explicit = profile?.focus_valores || []
-  if (explicit.length) return explicit.slice(0, max).map((key) => ({ kind: 'valor', key, explicit: true }))
-  // Sem foco: sugere pelo que eles têm explorado e pela lista de leitura.
-  const w = {}
-  for (const s of signals) if (s.kind === 'valor') w[s.key] = (w[s.key] || 0) + Math.log2(1 + s.count) * 2
-  for (const e of entries) if (e.status === 'quero_ler') for (const v of byId[e.slug]?.valores || []) w[v] = (w[v] || 0) + 0.5
-  return Object.entries(w).filter(([, x]) => x >= 1).sort((a, b) => b[1] - a[1]).slice(0, 1)
-    .map(([key]) => ({ kind: 'valor', key, explicit: false }))
+// Valores em foco: só o que os pais escolheram (tirar do foco tira do Início na hora).
+// O comportamento (cliques, lista) continua pesando nas recomendações, não aqui.
+export function valueThemes({ profile }, max = 5) {
+  return (profile?.focus_valores || []).slice(0, max).map((key) => ({ kind: 'valor', key, explicit: true }))
 }
 
 // Jornadas que os pais escolheram apresentar: cada uma ganha seu carrossel no Início.
