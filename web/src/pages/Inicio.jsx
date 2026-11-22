@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSession } from '../session'
 import { useLibrary } from '../library'
@@ -6,7 +6,7 @@ import { useShell } from '../Shell'
 import Rail from '../Rail'
 import BookAnim from '../BookAnim'
 import { Card, Cover, Empty, Icon, Progress, Stat, Tag } from '../ds'
-import { DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, byId, valorImg, caminhoImg } from '../catalog'
+import { CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
 import { emphasis, newDoors, recommend, themeRow, valueThemes } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
@@ -105,18 +105,12 @@ export default function Inicio() {
       )}
 
       <div className="grid-2">
-        <Card title="Valores que mais vêm sendo cultivados" sub={`O peso de cada valor nas leituras recentes de ${profile.name}`}>
-          <Emphasis rows={enf.valores} tone="orange" img={valorImg}
-            lead={(r) => <><b>{r.key}</b> é o valor que mais tem aparecido nas leituras de {profile.name}.</>}
-            empty="Quando vocês lerem alguns livros, aparece aqui quais valores vêm ganhando mais espaço."
-            foot={(r) => `${r.read} ${r.read === 1 ? 'livro' : 'livros'}`} />
+        <Card title="Jardim de valores" sub="Quanto mais um valor aparece nas leituras, mais ele cresce">
+          <Garden rows={enf.valores} name={profile.name} />
         </Card>
 
-        <Card title="Jornadas com que mais se identifica" sub="Pelo que leu e, principalmente, pelo que gostou">
-          <Emphasis rows={enf.caminhos} tone="blue" img={caminhoImg} arch
-            lead={(r) => <><b>{r.key}</b> é a jornada que mais tem despertado interesse{r.liked ? ` (gostou de ${r.liked} de ${r.read})` : ''}.</>}
-            empty="Ainda não há leituras de jornadas suficientes. As sugestões de “Novas portas” ajudam a descobrir."
-            foot={(r) => (r.liked ? `gostou de ${r.liked} de ${r.read}` : `${r.read} ${r.read === 1 ? 'livro' : 'livros'}`)} />
+        <Card title="Corrida das jornadas" sub="Quem está na frente é a que mais tem a ver: conta o que leu e, principalmente, o que gostou">
+          <Race rows={enf.caminhos} />
         </Card>
 
         <Card title="Boxes em andamento" sub="A ordem certa faz diferença">
@@ -163,23 +157,67 @@ export function quando(iso) {
   return new Date(iso).toLocaleDateString('pt-BR')
 }
 
-// Ranking de ênfase: o primeiro em destaque com uma frase; barras relativas ao maior.
-function Emphasis({ rows, tone, img, arch, lead, empty, foot }) {
-  if (!rows.length) return <Empty icon={tone === 'orange' ? 'sprout' : 'door'} title="Ainda sem leituras">{empty}</Empty>
-  const max = rows[0].w
+// Jardim: todos os valores, ordenados pelo peso; a planta cresce com o peso.
+function Garden({ rows, name }) {
+  const grown = useGrow()
+  const w = Object.fromEntries(rows.map((r) => [r.key, r]))
+  const all = VALORES.map((v) => w[v] || { key: v, w: 0, pct: 0, read: 0 }).sort((a, b) => b.w - a.w)
+  const max = all[0].w || 1
+  const lead = all[0].w > 0 ? all[0] : null
   return (
-    <div className={`enf t-${tone}`}>
-      <p className="enf-lead">{lead(rows[0])}</p>
-      <ol className="enf-list">
-        {rows.slice(0, 6).map((r, i) => (
-          <li key={r.key} className={i === 0 ? 'top' : ''}>
-            <img src={img(r.key)} alt="" className={arch ? 'arch' : ''} />
-            <span className="enf-n"><b>{r.key}</b><small>{foot(r)}</small></span>
-            <span className="enf-bar"><i style={{ width: `${Math.max(6, (r.w / max) * 100)}%` }} /></span>
-            <em>{Math.round(r.pct * 100)}%</em>
-          </li>
-        ))}
+    <div className="garden">
+      <p className="garden-lead">{lead ? <><b>{lead.key}</b> é o que mais tem crescido em {name}.</> : <>Ainda não brotou nada. Cada livro lido rega o jardim.</>}</p>
+      <ol className="beds">
+        {all.map((r, i) => {
+          const size = r.w ? 0.42 + 0.58 * (r.w / max) : 0.26
+          return (
+            <li key={r.key} className={`bed${r.w ? '' : ' sprout'}${i === 0 && r.w ? ' first' : ''}`} title={r.w ? `${Math.round(r.pct * 100)}% das leituras` : 'Ainda não apareceu'}>
+              <span className="plant">{r.w > 0 && i < 3 && <span className={`medal m${i + 1}`}>{i + 1}º</span>}<img src={valorImg(r.key)} alt="" style={{ width: `${(grown ? size : 0.15) * 100}%` }} /></span>
+              <b>{r.key}</b>
+              <small>{r.read ? `${r.read} ${r.read === 1 ? 'livro' : 'livros'}` : 'broto'}</small>
+            </li>
+          )
+        })}
       </ol>
     </div>
   )
+}
+
+// Corrida: uma raia por jornada; a porta avança conforme a afinidade.
+function Race({ rows }) {
+  const go = useGrow()
+  const w = Object.fromEntries(rows.map((r) => [r.key, r]))
+  const all = CAMINHOS.map((c) => w[c] || { key: c, w: 0, read: 0, liked: 0 }).sort((a, b) => b.w - a.w)
+  const max = all[0].w || 1
+  const leader = all[0].w > 0 ? all[0].key : null
+  return (
+    <div className="race">
+      <p className="race-lead">{leader ? <><b>{leader}</b> está na frente{w[leader].liked ? `: gostou de ${w[leader].liked} de ${w[leader].read}` : ''}.</> : <>A corrida ainda não começou. Leia uma história de qualquer jornada para dar a largada.</>}</p>
+      <ol className="lanes">
+        {all.map((r) => {
+          const pos = r.w ? 8 + 84 * (r.w / max) : 0
+          return (
+            <li key={r.key} className={`lane${r.key === leader ? ' lead' : ''}${r.w ? '' : ' idle'}`}>
+              <span className="lane-n">{r.key}</span>
+              <span className="lane-t">
+                <span className="runner" style={{ left: `${go ? pos : 0}%` }}>
+                  <img src={caminhoImg(r.key)} alt="" />
+                  {r.key === leader && <i className="crown"><Icon name="star" size={12} /></i>}
+                </span>
+                <span className="finish" aria-hidden="true" />
+              </span>
+              <small className="lane-s">{r.w ? (r.liked ? `♥ ${r.liked}` : `${r.read} lido${r.read > 1 ? 's' : ''}`) : 'largada'}</small>
+            </li>
+          )
+        })}
+      </ol>
+    </div>
+  )
+}
+
+// Liga a animação logo depois de montar (as plantas crescem e as portas correm).
+function useGrow() {
+  const [on, setOn] = useState(false)
+  useEffect(() => { const id = requestAnimationFrame(() => setTimeout(() => setOn(true), 120)); return () => cancelAnimationFrame(id) }, [])
+  return on
 }
