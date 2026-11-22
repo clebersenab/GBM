@@ -40,12 +40,22 @@ export default function Explorar() {
           <Rail>{r.itens.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
         </Card>
       ))}
-      <Card title="Boxes e coleções" sub="Histórias em volumes e autores reunidos" pad={false}>
+      <Card title="Boxes" sub="Uma história contada em volumes. Leia na ordem." pad={false}>
         <Rail>
-          {GRUPOS.map((g) => (
+          {GRUPOS.filter((g) => g.tipo === 'box').map((g) => (
             <button key={g.id} className="grp" onClick={() => openTitle(byId[g.titulos[0]])}>
               <img loading="lazy" src={`/${g.arte}`} alt="" />
-              <span><Tag tone={g.tipo === 'box' ? 'purple' : 'blue'}>{g.tipo === 'box' ? `Box · ${g.titulos.length} volumes` : 'Coleção'}</Tag><b>{g.titulo}</b></span>
+              <span><Tag tone="purple">Box · {g.titulos.length} volumes, em ordem</Tag><b>{g.titulo}</b></span>
+            </button>
+          ))}
+        </Rail>
+      </Card>
+      <Card title="Coleções" sub="Livros independentes reunidos por autor ou tema. Leia em qualquer ordem." pad={false}>
+        <Rail>
+          {GRUPOS.filter((g) => g.tipo === 'colecao').map((g) => (
+            <button key={g.id} className="grp" onClick={() => openTitle(byId[g.titulos[0]])}>
+              <img loading="lazy" src={`/${g.arte}`} alt="" />
+              <span><Tag tone="blue">Coleção · {g.titulos.length} {g.titulos.length === 1 ? 'livro' : 'livros'}</Tag><b>{g.titulo}</b></span>
             </button>
           ))}
         </Rail>
