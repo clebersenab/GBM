@@ -1,0 +1,77 @@
+// Ficha de box ou coleção, mantendo a diferença entre os dois:
+// box = uma história em volumes, com roteiro de leitura em ordem;
+// coleção = livros independentes reunidos por autor ou tema, em qualquer ordem.
+import { useLibrary } from './library'
+import { useShell } from './Shell'
+import { Icon, Modal, StatusTag, Tag } from './ds'
+import { byId } from './catalog'
+
+// Arte do grupo; sem arte própria, um mosaico com as capas das obras.
+export function GroupArt({ g, className = '' }) {
+  if (g.arte) return <img className={`g-art ${className}`} loading="lazy" src={`/${g.arte}`} alt="" />
+  return (
+    <span className={`g-art g-mosaic ${className}`} aria-hidden="true">
+      {g.titulos.slice(0, 3).map((id) => byId[id] && <img key={id} loading="lazy" src={`/${byId[id].capa}`} alt="" />)}
+    </span>
+  )
+}
+
+export default function GroupModal({ g, onClose }) {
+  const { bySlug } = useLibrary()
+  const { openTitle } = useShell()
+  const isBox = g.tipo === 'box'
+  const vols = g.titulos.map((id) => byId[id]).filter(Boolean)
+  const next = isBox && vols.find((v) => bySlug[v.id]?.status !== 'lido')
+  const open = (t) => { onClose(); openTitle(t) }
+
+  return (
+    <Modal title={g.titulo} onClose={onClose} wide>
+      <GroupArt g={g} className="gm-art" />
+      <div className="gm-meta">
+        {isBox ? <Tag tone="purple">Box · {vols.length} volumes</Tag> : <Tag tone="blue">Coleção · {vols.length} {vols.length === 1 ? 'livro' : 'livros'}</Tag>}
+        <span className="muted sm">{isBox ? 'Leia em ordem' : 'Leia em qualquer ordem'}</span>
+      </div>
+      {g.descricao && <p className="gm-desc">{g.descricao}</p>}
+
+      {isBox ? (
+        <>
+          <h3 className="gm-h">Roteiro de leitura</h3>
+          <ol className="route">
+            {vols.map((v, i) => (
+              <li key={v.id}>
+                <button onClick={() => open(v)}>
+                  <span className="n">{i + 1}</span>
+                  <img src={`/${v.capa}`} alt="" />
+                  <span className="rt">
+                    <b>{v.titulo}</b>
+                    <small>{v.sinopse}</small>
+                    <span className="rt-tags">
+                      <StatusTag status={bySlug[v.id]?.status} />
+                      {next?.id === v.id && <Tag tone="purple" icon="play">{i === 0 ? 'Comece por aqui' : 'Próximo'}</Tag>}
+                    </span>
+                  </span>
+                  <Icon name="chev" size={18} />
+                </button>
+              </li>
+            ))}
+          </ol>
+        </>
+      ) : (
+        <>
+          <h3 className="gm-h">Livros da coleção</h3>
+          <div className="setgrid">
+            {vols.map((v) => (
+              <button key={v.id} onClick={() => open(v)}>
+                <span className="cv-img">
+                  <img src={`/${v.capa}`} alt="" />
+                  {bySlug[v.id] && <span className="cv-tag"><StatusTag status={bySlug[v.id].status} /></span>}
+                </span>
+                <span>{v.titulo}</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </Modal>
+  )
+}

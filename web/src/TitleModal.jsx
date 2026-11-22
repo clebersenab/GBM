@@ -4,16 +4,17 @@ import { api } from './api'
 import { useLibrary } from './library'
 import { useShell } from './Shell'
 import { Icon, Modal, STATUS } from './ds'
-import { boxOf, byId, valorImg, caminhoImg } from './catalog'
+import { boxOf, byId, grupoById, valorImg, caminhoImg } from './catalog'
 
 export default function TitleModal({ t, onClose }) {
   const { bySlug, save, remove } = useLibrary()
-  const { openTitle } = useShell()
+  const { openTitle, openGroup } = useShell()
   const entry = bySlug[t.id]
   const [msg, setMsg] = useState(null)
   const [busy, setBusy] = useState(null)
   const o = t.obra_mae
   const box = boxOf(t)
+  const colecoes = (t.colecoes || []).map((id) => grupoById[id]).filter(Boolean)
 
   async function setStatus(status) {
     setMsg(null)
@@ -66,8 +67,15 @@ export default function TitleModal({ t, onClose }) {
               {box.index > 0 && bySlug[box.grupo.titulos[box.index - 1]]?.status !== 'lido' && (
                 <p className="muted sm">Para uma experiência melhor, leia antes <b>{byId[box.grupo.titulos[box.index - 1]]?.titulo}</b>.</p>
               )}
+              <button className="tlink sm" onClick={() => { onClose(); openGroup(box.grupo) }}>Ver o roteiro do box</button>
             </div>
           )}
+          {colecoes.map((g) => (
+            <div key={g.id} className="tm-col">
+              <small>Faz parte da coleção <b>{g.titulo}</b>, {g.titulos.length} {g.titulos.length === 1 ? 'livro' : 'livros'} para ler em qualquer ordem.</small>
+              <button className="tlink sm" onClick={() => { onClose(); openGroup(g) }}>Ver a coleção</button>
+            </div>
+          ))}
 
           {(t.valores?.length > 0 || t.caminhos?.length > 0) && (
             <div className="plantou">
