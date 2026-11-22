@@ -55,7 +55,7 @@ export function ProfileForm({ profile, onClose, onDone }) {
   const [busy, setBusy] = useState(false)
   const flip = (k, x) => {
     const cur = form[k]
-    if (!cur.includes(x) && cur.length >= 3) { setError('Escolha até 3 em cada grupo.'); return }
+    if (!cur.includes(x) && cur.length >= 5) { setError('Escolha até 5 em cada grupo.'); return }
     setError(null)
     setForm({ ...form, [k]: cur.includes(x) ? cur.filter((y) => y !== x) : [...cur, x] })
   }
@@ -94,11 +94,11 @@ export function ProfileForm({ profile, onClose, onDone }) {
           ))}
         </fieldset>
         <fieldset className="bands focus">
-          <legend>Valores para cultivar <small>(até 3, opcional)</small></legend>
+          <legend>Valores para cultivar <small>(até 5, opcional)</small></legend>
           {VALORES.map((v) => <button type="button" key={v} aria-pressed={form.focus_valores.includes(v)} onClick={() => flip('focus_valores', v)}>{v}</button>)}
         </fieldset>
         <fieldset className="bands focus j">
-          <legend>Jornadas para apresentar <small>(até 3, opcional)</small></legend>
+          <legend>Jornadas para apresentar <small>(até 5, opcional)</small></legend>
           {CAMINHOS.map((c) => <button type="button" key={c} aria-pressed={form.focus_caminhos.includes(c)} onClick={() => flip('focus_caminhos', c)}>{c}</button>)}
         </fieldset>
         <FormError error={error} />

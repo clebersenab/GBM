@@ -22,7 +22,7 @@ export default function Inicio() {
   const lendo = entries.filter((e) => e.status === 'lendo')
   const quero = entries.filter((e) => e.status === 'quero_ler')
   const recs = useMemo(() => recommend(ctx, 14), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
-  const themes = useMemo(() => valueThemes(ctx, 3), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const themes = useMemo(() => valueThemes(ctx, 5), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const journeys = useMemo(() => journeyThemes(ctx), [profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const enf = useMemo(() => emphasis(entries), [entries])
   const nextDoors = useMemo(() => newDoors(ctx, 6), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -71,6 +71,38 @@ export default function Inicio() {
         <Stat icon="bookmark" tone="blue" value={quero.length} label="Quero ler" onClick={() => nav('/lista?f=quero_ler')} />
       </div>
 
+      {ready && (
+        <section className="plant-block">
+          <header className="pb-h">
+            <div>
+              <p className="eyebrow">O que vocês estão plantando</p>
+              <h2>Em {profile.name}</h2>
+            </div>
+            <div className="pb-chips">
+              {(profile.focus_valores || []).map((x) => <Tag key={'v' + x} tone="orange" icon="star">{x}</Tag>)}
+              {(profile.focus_caminhos || []).map((x) => <Tag key={'c' + x} tone="blue" icon="door">{x}</Tag>)}
+              <Link className="btn btn-sm btn-ghost" to="/cultivar">{themes.some((t) => t.explicit) || journeys.length ? 'Ajustar' : 'Escolher'}</Link>
+            </div>
+          </header>
+          {!themes.length && !journeys.length && (
+            <p className="muted pb-empty">Escolham valores para cultivar e jornadas para apresentar em <Link className="tlink" to="/cultivar">Plantar e cultivar</Link>. Cada escolha vira um carrossel aqui.</p>
+          )}
+          {[...themes, ...journeys].map((th) => {
+            const row = themeBooks(ctx, th, 14)
+            if (!row.length) return null
+            const v = th.kind === 'valor'
+            return (
+              <div key={th.kind + th.key} className={`pb-row t-${v ? 'orange' : 'blue'}`}>
+                <h3 className="th-t"><img className={v ? '' : 'door-ic'} src={v ? valorImg(th.key) : caminhoImg(th.key)} alt="" />
+                  {v ? `Para cultivar ${th.key}` : `Apresentando ${th.key}`}
+                  {!th.explicit && <small className="pb-hint">sugestão pelo que vocês têm buscado</small>}</h3>
+                <Rail>{row.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
+              </div>
+            )
+          })}
+        </section>
+      )}
+
       {lendo.length > 0 && (
         <Card title="Continue lendo" pad={false}>
           <Rail>{lendo.map((e) => byId[e.slug] && <Cover key={e.slug} t={byId[e.slug]} status="lendo" onClick={openTitle} />)}</Rail>
@@ -81,21 +113,6 @@ export default function Inicio() {
         action={<Tag tone="purple" icon="sparkle">Para você</Tag>}>
         {ready && <Rail>{recs.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} note={r.reason} onClick={openTitle} />)}</Rail>}
       </Card>
-
-      {ready && [...themes, ...journeys].map((th) => {
-        const row = themeBooks(ctx, th, 14)
-        if (!row.length) return null
-        const v = th.kind === 'valor'
-        return (
-          <Card key={th.kind + th.key} pad={false}
-            title={<span className="th-t"><img className={v ? '' : 'door-ic'} src={v ? valorImg(th.key) : caminhoImg(th.key)} alt="" />{v ? `Para cultivar ${th.key}` : `Apresentando ${th.key}`}</span>}
-            sub={v ? (th.explicit ? 'Valor em foco: vale ler várias histórias sobre ele' : 'Percebemos que vocês têm buscado este valor. Coloque em foco para fixar.')
-              : 'Jornada que vocês escolheram apresentar'}
-            action={<Link className="tlink sm" to="/cultivar">{v ? 'Ajustar valores' : 'Ajustar jornadas'}</Link>}>
-            <Rail>{row.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
-          </Card>
-        )
-      })}
 
       {ready && nextDoors.length > 0 && (
         <Card pad={false}

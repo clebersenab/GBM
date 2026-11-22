@@ -17,7 +17,7 @@ class ChildProfile < ApplicationRecord
   private
 
   def focus_size
-    errors.add(:base, "escolha até 3 valores e 3 jornadas em foco") if focus_valores.size > 3 || focus_caminhos.size > 3
+    errors.add(:base, "escolha até 5 valores e 5 jornadas") if focus_valores.size > 5 || focus_caminhos.size > 5
   end
 
   def profile_limit

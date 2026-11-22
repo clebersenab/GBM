@@ -6,6 +6,8 @@ export const VALORES = catalogo.valores
 export const CAMINHOS = catalogo.caminhos
 export const GRUPOS = catalogo.grupos
 export const FILEIRAS = catalogo.fileiras_landing
+// Todas as categorias que existem nos livros: primeiro as da landing, depois as demais.
+export const CATEGORIAS = [...new Set([...catalogo.fileiras_landing, ...catalogo.titulos.flatMap((t) => t.fileiras || [])])]
 export const LANCAMENTOS = catalogo.lancamentos_ordem
 // Lançamentos com ilustração larga em images/destaques (usada no banner do Início).
 export const DESTAQUE_IMG = new Set(['moby-dick', 'ze-candeia', 'a-banda-da-garagem', 'a-ilha-das-regras', 'a-turma-do-mucuripe', 'bentinho-e-capitu', 'lia-e-o-julgamento'])
