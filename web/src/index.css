@@ -645,3 +645,6 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .portal.first b{color:var(--j-ink)}
 .portal.shut{opacity:.7}
 @media(max-width:600px){.portals{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:18px}}
+.seed-note{display:inline-flex;align-items:center;gap:4px;color:var(--v-ink)}
+.pb-row.discover .th-t .ico{color:currentColor}
+.pb-row .pb-hint{flex-basis:100%;margin-top:-4px}
