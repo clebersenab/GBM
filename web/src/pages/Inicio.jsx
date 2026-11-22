@@ -4,8 +4,9 @@ import { useSession } from '../session'
 import { useLibrary } from '../library'
 import { useShell } from '../Shell'
 import Rail from '../Rail'
+import BookAnim from '../BookAnim'
 import { Card, Cover, Empty, Icon, Progress, Ring, Stat, Tag } from '../ds'
-import { CAMINHOS, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
+import { CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
 import { doorsState, newDoors, recommend, themeRow, valueThemes } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
@@ -31,22 +32,32 @@ export default function Inicio() {
   const cultivados = jardim.filter((x) => x.n > 0).length
   const boxes = GRUPOS.filter((g) => g.tipo === 'box').map((g) => ({ g, lidos: g.titulos.filter((id) => bySlug[id]?.status === 'lido').length,
     started: g.titulos.some((id) => bySlug[id]) })).filter((b) => b.started)
-  const next = lendo[0] ? byId[lendo[0].slug] : recs[0]?.t
+  // Banner: um lançamento em destaque (o primeiro da ordem de lançamentos).
+  const destaque = byId[LANCAMENTOS[0]]
 
   return (
     <div className="dash">
-      <section className="hero-card">
-        <div>
-          <p className="eyebrow">{saudacao()}, {profile.name}!</p>
-          <h1>{lidos.length ? <>Vocês já leram <em>{lidos.length} {lidos.length === 1 ? 'livro' : 'livros'}</em> juntos.</> : <>Que história vamos plantar hoje?</>}</h1>
-          <p className="muted">{next ? <>{lendo[0] ? 'Continue de onde pararam:' : 'Uma boa para começar:'} <b>{next.titulo}</b></> : 'Explore o catálogo e monte a lista de leitura.'}</p>
-          <div className="acts">
-            {next && <button className="btn btn-main" onClick={() => openTitle(next)}><Icon name="play" size={18} />{lendo[0] ? 'Continuar lendo' : 'Ver o livro'}</button>}
-            <Link className="btn btn-ghost" to="/cultivar"><Icon name="sprout" size={18} />Plantar e cultivar</Link>
+      <p className="greet">{saudacao()}, {profile.name}! {lidos.length ? <>Vocês já leram <b>{lidos.length} {lidos.length === 1 ? 'livro' : 'livros'}</b> juntos.</> : 'Que história vamos ler hoje?'}</p>
+
+      {destaque && (
+        <section className="hero-card">
+          <div className="hero-txt">
+            <p className="eyebrow">Lançamento</p>
+            <h1>{destaque.titulo}</h1>
+            <p className="hero-sin">{destaque.sinopse}</p>
+            <div className="hero-tags">
+              {destaque.valores?.map((v) => <Tag key={v} tone="orange" icon="sprout">{v}</Tag>)}
+              {destaque.caminhos?.map((c) => <Tag key={c} tone="blue" icon="door">{c}</Tag>)}
+            </div>
+            {destaque.obra_mae && <p className="hero-seed">Semente: <b>{destaque.obra_mae.titulo}</b>{destaque.obra_mae.autor && `, ${destaque.obra_mae.autor}`}</p>}
+            <div className="acts">
+              <button className="btn btn-main" onClick={() => openTitle(destaque)}><Icon name="play" size={18} />{bySlug[destaque.id]?.status === 'lendo' ? 'Continuar lendo' : 'Ler agora'}</button>
+              <button className="btn btn-ghost" onClick={() => openTitle(destaque)}>Mais informações</button>
+            </div>
           </div>
-        </div>
-        {next && <img className="hero-cover" src={`/${next.capa}`} alt="" />}
-      </section>
+          <BookAnim img={`/${DESTAQUE_IMG.has(destaque.id) ? `images/destaques/${destaque.id}.webp` : destaque.capa}`} />
+        </section>
+      )}
 
       {!me.access.full_access && (
         <div className="aviso"><b>Seu cadastro está pronto.</b> As assinaturas abrem em breve, e avisaremos você. Enquanto isso, explore e monte a lista.</div>
@@ -55,8 +66,8 @@ export default function Inicio() {
       <div className="stats">
         <Stat icon="check" tone="green" value={lidos.length} label="Lidos" onClick={() => nav('/lista?f=lido')} />
         <Stat icon="book" tone="purple" value={lendo.length} label="Lendo" onClick={() => nav('/lista?f=lendo')} />
-        <Stat icon="sprout" tone="orange" value={`${cultivados}/${VALORES.length}`} label="Valores plantados" onClick={() => nav('/cultivar?tipo=valor')} />
-        <Stat icon="door" tone="blue" value={`${abertas}/${CAMINHOS.length}`} label="Jornadas descobertas" onClick={() => nav('/cultivar?tipo=caminho')} />
+        <Stat icon="sprout" tone="orange" value={`${cultivados}/${VALORES.length}`} label="Valores plantados" onClick={() => nav('/cultivar')} />
+        <Stat icon="door" tone="blue" value={`${abertas}/${CAMINHOS.length}`} label="Jornadas descobertas" onClick={() => nav('/cultivar')} />
       </div>
 
       {lendo.length > 0 && (
@@ -77,7 +88,7 @@ export default function Inicio() {
           <Card key={th.key} pad={false}
             title={<span className="th-t"><img src={valorImg(th.key)} alt="" />Para cultivar {th.key}</span>}
             sub={th.explicit ? 'Valor em foco: vale ler várias histórias sobre ele' : 'Percebemos que vocês têm buscado este valor'}
-            action={<Link className="tlink sm" to="/cultivar?tipo=valor">Ajustar valores</Link>}>
+            action={<Link className="tlink sm" to="/cultivar">Ajustar valores</Link>}>
             <Rail>{row.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} onClick={openTitle} />)}</Rail>
           </Card>
         )
@@ -87,7 +98,7 @@ export default function Inicio() {
         <Card pad={false}
           title={<span className="th-t"><img className="door-ic" src={caminhoImg(nextDoors[0].key)} alt="" />Novas portas para {profile.name}</span>}
           sub="Uma história de cada jornada que ainda não foi aberta"
-          action={<Link className="tlink sm" to="/cultivar?tipo=caminho">Escolher jornadas</Link>}>
+          action={<Link className="tlink sm" to="/cultivar">Escolher jornadas</Link>}>
           <Rail>{nextDoors.map((d) => <Cover key={d.key} t={d.t} status={bySlug[d.t.id]?.status} onClick={openTitle}
             note={<span className="door-note">{d.chosen && <Icon name="door" size={13} />}Jornada: {d.key}</span>} />)}</Rail>
         </Card>
@@ -108,7 +119,7 @@ export default function Inicio() {
         <Card title="Portas abertas" sub="Jornadas que as leituras já apresentaram">
           <div className="doors">
             {doors.map((d) => (
-              <Link key={d.key} to="/cultivar?tipo=caminho" className={`door${d.opened ? ' open' : ''}`} title={d.opened ? `${d.opened} ${d.opened === 1 ? 'livro lido' : 'livros lidos'}` : 'Porta ainda fechada'}>
+              <Link key={d.key} to="/cultivar" className={`door${d.opened ? ' open' : ''}`} title={d.opened ? `${d.opened} ${d.opened === 1 ? 'livro lido' : 'livros lidos'}` : 'Porta ainda fechada'}>
                 <img src={caminhoImg(d.key)} alt="" />
                 <b>{d.key}</b>
                 <small>{d.opened ? 'Aberta' : d.chosen ? 'Para apresentar' : 'Fechada'}</small>
