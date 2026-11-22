@@ -697,3 +697,10 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .t10:hover .t10-n{-webkit-text-stroke-color:var(--orange)}
 :root[data-theme=light] .t10-n{color:var(--card)}
 .t10:first-child .t10-n{margin-right:-.04em}
+/* top 10: número inteiro ao lado da capa, preenchido com o degradê da marca */
+.t10{align-items:flex-end;gap:2px}
+.t10-n{font:900 clamp(96px,9vw,140px)/.8 Poppins,system-ui,sans-serif;letter-spacing:-.06em;margin-right:0;padding-left:0;color:transparent;-webkit-text-stroke:0;background:linear-gradient(180deg,#ffe2b8 0%,#f7a54a 55%,#d96b12 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));transition:transform .25s var(--ease),filter .25s}
+.t10:first-child .t10-n{margin-right:0}
+.t10:nth-child(n+10) .t10-n{letter-spacing:-.1em}
+.t10:hover .t10-n{transform:translateY(-4px);filter:drop-shadow(0 8px 14px rgba(242,140,40,.45))}
+:root[data-theme=light] .t10-n{color:transparent;background:linear-gradient(180deg,#f7a54a 0%,#d96b12 60%,#a8520a 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 4px 6px rgba(120,60,10,.25))}
