@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     post "signals", to: "library#signal"
   end
 
+  get "titles/top", to: "top#index"
   get "titles/:slug/access", to: "titles#access"
   get "titles/:slug/read", to: "titles#read"
   post "titles/:slug/download", to: "titles#download"
