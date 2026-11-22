@@ -5,8 +5,8 @@ import { useLibrary } from '../library'
 import { useShell } from '../Shell'
 import Rail from '../Rail'
 import { Card, Cover, Empty, Icon, Progress, Ring, Stat, Tag } from '../ds'
-import { GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
-import { focusThemes, recommend, themeRow } from '../recommend'
+import { CAMINHOS, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
+import { doorsState, newDoors, recommend, themeRow, valueThemes } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
 
@@ -21,7 +21,10 @@ export default function Inicio() {
   const lendo = entries.filter((e) => e.status === 'lendo')
   const quero = entries.filter((e) => e.status === 'quero_ler')
   const recs = useMemo(() => recommend(ctx, 14), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
-  const themes = useMemo(() => focusThemes(ctx, 2), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const themes = useMemo(() => valueThemes(ctx, 2), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const doors = useMemo(() => doorsState(ctx), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const nextDoors = useMemo(() => newDoors(ctx, 6), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const abertas = doors.filter((d) => d.opened).length
 
   // Valores que já foram plantados pelas leituras concluídas.
   const jardim = VALORES.map((v) => ({ v, n: lidos.filter((e) => byId[e.slug]?.valores?.includes(v)).length }))
@@ -51,9 +54,9 @@ export default function Inicio() {
 
       <div className="stats">
         <Stat icon="check" tone="green" value={lidos.length} label="Lidos" onClick={() => nav('/lista?f=lido')} />
-        <Stat icon="book" tone="orange" value={lendo.length} label="Lendo" onClick={() => nav('/lista?f=lendo')} />
-        <Stat icon="bookmark" tone="blue" value={quero.length} label="Quero ler" onClick={() => nav('/lista?f=quero_ler')} />
-        <Stat icon="sprout" tone="purple" value={`${cultivados}/${VALORES.length}`} label="Valores plantados" onClick={() => nav('/cultivar')} />
+        <Stat icon="book" tone="purple" value={lendo.length} label="Lendo" onClick={() => nav('/lista?f=lendo')} />
+        <Stat icon="sprout" tone="orange" value={`${cultivados}/${VALORES.length}`} label="Valores plantados" onClick={() => nav('/cultivar?tipo=valor')} />
+        <Stat icon="door" tone="blue" value={`${abertas}/${CAMINHOS.length}`} label="Jornadas descobertas" onClick={() => nav('/cultivar?tipo=caminho')} />
       </div>
 
       {lendo.length > 0 && (
@@ -71,16 +74,26 @@ export default function Inicio() {
         const row = themeRow(ctx, th, 14)
         if (!row.length) return null
         return (
-          <Card key={th.kind + th.key} pad={false} className="theme-row"
-            title={<span className="th-t"><img src={th.kind === 'valor' ? valorImg(th.key) : caminhoImg(th.key)} alt="" />{th.kind === 'valor' ? `Para cultivar ${th.key}` : `Jornada: ${th.key}`}</span>}
-            sub={th.explicit ? 'Foco que vocês escolheram para este perfil' : 'Percebemos que vocês têm buscado por isso'}
-            action={<Link className="tlink sm" to="/conta?aba=criancas">Ajustar foco</Link>}>
+          <Card key={th.key} pad={false}
+            title={<span className="th-t"><img src={valorImg(th.key)} alt="" />Para cultivar {th.key}</span>}
+            sub={th.explicit ? 'Valor em foco: vale ler várias histórias sobre ele' : 'Percebemos que vocês têm buscado este valor'}
+            action={<Link className="tlink sm" to="/cultivar?tipo=valor">Ajustar valores</Link>}>
             <Rail>{row.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} onClick={openTitle} />)}</Rail>
           </Card>
         )
       })}
 
-      <div className="grid-3">
+      {ready && nextDoors.length > 0 && (
+        <Card pad={false}
+          title={<span className="th-t"><img className="door-ic" src={caminhoImg(nextDoors[0].key)} alt="" />Novas portas para {profile.name}</span>}
+          sub="Uma história de cada jornada que ainda não foi aberta"
+          action={<Link className="tlink sm" to="/cultivar?tipo=caminho">Escolher jornadas</Link>}>
+          <Rail>{nextDoors.map((d) => <Cover key={d.key} t={d.t} status={bySlug[d.t.id]?.status} onClick={openTitle}
+            note={<span className="door-note">{d.chosen && <Icon name="door" size={13} />}Jornada: {d.key}</span>} />)}</Rail>
+        </Card>
+      )}
+
+      <div className="grid-2">
         <Card title="Jardim de valores" sub="O que as leituras concluídas já plantaram">
           <div className="jardim">
             <Ring value={cultivados} max={VALORES.length} label="plantados" size={132} />
@@ -89,6 +102,18 @@ export default function Inicio() {
                 <div key={v} className={`jv${n ? '' : ' off'}`}><img src={valorImg(v)} alt="" /><span>{v}</span><b>{n}</b></div>
               ))}
             </div>
+          </div>
+        </Card>
+
+        <Card title="Portas abertas" sub="Jornadas que as leituras já apresentaram">
+          <div className="doors">
+            {doors.map((d) => (
+              <Link key={d.key} to="/cultivar?tipo=caminho" className={`door${d.opened ? ' open' : ''}`} title={d.opened ? `${d.opened} ${d.opened === 1 ? 'livro lido' : 'livros lidos'}` : 'Porta ainda fechada'}>
+                <img src={caminhoImg(d.key)} alt="" />
+                <b>{d.key}</b>
+                <small>{d.opened ? 'Aberta' : d.chosen ? 'Para apresentar' : 'Fechada'}</small>
+              </Link>
+            ))}
           </div>
         </Card>
 
