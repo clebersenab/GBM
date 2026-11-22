@@ -1,11 +1,11 @@
 class Account < ApplicationRecord
   THEMES = %w[dark light].freeze
   has_secure_password :password, validations: false
-  has_secure_password :pin, validations: false
 
   has_many :sessions, dependent: :destroy
   has_many :child_profiles, dependent: :destroy
   has_one :subscription, dependent: :destroy
+  has_many :cancellations, dependent: :destroy
   has_many :downloads, dependent: :destroy
   has_many :owned_titles, through: :downloads, source: :title
 
@@ -14,14 +14,11 @@ class Account < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 8, message: "deve ter pelo menos 8 caracteres" }, allow_nil: true
-  validates :pin, format: { with: /\A\d{4}\z/, message: "deve ter 4 dígitos" }, allow_nil: true
   validates :access_status, inclusion: { in: ACCESS_STATUSES }
   validates :theme, inclusion: { in: THEMES }, allow_nil: true
   validate :release_period, if: -> { access_status == "liberado" }
 
   normalizes :email, with: ->(e) { e.to_s.strip.downcase }
-
-  def pin_set? = pin_digest.present?
 
   # Liberado pelo admin dentro do período definido.
   def released?
@@ -34,6 +31,8 @@ class Account < ApplicationRecord
     return false if access_status == "bloqueado"
     released? || subscription&.active? || false
   end
+
+  def renewal_canceled? = renewal_canceled_at.present?
 
   def owns?(title) = downloads.exists?(title_id: title.id)
 

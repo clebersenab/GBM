@@ -1,5 +1,4 @@
 class ActivationCodesController < ApplicationController
-  before_action :require_parent
   rate_limit to: 10, within: 10.minutes, only: :redeem, by: -> { current_session&.id || request.remote_ip },
              with: -> { render json: { error: "muitas tentativas" }, status: :too_many_requests }
 

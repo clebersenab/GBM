@@ -33,7 +33,7 @@ export default function Esqueci() {
     try {
       const { token, account } = await api('/auth/password/reset', { method: 'POST', body: form })
       signIn(token, account)
-      nav(account.pin_set ? '/perfis' : '/pin', { replace: true })
+      nav('/perfis', { replace: true })
     } catch (err) {
       setError(err.message)
     } finally {

@@ -10,12 +10,20 @@ Rails.application.routes.draw do
 
   get "me", to: "me#show"
   patch "me/preferences", to: "me#preferences"
+  patch "me", to: "me#update"
+  patch "me/password", to: "me#password"
+  get "me/subscription", to: "subscription#show"
+  post "me/subscription/cancel", to: "subscription#cancel"
+  post "me/subscription/resume", to: "subscription#resume"
 
-  post "parent/pin", to: "parent#set_pin"
-  post "parent/unlock", to: "parent#unlock"
-  post "parent/lock", to: "parent#lock"
 
-  resources :profiles, only: %i[index create update destroy]
+  resources :profiles, only: %i[index create update destroy] do
+    get "library", to: "library#index"
+    put "library/:slug", to: "library#upsert"
+    delete "library/:slug", to: "library#destroy"
+    get "signals", to: "library#signals"
+    post "signals", to: "library#signal"
+  end
 
   get "titles/:slug/access", to: "titles#access"
   get "titles/:slug/read", to: "titles#read"
