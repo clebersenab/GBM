@@ -2015,6 +2015,326 @@
    "colecoes": [
     "colecao-shakespeare"
    ]
+  },
+  {
+   "id": "noite-na-taverna",
+   "titulo": "Noite na Taverna",
+   "sinopse": "Numa noite de chuva, cinco amigos se reúnem perto da lareira e cada um conta a história mais misteriosa que já ouviu. Quem conta a melhor?",
+   "obra_mae": {
+    "titulo": "Noite na Taverna",
+    "autor": "Álvares de Azevedo",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Amizade",
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/noite-na-taverna.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "os-maias",
+   "titulo": "Os Maias: Carlos e o Avô Afonso",
+   "sinopse": "No casarão do Ramalhete, em Lisboa, o menino Carlos cresce ao lado do avô Afonso, que ensina que estudar e ser bom vale mais que qualquer fortuna.",
+   "obra_mae": {
+    "titulo": "Os Maias",
+    "autor": "Eça de Queirós",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Família",
+    "Honestidade"
+   ],
+   "caminhos": [
+    "Medicina"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/os-maias.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-eca-de-queiros"
+   ]
+  },
+  {
+   "id": "o-primo-basilio",
+   "titulo": "Luísa e o Primo Basílio",
+   "sinopse": "O primo Basílio chega de Paris cheio de histórias e presentes. Luísa descobre que quem brilha mais nem sempre é quem cuida melhor da gente.",
+   "obra_mae": {
+    "titulo": "O Primo Basílio",
+    "autor": "Eça de Queirós",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Honestidade",
+    "Família"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/o-primo-basilio.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-eca-de-queiros"
+   ]
+  },
+  {
+   "id": "o-caderno-do-desassossego",
+   "titulo": "O Caderno do Desassossego",
+   "sinopse": "Bernardo trabalha num escritório da Rua dos Douradores, mas pela janela ele viaja o mundo inteiro, e escreve tudo num caderno.",
+   "obra_mae": {
+    "titulo": "Livro do Desassossego",
+    "autor": "Fernando Pessoa",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/o-caderno-do-desassossego.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "amor-de-perdicao",
+   "titulo": "Simão e Teresa",
+   "sinopse": "As famílias de Simão e Teresa vivem brigadas em Viseu. Os dois são amigos e vão mostrar que a amizade pode ser mais forte que a briga dos adultos.",
+   "obra_mae": {
+    "titulo": "Amor de Perdição",
+    "autor": "Camilo Castelo Branco",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Amizade",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/amor-de-perdicao.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "dracula",
+   "titulo": "O Conde Drácula e a Luz",
+   "sinopse": "No castelo da Transilvânia, o Conde Drácula vive no escuro e tem medo da luz. O jovem Jonathan Harker e a professora Van Helsing vão ajudá-lo a descobrir o sol.",
+   "obra_mae": {
+    "titulo": "Drácula",
+    "autor": "Bram Stoker",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Coragem",
+    "Amizade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/dracula.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "guerra-e-paz",
+   "titulo": "Natacha e Pedro",
+   "sinopse": "Em Moscou, a alegre Natacha e o atrapalhado Pedro descobrem que, mesmo quando o mundo lá fora está agitado, a amizade dá coragem para recomeçar.",
+   "obra_mae": {
+    "titulo": "Guerra e Paz",
+    "autor": "Liev Tolstói",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Amizade",
+    "Família",
+    "Perseverança"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/guerra-e-paz.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-tolstoi"
+   ]
+  },
+  {
+   "id": "anna-karienina",
+   "titulo": "Liévin e a Plantação",
+   "sinopse": "No campo, Liévin trabalha a terra junto com os camponeses e descobre que a felicidade mora nas coisas simples: a colheita, a família e a mesa cheia.",
+   "obra_mae": {
+    "titulo": "Anna Kariênina",
+    "autor": "Liev Tolstói",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Família",
+    "Fé"
+   ],
+   "caminhos": [
+    "Empreender"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/anna-karienina.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-tolstoi"
+   ]
+  },
+  {
+   "id": "a-metamorfose",
+   "titulo": "Gregor Acordou Diferente",
+   "sinopse": "Um dia Gregor acordou diferente de todo mundo. A irmã Grete aprende que a gente continua amando quem muda.",
+   "obra_mae": {
+    "titulo": "A Metamorfose",
+    "autor": "Franz Kafka",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Família",
+    "Amizade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/a-metamorfose.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-kafka"
+   ]
+  },
+  {
+   "id": "o-processo",
+   "titulo": "Josef K. e a Porta da Lei",
+   "sinopse": "Josef K. quer entender as regras de um tribunal cheio de portas e corredores. Ele descobre que perguntar é o primeiro passo para fazer justiça.",
+   "obra_mae": {
+    "titulo": "O Processo",
+    "autor": "Franz Kafka",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Perseverança"
+   ],
+   "caminhos": [
+    "Direito"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/o-processo.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-kafka"
+   ]
+  },
+  {
+   "id": "dorian-gray",
+   "titulo": "O Retrato de Dorian Gray",
+   "sinopse": "Dorian ganha um retrato mágico: cada vez que ele mente, quem muda é a pintura. Até o dia em que ele resolve consertar tudo.",
+   "obra_mae": {
+    "titulo": "O Retrato de Dorian Gray",
+    "autor": "Oscar Wilde",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Honestidade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/dorian-gray.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "macbeth",
+   "titulo": "Macbeth e a Coroa",
+   "sinopse": "Três bruxas dizem a Macbeth que ele vai ser rei. Ele aprende que querer demais o que é dos outros só traz preocupação.",
+   "obra_mae": {
+    "titulo": "Macbeth",
+    "autor": "William Shakespeare",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Honestidade",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/macbeth.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-shakespeare"
+   ]
   }
  ],
  "grupos": [
@@ -2279,7 +2599,8 @@
     "julio-cesar",
     "hamlet",
     "rei-lear",
-    "romeu-e-julieta"
+    "romeu-e-julieta",
+    "macbeth"
    ],
    "descricao": "Três peças de Shakespeare para os pequenos: um general romano, um príncipe em dúvida e um rei com três filhas."
   },
@@ -2342,6 +2663,60 @@
     "iliucha-e-o-cachorro"
    ],
    "descricao": "Dois meninos russos, uma verdade difícil de contar e uma amizade que nasce depois da briga."
+  },
+  {
+   "id": "colecao-eca-de-queiros",
+   "titulo": "Eça de Queirós",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Obras de Eça de Queirós",
+    "autor": "Eça de Queirós",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "os-maias",
+    "o-primo-basilio"
+   ],
+   "descricao": "Lisboa no tempo dos avós: as famílias e os casarões de Eça de Queirós."
+  },
+  {
+   "id": "colecao-tolstoi",
+   "titulo": "Tolstói",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Guerra e Paz e Anna Kariênina",
+    "autor": "Liev Tolstói",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "guerra-e-paz",
+    "anna-karienina"
+   ],
+   "descricao": "A Rússia de Liev Tolstói: neve, família e recomeços."
+  },
+  {
+   "id": "colecao-kafka",
+   "titulo": "Kafka",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "A Metamorfose e O Processo",
+    "autor": "Franz Kafka",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "a-metamorfose",
+    "o-processo"
+   ],
+   "descricao": "Duas histórias de Franz Kafka sobre ser diferente e fazer perguntas."
   }
  ],
  "lancamentos_ordem": [
