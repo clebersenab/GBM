@@ -25,7 +25,7 @@
   {
    "id": "moby-dick",
    "titulo": "Moby Dick",
-   "sinopse": "Um menino marinheiro atravessa o mar atrás de uma baleia branca que ninguém consegue alcançar.",
+   "sinopse": "Ismael, o grumete mais novo do Pequod, atravessa o mar com o capitão Ahab atrás de Moby Dick, a baleia branca que ninguém consegue alcançar.",
    "obra_mae": {
     "titulo": "Moby Dick",
     "autor": "Herman Melville",
@@ -105,7 +105,7 @@
   {
    "id": "dante-2-purgatorio",
    "titulo": "A Grande Viagem de Dante: o Purgatório",
-   "sinopse": "Um jovem poeta e seu guia sobem a montanha mais alta do mundo em busca da luz.",
+   "sinopse": "Dante e Virgílio sobem a montanha mais alta do mundo em busca da luz.",
    "obra_mae": {
     "titulo": "A Divina Comédia",
     "autor": "Dante Alighieri",
@@ -205,7 +205,7 @@
   {
    "id": "robinson-crusoe",
    "titulo": "Robinson Crusoé",
-   "sinopse": "Sozinho numa ilha, um menino aprende a construir tudo a partir do nada.",
+   "sinopse": "Sozinho numa ilha, Robinson aprende a construir tudo a partir do nada, até o dia em que encontra Sexta-Feira.",
    "obra_mae": {
     "titulo": "Robinson Crusoé",
     "autor": "Daniel Defoe",
@@ -790,7 +790,7 @@
   {
    "id": "dante-1-inferno",
    "titulo": "A Grande Viagem de Dante: o Inferno",
-   "sinopse": "Com uma lanterna na mão, o velho poeta guia o jovem pelo lugar de quem escolheu errado.",
+   "sinopse": "Com uma lanterna na mão, o velho poeta Virgílio guia Dante pelo lugar de quem escolheu errado.",
    "obra_mae": {
     "titulo": "A Divina Comédia",
     "autor": "Dante Alighieri",
@@ -815,7 +815,7 @@
   {
    "id": "dante-3-paraiso",
    "titulo": "A Grande Viagem de Dante: o Paraíso",
-   "sinopse": "No alto do céu, entre anéis de luz, alguém espera Dante de braços abertos.",
+   "sinopse": "No alto do céu, entre anéis de luz, Beatriz espera Dante de braços abertos.",
    "obra_mae": {
     "titulo": "A Divina Comédia",
     "autor": "Dante Alighieri",
@@ -1026,7 +1026,7 @@
   {
    "id": "cinco-minutos",
    "titulo": "Cinco Minutos",
-   "sinopse": "Por cinco minutos de atraso, um rapaz perde o ônibus e encontra um mistério.",
+   "sinopse": "Por cinco minutos de atraso, um rapaz perde o ônibus e encontra Carlota, a moça misteriosa de véu.",
    "obra_mae": {
     "titulo": "Cinco Minutos",
     "autor": "José de Alencar",
@@ -1162,8 +1162,8 @@
   },
   {
    "id": "a-vila-de-muitas-portas",
-   "titulo": "A Vila de Muitas Portas",
-   "sinopse": "Dezenas de famílias vivem lado a lado, e cada porta guarda uma história.",
+   "titulo": "O Cortiço de João Romão",
+   "sinopse": "Na estalagem de São Romão, dezenas de famílias vivem lado a lado, e cada porta guarda uma história.",
    "obra_mae": {
     "titulo": "O Cortiço",
     "autor": "Aluísio Azevedo",
@@ -1239,8 +1239,8 @@
   },
   {
    "id": "ivanhoe-e-o-escudeiro",
-   "titulo": "Ivanhoé e o Escudeiro",
-   "sinopse": "No torneio, o escudeiro de oito anos segura o elmo de Ivanhoé.",
+   "titulo": "Ivanhoé e o Escudeiro Gurth",
+   "sinopse": "No torneio de Ashby, o pequeno Gurth segura o elmo de Ivanhoé, o cavaleiro que ninguém reconhece.",
    "obra_mae": {
     "titulo": "Ivanhoé",
     "autor": "Walter Scott",
@@ -1455,7 +1455,7 @@
   {
    "id": "julio-cesar",
    "titulo": "Júlio César",
-   "sinopse": "O general mais famoso de Roma e o melhor amigo dele. Mas em quem ele podia confiar?",
+   "sinopse": "Júlio César, o general mais famoso de Roma, e Bruto, o melhor amigo dele. Mas em quem ele podia confiar?",
    "obra_mae": {
     "titulo": "Júlio César",
     "autor": "William Shakespeare",
@@ -1482,7 +1482,7 @@
   {
    "id": "hamlet",
    "titulo": "Hamlet",
-   "sinopse": "O rei morreu, o tio assumiu o trono, e o jovem príncipe desconfia de que algo está errado.",
+   "sinopse": "O rei morreu, o tio Cláudio assumiu o trono, e o jovem príncipe Hamlet desconfia de que algo está errado na Dinamarca.",
    "obra_mae": {
     "titulo": "Hamlet",
     "autor": "William Shakespeare",
@@ -1509,7 +1509,7 @@
   {
    "id": "rei-lear",
    "titulo": "Rei Lear e as Três Filhas",
-   "sinopse": "Duas filhas fizeram discursos lindos. A caçula disse só a verdade.",
+   "sinopse": "Goneril e Regana fizeram discursos lindos para o pai. Cordélia, a caçula, disse só a verdade.",
    "obra_mae": {
     "titulo": "Rei Lear",
     "autor": "William Shakespeare",
@@ -1536,7 +1536,7 @@
   {
    "id": "os-lusiadas",
    "titulo": "Os Lusíadas: a Viagem de Vasco da Gama",
-   "sinopse": "Os navios portugueses vão para onde ninguém tinha ido, e no cabo das tormentas um gigante se levanta do mar.",
+   "sinopse": "Os navios de Vasco da Gama vão para onde ninguém tinha ido, e no Cabo das Tormentas o gigante Adamastor se levanta do mar.",
    "obra_mae": {
     "titulo": "Os Lusíadas",
     "autor": "Luís de Camões",
@@ -1561,8 +1561,8 @@
   },
   {
    "id": "o-vaso-da-vovo",
-   "titulo": "O Vaso da Vovó",
-   "sinopse": "Ninguém descobriu quem quebrou o vaso da vovó. Então por que Nino não consegue mais dormir?",
+   "titulo": "Ródia e o Vaso da Vovó",
+   "sinopse": "Ninguém descobriu quem quebrou o vaso da vovó. Então por que Ródia não consegue mais dormir? Só a amiga Sônia percebe.",
    "obra_mae": {
     "titulo": "Crime e Castigo",
     "autor": "Fiódor Dostoiévski",
@@ -1581,12 +1581,14 @@
    "capa": "images/capas/o-vaso-da-vovo.webp",
    "lancamento": false,
    "box": null,
-   "colecoes": []
+   "colecoes": [
+    "colecao-dostoievski"
+   ]
   },
   {
    "id": "iliucha-e-o-cachorro",
-   "titulo": "Iliúcha e o Cachorro",
-   "sinopse": "Os colegas que provocavam Iliúcha viram seus amigos, e juntos procuram o cachorro que ele achava ter perdido para sempre.",
+   "titulo": "Aliócha, Iliúcha e o Cachorro",
+   "sinopse": "Com a ajuda de Aliócha Karamázov, os colegas que provocavam Iliúcha viram seus amigos e procuram Jútchka, o cachorro que ele achava ter perdido para sempre.",
    "obra_mae": {
     "titulo": "Os Irmãos Karamázov",
     "autor": "Fiódor Dostoiévski",
@@ -1606,7 +1608,9 @@
    "capa": "images/capas/iliucha-e-o-cachorro.webp",
    "lancamento": false,
    "box": null,
-   "colecoes": []
+   "colecoes": [
+    "colecao-dostoievski"
+   ]
   },
   {
    "id": "paulo-e-o-naufragio",
@@ -1658,6 +1662,114 @@
    "vitrine": true,
    "capa": "images/capas/ben-hur.webp",
    "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "orgulho-e-preconceito",
+   "titulo": "Orgulho e Preconceito",
+   "sinopse": "Elizabeth Bennet acha o Sr. Darcy metido. O Sr. Darcy acha a família Bennet barulhenta. Os dois vão descobrir que julgaram rápido demais.",
+   "obra_mae": {
+    "titulo": "Orgulho e Preconceito",
+    "autor": "Jane Austen",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Honestidade",
+    "Família"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/orgulho-e-preconceito.webp",
+   "lancamento": true,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "o-conde-de-monte-cristo",
+   "titulo": "O Conde de Monte Cristo",
+   "sinopse": "Edmond Dantès é preso sem ter feito nada. Na cela vizinha, o velho abade Faria ensina tudo o que sabe e mostra o caminho de um tesouro escondido.",
+   "obra_mae": {
+    "titulo": "O Conde de Monte Cristo",
+    "autor": "Alexandre Dumas",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Perseverança",
+    "Fé"
+   ],
+   "caminhos": [
+    "Direito"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/o-conde-de-monte-cristo.webp",
+   "lancamento": true,
+   "box": null,
+   "colecoes": [
+    "colecao-alexandre-dumas"
+   ]
+  },
+  {
+   "id": "os-tres-mosqueteiros",
+   "titulo": "Os Três Mosqueteiros",
+   "sinopse": "D'Artagnan chega a Paris querendo ser mosqueteiro e acaba amigo de Athos, Porthos e Aramis: um por todos, todos por um.",
+   "obra_mae": {
+    "titulo": "Os Três Mosqueteiros",
+    "autor": "Alexandre Dumas",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Amizade",
+    "Coragem"
+   ],
+   "caminhos": [
+    "Servir e proteger"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/os-tres-mosqueteiros.webp",
+   "lancamento": true,
+   "box": null,
+   "colecoes": [
+    "colecao-alexandre-dumas"
+   ]
+  },
+  {
+   "id": "alice-no-pais-das-maravilhas",
+   "titulo": "Alice no País das Maravilhas",
+   "sinopse": "Alice segue um Coelho Branco apressado, cai num buraco sem fundo e vai parar num mundo onde nada faz sentido, nem o chá do Chapeleiro.",
+   "obra_mae": {
+    "titulo": "Alice no País das Maravilhas",
+    "autor": "Lewis Carroll",
+    "tipo": "livro",
+    "idade": "8+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Coragem"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/alice-no-pais-das-maravilhas.webp",
+   "lancamento": true,
    "box": null,
    "colecoes": []
   }
@@ -1949,6 +2061,42 @@
     "paulo-e-o-naufragio"
    ],
    "descricao": "Do Antigo ao Novo Testamento: Sansão, Davi, Salomão, Jesus, as parábolas e o naufrágio de Paulo."
+  },
+  {
+   "id": "colecao-alexandre-dumas",
+   "titulo": "Alexandre Dumas",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Obras de Alexandre Dumas",
+    "autor": "Alexandre Dumas",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "os-tres-mosqueteiros",
+    "o-conde-de-monte-cristo"
+   ],
+   "descricao": "Espadas, amizade e um tesouro escondido: as aventuras de Alexandre Dumas para os pequenos."
+  },
+  {
+   "id": "colecao-dostoievski",
+   "titulo": "Dostoiévski",
+   "tipo": "colecao",
+   "obra_mae": {
+    "titulo": "Crime e Castigo e Os Irmãos Karamázov",
+    "autor": "Fiódor Dostoiévski",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "arte": null,
+   "vitrine": false,
+   "titulos": [
+    "o-vaso-da-vovo",
+    "iliucha-e-o-cachorro"
+   ],
+   "descricao": "Dois meninos russos, uma verdade difícil de contar e uma amizade que nasce depois da briga."
   }
  ],
  "lancamentos_ordem": [
