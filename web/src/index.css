@@ -686,3 +686,14 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .pblock .pb-row .th-t{margin:0;padding:0 20px;font:700 17px Poppins,sans-serif;display:flex;align-items:center;gap:10px}
 .pblock .pb-row .th-t img{width:32px;height:32px;border-radius:50%;object-fit:cover}
 .pblock.k-v .pb-row .th-t{color:var(--v-ink)}.pblock.k-j .pb-row .th-t{color:var(--j-ink)}
+/* top 10: número grande atrás da capa, como na Netflix */
+.t10{flex:0 0 auto;display:flex;align-items:flex-end;border:0;background:none;padding:0;scroll-snap-align:start;text-align:left}
+.t10-n{font:900 clamp(110px,11vw,170px)/.78 Poppins,system-ui,sans-serif;letter-spacing:-.08em;color:var(--bg);-webkit-text-stroke:3px color-mix(in srgb,var(--ink) 55%,transparent);paint-order:stroke;margin-right:-.18em;padding-left:.08em;position:relative;z-index:0;user-select:none;transition:-webkit-text-stroke-color .2s}
+.t10:nth-child(n+10) .t10-n{letter-spacing:-.14em}
+.t10 .cv-img{position:relative;z-index:1;width:clamp(110px,10.5vw,145px);flex:none}
+.t10 .cv-img img{aspect-ratio:2/3;width:100%;object-fit:cover}
+.t10 b{color:#fff4e0;position:absolute;left:0;right:0;bottom:0;padding:30px 9px 9px;font:700 13px/1.2 Poppins,sans-serif;background:linear-gradient(0deg,rgba(8,9,16,.95) 30%,rgba(8,9,16,0))}
+.t10:hover .cv-img{transform:translateY(-4px)}
+.t10:hover .t10-n{-webkit-text-stroke-color:var(--orange)}
+:root[data-theme=light] .t10-n{color:var(--card)}
+.t10:first-child .t10-n{margin-right:-.04em}

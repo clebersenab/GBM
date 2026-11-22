@@ -6,7 +6,8 @@ import { useShell } from '../Shell'
 import Rail from '../Rail'
 import BookAnim from '../BookAnim'
 import PlantBlock from '../PlantBlock'
-import { Card, Cover, Empty, Icon, Progress, Stat, Tag } from '../ds'
+import { Card, Cover, Empty, Icon, Progress, Stat, StatusTag, Tag } from '../ds'
+import { api } from '../api'
 import { CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
 import { emphasis, recommend } from '../recommend'
 
@@ -24,6 +25,10 @@ export default function Inicio() {
   const quero = entries.filter((e) => e.status === 'quero_ler')
   const recs = useMemo(() => recommend(ctx, 14), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const enf = useMemo(() => emphasis(entries), [entries])
+  const [top, setTop] = useState([])
+  useEffect(() => {
+    api('/titles/top').then((r) => setTop(r.items.map((x) => ({ t: byId[x.slug], readers: x.readers })).filter((x) => x.t))).catch(() => {})
+  }, [])
 
   const boxes = GRUPOS.filter((g) => g.tipo === 'box').map((g) => ({ g, lidos: g.titulos.filter((id) => bySlug[id]?.status === 'lido').length,
     started: g.titulos.some((id) => bySlug[id]) })).filter((b) => b.started)
@@ -73,6 +78,19 @@ export default function Inicio() {
         <Rail>{[...LANCAMENTOS.map((id) => byId[id]), ...TITULOS.filter((t) => t.lancamento && !LANCAMENTOS.includes(t.id))].filter(Boolean)
           .map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
       </Card>
+
+      {top.length > 0 && (
+        <Card title="Top 10 no GBM" sub="Os livros mais lidos pelas famílias nos últimos 30 dias" pad={false} className="top10">
+          <Rail>{top.map(({ t }, i) => (
+            <button key={t.id} className="t10" onClick={() => openTitle(t)} aria-label={`${i + 1}º lugar: ${t.titulo}`}>
+              <span className="t10-n" aria-hidden="true">{i + 1}</span>
+              <span className="cv-img"><img loading="lazy" src={`/${t.capa}`} alt="" />
+                {bySlug[t.id] && <span className="cv-tag"><StatusTag status={bySlug[t.id].status} /></span>}
+                <b>{t.titulo}</b></span>
+            </button>
+          ))}</Rail>
+        </Card>
+      )}
 
       <Card title={`Recomendados para ${profile.name}`} sub="Com base no que vocês leram, gostaram e querem cultivar" pad={false}
         action={<Tag tone="purple" icon="sparkle">Para você</Tag>}>
