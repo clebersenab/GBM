@@ -124,13 +124,31 @@ export function recommend(ctx, k = 12) {
 
 // Valores se CULTIVAM (repetição): carrosséis "Para cultivar X" com o foco dos pais,
 // ou com o que eles mais exploram em Plantar e cultivar.
-export function valueThemes({ entries = [], profile, signals = [] }, max = 2) {
+export function valueThemes({ entries = [], profile, signals = [] }, max = 3) {
+  // A escolha dos pais manda: com valores em foco, só eles aparecem.
+  const explicit = profile?.focus_valores || []
+  if (explicit.length) return explicit.slice(0, max).map((key) => ({ kind: 'valor', key, explicit: true }))
+  // Sem foco: sugere pelo que eles têm explorado e pela lista de leitura.
   const w = {}
-  for (const v of profile?.focus_valores || []) w[v] = (w[v] || 0) + 10
   for (const s of signals) if (s.kind === 'valor') w[s.key] = (w[s.key] || 0) + Math.log2(1 + s.count) * 2
   for (const e of entries) if (e.status === 'quero_ler') for (const v of byId[e.slug]?.valores || []) w[v] = (w[v] || 0) + 0.5
-  return Object.entries(w).filter(([, x]) => x >= 1).sort((a, b) => b[1] - a[1]).slice(0, max)
-    .map(([key]) => ({ kind: 'valor', key, explicit: (profile?.focus_valores || []).includes(key) }))
+  return Object.entries(w).filter(([, x]) => x >= 1).sort((a, b) => b[1] - a[1]).slice(0, 1)
+    .map(([key]) => ({ kind: 'valor', key, explicit: false }))
+}
+
+// Jornadas que os pais escolheram apresentar: cada uma ganha seu carrossel no Início.
+export function journeyThemes({ profile }) {
+  return (profile?.focus_caminhos || []).map((key) => ({ kind: 'caminho', key, explicit: true }))
+}
+
+// Livros de um tema: primeiro os ainda não lidos (pela nota do perfil), depois os lidos.
+export function themeBooks(ctx, theme, k = 14) {
+  const field = theme.kind === 'valor' ? 'valores' : 'caminhos'
+  const status = Object.fromEntries((ctx.entries || []).map((e) => [e.slug, e.status]))
+  const scored = Object.fromEntries(scoreAll(ctx).map((r) => [r.t.id, r.score]))
+  return TITULOS.filter((t) => t[field]?.includes(theme.key))
+    .sort((a, b) => (status[a.id] === 'lido') - (status[b.id] === 'lido') || (scored[b.id] ?? -9) - (scored[a.id] ?? -9))
+    .slice(0, k)
 }
 
 export function themeRow(ctx, theme, k = 14) {
@@ -156,8 +174,8 @@ export function newDoors(ctx, k = 6) {
   const scored = scoreAll(ctx)
   const used = new Set()
   return doorsState(ctx)
-    .filter((d) => !d.opened)
-    .sort((a, b) => (b.chosen - a.chosen) || (b.signal - a.signal))
+    .filter((d) => !d.opened && !d.chosen)
+    .sort((a, b) => b.signal - a.signal)
     .map((d) => {
       const pick = scored.find((r) => r.t.caminhos?.includes(d.key) && !used.has(r.t.id) && !ctx.entries?.some((e) => e.slug === r.t.id && e.status !== 'quero_ler'))
       if (!pick) return null

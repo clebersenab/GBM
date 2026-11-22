@@ -7,7 +7,7 @@ import Rail from '../Rail'
 import BookAnim from '../BookAnim'
 import { Card, Cover, Empty, Icon, Progress, Stat, Tag } from '../ds'
 import { CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
-import { emphasis, newDoors, recommend, themeRow, valueThemes } from '../recommend'
+import { emphasis, journeyThemes, newDoors, recommend, themeBooks, valueThemes } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
 
@@ -22,7 +22,8 @@ export default function Inicio() {
   const lendo = entries.filter((e) => e.status === 'lendo')
   const quero = entries.filter((e) => e.status === 'quero_ler')
   const recs = useMemo(() => recommend(ctx, 14), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
-  const themes = useMemo(() => valueThemes(ctx, 2), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const themes = useMemo(() => valueThemes(ctx, 3), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const journeys = useMemo(() => journeyThemes(ctx), [profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const enf = useMemo(() => emphasis(entries), [entries])
   const nextDoors = useMemo(() => newDoors(ctx, 6), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -81,15 +82,17 @@ export default function Inicio() {
         {ready && <Rail>{recs.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} note={r.reason} onClick={openTitle} />)}</Rail>}
       </Card>
 
-      {ready && themes.map((th) => {
-        const row = themeRow(ctx, th, 14)
+      {ready && [...themes, ...journeys].map((th) => {
+        const row = themeBooks(ctx, th, 14)
         if (!row.length) return null
+        const v = th.kind === 'valor'
         return (
-          <Card key={th.key} pad={false}
-            title={<span className="th-t"><img src={valorImg(th.key)} alt="" />Para cultivar {th.key}</span>}
-            sub={th.explicit ? 'Valor em foco: vale ler várias histórias sobre ele' : 'Percebemos que vocês têm buscado este valor'}
-            action={<Link className="tlink sm" to="/cultivar">Ajustar valores</Link>}>
-            <Rail>{row.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} onClick={openTitle} />)}</Rail>
+          <Card key={th.kind + th.key} pad={false}
+            title={<span className="th-t"><img className={v ? '' : 'door-ic'} src={v ? valorImg(th.key) : caminhoImg(th.key)} alt="" />{v ? `Para cultivar ${th.key}` : `Apresentando ${th.key}`}</span>}
+            sub={v ? (th.explicit ? 'Valor em foco: vale ler várias histórias sobre ele' : 'Percebemos que vocês têm buscado este valor. Coloque em foco para fixar.')
+              : 'Jornada que vocês escolheram apresentar'}
+            action={<Link className="tlink sm" to="/cultivar">{v ? 'Ajustar valores' : 'Ajustar jornadas'}</Link>}>
+            <Rail>{row.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
           </Card>
         )
       })}
@@ -97,7 +100,7 @@ export default function Inicio() {
       {ready && nextDoors.length > 0 && (
         <Card pad={false}
           title={<span className="th-t"><img className="door-ic" src={caminhoImg(nextDoors[0].key)} alt="" />Novas portas para {profile.name}</span>}
-          sub="Uma história de cada jornada que ainda não foi aberta"
+          sub="Uma história de cada jornada que ainda não apareceu nas leituras"
           action={<Link className="tlink sm" to="/cultivar">Escolher jornadas</Link>}>
           <Rail>{nextDoors.map((d) => <Cover key={d.key} t={d.t} status={bySlug[d.t.id]?.status} onClick={openTitle}
             note={<span className="door-note">{d.chosen && <Icon name="door" size={13} />}Jornada: {d.key}</span>} />)}</Rail>
