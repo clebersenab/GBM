@@ -1,0 +1,25 @@
+// Catálogo e utilidades compartilhadas (dados em data/catalogo.json).
+import catalogo from '../../data/catalogo.json'
+
+export const TITULOS = catalogo.titulos
+export const VALORES = catalogo.valores
+export const CAMINHOS = catalogo.caminhos
+export const GRUPOS = catalogo.grupos
+export const FILEIRAS = catalogo.fileiras_landing
+export const LANCAMENTOS = catalogo.lancamentos_ordem
+export const byId = Object.fromEntries(TITULOS.map((t) => [t.id, t]))
+export const grupoById = Object.fromEntries(GRUPOS.map((g) => [g.id, g]))
+
+// minúsculas e sem acento: "Fé" -> "fe"
+export const norm = (s) => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+export const slug = (s) => norm(s).replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+export const valorImg = (v) => `/images/cards/valor-${slug(v)}.webp`
+export const caminhoImg = (c) => `/images/cards/caminho-${slug(c)}.webp`
+export const avatarImg = (a) => `/images/avatares/avatar-${a}.webp`
+
+// Box de um título e a posição dele na ordem de leitura.
+export function boxOf(t) {
+  const g = t.box && grupoById[t.box]
+  if (!g) return null
+  return { grupo: g, index: g.titulos.indexOf(t.id), total: g.titulos.length }
+}

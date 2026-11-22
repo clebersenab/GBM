@@ -60,10 +60,8 @@ class AuthController < ApplicationController
     head :no_content
   end
 
-  # DELETE /auth/sessions -> sai de todos os aparelhos (exige PIN)
+  # DELETE /auth/sessions -> sai de todos os aparelhos
   def destroy_all
-    require_parent
-    return if performed?
     current_account.sessions.live.find_each(&:revoke!)
     head :no_content
   end

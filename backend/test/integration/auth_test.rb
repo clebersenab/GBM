@@ -70,13 +70,8 @@ class AuthTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
   end
 
-  test "sair de todos os aparelhos exige o PIN" do
+  test "sair de todos os aparelhos" do
     login
-    set_pin
-    post "/parent/lock", headers: auth
-    delete "/auth/sessions", headers: auth
-    assert_response :forbidden
-    post "/parent/unlock", params: { pin: "1234" }, headers: auth
     delete "/auth/sessions", headers: auth
     assert_response :no_content
     get "/me", headers: auth

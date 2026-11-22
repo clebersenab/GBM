@@ -20,7 +20,7 @@ export default function Cadastro() {
     try {
       const { token, account } = await api('/auth/signup', { method: 'POST', body: form })
       signIn(token, account)
-      nav('/pin', { replace: true })
+      nav('/perfis', { replace: true })
     } catch (err) {
       setError(err.message)
     } finally {

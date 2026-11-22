@@ -13,16 +13,18 @@ export default function Rail({ children }) {
     if (!t) return
     setEdge({ l: t.scrollLeft > 4, r: t.scrollLeft + t.clientWidth < t.scrollWidth - 4 })
   }, [])
+  const touched = useRef(false)
   useEffect(() => {
+    if (!touched.current && ref.current) ref.current.scrollLeft = 0
     update()
     window.addEventListener('resize', update)
     return () => window.removeEventListener('resize', update)
   }, [update, children])
-  const go = (d) => ref.current?.scrollBy({ left: d * ref.current.clientWidth * 0.85, behavior: 'smooth' })
+  const go = (d) => (touched.current = true) && ref.current?.scrollBy({ left: d * ref.current.clientWidth * 0.85, behavior: 'smooth' })
   return (
     <div className={`rail${edge.l ? ' more-l' : ''}${edge.r ? ' more-r' : ''}`}>
       <button className="arr prev" aria-label="Anteriores" disabled={!edge.l} onClick={() => go(-1)}><Arrow /></button>
-      <div className="track" ref={ref} onScroll={update}>{children}</div>
+      <div className="track" ref={ref} onScroll={update} onPointerDown={() => (touched.current = true)} onWheel={() => (touched.current = true)}>{children}</div>
       <button className="arr next" aria-label="Próximos" disabled={!edge.r} onClick={() => go(1)}><Arrow dir="next" /></button>
     </div>
   )

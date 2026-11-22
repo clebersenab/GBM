@@ -1,7 +1,6 @@
 # Sessão por aparelho. O token só existe em texto no momento da criação.
 class Session < ApplicationRecord
   TTL = 60.days
-  PARENT_WINDOW = 10.minutes
 
   belongs_to :account
   attr_reader :token
@@ -27,9 +26,4 @@ class Session < ApplicationRecord
 
   def revoke! = update!(revoked_at: Time.current)
 
-  def parent_unlocked? = parent_unlocked_until.present? && parent_unlocked_until > Time.current
-
-  def unlock_parent! = update!(parent_unlocked_until: PARENT_WINDOW.from_now)
-
-  def lock_parent! = update!(parent_unlocked_until: nil)
 end

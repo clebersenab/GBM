@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_22_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -18,7 +18,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
   create_table "accounts", force: :cascade do |t|
     t.citext "email", null: false
     t.string "name"
-    t.string "pin_digest"
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,6 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
     t.datetime "access_from"
     t.datetime "access_until"
     t.string "theme"
+    t.datetime "renewal_canceled_at"
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
@@ -46,6 +46,17 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
     t.index ["redeemed_by_id"], name: "index_activation_codes_on_redeemed_by_id"
   end
 
+  create_table "cancellations", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.integer "nps_score", null: false
+    t.string "reason"
+    t.text "comment"
+    t.datetime "reverted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_cancellations_on_account_id"
+  end
+
   create_table "child_profiles", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "name", null: false
@@ -53,6 +64,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
     t.string "age_band", default: "3-5", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "focus_valores", default: [], null: false, array: true
+    t.string "focus_caminhos", default: [], null: false, array: true
     t.index ["account_id"], name: "index_child_profiles_on_account_id"
   end
 
@@ -81,6 +94,32 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
     t.index ["email", "created_at"], name: "index_login_codes_on_email_and_created_at"
   end
 
+  create_table "profile_signals", force: :cascade do |t|
+    t.bigint "child_profile_id", null: false
+    t.string "kind", null: false
+    t.string "key", null: false
+    t.integer "count", default: 0, null: false
+    t.datetime "last_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_profile_id", "kind", "key"], name: "index_profile_signals_on_child_profile_id_and_kind_and_key", unique: true
+    t.index ["child_profile_id"], name: "index_profile_signals_on_child_profile_id"
+  end
+
+  create_table "reading_entries", force: :cascade do |t|
+    t.bigint "child_profile_id", null: false
+    t.bigint "title_id", null: false
+    t.string "status", null: false
+    t.boolean "liked"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_profile_id", "title_id"], name: "index_reading_entries_on_child_profile_id_and_title_id", unique: true
+    t.index ["child_profile_id"], name: "index_reading_entries_on_child_profile_id"
+    t.index ["title_id"], name: "index_reading_entries_on_title_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "token_digest", null: false
@@ -88,7 +127,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
     t.string "ip"
     t.datetime "expires_at", null: false
     t.datetime "last_used_at"
-    t.datetime "parent_unlocked_until"
     t.datetime "revoked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -118,9 +156,13 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_21_000003) do
   end
 
   add_foreign_key "activation_codes", "accounts", column: "redeemed_by_id"
+  add_foreign_key "cancellations", "accounts"
   add_foreign_key "child_profiles", "accounts"
   add_foreign_key "downloads", "accounts"
   add_foreign_key "downloads", "titles"
+  add_foreign_key "profile_signals", "child_profiles"
+  add_foreign_key "reading_entries", "child_profiles"
+  add_foreign_key "reading_entries", "titles"
   add_foreign_key "sessions", "accounts"
   add_foreign_key "subscriptions", "accounts"
 end

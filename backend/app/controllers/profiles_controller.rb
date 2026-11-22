@@ -1,17 +1,15 @@
 class ProfilesController < ApplicationController
-  before_action :require_parent, except: :index
-
-  def index = render(json: current_account.child_profiles.order(:created_at).map { |p| view(p) })
+  def index = render(json: current_account.child_profiles.order(:created_at).map(&:view))
 
   def create
     profile = current_account.child_profiles.create!(profile_params)
-    render json: view(profile), status: :created
+    render json: profile.view, status: :created
   end
 
   def update
     profile = current_account.child_profiles.find(params[:id])
     profile.update!(profile_params)
-    render json: view(profile)
+    render json: profile.view
   end
 
   def destroy
@@ -21,6 +19,9 @@ class ProfilesController < ApplicationController
 
   private
 
-  def profile_params = params.require(:profile).permit(:name, :avatar, :age_band)
-  def view(p) = p.slice(:id, :name, :avatar, :age_band)
+  def profile_params
+    p = params.require(:profile).permit(:name, :avatar, :age_band, focus_valores: [], focus_caminhos: [])
+    %i[focus_valores focus_caminhos].each { |k| p[k] = Array(p[k]).compact_blank.uniq if p.key?(k) }
+    p
+  end
 end

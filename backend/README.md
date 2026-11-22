@@ -30,7 +30,7 @@ bin/rails s
 | Ler um livro no app | Só com acesso pleno (assinatura ativa ou liberação do admin) |
 | Baixar o PDF | Assinatura ativa; o download registra a posse para sempre |
 | Depois de cancelar | Só baixar de novo os PDFs que já tinha baixado; o app de leitura fecha |
-| Criar ou apagar perfil, resgatar código, sair de todos os aparelhos | Só com o PIN dos pais (vale 10 minutos) |
+| Perfis, códigos, sair de todos os aparelhos | Basta estar logado (o PIN foi removido) |
 
 As regras ficam em `app/policies/access_policy.rb`.
 
@@ -69,16 +69,22 @@ Ainda sem gateway de pagamento. A assinatura é alimentada pelo admin
 | POST | /auth/password/forgot | `{ email }`, sempre 202 |
 | POST | /auth/password/reset | `{ email, code, password }` |
 | DELETE | /auth/session | sai deste aparelho |
-| DELETE | /auth/sessions | sai de todos (PIN) |
+| DELETE | /auth/sessions | sai de todos os aparelhos |
 | GET | /me | conta, perfis e situação de acesso |
-| POST | /parent/pin | cria o PIN logo após o login, ou troca com `current_pin` |
-| POST | /parent/unlock, /parent/lock | abre e fecha a janela do PIN |
-| GET/POST/PATCH/DELETE | /profiles | escrita exige PIN |
+| GET/POST/PATCH/DELETE | /profiles | perfis; `focus_valores` e `focus_caminhos` (até 3 cada) |
+| GET | /profiles/:id/library | estante da criança |
+| PUT/DELETE | /profiles/:id/library/:slug | `{ status: quero_ler|lendo|lido, liked }` |
+| GET/POST | /profiles/:id/signals | sinais de interesse `{ kind: valor|caminho, key }` |
+| PATCH | /me | `{ name, phone, marketing_opt_in }` |
+| PATCH | /me/password | `{ current_password, password }` (derruba outros aparelhos) |
+| GET | /me/subscription | plano, próxima cobrança, acesso até, PDFs baixados |
+| POST | /me/subscription/cancel | `{ nps_score 0–10, reason, comment }`: não renova; acesso vale até o fim do período |
+| POST | /me/subscription/resume | desfaz o cancelamento |
 | GET | /titles/:slug/access | `{ can_read, can_download, owned }` |
 | GET | /titles/:slug/read | 403 sem assinatura |
 | POST | /titles/:slug/download | link do PDF válido por 5 minutos |
 | GET | /downloads | livros da família |
-| POST | /codes/redeem | `{ code }` (PIN) |
+| POST | /codes/redeem | `{ code }` |
 | PUT | /admin/accounts/:id/subscription | admin |
 | PUT | /admin/accounts/:id/access | `{ status, from?, until }` (admin) |
 | POST | /admin/activation_codes | `{ months, store, quantity }` (admin) |

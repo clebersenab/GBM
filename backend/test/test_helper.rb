@@ -19,11 +19,6 @@ class ActionDispatch::IntegrationTest
 
   def auth = { "Authorization" => "Bearer #{@token}" }
 
-  def set_pin(pin = "1234")
-    post "/parent/pin", params: { pin: pin }, headers: auth
-    assert_response :no_content
-  end
-
   def activate!(account, until_at: 1.month.from_now)
     Subscription.create!(account: account, plan: "mensal", status: "active", source: "admin", current_period_end: until_at)
   end

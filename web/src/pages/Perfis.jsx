@@ -1,21 +1,21 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../api'
 import { useSession } from '../session'
-import { IMG, FormError, Submit } from '../ui'
-import PinInput from '../PinInput'
+import { FormError, Submit } from '../ui'
+import { Modal } from '../ds'
+import { CAMINHOS, VALORES, avatarImg } from '../catalog'
 import { Logo, ThemeToggle } from '../theme'
 
 export const AVATARS = ['raposa', 'leao', 'baleia', 'coruja', 'tartaruga', 'cabra', 'onca', 'papagaio']
-const BANDS = [['0-2', '0 a 2 anos'], ['3-5', '3 a 5 anos'], ['6-8', '6 a 8 anos']]
+export const BANDS = [['0-2', '0 a 2 anos'], ['3-5', '3 a 5 anos'], ['6-8', '6 a 8 anos']]
 
 export default function Perfis() {
   const { me, refresh, setProfileId, signOut } = useSession()
   const nav = useNavigate()
-  const [modal, setModal] = useState(null) // 'pin' | 'novo'
+  const [novo, setNovo] = useState(false)
 
-  const open = (p) => { setProfileId(p.id); nav('/estante') }
-  const startAdd = () => setModal(me.parent_unlocked ? 'novo' : 'pin')
+  const open = (p) => { setProfileId(p.id); nav('/inicio') }
 
   return (
     <main className="perfis">
@@ -25,71 +25,55 @@ export default function Perfis() {
       <div className="who">
         {me.profiles.map((p) => (
           <button key={p.id} onClick={() => open(p)}>
-            <img src={`${IMG}/avatares/avatar-${p.avatar}.webp`} alt="" />
+            <img src={avatarImg(p.avatar)} alt="" />
             {p.name}
           </button>
         ))}
         {me.profiles.length < 6 && (
-          <button onClick={startAdd}>
+          <button onClick={() => setNovo(true)}>
             <span className="add" aria-hidden="true">+</span>
             Adicionar
           </button>
         )}
       </div>
-      <button className="tlink perfis-sair" onClick={async () => { await signOut(); nav('/entrar') }}>Sair da conta</button>
-
-      {modal === 'pin' && <PinGate onClose={() => setModal(null)} onOk={async () => { await refresh(); setModal('novo') }} />}
-      {modal === 'novo' && <NovoPerfil onClose={() => setModal(null)} onDone={async () => { await refresh(); setModal(null) }} />}
+      <div className="perfis-foot">
+        {me.profiles.length > 0 && <Link className="tlink" to="/conta?aba=criancas" onClick={() => setProfileId(me.profiles[0].id)}>Gerenciar perfis</Link>}
+        <button className="tlink perfis-sair" onClick={async () => { await signOut(); nav('/entrar') }}>Sair da conta</button>
+      </div>
+      {novo && <ProfileForm onClose={() => setNovo(false)} onDone={async (p) => { await refresh(); setNovo(false); if (!me.profiles.length) open(p) }} />}
     </main>
   )
 }
 
-export function PinGate({ onClose, onOk }) {
-  const [pin, setPin] = useState('')
+// Criar ou editar perfil de criança, com o foco que os pais querem trabalhar.
+export function ProfileForm({ profile, onClose, onDone }) {
+  const [form, setForm] = useState({
+    name: profile?.name || '', avatar: profile?.avatar || 'raposa', age_band: profile?.age_band || '3-5',
+    focus_valores: profile?.focus_valores || [], focus_caminhos: profile?.focus_caminhos || [],
+  })
   const [error, setError] = useState(null)
   const [busy, setBusy] = useState(false)
+  const flip = (k, x) => {
+    const cur = form[k]
+    if (!cur.includes(x) && cur.length >= 3) { setError('Escolha até 3 em cada grupo.'); return }
+    setError(null)
+    setForm({ ...form, [k]: cur.includes(x) ? cur.filter((y) => y !== x) : [...cur, x] })
+  }
   async function submit(e) {
     e.preventDefault()
     setBusy(true); setError(null)
     try {
-      await api('/parent/unlock', { method: 'POST', body: { pin } })
-      onOk()
+      const saved = profile
+        ? await api(`/profiles/${profile.id}`, { method: 'PATCH', body: { profile: form } })
+        : await api('/profiles', { method: 'POST', body: { profile: form } })
+      onDone(saved)
     } catch (err) {
-      setError(err.message); setPin('')
-    } finally {
+      setError(err.message)
       setBusy(false)
     }
   }
   return (
-    <Modal onClose={onClose} title="Área dos pais">
-      <p className="muted">Digite o PIN dos pais para continuar.</p>
-      <form onSubmit={submit} className="stack">
-        <PinInput label="PIN" value={pin} onChange={setPin} autoFocus />
-        <FormError error={error} />
-        <Submit busy={busy}>Continuar</Submit>
-      </form>
-    </Modal>
-  )
-}
-
-function NovoPerfil({ onClose, onDone }) {
-  const [form, setForm] = useState({ name: '', avatar: 'raposa', age_band: '3-5' })
-  const [error, setError] = useState(null)
-  const [busy, setBusy] = useState(false)
-  async function submit(e) {
-    e.preventDefault()
-    setBusy(true); setError(null)
-    try {
-      await api('/profiles', { method: 'POST', body: { profile: form } })
-      onDone()
-    } catch (err) {
-      setError(err.code === 'pin_required' ? 'O tempo do PIN acabou. Feche e abra de novo.' : err.message)
-    } finally {
-      setBusy(false)
-    }
-  }
-  return (
-    <Modal onClose={onClose} title="Novo perfil">
+    <Modal onClose={onClose} title={profile ? `Editar ${profile.name}` : 'Novo perfil'}>
       <form onSubmit={submit} className="stack">
         <label className="field">
           <span>Nome ou apelido da criança</span>
@@ -99,7 +83,7 @@ function NovoPerfil({ onClose, onDone }) {
           <legend>Escolha um bichinho</legend>
           {AVATARS.map((a) => (
             <button type="button" key={a} aria-pressed={form.avatar === a} onClick={() => setForm({ ...form, avatar: a })}>
-              <img src={`${IMG}/avatares/avatar-${a}.webp`} alt={a} />
+              <img src={avatarImg(a)} alt={a} />
             </button>
           ))}
         </fieldset>
@@ -109,21 +93,17 @@ function NovoPerfil({ onClose, onDone }) {
             <button type="button" key={v} aria-pressed={form.age_band === v} onClick={() => setForm({ ...form, age_band: v })}>{l}</button>
           ))}
         </fieldset>
+        <fieldset className="bands focus">
+          <legend>O que vocês querem cultivar? <small>(até 3, opcional)</small></legend>
+          {VALORES.map((v) => <button type="button" key={v} aria-pressed={form.focus_valores.includes(v)} onClick={() => flip('focus_valores', v)}>{v}</button>)}
+        </fieldset>
+        <fieldset className="bands focus j">
+          <legend>Jornadas para apresentar <small>(até 3, opcional)</small></legend>
+          {CAMINHOS.map((c) => <button type="button" key={c} aria-pressed={form.focus_caminhos.includes(c)} onClick={() => flip('focus_caminhos', c)}>{c}</button>)}
+        </fieldset>
         <FormError error={error} />
-        <Submit busy={busy}>Criar perfil</Submit>
+        <Submit busy={busy}>{profile ? 'Salvar' : 'Criar perfil'}</Submit>
       </form>
     </Modal>
-  )
-}
-
-export function Modal({ title, onClose, children }) {
-  return (
-    <div className="modal" role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="modal-card">
-        <button className="x" onClick={onClose} aria-label="Fechar">×</button>
-        <h2>{title}</h2>
-        {children}
-      </div>
-    </div>
   )
 }

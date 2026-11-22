@@ -18,7 +18,7 @@ export default function Entrar() {
     try {
       const { token, account } = await api('/auth/login', { method: 'POST', body: form })
       signIn(token, account)
-      nav(account.pin_set ? '/perfis' : '/pin', { replace: true })
+      nav('/perfis', { replace: true })
     } catch (err) {
       setError(err.message)
     } finally {
