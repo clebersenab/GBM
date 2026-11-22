@@ -1772,6 +1772,249 @@
    "lancamento": true,
    "box": null,
    "colecoes": []
+  },
+  {
+   "id": "policarpo-quaresma",
+   "titulo": "Policarpo Quaresma",
+   "sinopse": "Policarpo ama tudo o que é do Brasil: a modinha no violão, as frutas do quintal e até o tupi. No sítio do Sossego, ele resolve plantar o país inteiro.",
+   "obra_mae": {
+    "titulo": "Triste Fim de Policarpo Quaresma",
+    "autor": "Lima Barreto",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Perseverança",
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/policarpo-quaresma.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "senhora",
+   "titulo": "Senhora",
+   "sinopse": "Aurélia ganhou uma herança enorme, e de repente todo mundo queria ser amigo dela. Mas amizade de verdade se compra?",
+   "obra_mae": {
+    "titulo": "Senhora",
+    "autor": "José de Alencar",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Honestidade",
+    "Amizade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/senhora.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-jose-de-alencar"
+   ]
+  },
+  {
+   "id": "o-sertanejo-e-um-forte",
+   "titulo": "O Sertanejo é um Forte",
+   "sinopse": "Na seca do sertão, Zé e a família cuidam do pouco que têm, dividem a água com os vizinhos e esperam a chuva sem perder a fé.",
+   "obra_mae": {
+    "titulo": "Os Sertões",
+    "autor": "Euclides da Cunha",
+    "tipo": "livro",
+    "idade": "16+"
+   },
+   "valores": [
+    "Perseverança",
+    "Fé",
+    "Família"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura",
+    "Raízes do Brasil"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/o-sertanejo-e-um-forte.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "fernando-e-os-amigos-de-muitos-nomes",
+   "titulo": "Fernando e os Amigos de Muitos Nomes",
+   "sinopse": "Fernando era um menino de Lisboa que inventava amigos: Alberto cuidava das ovelhas, Ricardo gostava de flores e Álvaro adorava máquinas. Todos moravam na imaginação dele.",
+   "obra_mae": {
+    "titulo": "Poemas de Fernando Pessoa",
+    "autor": "Fernando Pessoa",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Amizade"
+   ],
+   "caminhos": [
+    "Música"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/fernando-e-os-amigos-de-muitos-nomes.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "frankenstein",
+   "titulo": "Frankenstein",
+   "sinopse": "Victor monta no laboratório uma criatura enorme e foge de medo. Só que a criatura só queria um amigo.",
+   "obra_mae": {
+    "titulo": "Frankenstein",
+    "autor": "Mary Shelley",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Amizade",
+    "Honestidade"
+   ],
+   "caminhos": [
+    "Ciência e Inovação"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/frankenstein.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "os-miseraveis",
+   "titulo": "Os Miseráveis: Jean Valjean e os Castiçais",
+   "sinopse": "Jean Valjean leva os castiçais de prata do bispo. Em vez de castigo, ganha uma segunda chance, e decide usá-la para cuidar da pequena Cosette.",
+   "obra_mae": {
+    "titulo": "Os Miseráveis",
+    "autor": "Victor Hugo",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Honestidade",
+    "Fé",
+    "Família"
+   ],
+   "caminhos": [
+    "Direito"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/os-miseraveis.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "sherlock-holmes",
+   "titulo": "Sherlock Holmes e o Dr. Watson",
+   "sinopse": "Sherlock repara no que ninguém vê: um botão, uma pegada, um fio de lã. Com o amigo Watson, ele desvenda os mistérios da Baker Street.",
+   "obra_mae": {
+    "titulo": "As Aventuras de Sherlock Holmes",
+    "autor": "Arthur Conan Doyle",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Curiosidade",
+    "Amizade"
+   ],
+   "caminhos": [
+    "Servir e proteger"
+   ],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/sherlock-holmes.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "dom-quixote",
+   "titulo": "Dom Quixote e Sancho Pança",
+   "sinopse": "Dom Quixote leu tantas histórias de cavaleiros que virou um. No cavalo Rocinante e com o fiel Sancho Pança, enfrenta gigantes que talvez sejam moinhos de vento.",
+   "obra_mae": {
+    "titulo": "Dom Quixote",
+    "autor": "Miguel de Cervantes",
+    "tipo": "livro",
+    "idade": "12+"
+   },
+   "valores": [
+    "Coragem",
+    "Amizade",
+    "Curiosidade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/dom-quixote.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": []
+  },
+  {
+   "id": "romeu-e-julieta",
+   "titulo": "Romeu e Julieta",
+   "sinopse": "Os Montéquios e os Capuletos brigam há tanto tempo que ninguém lembra o motivo. Romeu e Julieta vão mostrar que as duas famílias podem viver em paz.",
+   "obra_mae": {
+    "titulo": "Romeu e Julieta",
+    "autor": "William Shakespeare",
+    "tipo": "livro",
+    "idade": "14+"
+   },
+   "valores": [
+    "Família",
+    "Amizade"
+   ],
+   "caminhos": [],
+   "volume": null,
+   "fileiras": [
+    "Clássicos da literatura"
+   ],
+   "vitrine": false,
+   "capa": "images/capas/romeu-e-julieta.webp",
+   "lancamento": false,
+   "box": null,
+   "colecoes": [
+    "colecao-shakespeare"
+   ]
   }
  ],
  "grupos": [
@@ -1921,7 +2164,8 @@
    "vitrine": true,
    "titulos": [
     "cinco-minutos",
-    "iracema"
+    "iracema",
+    "senhora"
    ],
    "descricao": "As paisagens e os personagens de José de Alencar, da lagoa de Iracema ao Rio antigo."
   },
@@ -2034,7 +2278,8 @@
    "titulos": [
     "julio-cesar",
     "hamlet",
-    "rei-lear"
+    "rei-lear",
+    "romeu-e-julieta"
    ],
    "descricao": "Três peças de Shakespeare para os pequenos: um general romano, um príncipe em dúvida e um rei com três filhas."
   },
