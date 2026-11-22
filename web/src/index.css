@@ -222,7 +222,7 @@ textarea:focus{outline:0;border-color:var(--blue)}
   .search.is-open .search-clear{display:grid}
   .search.is-open .search-pop{left:-4px;right:-4px;width:auto;min-width:0}
   .content{padding:12px 14px 100px}
-  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--glass);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--glass);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
   .tabbar .nav-a{flex-direction:column;gap:3px;padding:6px 4px;border-radius:12px;font-size:11.5px;font-weight:700}
   .tabbar .nav-a.active{color:var(--orange)}
   .tabbar .nav-a .badge{position:absolute;top:2px;left:calc(50% + 6px)}
@@ -648,3 +648,35 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .seed-note{display:inline-flex;align-items:center;gap:4px;color:var(--v-ink)}
 .pb-row.discover .th-t .ico{color:currentColor}
 .pb-row .pb-hint{flex-basis:100%;margin-top:-4px}
+/* bloco de plantar no Início: escolha + um carrossel com abas */
+.pb-help{margin:0}
+.pickers{display:grid;grid-template-columns:7fr 6fr;gap:16px;padding:4px 20px 0}
+.picker{display:grid;gap:10px;padding:12px;border-radius:var(--r-lg);background:color-mix(in srgb,var(--bg2) 70%,transparent);border:1px solid var(--line)}
+.picker h3{margin:0;display:flex;align-items:center;gap:7px;flex-wrap:wrap;font:700 14.5px Poppins,sans-serif}
+.picker.v h3{color:var(--v-ink)}.picker.j h3{color:var(--j-ink)}
+.picker.v h3 .ico{fill:currentColor}
+.picker h3 small{margin-left:auto;font:700 12px "Nunito Sans",system-ui,sans-serif;color:var(--mute)}
+.pick-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:6px}
+.pk{display:grid;justify-items:center;gap:5px;border:0;background:none;padding:4px 2px;border-radius:12px;color:var(--ink2);font:700 11.5px/1.15 Poppins,sans-serif;text-align:center;transition:transform .2s,color .2s}
+.pk:hover{transform:translateY(-2px);color:var(--ink)}
+.pk-img{position:relative;width:min(58px,100%);aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 2px var(--line);transition:box-shadow .2s,filter .2s;filter:saturate(.7) brightness(.85)}
+.pk.arch .pk-img{aspect-ratio:3/4;width:min(46px,100%);border-radius:999px 999px 8px 8px}
+.pk-img img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.pk-img i{position:absolute;top:-4px;right:-4px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;color:#111}
+.picker.v .pk.on .pk-img{box-shadow:0 0 0 3px var(--orange),0 8px 18px -8px var(--orange);filter:none}
+.picker.j .pk.on .pk-img{box-shadow:0 0 0 3px var(--blue),0 8px 18px -8px var(--blue);filter:none}
+.picker.v .pk.on .pk-img i{background:var(--orange)}.picker.j .pk.on .pk-img i{background:var(--blue)}
+.pk.on{color:var(--ink)}
+.pb-err{padding:0 20px;margin:0}
+.pb-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:6px 20px 0}
+.pb-tabs button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg2);color:var(--mute);border-radius:999px;padding:7px 13px;font:700 13px "Nunito Sans",system-ui,sans-serif;transition:background .2s,color .2s,border-color .2s}
+.pb-tabs button:hover{color:var(--ink)}
+.pb-tabs button[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pb-tabs button.k-valor[aria-selected=true]{background:var(--orange);border-color:var(--orange);color:var(--on-orange)}
+.pb-tabs button.k-caminho[aria-selected=true]{background:var(--blue);border-color:var(--blue);color:#06202a}
+.pb-tabs .k-valor .ico{color:var(--orange)}.pb-tabs .k-caminho .ico{color:var(--blue)}
+.pb-tabs [aria-selected=true] .ico{color:currentColor}
+.pb-tabs .k-valor:not(.disc) .ico{fill:currentColor}
+.pb-hint2{padding:0 20px;margin:0}
+@media(max-width:1100px){.pickers{grid-template-columns:1fr}}
+@media(max-width:600px){.pick-row{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));row-gap:10px}.picker.j .pick-row{grid-template-columns:repeat(3,minmax(0,1fr))}.pickers{padding:4px 12px 0}}

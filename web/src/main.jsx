@@ -13,7 +13,6 @@ import Perfis from './pages/Perfis'
 import Inicio from './pages/Inicio'
 import Explorar from './pages/Explorar'
 import Lista from './pages/Lista'
-import Cultivar from './pages/Cultivar'
 import Conta from './pages/Conta'
 import Assinatura from './pages/Assinatura'
 import DesignSystem from './pages/DesignSystem'
@@ -47,12 +46,12 @@ createRoot(document.getElementById('root')).render(
             <Route path="/inicio" element={<Inicio />} />
             <Route path="/explorar" element={<Explorar />} />
             <Route path="/lista" element={<Lista />} />
-            <Route path="/cultivar" element={<Cultivar />} />
             <Route path="/conta" element={<Conta />} />
             <Route path="/assinatura" element={<Assinatura />} />
             <Route path="/design" element={<DesignSystem />} />
           </Route>
           <Route path="/estante" element={<Navigate to="/inicio" replace />} />
+          <Route path="/cultivar" element={<Navigate to="/inicio" replace />} />
           <Route path="*" element={<Navigate to="/inicio" replace />} />
         </Routes>
       </HashRouter>

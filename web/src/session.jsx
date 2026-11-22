@@ -38,8 +38,20 @@ export function SessionProvider({ children }) {
   }
   const profile = me?.profiles?.find((p) => p.id === profileId) || null
 
+  const patchProfile = useCallback(async (id, patch) => {
+    let before
+    setMe((m) => { before = m; return m && { ...m, profiles: m.profiles.map((p) => (p.id === id ? { ...p, ...patch } : p)) } })
+    try {
+      const saved = await api(`/profiles/${id}`, { method: 'PATCH', body: { profile: patch } })
+      setMe((m) => m && { ...m, profiles: m.profiles.map((p) => (p.id === id ? saved : p)) })
+    } catch (err) {
+      setMe(before)
+      throw err
+    }
+  }, [])
+
   return (
-    <Ctx.Provider value={{ me, loading, refresh, signIn, signOut, profile, setProfileId }}>
+    <Ctx.Provider value={{ me, loading, refresh, signIn, signOut, profile, setProfileId, patchProfile }}>
       {children}
     </Ctx.Provider>
   )

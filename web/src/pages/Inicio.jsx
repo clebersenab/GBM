@@ -5,9 +5,10 @@ import { useLibrary } from '../library'
 import { useShell } from '../Shell'
 import Rail from '../Rail'
 import BookAnim from '../BookAnim'
+import PlantBlock from '../PlantBlock'
 import { Card, Cover, Empty, Icon, Progress, Stat, Tag } from '../ds'
 import { CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
-import { emphasis, journeyThemes, newDoors, newSeeds, recommend, themeBooks, valueThemes } from '../recommend'
+import { emphasis, recommend } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
 
@@ -22,11 +23,7 @@ export default function Inicio() {
   const lendo = entries.filter((e) => e.status === 'lendo')
   const quero = entries.filter((e) => e.status === 'quero_ler')
   const recs = useMemo(() => recommend(ctx, 14), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
-  const themes = useMemo(() => valueThemes(ctx, 5), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
-  const journeys = useMemo(() => journeyThemes(ctx), [profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const enf = useMemo(() => emphasis(entries), [entries])
-  const nextDoors = useMemo(() => newDoors(ctx, 6), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
-  const seeds = useMemo(() => newSeeds(ctx, 7), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const boxes = GRUPOS.filter((g) => g.tipo === 'box').map((g) => ({ g, lidos: g.titulos.filter((id) => bySlug[id]?.status === 'lido').length,
     started: g.titulos.some((id) => bySlug[id]) })).filter((b) => b.started)
@@ -72,37 +69,17 @@ export default function Inicio() {
         <Stat icon="bookmark" tone="blue" value={quero.length} label="Quero ler" onClick={() => nav('/lista?f=quero_ler')} />
       </div>
 
-      {ready && (
-        <section className="plant-block">
-          <header className="pb-h">
-            <div>
-              <p className="eyebrow">O que vocês estão plantando</p>
-              <h2>Em {profile.name}</h2>
-            </div>
-            <div className="pb-chips">
-              {(profile.focus_valores || []).map((x) => <Tag key={'v' + x} tone="orange" icon="star">{x}</Tag>)}
-              {(profile.focus_caminhos || []).map((x) => <Tag key={'c' + x} tone="blue" icon="door">{x}</Tag>)}
-              <Link className="btn btn-sm btn-ghost" to="/cultivar">{themes.length || journeys.length ? 'Ajustar' : 'Escolher'}</Link>
-            </div>
-          </header>
-          {themes.length ? themes.map((th) => <FocusRow key={'v' + th.key} th={th} ctx={ctx} bySlug={bySlug} openTitle={openTitle} />) : seeds.length > 0 && (
-            <div className="pb-row t-orange discover">
-              <h3 className="th-t"><Icon name="sprout" size={20} />Novas sementes para {profile.name}
-                <small className="pb-hint">uma história de cada valor que ainda não apareceu · coloque um valor em foco para trocar por um carrossel dele</small></h3>
-              <Rail>{seeds.map((d) => <Cover key={d.key} t={d.t} status={bySlug[d.t.id]?.status} onClick={openTitle}
-                note={<span className="seed-note">Valor: {d.key}</span>} />)}</Rail>
-            </div>
-          )}
-          {journeys.length ? journeys.map((th) => <FocusRow key={'c' + th.key} th={th} ctx={ctx} bySlug={bySlug} openTitle={openTitle} />) : nextDoors.length > 0 && (
-            <div className="pb-row t-blue discover">
-              <h3 className="th-t"><Icon name="door" size={20} />Novas portas para {profile.name}
-                <small className="pb-hint">uma história de cada jornada que ainda não apareceu · marque uma jornada para apresentar e ela toma este lugar</small></h3>
-              <Rail>{nextDoors.map((d) => <Cover key={d.key} t={d.t} status={bySlug[d.t.id]?.status} onClick={openTitle}
-                note={<span className="door-note">Jornada: {d.key}</span>} />)}</Rail>
-            </div>
-          )}
-        </section>
-      )}
+      <Card title="Lançamentos" pad={false}>
+        <Rail>{[...LANCAMENTOS.map((id) => byId[id]), ...TITULOS.filter((t) => t.lancamento && !LANCAMENTOS.includes(t.id))].filter(Boolean)
+          .map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
+      </Card>
+
+      <Card title={`Recomendados para ${profile.name}`} sub="Com base no que vocês leram, gostaram e querem cultivar" pad={false}
+        action={<Tag tone="purple" icon="sparkle">Para você</Tag>}>
+        {ready && <Rail>{recs.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} note={r.reason} onClick={openTitle} />)}</Rail>}
+      </Card>
+
+      {ready && <PlantBlock />}
 
       {lendo.length > 0 && (
         <Card title="Continue lendo" pad={false}>
@@ -110,10 +87,8 @@ export default function Inicio() {
         </Card>
       )}
 
-      <Card title={`Recomendados para ${profile.name}`} sub="Com base no que vocês leram, gostaram e querem cultivar" pad={false}
-        action={<Tag tone="purple" icon="sparkle">Para você</Tag>}>
-        {ready && <Rail>{recs.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} note={r.reason} onClick={openTitle} />)}</Rail>}
-      </Card>
+
+
 
 
       <div className="grid-2">
@@ -152,10 +127,6 @@ export default function Inicio() {
         </Card>
       </div>
 
-      <Card title="Lançamentos" pad={false}>
-        <Rail>{[...LANCAMENTOS.map((id) => byId[id]), ...TITULOS.filter((t) => t.lancamento && !LANCAMENTOS.includes(t.id))].filter(Boolean)
-          .map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
-      </Card>
     </div>
   )
 }
@@ -232,14 +203,3 @@ function useGrow() {
   return on
 }
 
-function FocusRow({ th, ctx, bySlug, openTitle }) {
-  const row = themeBooks(ctx, th, 14)
-  if (!row.length) return null
-  const v = th.kind === 'valor'
-  return (
-    <div className={`pb-row t-${v ? 'orange' : 'blue'}`}>
-      <h3 className="th-t"><img className={v ? '' : 'door-ic'} src={v ? valorImg(th.key) : caminhoImg(th.key)} alt="" />{v ? `Para cultivar ${th.key}` : `Apresentando ${th.key}`}</h3>
-      <Rail>{row.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
-    </div>
-  )
-}
