@@ -1,6 +1,6 @@
 // Blocos do Início, um para valores e outro para jornadas (nunca juntos).
 // Cada bloco: escolher (vários) + um carrossel para cada escolha, na ordem em que foram marcadas.
-// Sem nada escolhido, o carrossel mostra a descoberta (Novas sementes / Novas portas).
+// Sem nada escolhido, só o convite para escolher (sem obras de exemplo). A escolha fica salva no perfil da criança, no banco.
 import { useMemo, useState } from 'react' // eslint-disable-line no-unused-vars
 import { useSession } from './session'
 import { useLibrary } from './library'
@@ -8,7 +8,7 @@ import { useShell } from './Shell'
 import Rail from './Rail'
 import { Cover, Icon } from './ds'
 import { CAMINHOS, TITULOS, VALORES, valorImg, caminhoImg } from './catalog'
-import { newDoors, newSeeds, scoreAll } from './recommend'
+import { scoreAll } from './recommend'
 
 const MAX = 5
 const KIND = {
@@ -17,16 +17,14 @@ const KIND = {
     eyebrow: 'Plantar', title: (n) => `Valores para cultivar em ${n}`,
     help: 'Toque nos valores que vocês querem trabalhar. Pode escolher vários.',
     count: (k) => (k ? `${k} em foco` : 'nenhum em foco'),
-    disc: 'Novas sementes', discHelp: 'Nenhum valor em foco ainda: uma história de cada valor que não apareceu nas leituras.',
-    discover: newSeeds, noteFor: (k) => `Valor: ${k}`,
+    empty: 'Escolha um ou mais valores acima e os livros de cada um aparecem aqui.',
   },
   caminho: {
     list: CAMINHOS, field: 'focus_caminhos', tfield: 'caminhos', img: caminhoImg, tone: 'j', icon: 'door', pickIcon: 'door',
     eyebrow: 'Apresentar', title: (n) => `Jornadas para apresentar a ${n}`,
     help: 'Toque nas jornadas que vocês querem mostrar. Pode escolher várias.',
     count: (k) => (k ? `${k} ${k === 1 ? 'escolhida' : 'escolhidas'}` : 'nenhuma escolhida'),
-    disc: 'Novas portas', discHelp: 'Nenhuma jornada escolhida ainda: uma história de cada jornada que não apareceu nas leituras.',
-    discover: newDoors, noteFor: (k) => `Jornada: ${k}`,
+    empty: 'Escolha uma ou mais jornadas acima e os livros de cada uma aparecem aqui.',
   },
 }
 
@@ -49,7 +47,7 @@ export default function PlantBlock({ kind }) {
 
   const lists = useMemo(() => {
     const ctx = { entries, profile, signals }
-    if (!chosen.length) return { tudo: K.discover(ctx, 7).map((d) => ({ t: d.t, note: K.noteFor(d.key) })) }
+    if (!chosen.length) return {}
     const score = Object.fromEntries(scoreAll(ctx).map((r) => [r.t.id, r.score]))
     const order = (a, b) => (bySlug[a.id]?.status === 'lido') - (bySlug[b.id]?.status === 'lido') || (score[b.id] ?? -9) - (score[a.id] ?? -9)
     const out = {}
@@ -88,11 +86,7 @@ export default function PlantBlock({ kind }) {
           <Rail>{(lists[c] || []).map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} onClick={openTitle} />)}</Rail>
         </div>
       )) : (
-        <>
-          <p className="pb-disc"><Icon name={K.icon} size={15} /><b>{K.disc}</b><span>{K.discHelp}</span></p>
-          <Rail>{(lists.tudo || []).map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} onClick={openTitle}
-            note={<span className={kind === 'valor' ? 'seed-note' : 'door-note'}>{r.note}</span>} />)}</Rail>
-        </>
+        <p className="pb-disc"><Icon name={K.icon} size={15} /><span>{K.empty}</span></p>
       )}
     </section>
   )
