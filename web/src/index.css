@@ -704,3 +704,10 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .t10:nth-child(n+10) .t10-n{letter-spacing:-.1em}
 .t10:hover .t10-n{transform:translateY(-4px);filter:drop-shadow(0 8px 14px rgba(242,140,40,.45))}
 :root[data-theme=light] .t10-n{color:transparent;background:linear-gradient(180deg,#f7a54a 0%,#d96b12 60%,#a8520a 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 4px 6px rgba(120,60,10,.25))}
+/* top 10 como na referência: número por cima da capa, no canto inferior esquerdo, metade para fora */
+.t10{position:relative;display:block;padding-left:clamp(26px,2.6vw,38px)}
+.t10 .cv-img{width:clamp(120px,11vw,150px)}
+.t10-n{position:absolute;z-index:2;left:0;bottom:22%;margin:0;padding:0;font-size:clamp(72px,6.4vw,100px);line-height:.8;letter-spacing:-.04em;pointer-events:none}
+.t10:first-child .t10-n{margin:0}
+.t10:nth-child(n+10) .t10-n{letter-spacing:-.12em;left:-8px}
+.t10 b{padding-left:9px}
