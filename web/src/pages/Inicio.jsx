@@ -7,7 +7,7 @@ import Rail from '../Rail'
 import BookAnim from '../BookAnim'
 import { Card, Cover, Empty, Icon, Progress, Stat, Tag } from '../ds'
 import { CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
-import { emphasis, journeyThemes, newDoors, recommend, themeBooks, valueThemes } from '../recommend'
+import { emphasis, journeyThemes, newDoors, newSeeds, recommend, themeBooks, valueThemes } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
 
@@ -26,6 +26,7 @@ export default function Inicio() {
   const journeys = useMemo(() => journeyThemes(ctx), [profile]) // eslint-disable-line react-hooks/exhaustive-deps
   const enf = useMemo(() => emphasis(entries), [entries])
   const nextDoors = useMemo(() => newDoors(ctx, 6), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
+  const seeds = useMemo(() => newSeeds(ctx, 7), [entries, signals, profile]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const boxes = GRUPOS.filter((g) => g.tipo === 'box').map((g) => ({ g, lidos: g.titulos.filter((id) => bySlug[id]?.status === 'lido').length,
     started: g.titulos.some((id) => bySlug[id]) })).filter((b) => b.started)
@@ -84,22 +85,22 @@ export default function Inicio() {
               <Link className="btn btn-sm btn-ghost" to="/cultivar">{themes.length || journeys.length ? 'Ajustar' : 'Escolher'}</Link>
             </div>
           </header>
-          {!themes.length && !journeys.length && (
-            <p className="muted pb-empty">Escolham valores para cultivar e jornadas para apresentar em <Link className="tlink" to="/cultivar">Plantar e cultivar</Link>. Cada escolha vira um carrossel aqui.</p>
+          {themes.length ? themes.map((th) => <FocusRow key={'v' + th.key} th={th} ctx={ctx} bySlug={bySlug} openTitle={openTitle} />) : seeds.length > 0 && (
+            <div className="pb-row t-orange discover">
+              <h3 className="th-t"><Icon name="sprout" size={20} />Novas sementes para {profile.name}
+                <small className="pb-hint">uma história de cada valor que ainda não apareceu · coloque um valor em foco para trocar por um carrossel dele</small></h3>
+              <Rail>{seeds.map((d) => <Cover key={d.key} t={d.t} status={bySlug[d.t.id]?.status} onClick={openTitle}
+                note={<span className="seed-note">Valor: {d.key}</span>} />)}</Rail>
+            </div>
           )}
-          {[...themes, ...journeys].map((th) => {
-            const row = themeBooks(ctx, th, 14)
-            if (!row.length) return null
-            const v = th.kind === 'valor'
-            return (
-              <div key={th.kind + th.key} className={`pb-row t-${v ? 'orange' : 'blue'}`}>
-                <h3 className="th-t"><img className={v ? '' : 'door-ic'} src={v ? valorImg(th.key) : caminhoImg(th.key)} alt="" />
-                  {v ? `Para cultivar ${th.key}` : `Apresentando ${th.key}`}
-</h3>
-                <Rail>{row.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
-              </div>
-            )
-          })}
+          {journeys.length ? journeys.map((th) => <FocusRow key={'c' + th.key} th={th} ctx={ctx} bySlug={bySlug} openTitle={openTitle} />) : nextDoors.length > 0 && (
+            <div className="pb-row t-blue discover">
+              <h3 className="th-t"><Icon name="door" size={20} />Novas portas para {profile.name}
+                <small className="pb-hint">uma história de cada jornada que ainda não apareceu · marque uma jornada para apresentar e ela toma este lugar</small></h3>
+              <Rail>{nextDoors.map((d) => <Cover key={d.key} t={d.t} status={bySlug[d.t.id]?.status} onClick={openTitle}
+                note={<span className="door-note">Jornada: {d.key}</span>} />)}</Rail>
+            </div>
+          )}
         </section>
       )}
 
@@ -114,15 +115,6 @@ export default function Inicio() {
         {ready && <Rail>{recs.map((r) => <Cover key={r.t.id} t={r.t} status={bySlug[r.t.id]?.status} note={r.reason} onClick={openTitle} />)}</Rail>}
       </Card>
 
-      {ready && nextDoors.length > 0 && (
-        <Card pad={false}
-          title={<span className="th-t"><img className="door-ic" src={caminhoImg(nextDoors[0].key)} alt="" />Novas portas para {profile.name}</span>}
-          sub="Uma história de cada jornada que ainda não apareceu nas leituras"
-          action={<Link className="tlink sm" to="/cultivar">Escolher jornadas</Link>}>
-          <Rail>{nextDoors.map((d) => <Cover key={d.key} t={d.t} status={bySlug[d.t.id]?.status} onClick={openTitle}
-            note={<span className="door-note">{d.chosen && <Icon name="door" size={13} />}Jornada: {d.key}</span>} />)}</Rail>
-        </Card>
-      )}
 
       <div className="grid-2">
         <Card title="Jardim de valores" sub="Quanto mais um valor aparece nas leituras, mais ele cresce">
@@ -238,4 +230,16 @@ function useGrow() {
   const [on, setOn] = useState(false)
   useEffect(() => { const id = requestAnimationFrame(() => setTimeout(() => setOn(true), 120)); return () => cancelAnimationFrame(id) }, [])
   return on
+}
+
+function FocusRow({ th, ctx, bySlug, openTitle }) {
+  const row = themeBooks(ctx, th, 14)
+  if (!row.length) return null
+  const v = th.kind === 'valor'
+  return (
+    <div className={`pb-row t-${v ? 'orange' : 'blue'}`}>
+      <h3 className="th-t"><img className={v ? '' : 'door-ic'} src={v ? valorImg(th.key) : caminhoImg(th.key)} alt="" />{v ? `Para cultivar ${th.key}` : `Apresentando ${th.key}`}</h3>
+      <Rail>{row.map((t) => <Cover key={t.id} t={t} status={bySlug[t.id]?.status} onClick={openTitle} />)}</Rail>
+    </div>
+  )
 }

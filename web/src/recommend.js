@@ -16,7 +16,7 @@
 // Sem histórico (perfil novo), cai para vitrine + lançamentos + foco dos pais.
 // Com uso real, o próximo passo é somar filtragem colaborativa item a item
 // ("famílias que leram X também leram Y") no servidor.
-import { CAMINHOS, TITULOS, LANCAMENTOS, byId, grupoById } from './catalog'
+import { CAMINHOS, VALORES as VALORES_ALL, TITULOS, LANCAMENTOS, byId, grupoById } from './catalog'
 
 const W_STATUS = { quero_ler: 1, lendo: 1.2, lido: 1.5 }
 const HALF_LIFE_DAYS = 45
@@ -214,4 +214,21 @@ export function emphasis(entries = []) {
       .map(([key, w]) => ({ key, w, pct: total ? w / total : 0, ...ev[kind][key] }))
   }
   return { valores: rank('valores'), caminhos: rank('caminhos') }
+}
+
+// Novas sementes: uma história de cada valor que ainda não apareceu nas leituras (lido ou lendo).
+// Só aparece enquanto não há valor em foco.
+export function newSeeds(ctx, k = 7) {
+  const seen = new Set()
+  for (const e of ctx.entries || []) if (e.status === 'lido' || e.status === 'lendo') for (const v of byId[e.slug]?.valores || []) seen.add(v)
+  const sig = Object.fromEntries((ctx.signals || []).filter((s) => s.kind === 'valor').map((s) => [s.key, s.count]))
+  const scored = scoreAll(ctx)
+  const used = new Set()
+  return VALORES_ALL.filter((v) => !seen.has(v)).sort((a, b) => (sig[b] || 0) - (sig[a] || 0))
+    .map((v) => {
+      const pick = scored.find((r) => r.t.valores?.includes(v) && !used.has(r.t.id) && !ctx.entries?.some((e) => e.slug === r.t.id && e.status !== 'quero_ler'))
+      if (!pick) return null
+      used.add(pick.t.id)
+      return { key: v, t: pick.t }
+    }).filter(Boolean).slice(0, k)
 }
