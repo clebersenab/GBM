@@ -16,7 +16,7 @@
 // Sem histórico (perfil novo), cai para vitrine + lançamentos + foco dos pais.
 // Com uso real, o próximo passo é somar filtragem colaborativa item a item
 // ("famílias que leram X também leram Y") no servidor.
-import { TITULOS, LANCAMENTOS, byId, grupoById } from './catalog'
+import { CAMINHOS, TITULOS, LANCAMENTOS, byId, grupoById } from './catalog'
 
 const W_STATUS = { quero_ler: 1, lendo: 1.2, lido: 1.5 }
 const HALF_LIFE_DAYS = 45
@@ -122,23 +122,48 @@ export function recommend(ctx, k = 12) {
   return diversify(scoreAll(ctx).filter((r) => !inList.has(r.t.id)), k)
 }
 
-// O que os pais estão querendo trabalhar: foco explícito primeiro, depois sinais e a lista.
-export function focusThemes({ entries = [], profile, signals = [] }, max = 2) {
+// Valores se CULTIVAM (repetição): carrosséis "Para cultivar X" com o foco dos pais,
+// ou com o que eles mais exploram em Plantar e cultivar.
+export function valueThemes({ entries = [], profile, signals = [] }, max = 2) {
   const w = {}
-  const bump = (kind, key, x) => { const k = kind + ':' + key; w[k] = (w[k] || 0) + x }
-  for (const v of profile?.focus_valores || []) bump('valor', v, 10)
-  for (const c of profile?.focus_caminhos || []) bump('caminho', c, 10)
-  for (const s of signals) bump(s.kind, s.key, Math.log2(1 + s.count) * 2)
-  for (const e of entries) {
-    if (e.status !== 'quero_ler' || !byId[e.slug]) continue
-    for (const v of byId[e.slug].valores || []) bump('valor', v, 0.5)
-    for (const c of byId[e.slug].caminhos || []) bump('caminho', c, 0.5)
-  }
+  for (const v of profile?.focus_valores || []) w[v] = (w[v] || 0) + 10
+  for (const s of signals) if (s.kind === 'valor') w[s.key] = (w[s.key] || 0) + Math.log2(1 + s.count) * 2
+  for (const e of entries) if (e.status === 'quero_ler') for (const v of byId[e.slug]?.valores || []) w[v] = (w[v] || 0) + 0.5
   return Object.entries(w).filter(([, x]) => x >= 1).sort((a, b) => b[1] - a[1]).slice(0, max)
-    .map(([k]) => { const [kind, ...rest] = k.split(':'); return { kind, key: rest.join(':'), explicit: (kind === 'valor' ? profile?.focus_valores : profile?.focus_caminhos)?.includes(rest.join(':')) } })
+    .map(([key]) => ({ kind: 'valor', key, explicit: (profile?.focus_valores || []).includes(key) }))
 }
 
 export function themeRow(ctx, theme, k = 14) {
   const field = theme.kind === 'valor' ? 'valores' : 'caminhos'
   return scoreAll(ctx).filter((r) => r.t[field]?.includes(theme.key)).slice(0, k)
+}
+
+// Jornadas se DESCOBREM (amplitude): uma porta de cada vez. Uma jornada está "aberta" quando a
+// criança leu (ou está lendo) um livro dela. Sugere um livro por porta ainda fechada, primeiro as
+// que os pais escolheram apresentar, depois as que eles têm explorado, depois as demais.
+export function doorsState({ entries = [], profile, signals = [] }) {
+  const opened = {}
+  for (const e of entries) {
+    if (e.status !== 'lido' && e.status !== 'lendo') continue
+    for (const c of byId[e.slug]?.caminhos || []) opened[c] = (opened[c] || 0) + 1
+  }
+  const chosen = profile?.focus_caminhos || []
+  const sig = Object.fromEntries(signals.filter((s) => s.kind === 'caminho').map((s) => [s.key, s.count]))
+  return CAMINHOS.map((c) => ({ key: c, opened: opened[c] || 0, chosen: chosen.includes(c), signal: sig[c] || 0 }))
+}
+
+export function newDoors(ctx, k = 6) {
+  const scored = scoreAll(ctx)
+  const used = new Set()
+  return doorsState(ctx)
+    .filter((d) => !d.opened)
+    .sort((a, b) => (b.chosen - a.chosen) || (b.signal - a.signal))
+    .map((d) => {
+      const pick = scored.find((r) => r.t.caminhos?.includes(d.key) && !used.has(r.t.id) && !ctx.entries?.some((e) => e.slug === r.t.id && e.status !== 'quero_ler'))
+      if (!pick) return null
+      used.add(pick.t.id)
+      return { ...d, t: pick.t }
+    })
+    .filter(Boolean)
+    .slice(0, k)
 }

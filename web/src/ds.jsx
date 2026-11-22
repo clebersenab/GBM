@@ -27,6 +27,7 @@ const P = {
   download: 'M12 4v11M7 10l5 5 5-5M5 20h14',
   sparkle: 'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z',
   clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2',
+  door: 'M6 21V8a6 6 0 0 1 12 0v13M4 21h16M14 14h.01',
   palette: 'M12 3a9 9 0 1 0 0 18c1 0 2-1 1-2s0-3 2-3h2a4 4 0 0 0 4-4c0-5-4-9-9-9zM7.5 11.5h.01M10 7.5h.01M14.5 7.5h.01M17 11h.01',
 }
 export function Icon({ name, size = 20, className = '' }) {

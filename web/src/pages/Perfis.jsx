@@ -94,7 +94,7 @@ export function ProfileForm({ profile, onClose, onDone }) {
           ))}
         </fieldset>
         <fieldset className="bands focus">
-          <legend>O que vocês querem cultivar? <small>(até 3, opcional)</small></legend>
+          <legend>Valores para cultivar <small>(até 3, opcional)</small></legend>
           {VALORES.map((v) => <button type="button" key={v} aria-pressed={form.focus_valores.includes(v)} onClick={() => flip('focus_valores', v)}>{v}</button>)}
         </fieldset>
         <fieldset className="bands focus j">
