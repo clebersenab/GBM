@@ -129,8 +129,8 @@ export default function Inicio() {
           <Garden rows={enf.valores} name={profile.name} />
         </Card>
 
-        <Card title="Corrida das jornadas" sub="Quem está na frente é a que mais tem a ver: conta o que leu e, principalmente, o que gostou">
-          <Race rows={enf.caminhos} />
+        <Card title={`Portas que mais chamam ${profile.name}`} sub="Quanto mais aberta, mais a jornada tem a ver: conta o que leu e, principalmente, o que gostou">
+          <Doors rows={enf.caminhos} name={profile.name} />
         </Card>
 
         <Card title="Boxes em andamento" sub="A ordem certa faz diferença">
@@ -203,30 +203,28 @@ function Garden({ rows, name }) {
   )
 }
 
-// Corrida: uma raia por jornada; a porta avança conforme a afinidade.
-function Race({ rows }) {
-  const go = useGrow()
+// Portas: uma por jornada. A folha de madeira abre conforme a afinidade e deixa a cena aparecer.
+function Doors({ rows, name }) {
+  const open = useGrow()
   const w = Object.fromEntries(rows.map((r) => [r.key, r]))
   const all = CAMINHOS.map((c) => w[c] || { key: c, w: 0, read: 0, liked: 0 }).sort((a, b) => b.w - a.w)
   const max = all[0].w || 1
-  const leader = all[0].w > 0 ? all[0].key : null
+  const top = all[0].w > 0 ? all[0] : null
   return (
-    <div className="race">
-      <p className="race-lead">{leader ? <><b>{leader}</b> está na frente{w[leader].liked ? `: gostou de ${w[leader].liked} de ${w[leader].read}` : ''}.</> : <>A corrida ainda não começou. Leia uma história de qualquer jornada para dar a largada.</>}</p>
-      <ol className="lanes">
-        {all.map((r) => {
-          const pos = r.w ? 8 + 84 * (r.w / max) : 0
+    <div className="doors2">
+      <p className="race-lead">{top ? <>A porta de <b>{top.key}</b> é a que mais se abriu para {name}{top.liked ? `: gostou de ${top.liked} de ${top.read}` : ''}.</> : <>Todas as portas ainda estão fechadas. Cada história lida abre um pouco uma delas.</>}</p>
+      <ol className="portals">
+        {all.map((r, i) => {
+          const k = r.w ? 0.3 + 0.7 * (r.w / max) : 0
           return (
-            <li key={r.key} className={`lane${r.key === leader ? ' lead' : ''}${r.w ? '' : ' idle'}`}>
-              <span className="lane-n">{r.key}</span>
-              <span className="lane-t">
-                <span className="runner" style={{ left: `${go ? pos : 0}%` }}>
-                  <img src={caminhoImg(r.key)} alt="" />
-                  {r.key === leader && <i className="crown"><Icon name="star" size={12} /></i>}
-                </span>
-                <span className="finish" aria-hidden="true" />
+            <li key={r.key} className={`portal${i === 0 && r.w ? ' first' : ''}${r.w ? '' : ' shut'}`} style={{ '--open': open ? k : 0 }}>
+              <span className="frame">
+                <img src={caminhoImg(r.key)} alt="" />
+                <span className="glow" />
+                <span className="leaf"><i className="knob" /></span>
               </span>
-              <small className="lane-s">{r.w ? (r.liked ? `♥ ${r.liked}` : `${r.read} lido${r.read > 1 ? 's' : ''}`) : 'largada'}</small>
+              <b>{r.key}</b>
+              <small>{r.w ? (r.liked ? `gostou de ${r.liked} de ${r.read}` : `${r.read} ${r.read === 1 ? 'livro' : 'livros'}`) : 'fechada'}</small>
             </li>
           )
         })}
