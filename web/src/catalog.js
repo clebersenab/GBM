@@ -7,6 +7,8 @@ export const CAMINHOS = catalogo.caminhos
 export const GRUPOS = catalogo.grupos
 export const FILEIRAS = catalogo.fileiras_landing
 export const LANCAMENTOS = catalogo.lancamentos_ordem
+// Lançamentos com ilustração larga em images/destaques (usada no banner do Início).
+export const DESTAQUE_IMG = new Set(['moby-dick', 'ze-candeia', 'a-banda-da-garagem', 'a-ilha-das-regras', 'a-turma-do-mucuripe', 'bentinho-e-capitu', 'lia-e-o-julgamento'])
 export const byId = Object.fromEntries(TITULOS.map((t) => [t.id, t]))
 export const grupoById = Object.fromEntries(GRUPOS.map((g) => [g.id, g]))
 
