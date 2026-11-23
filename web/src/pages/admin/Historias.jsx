@@ -58,7 +58,7 @@ export default function Historias() {
               {t.capa ? <img src={/^https?:/.test(t.capa) ? t.capa : '/' + t.capa} alt="" loading="lazy" /> : <span className="ad-semcapa"><Icon name="book" /></span>}
               <span className="ad-li-main">
                 <b>{t.titulo}</b>
-                <small>{t.pages} {t.pages === 1 ? 'página' : 'páginas'}{t.editor && ` · ${t.editor}`}{t.review_note && t.status === 'em_edicao' && ' · devolvida com observação'}</small>
+                <small>{t.em_breve && t.status !== 'publicado' ? 'Em breve no catálogo · ' : ''}{t.pages} {t.pages === 1 ? 'página' : 'páginas'}{t.editor && ` · ${t.editor}`}{t.review_note && t.status === 'em_edicao' && ' · devolvida com observação'}</small>
               </span>
               <StatusChip s={t.status} />
               <small className="ad-li-data">{new Date(t.updated_at).toLocaleDateString('pt-BR')}</small>

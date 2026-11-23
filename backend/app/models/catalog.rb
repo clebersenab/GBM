@@ -9,9 +9,9 @@ class Catalog
   def self.originais = @originais ||= file["titulos"].map { |t| t["id"] }.to_set
 
   def self.build(base)
-    titles = Title.published.includes(:cover_image).order(:position, :id).to_a
+    titles = Title.visible.includes(:cover_image).order(:position, :id).to_a
     views = titles.map { |t| t.catalog_view(base) }
-    published = titles.index_by(&:slug)
+    published = titles.index_by(&:slug) # visíveis no catálogo (publicados + em breve)
     s = static
     grupos = s["grupos"].map do |g|
       membros = if g["tipo"] == "box"

@@ -6,7 +6,7 @@ import { useShell } from '../Shell'
 import Rail from '../Rail'
 import BookAnim from '../BookAnim'
 import PlantBlock from '../PlantBlock'
-import { Card, Cover, Empty, Icon, Progress, Stat, StatusTag, Tag } from '../ds'
+import { Card, Cover, EmBreve, Empty, Icon, Progress, Stat, StatusTag, Tag } from '../ds'
 import { api } from '../api'
 import { src, thumb, CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
 import { emphasis, recommend } from '../recommend'
@@ -33,7 +33,7 @@ export default function Inicio() {
   const boxes = GRUPOS.filter((g) => g.tipo === 'box').map((g) => ({ g, lidos: g.titulos.filter((id) => bySlug[id]?.status === 'lido').length,
     started: g.titulos.some((id) => bySlug[id]) })).filter((b) => b.started)
   // Banner: um lançamento em destaque (o primeiro da ordem de lançamentos).
-  const destaque = byId[LANCAMENTOS[0]]
+  const destaque = byId[LANCAMENTOS.find((id) => byId[id] && !byId[id].em_breve)] || byId[LANCAMENTOS[0]]
 
   return (
     <div className="dash">
@@ -84,7 +84,7 @@ export default function Inicio() {
           <Rail>{top.map(({ t }, i) => (
             <button key={t.id} className="t10" onClick={() => openTitle(t)} aria-label={`${i + 1}º lugar: ${t.titulo}`}>
               <span className="t10-n" aria-hidden="true">{i + 1}</span>
-              <span className="cv-img"><img loading="lazy" src={thumb(t.capa)} alt="" />
+              <span className={`cv-img${t.em_breve ? ' eb' : ''}`}><img loading="lazy" src={thumb(t.capa)} alt="" />{t.em_breve && <EmBreve />}
                 {bySlug[t.id] && <span className="cv-tag"><StatusTag status={bySlug[t.id].status} /></span>}
                 <b>{t.titulo}</b></span>
             </button>

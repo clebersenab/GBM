@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_23_000002) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_23_000003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -203,6 +203,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_23_000002) do
     t.jsonb "vocabulario", default: [], null: false
     t.integer "position"
     t.datetime "published_at"
+    t.boolean "em_breve", default: false, null: false
     t.index ["cover_image_id"], name: "index_titles_on_cover_image_id"
     t.index ["editor_id"], name: "index_titles_on_editor_id"
     t.index ["slug"], name: "index_titles_on_slug", unique: true

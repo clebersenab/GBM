@@ -11,6 +11,8 @@ class Title < ApplicationRecord
   belongs_to :cover_image, class_name: "StoredImage", optional: true
 
   scope :published, -> { where(status: "publicado") }
+  # O que aparece no catálogo: publicados + "em breve" (visíveis, mas sem leitura).
+  scope :visible, -> { where(status: "publicado").or(where(em_breve: true)) }
 
   validates :slug, :title, presence: true
   validates :slug, uniqueness: true, format: { with: /\A[a-z0-9][a-z0-9-]*\z/, message: "só pode ter letras minúsculas, números e hífen" }
@@ -27,7 +29,7 @@ class Title < ApplicationRecord
   def catalog_view(base)
     { id: slug, titulo: title, sinopse: sinopse.to_s, obra_mae: obra_mae.presence, valores: valores, caminhos: caminhos,
       volume: volume, fileiras: fileiras, vitrine: vitrine, capa: capa_url(base), lancamento: lancamento,
-      box: box.presence, colecoes: colecoes }
+      box: box.presence, colecoes: colecoes, em_breve: !published? }
   end
 
   # Conteúdo do leitor. paginas = nil enquanto a história não tem páginas.
@@ -39,7 +41,7 @@ class Title < ApplicationRecord
 
   def admin_view(base)
     catalog_view(base).merge(
-      db_id: id, status: status, editor: editor && { id: editor.id, email: editor.email, name: editor.name },
+      db_id: id, status: status, mostrar_em_breve: em_breve, editor: editor && { id: editor.id, email: editor.email, name: editor.name },
       review_note: review_note, quiz: quiz, vocabulario: vocabulario, published_at: published_at, updated_at: updated_at,
       cover_image_id: cover_image_id,
       pages: pages.includes(:image).map { |p| { image_id: p.image_id, image_path: p.image_path, image_url: p.image_url(base), text: p.text, parent_question: p.parent_question } }

@@ -136,12 +136,16 @@ export function PageHead({ title, sub, children }) {
   )
 }
 
+// Selo das capas de títulos que ainda não abriram para leitura (capa em preto e branco).
+export const EmBreve = ({ small }) => <i className={`eb-tag${small ? ' sm' : ''}`}>Em breve</i>
+
 // Capa clicável com etiqueta de status e linha de apoio (motivo da recomendação, box…).
 export function Cover({ t, status, note, onClick, size }) {
   return (
     <button className={`cv${size ? ' cv-' + size : ''}`} onClick={() => onClick(t)}>
-      <span className="cv-img">
+      <span className={`cv-img${t.em_breve ? ' eb' : ''}`}>
         <img loading="lazy" decoding="async" src={thumb(t.capa)} alt="" />
+        {t.em_breve && <EmBreve />}
         {status && <span className="cv-tag"><StatusTag status={status} /></span>}
         <b>{t.titulo}</b>
       </span>
