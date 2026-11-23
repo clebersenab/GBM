@@ -48,5 +48,6 @@ Rails.application.routes.draw do
     end
     resources :images, only: :create
     resources :editors, only: %i[index create destroy]
+    resources :admins, only: %i[index create destroy]
   end
 end

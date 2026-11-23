@@ -79,8 +79,9 @@ createRoot(document.getElementById('root')).render(
           <Route path="/admin" element={<Private><Suspense fallback={carregando}><AdminLayout /></Suspense></Private>}>
             <Route index element={<Suspense fallback={carregando}><Historias /></Suspense>} />
             <Route path="historia/:id" element={<Suspense fallback={carregando}><Historia /></Suspense>} />
-            <Route path="editores" element={<Suspense fallback={carregando}><Editores /></Suspense>} />
+            <Route path="equipe" element={<Suspense fallback={carregando}><Editores /></Suspense>} />
           </Route>
+          <Route path="/admin/editores" element={<Navigate to="/admin/equipe" replace />} />
           <Route path="/estante" element={<Navigate to="/inicio" replace />} />
           <Route path="/cultivar" element={<Navigate to="/inicio" replace />} />
           <Route path="*" element={<Navigate to="/inicio" replace />} />
