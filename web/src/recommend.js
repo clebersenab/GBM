@@ -96,6 +96,7 @@ export function scoreAll({ entries = [], profile, signals = [] }) {
       if (n?.id === t.id) s += n.started ? 0.6 : 0.05
       else s -= 0.35 // volume fora de ordem
     }
+    if (t.em_breve) s -= 0.25 // o que já dá para ler vem antes do que está em breve
     if (cold) s += (t.vitrine ? 0.3 : 0) + (LANCAMENTOS.includes(t.id) ? 0.4 : 0)
     else if (t.lancamento) s += 0.05
     return { t, score: s, reason: reasonFor(t, taste, entries, nextOf) }

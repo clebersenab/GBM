@@ -67,7 +67,8 @@ h1,h2{font-family:Poppins,system-ui,sans-serif;margin:0;letter-spacing:-.02em;li
 .track{display:flex;gap:12px;overflow-x:auto;padding:6px 2px 12px;scroll-snap-type:x mandatory;scrollbar-width:none}
 .track::-webkit-scrollbar{display:none}
 .titulo{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:start}
-.titulo>img{border-radius:10px;aspect-ratio:2/3;object-fit:cover}
+.titulo>img,.tm-capa img{border-radius:10px;aspect-ratio:2/3;object-fit:cover;width:100%;display:block}
+.tm-capa{position:relative;align-self:start}
 .titulo p{margin:0;color:var(--ink2)}
 .later{background:var(--card);border-left:4px solid var(--orange);border-radius:10px;padding:10px 14px;display:grid}
 .later small{color:var(--mute)}
@@ -736,3 +737,9 @@ textarea:focus{outline:0;border-color:var(--blue)}
   .cover-grid{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:14px 10px}
 }
 @media(max-width:380px){.pblock .pick-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Em breve: títulos que ainda não abriram para leitura. Capa em preto e branco com o selo por cima. */
+.eb{position:relative}
+.eb img,.eb-img{filter:grayscale(1) brightness(.8) contrast(1.05)}
+.eb-tag{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%) rotate(-6deg);z-index:2;padding:6px 14px;border-radius:999px;background:rgba(11,13,23,.82);color:#fff4e0;font:800 13px Poppins,sans-serif;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;box-shadow:0 6px 18px -6px rgba(0,0,0,.6);border:1.5px solid rgba(255,244,224,.5);pointer-events:none;font-style:normal}
+.tm-capa .eb-tag{font-size:16px;padding:8px 18px}
+.eb-txt{font-style:normal;font-weight:700;color:var(--mute);font-size:.85em}

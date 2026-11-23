@@ -12,7 +12,7 @@ export function GroupArt({ g, className = '' }) {
   if (g.arte) return <img className={`g-art ${className}`} loading="lazy" src={thumb(g.arte)} alt="" />
   return (
     <span className={`g-art g-mosaic ${className}`} aria-hidden="true">
-      {g.titulos.slice(0, 3).map((id) => byId[id] && <img key={id} loading="lazy" src={thumb(byId[id].capa)} alt="" />)}
+      {g.titulos.slice(0, 3).map((id) => byId[id] && <img key={id} loading="lazy" src={thumb(byId[id].capa)} alt="" className={byId[id].em_breve ? 'eb-img' : ''} />)}
     </span>
   )
 }
@@ -42,7 +42,7 @@ export default function GroupModal({ g, onClose }) {
               <li key={v.id}>
                 <button onClick={() => open(v)}>
                   <span className="n">{i + 1}</span>
-                  <img src={thumb(v.capa)} alt="" />
+                  <img src={thumb(v.capa)} alt="" className={v.em_breve ? 'eb-img' : ''} />
                   <span className="rt">
                     <b>{v.titulo}</b>
                     <small>{v.sinopse}</small>

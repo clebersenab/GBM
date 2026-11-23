@@ -119,9 +119,9 @@ function SearchBox() {
           {results.length === 0 && <p className="search-none">Nada encontrado para “{deb}”. Tente o nome da obra original ou uma palavra da história.</p>}
           {results.map((r, k) => (
             <button key={r.t.id} role="option" aria-selected={k === i} className="sr" onMouseEnter={() => setI(k)} onClick={() => pick(r.t)}>
-              <img src={thumb(r.t.capa)} alt="" />
+              <img src={thumb(r.t.capa)} alt="" className={r.t.em_breve ? 'eb-img' : ''} />
               <span className="sr-t">
-                <b>{r.t.titulo}</b>
+                <b>{r.t.titulo}{r.t.em_breve && <em className="eb-txt"> · Em breve</em>}</b>
                 <small>{r.field === 'sinopse' ? r.t.sinopse : r.t.obra_mae ? `Semente: ${r.t.obra_mae.titulo}` : r.t.sinopse}</small>
               </span>
               <span className="sr-r">

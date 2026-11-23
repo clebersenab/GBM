@@ -11,6 +11,7 @@ module Admin
     before_action :load_title, except: %i[index create]
 
     META = %i[title sinopse box volume vitrine lancamento cover_image_id].freeze
+    FLAGS = { mostrar_em_breve: :em_breve }.freeze
     LISTS = %i[valores caminhos fileiras colecoes].freeze
 
     # GET /admin/titles?status=
@@ -23,7 +24,7 @@ module Admin
         counts: counts,
         items: rows.map do |t|
           { db_id: t.id, slug: t.slug, titulo: t.title, status: t.status, capa: t.capa_url(request.base_url),
-            editor: t.editor&.email, pages: t.pages.size, updated_at: t.updated_at, review_note: t.review_note }
+            editor: t.editor&.email, em_breve: t.em_breve, pages: t.pages.size, updated_at: t.updated_at, review_note: t.review_note }
         end
       }
     end
@@ -112,6 +113,7 @@ module Admin
 
     def assign_meta(t)
       META.each { |k| t[k] = params[k] if params.key?(k) }
+      FLAGS.each { |param, col| t[col] = ActiveModel::Type::Boolean.new.cast(params[param]) || false if params.key?(param) }
       t.title = t.title.to_s.strip
       t.box = t.box.presence
       t.volume = t.box ? params[:volume].presence&.to_i : nil if params.key?(:volume) || params.key?(:box)

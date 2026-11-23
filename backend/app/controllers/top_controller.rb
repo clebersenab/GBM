@@ -7,7 +7,7 @@ class TopController < ApplicationController
   def index
     since = Title.connection.quote(WINDOW.ago)
     readers = "COUNT(DISTINCT reading_entries.child_profile_id)"
-    rows = Title.published.joins(<<~SQL.squish)
+    rows = Title.visible.joins(<<~SQL.squish)
       LEFT JOIN reading_entries ON reading_entries.title_id = titles.id
         AND reading_entries.status IN ('lendo', 'lido')
         AND COALESCE(reading_entries.started_at, reading_entries.updated_at) >= #{since}

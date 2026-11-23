@@ -11,7 +11,7 @@ import { Escolha, ImagemUpload, StatusChip, enviarImagem } from './comum'
 
 const VAZIA = {
   titulo: '', sinopse: '', capa: null, cover_image_id: null, obra_mae: { titulo: '', autor: '', tipo: 'livro', idade: '' },
-  valores: [], caminhos: [], fileiras: [], colecoes: [], box: '', volume: '', lancamento: false, editor: null,
+  valores: [], caminhos: [], fileiras: [], colecoes: [], box: '', volume: '', lancamento: false, mostrar_em_breve: false, editor: null,
   status: 'rascunho', quiz: [], vocabulario: [], pages: [],
 }
 const urlDe = (u) => (!u ? null : /^https?:/.test(u) ? u : '/' + u)
@@ -69,7 +69,7 @@ export default function Historia() {
     return {
       ...conteudo, title: h.titulo, sinopse: h.sinopse, cover_image_id: h.cover_image_id, obra_mae: h.obra_mae,
       valores: h.valores, caminhos: h.caminhos, fileiras: h.fileiras, colecoes: h.colecoes, box: h.box || null,
-      volume: h.box ? h.volume || null : null, lancamento: h.lancamento, editor_id: h.editor?.id || null,
+      volume: h.box ? h.volume || null : null, lancamento: h.lancamento, mostrar_em_breve: h.mostrar_em_breve, editor_id: h.editor?.id || null,
     }
   }
 
@@ -216,6 +216,7 @@ export default function Historia() {
                 </div>
                 <div className="ad-campo"><span>Coleções</span><Escolha opcoes={colecoes} valor={h.colecoes} onChange={(c) => set({ colecoes: c })} /></div>
                 <label className="ad-check"><input type="checkbox" checked={h.lancamento} onChange={(e) => set({ lancamento: e.target.checked })} />Mostrar em Lançamentos</label>
+                {h.status !== 'publicado' && <label className="ad-check"><input type="checkbox" checked={h.mostrar_em_breve} onChange={(e) => set({ mostrar_em_breve: e.target.checked })} />Mostrar no catálogo como “Em breve” enquanto não é publicada</label>}
               </details>
             )}
             {admin && (

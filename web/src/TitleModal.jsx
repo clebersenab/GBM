@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { api } from './api'
 import { useLibrary } from './library'
 import { useShell } from './Shell'
-import { Icon, Modal, STATUS } from './ds'
+import { EmBreve, Icon, Modal, STATUS } from './ds'
 import { src, thumb, boxOf, byId, grupoById, valorImg, caminhoImg } from './catalog'
 
 export default function TitleModal({ t, onClose }) {
@@ -55,7 +55,7 @@ export default function TitleModal({ t, onClose }) {
   return (
     <Modal title={t.titulo} onClose={onClose} wide>
       <div className="titulo">
-        <img src={src(t.capa)} alt="" />
+        <span className={`tm-capa${t.em_breve ? ' eb' : ''}`}><img src={src(t.capa)} alt="" />{t.em_breve && <EmBreve />}</span>
         <div className="stack">
           <p>{t.sinopse}</p>
 
@@ -65,7 +65,7 @@ export default function TitleModal({ t, onClose }) {
               <div className="tm-vols">
                 {box.grupo.titulos.map((id, k) => byId[id] && (
                   <button key={id} className={id === t.id ? 'now' : ''} onClick={() => id !== t.id && openTitle(byId[id])} title={byId[id].titulo}>
-                    <img src={thumb(byId[id].capa)} alt="" />
+                    <img src={thumb(byId[id].capa)} alt="" className={byId[id].em_breve ? 'eb-img' : ''} />
                     <span>{k + 1}</span>
                     {bySlug[id]?.status === 'lido' && <i><Icon name="check" size={12} /></i>}
                   </button>
@@ -103,7 +103,7 @@ export default function TitleModal({ t, onClose }) {
           <div className="tm-status">
             <small>Na estante</small>
             <div className="seg" role="group" aria-label="Status de leitura">
-              {Object.entries(STATUS).map(([k, s]) => (
+              {Object.entries(STATUS).filter(([k]) => !t.em_breve || k === 'quero_ler').map(([k, s]) => (
                 <button key={k} aria-pressed={entry?.status === k} className={`s-${k}`} onClick={() => setStatus(k)}>
                   {entry?.status === k && <Icon name="check" size={14} />}{s.label}
                 </button>
@@ -118,10 +118,17 @@ export default function TitleModal({ t, onClose }) {
             )}
           </div>
 
+          {t.em_breve ? (
+          <div className="acts">
+            <button className="btn btn-main" disabled><Icon name="clock" size={18} />Em breve</button>
+            <p className="muted sm">Esta história ainda está sendo ilustrada. Marque como “Quero ler” para ela aparecer na sua lista quando abrir.</p>
+          </div>
+          ) : (
           <div className="acts">
             <button className="btn btn-main" onClick={() => run('ler')} disabled={!!busy}><Icon name="play" size={18} />{busy === 'ler' ? 'Abrindo…' : entry?.status === 'lendo' && entry.page > 0 ? 'Continuar lendo' : 'Ler agora'}</button>
             <button className="btn btn-ghost" onClick={() => run('baixar')} disabled={!!busy}><Icon name="download" size={18} />{busy === 'baixar' ? 'Gerando…' : 'Baixar PDF'}</button>
           </div>
+          )}
           {msg && <p className={msg.ok ? 'form-ok' : 'form-error'}>{msg.text}</p>}
         </div>
       </div>
