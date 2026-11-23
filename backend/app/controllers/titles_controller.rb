@@ -11,7 +11,7 @@ class TitlesController < ApplicationController
 
     load_title
     policy = AccessPolicy.new(current_account, @title)
-    return render(json: { error: "assinaturas abrem em breve", code: "sem_acesso" }, status: :forbidden) unless policy.can_read?
+    return render(json: { error: "assinaturas abrem em breve", code: "sem_acesso" }, status: :forbidden) unless policy.can_read? || book&.dig("livre")
     render json: book || { slug: @title.slug, titulo: @title.title, paginas: nil } # ainda em preparação
   end
 

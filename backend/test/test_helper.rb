@@ -23,5 +23,5 @@ class ActionDispatch::IntegrationTest
     Subscription.create!(account: account, plan: "mensal", status: "active", source: "admin", current_period_end: until_at)
   end
 
-  def title(slug = "moby-dick") = Title.find_or_create_by!(slug: slug) { |t| t.title = slug.titleize }
+  def title(slug = "hamlet") = Title.find_or_create_by!(slug: slug) { |t| t.title = slug.titleize }
 end

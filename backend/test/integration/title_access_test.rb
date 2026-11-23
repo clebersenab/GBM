@@ -23,20 +23,20 @@ class TitleAccessTest < ActionDispatch::IntegrationTest
   test "depois de cancelar: só baixa de novo o que já tinha baixado, e não lê no app" do
     account = login
     activate!(account)
-    post "/titles/#{title('moby-dick').slug}/download", headers: auth
+    post "/titles/#{title('hamlet').slug}/download", headers: auth
     account.subscription.cancel!
 
-    get "/titles/moby-dick/read", headers: auth
+    get "/titles/hamlet/read", headers: auth
     assert_response :forbidden, "o app de leitura fecha com a assinatura cancelada"
 
-    post "/titles/moby-dick/download", headers: auth
+    post "/titles/hamlet/download", headers: auth
     assert_response :ok, "o PDF já baixado continua sendo da família"
 
-    post "/titles/#{title('hamlet').slug}/download", headers: auth
+    post "/titles/#{title('otelo').slug}/download", headers: auth
     assert_response :forbidden, "livro novo não pode ser baixado"
 
     get "/downloads", headers: auth
-    assert_equal ["moby-dick"], response.parsed_body.map { |d| d["slug"] }
+    assert_equal ["hamlet"], response.parsed_body.map { |d| d["slug"] }
   end
 
   test "assinatura com período vencido conta como inativa" do
@@ -65,6 +65,10 @@ class TitleAccessTest < ActionDispatch::IntegrationTest
     get "/titles/demo-leitor/read", headers: auth
     assert_response :ok
     assert response.parsed_body["paginas"].size >= 10
+    get "/titles/#{title('moby-dick').slug}/read", headers: auth
+    assert_response :ok, "livro marcado como livre abre sem assinatura"
+    get "/titles/#{title('hamlet').slug}/read", headers: auth
+    assert_response :forbidden
     get "/titles/../secrets/read", headers: auth
     assert_response :not_found
   end
