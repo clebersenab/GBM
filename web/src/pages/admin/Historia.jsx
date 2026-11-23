@@ -259,7 +259,7 @@ export default function Historia() {
                   <div className="ad-campos">
                     <label className="ad-campo"><span>Texto <small>{palavras(p.text)} palavras</small></span>
                       <textarea rows={4} value={p.text} disabled={!podeConteudo} onChange={(e) => setPag(i, { text: e.target.value })} /></label>
-                    <label className="ad-campo"><span>Pergunta para os pais</span>
+                    <label className="ad-campo"><span>Pergunta para os pais <small>opcional</small></span>
                       <input value={p.parent_question || ''} disabled={!podeConteudo} onChange={(e) => setPag(i, { parent_question: e.target.value })} placeholder="Pergunta aberta, ligada à página. Ex.: o que você faria no lugar dele?" /></label>
                   </div>
                 </li>
