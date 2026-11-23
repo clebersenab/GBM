@@ -1,5 +1,6 @@
 // Design system GBM: componentes base da plataforma (referência visual em #/design).
 import { useEffect, useRef, useState } from 'react'
+import { thumb } from './catalog'
 
 // Ícones de traço (24×24), um só estilo para toda a plataforma.
 const P = {
@@ -139,7 +140,7 @@ export function Cover({ t, status, note, onClick, size }) {
   return (
     <button className={`cv${size ? ' cv-' + size : ''}`} onClick={() => onClick(t)}>
       <span className="cv-img">
-        <img loading="lazy" src={`/${t.capa}`} alt="" />
+        <img loading="lazy" decoding="async" src={thumb(t.capa)} alt="" />
         {status && <span className="cv-tag"><StatusTag status={status} /></span>}
         <b>{t.titulo}</b>
       </span>

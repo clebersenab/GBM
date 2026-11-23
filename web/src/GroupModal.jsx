@@ -5,14 +5,14 @@ import { useLibrary } from './library'
 import { useShell } from './Shell'
 import { Cover, Icon, Modal, StatusTag, Tag } from './ds'
 import Rail from './Rail'
-import { byId } from './catalog'
+import { thumb, byId } from './catalog'
 
 // Arte do grupo; sem arte própria, um mosaico com as capas das obras.
 export function GroupArt({ g, className = '' }) {
-  if (g.arte) return <img className={`g-art ${className}`} loading="lazy" src={`/${g.arte}`} alt="" />
+  if (g.arte) return <img className={`g-art ${className}`} loading="lazy" src={thumb(g.arte)} alt="" />
   return (
     <span className={`g-art g-mosaic ${className}`} aria-hidden="true">
-      {g.titulos.slice(0, 3).map((id) => byId[id] && <img key={id} loading="lazy" src={`/${byId[id].capa}`} alt="" />)}
+      {g.titulos.slice(0, 3).map((id) => byId[id] && <img key={id} loading="lazy" src={thumb(byId[id].capa)} alt="" />)}
     </span>
   )
 }
@@ -42,7 +42,7 @@ export default function GroupModal({ g, onClose }) {
               <li key={v.id}>
                 <button onClick={() => open(v)}>
                   <span className="n">{i + 1}</span>
-                  <img src={`/${v.capa}`} alt="" />
+                  <img src={thumb(v.capa)} alt="" />
                   <span className="rt">
                     <b>{v.titulo}</b>
                     <small>{v.sinopse}</small>

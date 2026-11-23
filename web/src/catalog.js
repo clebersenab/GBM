@@ -17,8 +17,10 @@ export const grupoById = Object.fromEntries(GRUPOS.map((g) => [g.id, g]))
 // minúsculas e sem acento: "Fé" -> "fe"
 export const norm = (s) => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 export const slug = (s) => norm(s).replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-export const valorImg = (v) => `/images/cards/valor-${slug(v)}.webp`
-export const caminhoImg = (c) => `/images/cards/caminho-${slug(c)}.webp`
+// Miniatura leve para listas e carrosséis (gerada por scripts/thumbs.py); a original fica para telas grandes.
+export const thumb = (p) => '/' + (p || '').replace(/^images\/(capas|cards|boxes)\//, 'images/t/$1/')
+export const valorImg = (v) => `/images/t/cards/valor-${slug(v)}.webp`
+export const caminhoImg = (c) => `/images/t/cards/caminho-${slug(c)}.webp`
 export const avatarImg = (a) => `/images/avatares/avatar-${a}.webp`
 
 // Box de um título e a posição dele na ordem de leitura.

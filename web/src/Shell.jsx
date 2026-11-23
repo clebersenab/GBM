@@ -5,7 +5,7 @@ import { useSession } from './session'
 import { useLibrary } from './library'
 import { Logo, ThemeToggle } from './theme'
 import { Icon, Badge, useDismiss } from './ds'
-import { avatarImg } from './catalog'
+import { thumb, avatarImg } from './catalog'
 import { search } from './search'
 import TitleModal from './TitleModal'
 import GroupModal from './GroupModal'
@@ -119,7 +119,7 @@ function SearchBox() {
           {results.length === 0 && <p className="search-none">Nada encontrado para “{deb}”. Tente o nome da obra original ou uma palavra da história.</p>}
           {results.map((r, k) => (
             <button key={r.t.id} role="option" aria-selected={k === i} className="sr" onMouseEnter={() => setI(k)} onClick={() => pick(r.t)}>
-              <img src={`/${r.t.capa}`} alt="" />
+              <img src={thumb(r.t.capa)} alt="" />
               <span className="sr-t">
                 <b>{r.t.titulo}</b>
                 <small>{r.field === 'sinopse' ? r.t.sinopse : r.t.obra_mae ? `Semente: ${r.t.obra_mae.titulo}` : r.t.sinopse}</small>

@@ -3,16 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GBM Histórias</title>
-<meta name="description" content="Histórias para ler juntos. Clássicos, grandes filmes e histórias de fé recontados para crianças do nascimento aos 8 anos, com valores para cultivar e jornadas para conhecer.">
+<title>GBM Histórias · Clássicos recontados para crianças de 0 a 8 anos</title>
+<meta name="description" content="E-books infantis que plantam a semente dos grandes clássicos da literatura e do cinema. Valores para cultivar e jornadas para descobrir, do nascimento aos 8 anos. R$ 19,90 por mês para a família inteira.">
+<link rel="canonical" href="https://gbm-six.vercel.app/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b0d17">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="GBM Histórias">
+<meta property="og:url" content="https://gbm-six.vercel.app/">
 <meta property="og:title" content="GBM · Histórias para ler juntos">
-<meta property="og:description" content="Histórias que plantam valores e apresentam caminhos, para pais e filhos lerem juntos.">
-<meta property="og:image" content="../images/marca/og-image.jpg">
+<meta property="og:description" content="Livros que plantam nas crianças a semente dos grandes clássicos da literatura e do cinema. Do nascimento aos 8 anos.">
+<meta property="og:image" content="https://gbm-six.vercel.app/images/marca/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GBM, Histórias para ler juntos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GBM · Histórias para ler juntos">
+<meta name="twitter:description" content="Livros que plantam nas crianças a semente dos grandes clássicos. Do nascimento aos 8 anos.">
+<meta name="twitter:image" content="https://gbm-six.vercel.app/images/marca/og-image.jpg">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "GBM Histórias", "alternateName": "GBM · Histórias para ler juntos", "url": "https://gbm-six.vercel.app/", "logo": "https://gbm-six.vercel.app/images/marca/logo-web.png", "email": "contato@gbmhistorias.com.br", "taxID": "24.217.073/0001-06"}, {"@context": "https://schema.org", "@type": "Product", "name": "Assinatura GBM Histórias", "description": "E-books infantis que plantam a semente dos grandes clássicos da literatura e do cinema, para crianças do nascimento aos 8 anos. Uma assinatura para a família inteira.", "brand": {"@type": "Brand", "name": "GBM Histórias"}, "image": "https://gbm-six.vercel.app/images/marca/og-image.jpg", "offers": {"@type": "Offer", "price": "19.90", "priceCurrency": "BRL", "url": "https://gbm-six.vercel.app/#preco", "availability": "https://schema.org/PreOrder"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Para que idade é o GBM?", "acceptedAnswer": {"@type": "Answer", "text": "Do nascimento aos 8 anos. Com os bebês, o adulto lê em voz alta e as ilustrações prendem o olhar: o hábito da leitura começa antes de a criança entender as palavras. Os maiores acompanham, respondem o quiz e leem trechos sozinhos."}}, {"@type": "Question", "name": "As histórias são resumos dos clássicos?", "acceptedAnswer": {"@type": "Answer", "text": "Não. São histórias novas, inspiradas nos temas das grandes obras e simplificadas para a idade da criança, sem os temas delicados do original. Cada uma termina com a indicação do clássico para ler ou assistir quando crescer."}}, {"@type": "Question", "name": "Posso baixar os livros?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Os e-books ficam disponíveis em PDF para download."}}, {"@type": "Question", "name": "Quantos filhos posso cadastrar?", "acceptedAnswer": {"@type": "Answer", "text": "Todos. A assinatura é da família, e cada filho tem o seu perfil."}}]}]</script>
 <link rel="icon" href="../images/marca/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../images/marca/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="../images/marca/favicon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="../images/marca/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="../images/hero/hero-pai-e-filho.webp" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Literata:ital,opsz,wght@1,7..72,500;1,7..72,600&display=swap" rel="stylesheet">
 <style>
 /* VOICE  occasion: a bedtime-story catalogue for parents, warm and unhurried
@@ -546,7 +563,7 @@ details[open] summary::after{transform:rotate(180deg)}
 </nav>
 
 <header class="hero" id="topo">
-  <img src="../images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
+  <img fetchpriority="high" width="1672" height="941" src="../images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
   <div class="txt">
     <p class="eyebrow">Do nascimento aos 8 anos</p>
     <h1>Histórias para ler <span>juntos</span></h1>
@@ -572,7 +589,7 @@ details[open] summary::after{transform:rotate(180deg)}
 
 <section class="band origin">
   <div class="wrap">
-    <img src="../images/secoes/origem-antes-e-depois.webp" alt="O mesmo pai e a mesma filha com o mesmo livro: à esquerda entediados, à direita encantados com uma baleia saindo das páginas">
+    <img loading="lazy" decoding="async" src="../images/secoes/origem-antes-e-depois.webp" alt="O mesmo pai e a mesma filha com o mesmo livro: à esquerda entediados, à direita encantados com uma baleia saindo das páginas">
     <div class="story">
       <h2>Começou com a Giovana</h2>
       <p>Ela tinha 6 anos e estava aprendendo a ler. Os livrinhos de sempre davam sono nela e em mim.</p>
@@ -591,11 +608,11 @@ details[open] summary::after{transform:rotate(180deg)}
     <p class="step" id="step1"><i>1</i>Primeiro, escolha o que você quer plantar</p>
     <div class="choose" role="tablist" aria-label="Escolha entre valores e jornadas">
       <button class="pick v" role="tab" data-mode="valores" aria-selected="false">
-        <img src="../images/cards/valor-fe.webp" alt="">
+        <img src="../images/t/cards/valor-fe.webp" alt="" loading="lazy">
         <span><b>Cultivar um valor</b><small>Fé, coragem, honestidade, amizade e outros</small><em>Ver os valores</em></span>
       </button>
       <button class="pick j" role="tab" data-mode="jornadas" aria-selected="false">
-        <img src="../images/cards/caminho-empreender.webp" alt="">
+        <img src="../images/t/cards/caminho-empreender.webp" alt="" loading="lazy">
         <span><b>Descobrir uma jornada</b><small>Empreender, medicina, direito, música e outras</small><em>Ver as jornadas</em></span>
       </button>
     </div>
@@ -646,7 +663,7 @@ details[open] summary::after{transform:rotate(180deg)}
       <div class="stage">
         <div class="device"><span class="dots"><i></i><i></i><i></i></span>
           <div class="screens">
-            <img class="on" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos">
+            <img loading="lazy" decoding="async" class="on" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos">
             <div class="qapp" id="qapp" aria-label="Protótipo do quiz">
               <div class="qa-top"><img src="../images/marca/logo-nav.png" alt="GBM"><span><img src="../images/avatares/avatar-raposa.webp" alt="">Giovana</span></div>
               <div class="qa-body">
@@ -731,7 +748,7 @@ details[open] summary::after{transform:rotate(180deg)}
 </section>
 
 <footer class="final">
-  <img src="../images/hero/hero-mae-e-filha.webp" alt="Mãe e filha lendo juntas no sofá; da tela saem cenas de histórias">
+  <img loading="lazy" decoding="async" src="../images/hero/hero-mae-e-filha.webp" alt="Mãe e filha lendo juntas no sofá; da tela saem cenas de histórias">
   <div class="txt">
     <h2>Escolham a história de hoje à noite</h2>
     <p class="lead">R$ 19,90 por mês, para a família inteira.</p>
@@ -739,7 +756,7 @@ details[open] summary::after{transform:rotate(180deg)}
   </div>
   <div class="foot">
     <div class="foot-brand">
-      <img src="../images/marca/logo-web.png" alt="GBM, Histórias para ler juntos">
+      <img loading="lazy" decoding="async" src="../images/marca/logo-web.png" alt="GBM, Histórias para ler juntos">
     </div>
     <div class="foot-col">
       <b>Contato</b>
@@ -773,11 +790,12 @@ let T=[],G=[],cat={};
 let mode=null, sel=null;
 const byId=id=>T.find(t=>t.id==id);
 const later=(o,cls)=>{const k=o.tipo=="livro"?"leia":"assista";return `<div class="${cls}"><small>Quando crescer, ${k}</small><strong>${o.titulo}</strong>${o.autor?`<small>${o.autor}</small>`:""}<small>Idade sugerida: ${o.idade}</small></div>`};
-const cover=(x,badge="")=>`<button class="cover" data-id="${x.id}"><img loading="lazy" src="${A}${x.capa}" alt="">${badge}<b>${x.titulo}</b></button>`;
+const T_=p=>(p||"").replace(/^images\/(capas|cards|boxes)\//,"images/t/$1/");
+const cover=(x,badge="")=>`<button class="cover" data-id="${x.id}"><img loading="lazy" decoding="async" src="${A}${T_(x.capa)}" alt="">${badge}<b>${x.titulo}</b></button>`;
 const rail=(inner,c="")=>`<div class="rail rv${c}"><button class="arr prev" aria-label="Anteriores" disabled>${ARR}</button><div class="track st">${inner}</div><button class="arr next" aria-label="Próximos"><span style="display:grid;transform:scaleX(-1)">${ARR}</span></button></div>`;
 const row=(title,color,count,inner,sub="")=>`<div class="row"><div class="row-h"><h3><i style="background:${color}"></i>${title}</h3><span>${count}</span></div>${sub?`<p class="row-sub">${sub}</p>`:""}${rail(inner,sub?" grps":"")}</div>`;
-const boxCard=g=>{const n=g.titulos.length;return `<button class="grp box" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${g.arte}" alt=""><span class="badge b-box">${n} volumes · em ordem</span></div><b>${g.titulo}</b><span class="vols-mini">${g.titulos.map((_,i)=>`<i>${i+1}</i>`).join("<em>›</em>")}</span><small>${g.descricao}</small></button>`};
-const colCard=g=>`<button class="grp col" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${g.arte}" alt=""><span class="badge b-col">Coleção · ${g.titulos.length} títulos</span></div><b>${g.titulo}</b><small>${g.descricao}</small></button>`;
+const boxCard=g=>{const n=g.titulos.length;return `<button class="grp box" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${T_(g.arte)}" alt=""><span class="badge b-box">${n} volumes · em ordem</span></div><b>${g.titulo}</b><span class="vols-mini">${g.titulos.map((_,i)=>`<i>${i+1}</i>`).join("<em>›</em>")}</span><small>${g.descricao}</small></button>`};
+const colCard=g=>`<button class="grp col" data-grp="${g.id}"><div class="art"><img loading="lazy" src="${A}${T_(g.arte)}" alt=""><span class="badge b-col">Coleção · ${g.titulos.length} títulos</span></div><b>${g.titulo}</b><small>${g.descricao}</small></button>`;
 function rows(){
  const vit=T.filter(x=>x.vitrine&&x.capa);
  const lan=(cat.lancamentos_ordem||[]).map(byId).filter(x=>x&&x.capa);
@@ -786,9 +804,9 @@ function rows(){
   +cat.fileiras_landing.filter(n=>n!=="Histórias reais e de fé").map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return row(n,COL[n]||"var(--ink)",`${l.length} títulos`,l.map(x=>cover(x)).join(""))}).join("")
   +row("Boxes","var(--purple)",`${boxes.length} boxes`,boxes.map(boxCard).join(""),"Histórias com continuação: um volume depende do outro, e a leitura segue em ordem.")
   +row("Coleções","var(--blue)",`${cols.length} coleções`,cols.map(colCard).join(""),"Histórias do mesmo tema, para ler em qualquer ordem.");
- $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=byId(id);if(!x)return"";const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${A}${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
+ $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=byId(id);if(!x)return"";const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${A}${T_(x.capa)}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
  seeds(); arrows(); watch();
- {const m=byId("moby-dick");if(m)$("#qaVals").innerHTML=[...m.valores.map(v=>`<span class="qa-val"><img src="${A}images/cards/valor-${slug(v)}.webp" alt="">${v}</span>`),...m.caminhos.map(c=>`<span class="qa-val j"><img src="${A}images/cards/caminho-${slug(c)}.webp" alt="">${c}</span>`)].join("")}
+ {const m=byId("moby-dick");if(m)$("#qaVals").innerHTML=[...m.valores.map(v=>`<span class="qa-val"><img src="${A}images/t/cards/valor-${slug(v)}.webp" alt="">${v}</span>`),...m.caminhos.map(c=>`<span class="qa-val j"><img src="${A}images/t/cards/caminho-${slug(c)}.webp" alt="">${c}</span>`)].join("")}
 }
 /* plantar: escolha única */
 const SUB={valores:"Agora, toque no valor que você quer ver crescer nele",jornadas:"Agora, toque na jornada que ele vai descobrir"};
@@ -801,13 +819,13 @@ function seeds(){
  if(!mode){
   $("#modeSub").textContent="Depois, escolha um valor ou uma jornada";
   el.className="track seeds val";
-  el.innerHTML=GHOST_V.map((n,i)=>[`<button class="seed" tabindex="-1" aria-hidden="true"><img src="${A}images/cards/valor-${slug(n)}.webp" alt=""><span>${n}</span></button>`,GHOST_J[i]?`<button class="seed" tabindex="-1" aria-hidden="true"><img style="border-radius:999px 999px 14px 14px" src="${A}images/cards/caminho-${slug(GHOST_J[i])}.webp" alt=""><span>${GHOST_J[i]}</span></button>`:""].join("")).join("");
+  el.innerHTML=GHOST_V.map((n,i)=>[`<button class="seed" tabindex="-1" aria-hidden="true"><img src="${A}images/t/cards/valor-${slug(n)}.webp" alt=""><span>${n}</span></button>`,GHOST_J[i]?`<button class="seed" tabindex="-1" aria-hidden="true"><img style="border-radius:999px 999px 14px 14px" src="${A}images/t/cards/caminho-${slug(GHOST_J[i])}.webp" alt=""><span>${GHOST_J[i]}</span></button>`:""].join("")).join("");
   fog("#zone2",true);sel=null;picked();return}
  const list=mode=="valores"?cat.valores:cat.caminhos, kind=mode=="valores"?"valor":"caminho";
  if(!list.includes(sel)) sel=null;
  $("#modeSub").textContent=SUB[mode];
  el.className="track seeds "+(mode=="valores"?"val":"jor");
- el.innerHTML=list.map(n=>`<button class="seed" data-tag="${n}" aria-pressed="${n==sel}"><img src="${A}images/cards/${kind}-${slug(n)}.webp" alt=""><span>${n}</span></button>`).join("");
+ el.innerHTML=list.map(n=>`<button class="seed" data-tag="${n}" aria-pressed="${n==sel}"><img src="${A}images/t/cards/${kind}-${slug(n)}.webp" alt=""><span>${n}</span></button>`).join("");
  el.scrollLeft=0; fog("#zone2",false); stag(el); requestAnimationFrame(()=>upd($("#seedRail")));
  picked();
 }
@@ -816,7 +834,7 @@ function picked(){
   $("#step3t").textContent="A estante dele aparece aqui";
   $("#hint3").textContent=mode?"Toque em um item do passo 2":"Escolha acima para revelar";
   $("#pickedTxt").innerHTML="Estante do Bento: ? títulos.";
-  $("#pickedRow").innerHTML=T.filter(x=>x.vitrine&&x.capa).slice(0,9).map(x=>`<div class="cover" aria-hidden="true"><img src="${A}${x.capa}" alt=""></div>`).join("");
+  $("#pickedRow").innerHTML=T.filter(x=>x.vitrine&&x.capa).slice(0,9).map(x=>`<div class="cover" aria-hidden="true"><img loading="lazy" src="${A}${T_(x.capa)}" alt=""></div>`).join("");
   fog("#zone3",true);return}
  const key=mode=="valores"?"valores":"caminhos";
  const l=T.filter(x=>x.capa&&x[key].includes(sel));
@@ -847,7 +865,7 @@ function openTitle(x){const tags=[...x.valores.map(v=>`<span>${v}</span>`),...x.
  if(box){const vols=box.titulos.map(byId).filter(Boolean),n=box.titulos.indexOf(x.id),prev=vols[n-1];
   where=`<span class="m-box">Box · volume ${n+1} de ${vols.length}</span>`;
   inbox=`<div class="inbox"><p class="ib-h"><span class="tag">Box</span>Faz parte do box <b>${box.titulo}</b>, volume ${n+1} de ${vols.length}.</p>${prev?`<p class="before">Para uma melhor experiência, leia antes <button data-id="${prev.id}">${prev.titulo}</button>.</p>`:`<p class="before first">Este é o primeiro volume: comece por aqui.</p>`}<ol class="mini" aria-label="Ordem de leitura">${vols.map((v,i)=>`<li${i==n?' class="now"':""}><button data-id="${v.id}" aria-label="Volume ${i+1}: ${v.titulo}"${i==n?' aria-current="true"':""}><i>${i+1}</i><img src="${A}${v.capa}" alt=""></button></li>`).join("")}</ol><button class="all" data-grp="${box.id}">Ver o roteiro do box</button></div>`}
- open(`<div class="cv"><img class="cv-bg" src="${A}${x.capa}" alt=""><img class="cv-fg" src="${A}${x.capa}" alt="Capa de ${x.titulo}"></div><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>0 a 8 anos</span>${where}${tags}</div><p class="desc">${x.sinopse}</p>${inbox}${later(x.obra_mae,"later")}${acts}</div>`)}
+ open(`<div class="cv"><img class="cv-bg" src="${A}${T_(x.capa)}" alt=""><img class="cv-fg" src="${A}${x.capa}" alt="Capa de ${x.titulo}"></div><div class="in"><h2 id="mTitle">${x.titulo}</h2><div class="meta"><span>0 a 8 anos</span>${where}${tags}</div><p class="desc">${x.sinopse}</p>${inbox}${later(x.obra_mae,"later")}${acts}</div>`)}
 function openGroup(g){const vols=g.titulos.map(byId).filter(Boolean);
  if(g.tipo=="box"){
   open(`<img src="${A}${g.arte}" alt=""><div class="in"><h2 id="mTitle">${g.titulo}</h2><div class="meta"><span class="m-box">Box · ${vols.length} volumes</span><span>Leia em ordem</span></div><p class="desc">${g.descricao}</p><h3>Roteiro de leitura</h3><ol class="route">${vols.map((v,i)=>`<li><button data-id="${v.id}"><span class="n">${i+1}</span><img src="${A}${v.capa}" alt=""><div><b>${v.titulo}</b><small>${v.sinopse}</small>${i==0?'<span class="start">Comece por aqui</span>':""}</div></button></li>`).join("")}</ol>${later(g.obra_mae,"later")}${acts}</div>`,true);
