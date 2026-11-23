@@ -22,6 +22,11 @@ module Authentication
     @current_session.touch_usage!
   end
 
+  # Administração de histórias: admin ou editor.
+  def require_staff
+    render json: { error: "acesso restrito" }, status: :forbidden unless current_account.admin? || current_account.editor?
+  end
+
   def require_admin
     render json: { error: "acesso restrito" }, status: :forbidden unless current_account.admin?
   end

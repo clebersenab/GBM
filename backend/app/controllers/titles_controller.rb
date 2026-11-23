@@ -11,8 +11,8 @@ class TitlesController < ApplicationController
 
     load_title
     policy = AccessPolicy.new(current_account, @title)
-    return render(json: { error: "assinaturas abrem em breve", code: "sem_acesso" }, status: :forbidden) unless policy.can_read? || book&.dig("livre")
-    render json: book || { slug: @title.slug, titulo: @title.title, paginas: nil } # ainda em preparação
+    return render(json: { error: "assinaturas abrem em breve", code: "sem_acesso" }, status: :forbidden) unless policy.can_read?
+    render json: @title.reader_view(request.base_url) # paginas = nil enquanto está em preparação
   end
 
   # POST /titles/:slug/download -> link temporário do PDF
@@ -27,5 +27,5 @@ class TitlesController < ApplicationController
 
   private
 
-  def load_title = @title = Title.find_by!(slug: params[:slug])
+  def load_title = @title = Title.published.find_by!(slug: params[:slug])
 end

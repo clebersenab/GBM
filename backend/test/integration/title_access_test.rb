@@ -12,9 +12,11 @@ class TitleAccessTest < ActionDispatch::IntegrationTest
   test "com assinatura: o livro com conteúdo chega com as páginas" do
     account = login
     activate!(account)
-    get "/titles/#{title('moby-dick').slug}/read", headers: auth
+    t = title("moby-dick")
+    2.times { |i| t.pages.create!(position: i + 1, image_path: "images/x#{i}.svg", text: "Página #{i + 1}") }
+    get "/titles/moby-dick/read", headers: auth
     assert_response :ok
-    assert_equal 12, response.parsed_body["paginas"].size
+    assert_equal ["Página 1", "Página 2"], response.parsed_body["paginas"].map { |p| p["texto"] }
   end
 
   test "com assinatura ativa: lê, baixa e o livro passa a ser da família" do
@@ -75,6 +77,9 @@ class TitleAccessTest < ActionDispatch::IntegrationTest
     assert response.parsed_body["paginas"].size >= 10
     get "/titles/#{title('moby-dick').slug}/read", headers: auth
     assert_response :forbidden, "livro com conteúdo continua exigindo assinatura"
+    Title.create!(slug: "rascunho-x", title: "Rascunho")
+    get "/titles/rascunho-x/read", headers: auth
+    assert_response :not_found, "rascunho não aparece para as famílias"
     get "/titles/../secrets/read", headers: auth
     assert_response :not_found
   end

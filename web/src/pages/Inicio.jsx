@@ -8,7 +8,7 @@ import BookAnim from '../BookAnim'
 import PlantBlock from '../PlantBlock'
 import { Card, Cover, Empty, Icon, Progress, Stat, StatusTag, Tag } from '../ds'
 import { api } from '../api'
-import { thumb, CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
+import { src, thumb, CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
 import { emphasis, recommend } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
@@ -60,7 +60,7 @@ export default function Inicio() {
               )}
             </div>
           </div>
-          <BookAnim img={`/${DESTAQUE_IMG.has(destaque.id) ? `images/destaques/${destaque.id}.webp` : destaque.capa}`} />
+          <BookAnim img={src(DESTAQUE_IMG.has(destaque.id) ? `images/destaques/${destaque.id}.webp` : destaque.capa)} />
         </section>
       )}
 

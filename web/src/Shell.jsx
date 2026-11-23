@@ -160,6 +160,7 @@ function UserMenu() {
           <button role="menuitem" onClick={() => { setProfileId(null); go('/perfis') }}><Icon name="swap" />Trocar perfil</button>
           <button role="menuitem" onClick={() => go('/conta')}><Icon name="edit" />Editar perfil</button>
           <button role="menuitem" onClick={() => go('/assinatura')}><Icon name="card" />Gerenciar assinatura</button>
+          {(me.admin || me.editor) && <button role="menuitem" onClick={() => go('/admin')}><Icon name="edit" />{me.admin ? 'Administração' : 'Edição de histórias'}</button>}
           {me.admin && <button role="menuitem" onClick={() => go('/design')}><Icon name="palette" />Design system</button>}
           <hr />
           <button role="menuitem" className="um-out" onClick={async () => { setOpen(false); await signOut(); nav('/entrar') }}><Icon name="logout" />Sair da conta</button>

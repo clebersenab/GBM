@@ -36,3 +36,21 @@ export async function api(path, { method = 'GET', body } = {}) {
   }
   return data
 }
+
+// Envio de arquivo (multipart). Usado pelo cadastro de histórias para subir imagens.
+export async function upload(path, blob, name = 'imagem.webp') {
+  const form = new FormData()
+  form.append('file', blob, name)
+  const headers = { Accept: 'application/json' }
+  const token = getToken()
+  if (token) headers.Authorization = `Bearer ${token}`
+  let res
+  try {
+    res = await fetch(BASE + path, { method: 'POST', headers, body: form })
+  } catch {
+    throw new ApiError(0, { error: 'Sem conexão com o servidor. Tente de novo em alguns segundos.' })
+  }
+  const data = await res.json().catch(() => null)
+  if (!res.ok) throw new ApiError(res.status, data)
+  return data
+}

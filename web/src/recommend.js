@@ -31,7 +31,9 @@ function features(t) {
   if (t.obra_mae?.tipo) v['o:' + t.obra_mae.tipo] = 0.3
   return v
 }
-const FEAT = Object.fromEntries(TITULOS.map((t) => [t.id, features(t)]))
+// Recalcula quando o catálogo muda (ele chega da API depois do arquivo embutido).
+let featFrom = null, featCache = {}
+const feats = () => (featFrom === TITULOS ? featCache : (featFrom = TITULOS, featCache = Object.fromEntries(TITULOS.map((t) => [t.id, features(t)]))))
 const norm2 = (v) => Math.sqrt(Object.values(v).reduce((s, x) => s + x * x, 0)) || 1
 function cosine(a, b) {
   let dot = 0
@@ -44,7 +46,7 @@ export function tasteVector({ entries = [], profile, signals = [] }) {
   const taste = {}
   const now = Date.now()
   for (const e of entries) {
-    const f = FEAT[e.slug]
+    const f = feats()[e.slug]
     if (!f) continue
     let w = e.liked === false ? -2 : e.status === 'lido' && e.liked ? 3 : W_STATUS[e.status] || 1
     const days = (now - new Date(e.updated_at || now)) / 864e5
@@ -77,7 +79,7 @@ function reasonFor(t, taste, entries, nextOf) {
     .sort((a, b) => b[1] - a[1]).map(([k]) => k)
   const hit = top.find((k) => (k[0] === 'v' ? t.valores : t.caminhos)?.includes(k.slice(2)))
   if (hit) return hit[0] === 'v' ? `Cultiva ${hit.slice(2)}` : `Jornada: ${hit.slice(2)}`
-  const liked = entries.find((e) => e.liked && byId[e.slug] && cosine(FEAT[e.slug], FEAT[t.id]) > 0.3)
+  const liked = entries.find((e) => e.liked && byId[e.slug] && cosine(feats()[e.slug], feats()[t.id]) > 0.3)
   if (liked) return `Porque gostou de ${byId[liked.slug].titulo}`
   return t.lancamento ? 'Lançamento' : 'Para começar'
 }
@@ -88,7 +90,7 @@ export function scoreAll({ entries = [], profile, signals = [] }) {
   const nextOf = boxProgress(entries)
   const cold = Object.keys(taste).length === 0
   return TITULOS.filter((t) => !seen.has(t.id)).map((t) => {
-    let s = cold ? 0 : cosine(taste, FEAT[t.id])
+    let s = cold ? 0 : cosine(taste, feats()[t.id])
     if (t.box) {
       const n = nextOf[t.box]
       if (n?.id === t.id) s += n.started ? 0.6 : 0.05
@@ -107,7 +109,7 @@ export function diversify(scored, k = 12, lambda = 0.72) {
   while (picked.length < k && pool.length) {
     let best = 0, bestVal = -Infinity
     pool.forEach((c, i) => {
-      const sim = picked.length ? Math.max(...picked.map((p) => cosine(FEAT[p.t.id], FEAT[c.t.id]))) : 0
+      const sim = picked.length ? Math.max(...picked.map((p) => cosine(feats()[p.t.id], feats()[c.t.id]))) : 0
       const val = lambda * c.score - (1 - lambda) * sim
       if (val > bestVal) { bestVal = val; best = i }
     })

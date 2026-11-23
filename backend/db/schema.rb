@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_23_000001) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_23_000002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_23_000001) do
     t.datetime "access_until"
     t.string "theme"
     t.datetime "renewal_canceled_at"
+    t.boolean "editor", default: false, null: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
@@ -44,6 +45,20 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_23_000001) do
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_activation_codes_on_code", unique: true
     t.index ["redeemed_by_id"], name: "index_activation_codes_on_redeemed_by_id"
+  end
+
+  create_table "book_pages", force: :cascade do |t|
+    t.bigint "title_id", null: false
+    t.integer "position", null: false
+    t.bigint "image_id"
+    t.string "image_path"
+    t.text "text", default: "", null: false
+    t.text "parent_question"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_book_pages_on_image_id"
+    t.index ["title_id", "position"], name: "index_book_pages_on_title_id_and_position", unique: true
+    t.index ["title_id"], name: "index_book_pages_on_title_id"
   end
 
   create_table "cancellations", force: :cascade do |t|
@@ -139,6 +154,18 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_23_000001) do
     t.index ["token_digest"], name: "index_sessions_on_token_digest", unique: true
   end
 
+  create_table "stored_images", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "content_type", null: false
+    t.binary "data", null: false
+    t.integer "byte_size", null: false
+    t.integer "width"
+    t.integer "height"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_stored_images_on_account_id"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "plan", default: "mensal", null: false
@@ -157,10 +184,34 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_23_000001) do
     t.string "pdf_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "sinopse"
+    t.jsonb "obra_mae", default: {}, null: false
+    t.string "valores", default: [], null: false, array: true
+    t.string "caminhos", default: [], null: false, array: true
+    t.string "fileiras", default: [], null: false, array: true
+    t.string "colecoes", default: [], null: false, array: true
+    t.string "box"
+    t.integer "volume"
+    t.boolean "vitrine", default: true, null: false
+    t.boolean "lancamento", default: false, null: false
+    t.string "capa_path"
+    t.bigint "cover_image_id"
+    t.string "status", default: "rascunho", null: false
+    t.bigint "editor_id"
+    t.text "review_note"
+    t.jsonb "quiz", default: [], null: false
+    t.jsonb "vocabulario", default: [], null: false
+    t.integer "position"
+    t.datetime "published_at"
+    t.index ["cover_image_id"], name: "index_titles_on_cover_image_id"
+    t.index ["editor_id"], name: "index_titles_on_editor_id"
     t.index ["slug"], name: "index_titles_on_slug", unique: true
+    t.index ["status"], name: "index_titles_on_status"
   end
 
   add_foreign_key "activation_codes", "accounts", column: "redeemed_by_id"
+  add_foreign_key "book_pages", "stored_images", column: "image_id"
+  add_foreign_key "book_pages", "titles"
   add_foreign_key "cancellations", "accounts"
   add_foreign_key "child_profiles", "accounts"
   add_foreign_key "downloads", "accounts"
@@ -169,5 +220,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_23_000001) do
   add_foreign_key "reading_entries", "child_profiles"
   add_foreign_key "reading_entries", "titles"
   add_foreign_key "sessions", "accounts"
+  add_foreign_key "stored_images", "accounts"
   add_foreign_key "subscriptions", "accounts"
+  add_foreign_key "titles", "accounts", column: "editor_id"
+  add_foreign_key "titles", "stored_images", column: "cover_image_id"
 end
