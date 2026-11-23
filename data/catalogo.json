@@ -1108,34 +1108,6 @@
    ]
   },
   {
-   "id": "a-cigarra-e-a-formiga",
-   "titulo": "A Cigarra e a Formiga",
-   "sinopse": "Uma cantou o verão inteiro. A outra guardou comida para o inverno.",
-   "obra_mae": {
-    "titulo": "Fábulas",
-    "autor": "La Fontaine",
-    "tipo": "livro",
-    "idade": "livre"
-   },
-   "valores": [
-    "Perseverança"
-   ],
-   "caminhos": [
-    "Empreender"
-   ],
-   "volume": null,
-   "fileiras": [
-    "Clássicos da literatura"
-   ],
-   "vitrine": false,
-   "capa": "images/capas/a-cigarra-e-a-formiga.webp",
-   "lancamento": false,
-   "box": null,
-   "colecoes": [
-    "colecao-fabulas"
-   ]
-  },
-  {
    "id": "o-cajueiro-do-quintal",
    "titulo": "O Cajueiro do Quintal",
    "sinopse": "Um cajueiro centenário viu quatro gerações da família brincarem na sombra dele.",
@@ -2578,9 +2550,7 @@
    },
    "arte": "images/boxes/colecao-fabulas.webp",
    "vitrine": false,
-   "titulos": [
-    "a-cigarra-e-a-formiga"
-   ],
+   "titulos": [],
    "descricao": "Fábulas de La Fontaine, curtas e cheias de bichos, cada uma com uma lição para conversar depois."
   },
   {

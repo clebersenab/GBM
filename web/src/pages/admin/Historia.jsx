@@ -6,7 +6,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { api } from '../../api'
 import { useSession } from '../../session'
 import { Icon } from '../../ds'
-import { CAMINHOS, CATEGORIAS, GRUPOS, VALORES, atualizarCatalogo } from '../../catalog'
+import { CAMINHOS, CATEGORIAS, GRUPOS_TODOS, VALORES, atualizarCatalogo } from '../../catalog'
 import { Escolha, ImagemUpload, StatusChip, enviarImagem } from './comum'
 
 const VAZIA = {
@@ -49,8 +49,8 @@ export default function Historia() {
     return () => window.removeEventListener('beforeunload', aviso)
   }, [sujo])
 
-  const boxes = useMemo(() => GRUPOS.filter((g) => g.tipo === 'box').map((g) => ({ id: g.id, nome: g.titulo })), [])
-  const colecoes = useMemo(() => GRUPOS.filter((g) => g.tipo !== 'box').map((g) => ({ id: g.id, nome: g.titulo })), [])
+  const boxes = useMemo(() => GRUPOS_TODOS.filter((g) => g.tipo === 'box').map((g) => ({ id: g.id, nome: g.titulo })), [])
+  const colecoes = useMemo(() => GRUPOS_TODOS.filter((g) => g.tipo !== 'box').map((g) => ({ id: g.id, nome: g.titulo })), [])
 
   if (!h) return msg ? <p className="form-error">{msg.text}</p> : <p className="muted">Carregando…</p>
 

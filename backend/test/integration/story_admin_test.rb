@@ -110,4 +110,13 @@ class StoryAdminTest < ActionDispatch::IntegrationTest
     delete "/admin/titles/#{id}", headers: auth
     assert_response :no_content
   end
+
+  test "admin edita só o conteúdo em JSON sem perder o título" do
+    admin = login("admin@exemplo.com"); admin.update!(admin: true)
+    t = Title.create!(slug: "x", title: "Título certo", status: "publicado")
+    patch "/admin/titles/#{t.id}", params: { quiz: [], vocabulario: [{ palavra: "Mar", significado: "Água salgada." }] }, headers: auth, as: :json
+    assert_response :ok
+    assert_equal "Título certo", t.reload.title
+    assert_equal 1, t.vocabulario.size
+  end
 end
