@@ -800,7 +800,7 @@ const colCard=g=>`<button class="grp col" data-grp="${g.id}"><div class="art"><i
 function rows(){
  const vit=T.filter(x=>x.vitrine&&x.capa);
  const lan=(cat.lancamentos_ordem||[]).map(byId).filter(x=>x&&x.capa);
- const boxes=G.filter(g=>g.vitrine&&g.tipo=="box"), cols=G.filter(g=>g.vitrine&&g.tipo=="colecao");
+ const boxes=G.filter(g=>g.vitrine&&g.tipo=="box"&&g.titulos.length), cols=G.filter(g=>g.vitrine&&g.tipo=="colecao"&&g.titulos.length);
  $("#rows").innerHTML=row("Lançamentos","var(--orange)",`${lan.length} títulos`,lan.map(x=>cover(x,'<span class="badge b-new">Novo</span>')).join(""))
   +cat.fileiras_landing.filter(n=>n!=="Histórias reais e de fé").map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return row(n,COL[n]||"var(--ink)",`${l.length} títulos`,l.map(x=>cover(x)).join(""))}).join("")
   +row("Boxes","var(--purple)",`${boxes.length} boxes`,boxes.map(boxCard).join(""),"Histórias com continuação: um volume depende do outro, e a leitura segue em ordem.")

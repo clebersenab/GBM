@@ -6,20 +6,22 @@ import embutido from '../../data/catalogo.json'
 import { api } from './api'
 
 const CACHE = 'gbm-catalogo'
-export let TITULOS, VALORES, CAMINHOS, GRUPOS, FILEIRAS, CATEGORIAS, LANCAMENTOS, byId, grupoById
+export let TITULOS, VALORES, CAMINHOS, GRUPOS, GRUPOS_TODOS, FILEIRAS, CATEGORIAS, LANCAMENTOS, byId, grupoById
 let atual = ''
 
 function aplicar(c) {
   TITULOS = c.titulos
   VALORES = c.valores
   CAMINHOS = c.caminhos
-  GRUPOS = c.grupos
+  GRUPOS_TODOS = c.grupos
+  // Para as famílias, só grupos com algum livro (o cadastro usa GRUPOS_TODOS).
+  GRUPOS = c.grupos.filter((g) => g.titulos.length > 0)
   FILEIRAS = c.fileiras_landing
   // Todas as categorias que existem nos livros: primeiro as da landing, depois as demais.
   CATEGORIAS = [...new Set([...c.fileiras_landing, ...c.titulos.flatMap((t) => t.fileiras || [])])]
   LANCAMENTOS = c.lancamentos_ordem
   byId = Object.fromEntries(TITULOS.map((t) => [t.id, t]))
-  grupoById = Object.fromEntries(GRUPOS.map((g) => [g.id, g]))
+  grupoById = Object.fromEntries(GRUPOS_TODOS.map((g) => [g.id, g]))
 }
 
 function guardado() {
