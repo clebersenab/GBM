@@ -224,7 +224,7 @@ export default function Historia() {
                   <option value="">Ninguém ainda</option>
                   {editores.map((x) => <option key={x.id} value={x.id}>{x.name ? `${x.name} (${x.email})` : x.email}</option>)}
                 </select>
-                {editores.length === 0 && <small>Nenhum editor cadastrado. <Link to="/admin/editores">Cadastrar editores</Link></small>}
+                {editores.length === 0 && <small>Nenhum editor cadastrado. <Link to="/admin/equipe">Cadastrar editores</Link></small>}
               </label>
             )}
           </div>

@@ -25,7 +25,7 @@ export function AdminLayout() {
         <Link to="/admin" className="ad-logo" aria-label="Administração"><Logo /><span>{me.admin ? 'Administração' : 'Edição'}</span></Link>
         <nav>
           <NavLink to="/admin" end>Histórias</NavLink>
-          {me.admin && <NavLink to="/admin/editores">Editores</NavLink>}
+          {me.admin && <NavLink to="/admin/equipe">Equipe</NavLink>}
         </nav>
         <span className="ad-sp" />
         <ThemeToggle />
