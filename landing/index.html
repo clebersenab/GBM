@@ -757,7 +757,7 @@ function rows(){
  const lan=(cat.lancamentos_ordem||[]).map(byId).filter(x=>x&&x.capa);
  const boxes=G.filter(g=>g.vitrine&&g.tipo=="box"), cols=G.filter(g=>g.vitrine&&g.tipo=="colecao");
  $("#rows").innerHTML=row("Lançamentos","var(--orange)",`${lan.length} títulos`,lan.map(x=>cover(x,'<span class="badge b-new">Novo</span>')).join(""))
-  +cat.fileiras_landing.map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return row(n,COL[n]||"var(--ink)",`${l.length} títulos`,l.map(x=>cover(x)).join(""))}).join("")
+  +cat.fileiras_landing.filter(n=>n!=="Histórias reais e de fé").map(n=>{const l=vit.filter(x=>x.fileiras.includes(n));return row(n,COL[n]||"var(--ink)",`${l.length} títulos`,l.map(x=>cover(x)).join(""))}).join("")
   +row("Boxes","var(--purple)",`${boxes.length} boxes`,boxes.map(boxCard).join(""),"Histórias com continuação: um volume depende do outro, e a leitura segue em ordem.")
   +row("Coleções","var(--blue)",`${cols.length} coleções`,cols.map(colCard).join(""),"Histórias do mesmo tema, para ler em qualquer ordem.");
  $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=byId(id);if(!x)return"";const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${A}${x.capa}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
