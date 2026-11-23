@@ -743,3 +743,8 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .eb-tag{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%) rotate(-6deg);z-index:2;padding:6px 14px;border-radius:999px;background:rgba(11,13,23,.82);color:#fff4e0;font:800 13px Poppins,sans-serif;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;box-shadow:0 6px 18px -6px rgba(0,0,0,.6);border:1.5px solid rgba(255,244,224,.5);pointer-events:none;font-style:normal}
 .tm-capa .eb-tag{font-size:16px;padding:8px 18px}
 .eb-txt{font-style:normal;font-weight:700;color:var(--mute);font-size:.85em}
+/* Livro do banner com páginas reais: ilustração inteira à direita, texto da página à esquerda. */
+.bk-ilus.bk-real{inset:9% 9% 9% 11%;background-size:cover;background-position:center}
+.bk-txt-real{inset:11% 11% 10% 12%;gap:0;justify-content:center}
+.bk-txt-real p{margin:0;font:500 clamp(9px,.85vw,12.5px)/1.5 Andika,"Nunito Sans",system-ui,sans-serif;color:#3b2a1a;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
+.bk-txt-real small{position:absolute;bottom:-4%;left:0;right:0;text-align:center;font:600 10px "Nunito Sans",sans-serif;color:rgba(70,45,20,.55)}

@@ -24,4 +24,14 @@ class EmBreveTest < ActionDispatch::IntegrationTest
     put "/profiles/#{kid.id}/library/oculto", headers: auth
     assert_response :not_found
   end
+
+  test "livro publicado com ilustrações manda três páginas para o banner" do
+    t = Title.create!(slug: "ilustrado", title: "Ilustrado", status: "publicado", sinopse: "x", capa_path: "images/a.webp")
+    img = StoredImage.create!(content_type: "image/webp", data: "x", byte_size: 1)
+    6.times { |i| t.pages.create!(position: i + 1, image: img, text: "Texto #{i + 1}") }
+    get "/catalog"
+    f = response.parsed_body["titulos"].find { |x| x["id"] == "ilustrado" }["folhear"]
+    assert_equal ["Texto 1", "Texto 3", "Texto 5"], f.map { |x| x["texto"] }
+    assert_match %r{/images/#{img.id}\z}, f.first["imagem"]
+  end
 end

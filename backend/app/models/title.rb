@@ -29,7 +29,17 @@ class Title < ApplicationRecord
   def catalog_view(base)
     { id: slug, titulo: title, sinopse: sinopse.to_s, obra_mae: obra_mae.presence, valores: valores, caminhos: caminhos,
       volume: volume, fileiras: fileiras, vitrine: vitrine, capa: capa_url(base), lancamento: lancamento,
-      box: box.presence, colecoes: colecoes, em_breve: !published? }
+      box: box.presence, colecoes: colecoes, em_breve: !published? }.merge(folhear_view(base))
+  end
+
+  # Três páginas espalhadas pelo livro (ilustração + texto) para o livro animado do banner.
+  # Só para publicados com ilustrações enviadas; não carrega os bytes das imagens.
+  def folhear_view(base)
+    return {} unless published?
+    ps = pages.where.not(image_id: nil).reorder(:position).pluck(:image_id, :text)
+    return {} if ps.size < 3
+    idx = [0, ps.size / 3, (2 * ps.size) / 3].uniq
+    { folhear: idx.map { |i| { imagem: "#{base}/images/#{ps[i][0]}", texto: ps[i][1].to_s.truncate(170, separator: " ", omission: "…"), pagina: i + 1 } } }
   end
 
   # Conteúdo do leitor. paginas = nil enquanto a história não tem páginas.

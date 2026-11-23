@@ -60,7 +60,7 @@ export default function Inicio() {
               )}
             </div>
           </div>
-          <BookAnim img={src(DESTAQUE_IMG.has(destaque.id) ? `images/destaques/${destaque.id}.webp` : destaque.capa)} />
+          <BookAnim img={src(DESTAQUE_IMG.has(destaque.id) ? `images/destaques/${destaque.id}.webp` : destaque.capa)} folhear={destaque.folhear} />
         </section>
       )}
 
