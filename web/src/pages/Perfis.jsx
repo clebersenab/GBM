@@ -38,6 +38,7 @@ export default function Perfis() {
       </div>
       <div className="perfis-foot">
         {me.profiles.length > 0 && <Link className="tlink" to="/conta?aba=criancas" onClick={() => setProfileId(me.profiles[0].id)}>Gerenciar perfis</Link>}
+        {(me.admin || me.editor) && <Link className="tlink" to="/admin">{me.admin ? "Administração" : "Edição de histórias"}</Link>}
         <button className="tlink perfis-sair" onClick={async () => { await signOut(); nav('/entrar') }}>Sair da conta</button>
       </div>
       {novo && <ProfileForm onClose={() => setNovo(false)} onDone={async (p) => { await refresh(); setNovo(false); if (!me.profiles.length) open(p) }} />}

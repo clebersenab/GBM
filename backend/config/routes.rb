@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     post "signals", to: "library#signal"
   end
 
+  get "catalog", to: "catalog#show"
+  get "images/:id", to: "images#show", as: :stored_image
   get "titles/top", to: "top#index"
   get "titles/:slug/access", to: "titles#access"
   get "titles/:slug/read", to: "titles#read"
@@ -38,5 +40,13 @@ Rails.application.routes.draw do
     put "accounts/:account_id/subscription", to: "subscriptions#update"
     put "accounts/:account_id/access", to: "access#update"
     post "activation_codes", to: "activation_codes#create"
+    resources :titles, only: %i[index show create update destroy] do
+      member do
+        post :transition
+        get :preview
+      end
+    end
+    resources :images, only: :create
+    resources :editors, only: %i[index create destroy]
   end
 end

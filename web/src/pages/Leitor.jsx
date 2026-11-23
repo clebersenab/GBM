@@ -11,7 +11,7 @@ import './leitor.css'
 import { api } from '../api'
 import { useLibrary } from '../library'
 import { Icon } from '../ds'
-import { boxOf, byId } from '../catalog'
+import { boxOf, byId, src } from '../catalog'
 
 const ESCALAS = [0.85, 1, 1.15, 1.3]
 const pref = (k, v) => { try { const s = localStorage.getItem(k); return s == null ? v : JSON.parse(s) } catch { return v } }
@@ -113,7 +113,7 @@ function Livro({ book, entry, save, profile, fechar }) {
   // Deixa a próxima ilustração carregada antes de virar.
   useEffect(() => {
     const seguinte = book.paginas[(typeof folha === 'number' ? folha : -1) + 1]
-    if (seguinte) new Image().src = '/' + seguinte.imagem
+    if (seguinte) new Image().src = src(seguinte.imagem)
   }, [folha, book])
 
   const historia = typeof folha === 'number'
@@ -165,7 +165,7 @@ function Capa({ book, comecar }) {
   const t = byId[book.slug]
   return (
     <div className="lt-capa">
-      <img src={'/' + (t?.capa || book.capa)} alt="" />
+      <img src={src(t?.capa || book.capa)} alt="" />
       <div>
         <h1>{book.titulo}</h1>
         {book.aviso && <p className="lt-aviso">{book.aviso}</p>}
@@ -178,7 +178,7 @@ function Capa({ book, comecar }) {
 function Pagina({ p, perguntas }) {
   return (
     <div className="lt-pag">
-      <figure><img src={'/' + p.imagem} alt={p.alt || ''} draggable="false" /></figure>
+      <figure><img src={src(p.imagem)} alt={p.alt || ''} draggable="false" /></figure>
       <div className="lt-texto">
         <p>{p.texto}</p>
         {perguntas && p.pergunta && (

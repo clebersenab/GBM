@@ -5,7 +5,7 @@ import { api } from './api'
 import { useLibrary } from './library'
 import { useShell } from './Shell'
 import { Icon, Modal, STATUS } from './ds'
-import { thumb, boxOf, byId, grupoById, valorImg, caminhoImg } from './catalog'
+import { src, thumb, boxOf, byId, grupoById, valorImg, caminhoImg } from './catalog'
 
 export default function TitleModal({ t, onClose }) {
   const { bySlug, save, remove } = useLibrary()
@@ -55,7 +55,7 @@ export default function TitleModal({ t, onClose }) {
   return (
     <Modal title={t.titulo} onClose={onClose} wide>
       <div className="titulo">
-        <img src={`/${t.capa}`} alt="" />
+        <img src={src(t.capa)} alt="" />
         <div className="stack">
           <p>{t.sinopse}</p>
 

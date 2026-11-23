@@ -20,7 +20,8 @@ import { TITULOS, grupoById, norm } from './catalog'
 
 const words = (s) => norm(s).split(/[^a-z0-9]+/).filter(Boolean)
 
-const INDEX = TITULOS.map((t) => {
+let indexFrom = null, indexCache = []
+const index = () => (indexFrom === TITULOS ? indexCache : (indexFrom = TITULOS, indexCache = TITULOS.map((t) => {
   const g = t.box && grupoById[t.box]
   const cols = (t.colecoes || []).map((id) => grupoById[id]?.titulo).filter(Boolean)
   const f = {
@@ -33,7 +34,7 @@ const INDEX = TITULOS.map((t) => {
     sinopse: norm(t.sinopse),
   }
   return { t, f, tituloWords: words(t.titulo), all: Object.values(f).join(' ') }
-})
+})))
 
 // Distância de edição limitada a 1 (rápida: para cedo).
 function within1(a, b) {
@@ -64,7 +65,7 @@ export function search(raw, limit = 8) {
   if (q.length < 2) return []
   const tokens = q.split(/\s+/)
   const out = []
-  for (const row of INDEX) {
+  for (const row of index()) {
     const { f } = row
     // Cada palavra precisa aparecer em algum campo (ou no título com 1 erro de digitação).
     const hits = tokens.filter((tk) => row.all.includes(tk) ||

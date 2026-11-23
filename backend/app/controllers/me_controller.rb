@@ -1,11 +1,12 @@
 class MeController < ApplicationController
   def self.payload(account, _session = nil)
     {
+      id: account.id,
       email: account.email,
       name: account.name,
       phone: account.phone,
       marketing_opt_in: account.marketing_opt_in,
-      admin: account.admin?,
+      admin: account.admin?, editor: account.editor?,
       profiles: account.child_profiles.order(:created_at).map(&:view),
       access: account.access_summary,
       theme: account.theme || "dark"
