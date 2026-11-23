@@ -73,7 +73,7 @@ def cena(i, topo, base, chao, tipo):
     return f"images/livros/demo-leitor/p{i+1:02d}.svg"
 
 TEXTOS = [
-    ("Numa tarde de chuva em Fortaleza, Giovana, Bento e Maria acharam uma folha de jornal velha. Giovana dobrou, Bento apertou as pontas e Maria fez o mastro. Pronto: um barquinho de papel.",
+    ("Em uma tarde de chuva em Fortaleza, Giovana, Bento e Maria acharam uma folha de jornal velha. Giovana dobrou, Bento apertou as pontas e Maria fez o mastro. Pronto: um barquinho de papel.",
      "Se vocês fossem fazer um barquinho, que nome dariam a ele?", "Três crianças em volta de uma mesa com um barquinho de papel."),
     ("A chuva caía forte lá fora. A rua virou um riozinho que corria ligeiro em direção ao mar. — Vamos ver até onde ele vai? — perguntou Bento.",
      "Para onde você acha que a água da chuva vai?", "As crianças olham a chuva com o barquinho nas mãos."),
@@ -82,7 +82,7 @@ TEXTOS = [
     ("De repente, o barquinho chegou perto de um bueiro. — Cuidado! — gritou Giovana. O barquinho rodopiou na beirada, quase caiu… e passou por cima, por um triz.",
      "O que você faria se visse o barquinho chegando perto do bueiro?", "O barquinho passa por cima de uma grade de bueiro."),
     ("A enxurrada levou o barquinho até o canal. Ali a água era larga e calma. O barquinho seguiu sozinho, cada vez mais longe das crianças.",
-     "Você já foi a algum lugar sozinho pela primeira vez? Como foi?", "O barquinho navega num canal largo."),
+     "Você já foi a algum lugar sozinho pela primeira vez? Como foi?", "O barquinho navega em um canal largo."),
     ("No canal, ele encontrou um pato amarelo. — Para onde você vai, barquinho? — Vou ver o mar — respondeu o barquinho, mesmo sem saber o caminho.",
      "Por que será que o barquinho quer tanto ver o mar?", "O barquinho conversa com um pato amarelo."),
     ("Passou debaixo de uma ponte grande. Lá em cima, os carros buzinavam. Lá embaixo, o barquinho seguia, pequeno e firme, sem desistir.",

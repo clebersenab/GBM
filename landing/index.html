@@ -582,7 +582,7 @@ details[open] summary::after{transform:rotate(180deg)}
   <div class="wrap">
     <div class="rv intro">
       <h2>Toda história é a semente de um clássico</h2>
-      <p class="lead">Cada livro termina com uma indicação para quando a criança crescer: o livro ou o filme que aquela história preparou. Toque numa capa para ver.</p>
+      <p class="lead">Cada livro termina com uma indicação para quando a criança crescer: o livro ou o filme que aquela história preparou. Toque em uma capa para ver.</p>
     </div>
     <div id="rows"></div>
   </div>
@@ -649,7 +649,7 @@ details[open] summary::after{transform:rotate(180deg)}
       <ol class="steps" aria-label="Partes do produto">
         <li><button class="tstep on" aria-pressed="true" data-i="0">
           <i>1</i><span><b>Página curta, ilustração grande</b>
-          <small>Um ou dois parágrafos por página, numa história que prende a criança e interessa a quem lê em voz alta. E cada livro é sempre a semente de um clássico da literatura ou do cinema.</small></span></button>
+          <small>Um ou dois parágrafos por página, em uma história que prende a criança e interessa a quem lê em voz alta. E cada livro é sempre a semente de um clássico da literatura ou do cinema.</small></span></button>
           <img class="mshot" aria-hidden="true" loading="lazy" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos"></li>
         <li><button class="tstep" aria-pressed="false" data-i="1">
           <i>2</i><span><b>Um quiz no fim de cada história</b>
@@ -893,7 +893,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contain
  const place=()=>{if(mq.matches){slot.appendChild(qa);qa.classList.add("on")}else{home.insertBefore(qa,home.children[1]);qa.classList.toggle("on",bs[1].classList.contains("on"))}};
  mq.addEventListener?mq.addEventListener("change",place):mq.addListener(place);place();
  const Q=[{q:"De que cor era a baleia?",o:[["sw","#2f5fc4","Azul"],["sw","#f4efe6","Branca"],["sw","#7d8494","Cinza"]],c:1,ok:"Isso! Branca como a espuma do mar.",no:"Quase! Lembra da espuma do mar?"},
-  {q:"Onde o Ismael estava quando viu o mar tão grande?",o:[["em","⛵","No alto do mastro"],["em","🏖️","Na areia da praia"],["em","🏠","Na janela de casa"]],c:0,ok:"Isso! Lá de cima dava para ver tudo.",no:"Quase! Ele estava num lugar bem alto do navio."},
+  {q:"Onde o Ismael estava quando viu o mar tão grande?",o:[["em","⛵","No alto do mastro"],["em","🏖️","Na areia da praia"],["em","🏠","Na janela de casa"]],c:0,ok:"Isso! Lá de cima dava para ver tudo.",no:"Quase! Ele estava em um lugar bem alto do navio."},
   {q:"E você, o que perguntaria para a baleia branca?",open:"Essa não tem resposta certa. Conversem sobre ela antes de dormir."}];
  let qi=0,hits=0;const M=$("#qaMain");
  const dots=()=>`<span class="qa-dots">${Q.map((_,k)=>`<i class="${k<qi?"d":k==qi?"c":""}"></i>`).join("")}</span>`;
@@ -902,7 +902,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contain
   const x=Q[qi];
   M.innerHTML=`<div class="qa-meta"><span>Moby Dick · pergunta ${qi+1} de ${Q.length}</span>${dots()}</div><p class="qa-q">${x.q}</p>`+
    (x.open?`<div class="qa-open">💬 ${x.open}</div><button class="qa-next" data-act="next">Conversamos!</button>`:
-   `<div class="qa-opts">${x.o.map((o,k)=>`<button data-k="${k}">${o[0]=="sw"?`<i class="sw" style="background:${o[1]}"></i>`:`<i class="em">${o[1]}</i>`}${o[2]}</button>`).join("")}</div><p class="qa-fb">Toque numa resposta.</p><button class="qa-next" data-act="next" disabled>Próxima</button>`)}
+   `<div class="qa-opts">${x.o.map((o,k)=>`<button data-k="${k}">${o[0]=="sw"?`<i class="sw" style="background:${o[1]}"></i>`:`<i class="em">${o[1]}</i>`}${o[2]}</button>`).join("")}</div><p class="qa-fb">Toque em uma resposta.</p><button class="qa-next" data-act="next" disabled>Próxima</button>`)}
  qa.addEventListener("click",e=>{
   const r=e.target.closest(".qa-rate button");if(r){qa.querySelectorAll(".qa-rate button").forEach(b=>b.classList.toggle("on",b===r));return}
   const o=e.target.closest(".qa-opts button");if(o){const wrap=o.parentElement;if(wrap.classList.contains("done"))return;const x=Q[qi],ok=+o.dataset.k==x.c;

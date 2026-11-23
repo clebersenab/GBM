@@ -4,7 +4,7 @@
 #           completa quiz, vocabulário e páginas e envia para revisão
 module Admin
   class TitlesController < ApplicationController
-    # Sem isto o Rails "embrulha" o corpo JSON em params[:title] e, numa edição que não
+    # Sem isto o Rails "embrulha" o corpo JSON em params[:title] e, em uma edição que não
     # manda o título, o embrulho inteiro virava o novo título.
     wrap_parameters false
     before_action :require_staff

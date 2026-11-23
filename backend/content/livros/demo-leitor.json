@@ -7,7 +7,7 @@
  "paginas": [
   {
    "imagem": "images/livros/demo-leitor/p01.svg",
-   "texto": "Numa tarde de chuva em Fortaleza, Giovana, Bento e Maria acharam uma folha de jornal velha. Giovana dobrou, Bento apertou as pontas e Maria fez o mastro. Pronto: um barquinho de papel.",
+   "texto": "Em uma tarde de chuva em Fortaleza, Giovana, Bento e Maria acharam uma folha de jornal velha. Giovana dobrou, Bento apertou as pontas e Maria fez o mastro. Pronto: um barquinho de papel.",
    "pergunta": "Se vocês fossem fazer um barquinho, que nome dariam a ele?",
    "alt": "Três crianças em volta de uma mesa com um barquinho de papel."
   },
@@ -33,7 +33,7 @@
    "imagem": "images/livros/demo-leitor/p05.svg",
    "texto": "A enxurrada levou o barquinho até o canal. Ali a água era larga e calma. O barquinho seguiu sozinho, cada vez mais longe das crianças.",
    "pergunta": "Você já foi a algum lugar sozinho pela primeira vez? Como foi?",
-   "alt": "O barquinho navega num canal largo."
+   "alt": "O barquinho navega em um canal largo."
   },
   {
    "imagem": "images/livros/demo-leitor/p06.svg",
