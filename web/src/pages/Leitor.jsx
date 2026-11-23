@@ -60,7 +60,8 @@ function Livro({ book, entry, save, profile, fechar }) {
   const [aviso, setAviso] = useState(retomar > 0)
   const [escala, setEscala] = useState(() => Math.min(ESCALAS.length - 1, pref('gbm-leitor-escala', 1)))
   const [perguntas, setPerguntas] = useState(() => pref('gbm-leitor-perguntas', false))
-  const [dir, setDir] = useState(1)
+  const [virando, setVirando] = useState(null) // { de, para, dir } enquanto a folha vira
+  const livro = useModoLivro()
   const folha = folhas[i]
   const pagina = typeof folha === 'number' ? folha + 1 : folha === 'capa' ? 0 : N
 
@@ -79,14 +80,18 @@ function Livro({ book, entry, save, profile, fechar }) {
     return () => clearTimeout(t)
   }, [pagina, folha]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Virar a página: a folha gira sobre a lombada (ou sobre a borda esquerda, no celular).
+  const virandoRef = useRef(false)
   const ir = useCallback((k) => {
-    setI((atual) => {
-      const novo = Math.max(0, Math.min(folhas.length - 1, k(atual)))
-      setDir(novo >= atual ? 1 : -1)
-      return novo
-    })
+    if (virandoRef.current) return
+    const novo = Math.max(0, Math.min(folhas.length - 1, k(i)))
     setAviso(false)
-  }, [folhas.length])
+    if (novo === i) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setI(novo); return }
+    virandoRef.current = true
+    setVirando({ de: i, para: novo, dir: novo > i ? 1 : -1 })
+    setTimeout(() => { setI(novo); setVirando(null); virandoRef.current = false }, VIRAR_MS)
+  }, [folhas.length, i])
   const prox = useCallback(() => ir((a) => a + 1), [ir])
   const ant = useCallback(() => ir((a) => a - 1), [ir])
 
@@ -117,6 +122,26 @@ function Livro({ book, entry, save, profile, fechar }) {
     if (seguinte) new Image().src = src(seguinte.imagem)
   }, [folha, book])
 
+  // Conteúdo de cada folha. No livro aberto: página da esquerda e da direita; no celular: uma página só.
+  const extras = { recomecar: () => ir(() => 0), fechar, nav }
+  function faces(f) {
+    if (f === 'capa') return { esq: <PgImagem src={byId[book.slug]?.capa || book.capa} capa />, dir: <Capa book={book} comecar={prox} soTexto /> }
+    if (typeof f === 'number') {
+      const p = book.paginas[f]
+      return { esq: <PgImagem src={p.imagem} alt={p.alt} />, dir: <PgTexto p={p} n={f + 1} perguntas={perguntas} /> }
+    }
+    if (f === 'vocab') return { esq: <PgEtapa book={book} titulo="Palavras novas" sub="Palavras que apareceram na história" />, dir: <Vocabulario itens={book.vocabulario} semTitulo /> }
+    if (f === 'quiz') return { esq: <PgEtapa book={book} titulo="Hora do quiz" sub="Cada resposta certa acende uma estrela" />, dir: <Quiz book={book} entry={entry} save={save} /> }
+    return { esq: <PgImagem src={book.paginas[N - 1].imagem} fim />, dir: <Fim book={book} entry={entry} save={save} {...extras} recomecar={extras.recomecar} /> }
+  }
+  function unica(f) {
+    if (f === 'capa') return <Capa book={book} comecar={prox} />
+    if (typeof f === 'number') return <Pagina p={book.paginas[f]} perguntas={perguntas} />
+    if (f === 'vocab') return <Vocabulario itens={book.vocabulario} />
+    if (f === 'quiz') return <Quiz book={book} entry={entry} save={save} />
+    return <Fim book={book} entry={entry} save={save} {...extras} />
+  }
+
   const historia = typeof folha === 'number'
   return (
     <div className="leitor" style={{ '--esc': ESCALAS[escala] }}>
@@ -135,12 +160,17 @@ function Livro({ book, entry, save, profile, fechar }) {
       </header>
 
       <main className="lt-palco" onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
-        <div key={i} className={`lt-folha ${dir > 0 ? 'vai' : 'volta'}`} aria-live="polite">
-          {folha === 'capa' && <Capa book={book} comecar={prox} />}
-          {historia && <Pagina p={book.paginas[folha]} perguntas={perguntas} />}
-          {folha === 'vocab' && <Vocabulario itens={book.vocabulario} />}
-          {folha === 'quiz' && <Quiz book={book} entry={entry} save={save} />}
-          {folha === 'fim' && <Fim book={book} entry={entry} save={save} recomecar={() => ir(() => 0)} fechar={fechar} nav={nav} />}
+        <div className="lt-mesa" aria-live="polite">
+          {livro ? (
+            <div className="lt-livro">
+              <Abertura v={virando} f={(n) => faces(folhas[n])} i={i} />
+              <div className="lt-lombada" />
+            </div>
+          ) : (
+            <div className="lt-folhas">
+              <Unica v={virando} f={(n) => unica(folhas[n])} i={i} />
+            </div>
+          )}
         </div>
         {i > 0 && <button className="lt-seta esq" onClick={ant} aria-label="Página anterior"><Icon name="chev" size={28} /></button>}
         {i < folhas.length - 1 && folha !== 'capa' && <button className="lt-seta dir" onClick={prox} aria-label="Próxima página"><Icon name="chev" size={28} /></button>}
@@ -168,11 +198,94 @@ function Livro({ book, entry, save, profile, fechar }) {
   )
 }
 
-function Capa({ book, comecar }) {
+const VIRAR_MS = 800
+
+// Livro aberto na tela deitada: duas páginas e a lombada no meio.
+function useModoLivro() {
+  const q = '(min-aspect-ratio: 11/10) and (min-width: 640px)'
+  const [sim, setSim] = useState(() => window.matchMedia(q).matches)
+  useEffect(() => {
+    const m = window.matchMedia(q)
+    const f = () => setSim(m.matches)
+    m.addEventListener('change', f)
+    return () => m.removeEventListener('change', f)
+  }, [])
+  return sim
+}
+
+// Abertura do livro. Para avançar, a folha da direita gira sobre a lombada: na frente, a página
+// que estava à direita; no verso, a próxima página da esquerda. Por baixo já está a próxima da direita.
+// Para voltar, o movimento é o inverso.
+function Abertura({ v, f, i }) {
+  if (!v) {
+    const a = f(i)
+    return <><div className="lt-pg esq">{a.esq}</div><div className="lt-pg dir">{a.dir}</div></>
+  }
+  const de = f(v.de), para = f(v.para)
+  const vai = v.dir > 0
+  return (
+    <>
+      <div className="lt-pg esq">{vai ? de.esq : para.esq}</div>
+      <div className="lt-pg dir">{vai ? para.dir : de.dir}</div>
+      <div className={`lt-folha3d ${vai ? 'vai' : 'volta'}`} style={{ animationDuration: `${VIRAR_MS}ms` }}>
+        <div className="lt-face frente lt-pg dir">{vai ? de.dir : para.dir}</div>
+        <div className="lt-face verso lt-pg esq">{vai ? para.esq : de.esq}</div>
+      </div>
+    </>
+  )
+}
+
+// Celular em pé: uma página por vez, que vira pela borda esquerda.
+function Unica({ v, f, i }) {
+  if (!v) return <div className="lt-folha">{f(i)}</div>
+  const vai = v.dir > 0
+  return (
+    <>
+      <div className="lt-folha">{vai ? f(v.para) : f(v.de)}</div>
+      <div className={`lt-folha3d unica ${vai ? 'vai' : 'volta'}`} style={{ animationDuration: `${VIRAR_MS}ms` }}>
+        <div className="lt-face frente lt-folha">{vai ? f(v.de) : f(v.para)}</div>
+        <div className="lt-face verso lt-folha lt-papel" />
+      </div>
+    </>
+  )
+}
+
+function PgImagem({ src: s, alt = '', capa, fim }) {
+  return (
+    <div className={`lt-pg-img${capa ? ' capa' : ''}`}>
+      <img src={src(s)} alt={alt} draggable="false" />
+      {fim && <span className="lt-fim-selo">Fim</span>}
+    </div>
+  )
+}
+
+function PgTexto({ p, n, perguntas }) {
+  return (
+    <div className="lt-pg-txt">
+      <div className="lt-pg-corpo">
+        <p>{p.texto}</p>
+        {perguntas && p.pergunta && <aside className="lt-conversa"><small>Para conversar</small>{p.pergunta}</aside>}
+      </div>
+      <small className="lt-pg-n">{n}</small>
+    </div>
+  )
+}
+
+function PgEtapa({ book, titulo, sub }) {
+  return (
+    <div className="lt-pg-etapa">
+      <img src={src(byId[book.slug]?.capa || book.capa)} alt="" />
+      <h2>{titulo}</h2>
+      <p>{sub}</p>
+    </div>
+  )
+}
+
+function Capa({ book, comecar, soTexto }) {
   const t = byId[book.slug]
   return (
-    <div className="lt-capa">
-      <img src={src(t?.capa || book.capa)} alt="" />
+    <div className={`lt-capa${soTexto ? ' so-texto' : ''}`}>
+      {!soTexto && <img src={src(t?.capa || book.capa)} alt="" />}
       <div>
         <h1>{book.titulo}</h1>
         {book.aviso && <p className="lt-aviso">{book.aviso}</p>}
@@ -196,10 +309,10 @@ function Pagina({ p, perguntas }) {
   )
 }
 
-function Vocabulario({ itens }) {
+function Vocabulario({ itens, semTitulo }) {
   return (
     <div className="lt-extra">
-      <h2>Palavras novas da história</h2>
+      {!semTitulo && <h2>Palavras novas da história</h2>}
       <ul className="lt-vocab">
         {itens.map((v) => <li key={v.palavra}><b>{v.palavra}</b><span>{v.significado}</span></li>)}
       </ul>
@@ -350,7 +463,7 @@ function Fim({ book, entry, save, recomecar, fechar, nav }) {
         <button aria-pressed={liked === false} onClick={() => gostou(false)}><Icon name="down" size={20} />Não muito</button>
       </div>
       {o && (
-        <p className="lt-crescer"><small>Quando crescer, {o.tipo === 'filme' ? 'assista' : 'leia'}</small><b>{o.titulo}</b>{o.autor && <span>, de {o.autor}</span>}</p>
+        <p className="lt-crescer"><small>Quando crescer, {o.tipo === 'filme' ? 'assista' : 'leia'}</small><b>{o.titulo}</b>{o.autor && <span>de {o.autor}</span>}</p>
       )}
       <label className="lt-diario">
         <span>Diário da leitura</span>
