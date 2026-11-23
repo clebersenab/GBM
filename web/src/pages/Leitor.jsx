@@ -148,8 +148,12 @@ function Livro({ book, entry, save, profile, fechar }) {
 
       <footer className="lt-pe">
         <button className="lt-seta esq" onClick={ant} disabled={i === 0} aria-label="Página anterior"><Icon name="chev" size={26} /></button>
-        <div className="lt-barra"><i style={{ width: `${(pagina / N) * 100}%` }} /></div>
-        <span>{historia ? `${pagina} de ${N}` : folha === 'capa' ? `${N} páginas` : folha === 'vocab' ? 'Palavras novas' : folha === 'quiz' ? 'Quiz' : 'Fim'}</span>
+        {/* A barra mede a experiência inteira (história + palavras novas + quiz + fim); a marca mostra onde a história termina. */}
+        <div className="lt-barra" role="progressbar" aria-valuemin={0} aria-valuemax={folhas.length - 1} aria-valuenow={i} aria-label="Progresso do livro">
+          <i style={{ width: `${(i / (folhas.length - 1)) * 100}%` }} />
+          {folhas.length - 1 > N && <b className="lt-marca" style={{ left: `${(N / (folhas.length - 1)) * 100}%` }} title="Fim da história" />}
+        </div>
+        <span>{historia ? `${pagina} de ${N}` : folha === 'capa' ? `${N} páginas` : folha === 'vocab' ? 'Palavras novas' : folha === 'quiz' ? 'Quiz' : 'Fim'}{!historia && folha !== 'capa' && ` · ${folhas.length - 1 - i === 0 ? 'última etapa' : `faltam ${folhas.length - 1 - i}`}`}</span>
         <button className="lt-seta dir" onClick={prox} disabled={i === folhas.length - 1} aria-label="Próxima página"><Icon name="chev" size={26} /></button>
       </footer>
 
@@ -207,34 +211,29 @@ function Quiz({ book, entry, save }) {
   const qs = book.quiz
   const [k, setK] = useState(0)
   const [esc, setEsc] = useState(null)
-  const [acertos, setAcertos] = useState(0)
+  const [resp, setResp] = useState([]) // índice escolhido em cada pergunta
   const q = qs[k]
   const fim = k >= qs.length
+  const acertos = resp.filter((r, n) => r === qs[n].certa).length
 
   function escolher(o) {
     if (esc != null) return
     setEsc(o)
-    if (o === q.certa) setAcertos((a) => a + 1)
   }
   function seguir() {
-    const total = acertos
-    setEsc(null); setK((v) => v + 1)
-    if (k + 1 >= qs.length && !book.amostra) save(book.slug, { quiz_score: total, quiz_total: qs.length }).catch(() => {})
+    const novas = [...resp, esc]
+    setResp(novas); setEsc(null); setK((v) => v + 1)
+    if (k + 1 >= qs.length && !book.amostra) {
+      save(book.slug, { quiz_score: novas.filter((r, n) => r === qs[n].certa).length, quiz_total: qs.length }).catch(() => {})
+    }
   }
 
-  if (fim) {
-    return (
-      <div className="lt-extra lt-quiz">
-        <h2>{acertos === qs.length ? 'Vocês acertaram tudo!' : `Vocês acertaram ${acertos} de ${qs.length}.`}</h2>
-        <p>{acertos === qs.length ? 'Que leitores atentos.' : 'Que tal voltar às páginas e procurar as respostas juntos?'}</p>
-        <button className="lt-btn lt-sec" onClick={() => { setK(0); setAcertos(0) }}>Jogar de novo</button>
-        {entry?.quiz_total > 0 && <p className="lt-mudo">Da última vez: {entry.quiz_score} de {entry.quiz_total}.</p>}
-      </div>
-    )
-  }
+  if (fim) return <Resultado qs={qs} resp={resp} acertos={acertos} entry={entry} denovo={() => { setK(0); setResp([]) }} />
   return (
     <div className="lt-extra lt-quiz">
-      <small className="lt-mudo">Pergunta {k + 1} de {qs.length}</small>
+      <div className="lt-q-estrelas" aria-label={`Pergunta ${k + 1} de ${qs.length}`}>
+        {qs.map((_, n) => <Estrela key={n} estado={n < k ? (resp[n] === qs[n].certa ? 'acesa' : 'apagada') : n === k ? 'agora' : 'vazia'} />)}
+      </div>
       <h2>{q.pergunta}</h2>
       <div className="lt-opcoes">
         {q.opcoes.map((o, n) => (
@@ -247,9 +246,78 @@ function Quiz({ book, entry, save }) {
       {esc != null && (
         <div className="lt-feed">
           <p><b>{esc === q.certa ? 'Isso mesmo!' : 'Quase!'}</b> {q.explica}</p>
-          <button className="lt-btn" onClick={seguir}>{k + 1 < qs.length ? 'Próxima pergunta' : 'Ver resultado'}</button>
+          <button className="lt-btn" onClick={seguir}>{k + 1 < qs.length ? 'Próxima pergunta' : 'Ver o céu de vocês'}</button>
         </div>
       )}
+    </div>
+  )
+}
+
+const Estrela = ({ estado, delay = 0, size = 22 }) => (
+  <svg className={`lt-estrela ${estado}`} style={{ animationDelay: `${delay}ms` }} width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" />
+  </svg>
+)
+
+// Resultado do quiz: cada pergunta é uma estrela no céu do livro.
+// Acerto acende a estrela; erro deixa uma "estrela para buscar no livro", com a resposta certa ao lado.
+function Resultado({ qs, resp, acertos, entry, denovo }) {
+  const total = qs.length
+  const tudo = acertos === total
+  const frase = tudo ? 'Constelação completa!' : acertos >= total / 2 ? 'Que céu bonito vocês acenderam!' : 'O céu de vocês está começando a brilhar!'
+  const sub = tudo ? 'Vocês acertaram todas. Leitores atentos de verdade.'
+    : `Vocês acenderam ${acertos} de ${total} ${total === 1 ? 'estrela' : 'estrelas'}. As apagadas estão escondidas nas páginas: que tal procurar juntos?`
+  // estrelas em arco sobre o livro
+  const pos = qs.map((_, n) => {
+    const a = Math.PI * (0.15 + 0.7 * (total === 1 ? 0.5 : n / (total - 1)))
+    return { x: 160 - Math.cos(a) * 120, y: 150 - Math.sin(a) * 110 }
+  })
+  return (
+    <div className="lt-extra lt-resultado">
+      <div className="lt-ceu" role="img" aria-label={`${acertos} de ${total} estrelas acesas`}>
+        <svg viewBox="0 0 320 200" className="lt-ceu-svg">
+          <defs>
+            <radialGradient id="lt-brilho"><stop offset="0" stopColor="#ffd65a" stopOpacity=".55" /><stop offset="1" stopColor="#ffd65a" stopOpacity="0" /></radialGradient>
+          </defs>
+          {pos.slice(1).map((p, n) => (resp[n] === qs[n].certa && resp[n + 1] === qs[n + 1].certa) && (
+            <line key={n} className="lt-traco" style={{ animationDelay: `${400 + (n + 1) * 450}ms` }} x1={pos[n].x} y1={pos[n].y} x2={p.x} y2={p.y} />
+          ))}
+          {pos.map((p, n) => {
+            const ok = resp[n] === qs[n].certa
+            return (
+              <g key={n} transform={`translate(${p.x} ${p.y})`}>
+                {ok && <circle r="26" fill="url(#lt-brilho)" className="lt-halo" style={{ animationDelay: `${300 + n * 450}ms` }} />}
+                <g className={`lt-estrela-g ${ok ? 'acesa' : 'apagada'}`} style={{ animationDelay: `${300 + n * 450}ms` }}>
+                  <path transform="translate(-16 -16) scale(1.33)" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" />
+                </g>
+              </g>
+            )
+          })}
+          <text x="160" y="128" textAnchor="middle" className="lt-placar"><tspan className="n">{acertos}</tspan><tspan dx="6" className="de">de {total}</tspan></text>
+          <g className="lt-livro" transform="translate(160 178)">
+            <path d="M-70 -18 Q-35 -32 0 -18 Q35 -32 70 -18 L70 6 Q35 -8 0 6 Q-35 -8 -70 6 Z" />
+            <path d="M0 -18 L0 6" className="lt-livro-meio" />
+          </g>
+        </svg>
+      </div>
+      <h2>{frase}</h2>
+      <p>{sub}</p>
+      <ul className="lt-recap">
+        {qs.map((x, n) => {
+          const ok = resp[n] === x.certa
+          return (
+            <li key={n} className={ok ? 'ok' : 'busca'}>
+              <Estrela estado={ok ? 'acesa' : 'apagada'} size={20} />
+              <span><b>{x.pergunta}</b>{ok ? <small>Vocês acertaram: {x.opcoes[x.certa]}</small> : <small>Para buscar no livro: a resposta é “{x.opcoes[x.certa]}”</small>}</span>
+            </li>
+          )
+        })}
+      </ul>
+      <div className="lt-acoes">
+        <button className="lt-btn lt-sec" onClick={denovo}>Acender de novo</button>
+        {entry?.quiz_total > 0 && <span className="lt-mudo">Da última vez: {entry.quiz_score} de {entry.quiz_total}</span>}
+      </div>
+      {tudo && <div className="lt-chuva" aria-hidden="true">{Array.from({ length: 18 }, (_, n) => <i key={n} style={{ left: `${(n * 53) % 100}%`, animationDelay: `${1800 + (n % 6) * 180}ms`, animationDuration: `${2.4 + (n % 4) * 0.5}s` }}>★</i>)}</div>}
     </div>
   )
 }
