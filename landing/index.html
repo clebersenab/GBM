@@ -332,12 +332,22 @@ summary::after{content:"+";position:absolute;right:4px;top:12px;font-size:26px;c
 details[open] summary::after{content:"–"}
 details p{color:var(--mute);padding:0 0 18px}
 /* final */
-.final{position:relative;overflow:hidden;min-height:clamp(460px,42vw,620px);display:grid;align-items:center}
-.final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
-.final::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--bg) 0%,transparent 26%),linear-gradient(0deg,var(--bg) 0%,transparent 30%),linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 75%,transparent) 40%,transparent 75%)}
-.final .txt{position:relative;z-index:2;max-width:520px;display:grid;gap:18px}
-footer{padding:28px max(5vw,16px);color:var(--mute);font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
-footer img{height:72px;width:auto}
+.final{position:relative;overflow:hidden;min-height:clamp(620px,52vw,820px);display:grid;grid-template-rows:1fr auto;padding:0 max(5vw,16px)}
+.final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 35%}
+.final::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--bg) 0%,transparent 22%),linear-gradient(0deg,var(--bg) 6%,color-mix(in srgb,var(--bg) 70%,transparent) 26%,transparent 48%),linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 75%,transparent) 40%,transparent 75%)}
+.final .txt{position:relative;z-index:2;max-width:520px;display:grid;gap:18px;align-self:center}
+.foot{position:relative;z-index:2;display:grid;grid-template-columns:auto 1fr 1fr auto;gap:28px 48px;align-items:start;padding:26px 0 30px;border-top:1px solid color-mix(in srgb,var(--ink) 14%,transparent);color:var(--mute);font-size:14.5px}
+.foot-brand img{height:68px;width:auto}
+.foot-col{display:grid;gap:8px;justify-items:start}
+.foot-col b{font:700 13px Poppins,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.foot a{color:var(--mute);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .2s}
+.foot a:hover{color:var(--ink)}
+.foot svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.foot svg .f{fill:currentColor;stroke:none}
+.foot-social{display:flex;gap:10px}
+.foot-social a{width:40px;height:40px;border-radius:50%;justify-content:center;border:1px solid color-mix(in srgb,var(--ink) 20%,transparent)}
+.foot-social a:hover{border-color:var(--orange);color:var(--orange)}
+.foot-legal{margin:0;text-align:right;line-height:1.6;font-size:13.5px}
 /* modal */
 html{scrollbar-gutter:stable}
 html.lock{overflow:hidden}
@@ -464,17 +474,18 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .sheet>img{aspect-ratio:3/2;height:auto;object-position:center 25%}
  .cv{display:grid;place-items:center;padding:22px 0 18px}
  .cv-fg{width:auto;height:min(52svh,360px);aspect-ratio:2/3;border-radius:12px;box-shadow:0 18px 40px -12px rgba(0,0,0,.85)}
- .final{min-height:0;padding-top:0;padding-left:0;padding-right:0}
- .final .txt{padding:0 16px}
+ .final{min-height:0;padding:0;display:block}
  .final>img{position:relative;height:auto;aspect-ratio:16/10}
- .final::before{background:linear-gradient(180deg,var(--bg) 0%,transparent 22%),linear-gradient(0deg,var(--bg) 45%,transparent 70%)}
- .final .txt{margin-top:-60px}
+ .final::before{display:none}
+ .final>img{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 55%,transparent 100%)}
+ .final .txt{position:relative;z-index:2;padding:0 16px;margin-top:-70px}
+ .foot{grid-template-columns:1fr;gap:22px 16px;padding:28px 16px 30px;margin-top:36px;font-size:15.5px}
+ .foot-legal{text-align:left}
 }
 @media(max-width:480px){
  nav .logo{height:38px}
  .pair{grid-template-columns:minmax(0,112px) minmax(0,1fr)}
  .cover{flex-basis:128px}
- footer{justify-content:center;text-align:center}
 }
 /* movimento */
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
@@ -723,18 +734,31 @@ details[open] summary::after{transform:rotate(180deg)}
   </div>
 </section>
 
-<section class="band final">
+<footer class="final">
   <img src="../images/hero/hero-mae-e-filha.webp" alt="Mãe e filha lendo juntas no sofá; da tela saem cenas de histórias">
   <div class="txt">
     <h2>Escolham a história de hoje à noite</h2>
     <p class="lead">R$ 19,90 por mês, para a família inteira.</p>
     <div><a class="btn btn-main" href="#preco">Assinar o GBM</a></div>
   </div>
-</section>
-
-<footer>
-  <img src="../images/marca/logo-web.png" alt="GBM, Histórias para ler juntos">
-  <span>© 2026 GBM · Histórias para ler juntos</span>
+  <div class="foot">
+    <div class="foot-brand">
+      <img src="../images/marca/logo-web.png" alt="GBM, Histórias para ler juntos">
+    </div>
+    <div class="foot-col">
+      <b>Contato</b>
+      <a href="#" aria-label="WhatsApp do GBM"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-3.9A8 8 0 1 1 8 19z"/><path d="M9 8.5c0 3.2 3.3 6.5 6.5 6.5l1.2-1.6-2-1-1 .9c-1.2-.5-2.3-1.6-2.8-2.8l.9-1-1-2z" class="f"/></svg>WhatsApp</a>
+      <a href="mailto:contato@gbmhistorias.com.br"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>contato@gbmhistorias.com.br</a>
+    </div>
+    <div class="foot-col">
+      <b>Redes sociais</b>
+      <span class="foot-social">
+        <a href="#" aria-label="Instagram do GBM"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" class="f"/></svg></a>
+        <a href="#" aria-label="TikTok do GBM"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.4 2.6 2.2 4.4 5 4.6"/></svg></a>
+      </span>
+    </div>
+    <p class="foot-legal">© 2026 GBM · Histórias para ler juntos<br>CNPJ 24.217.073/0001-06 · CBS Grupo</p>
+  </div>
 </footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
