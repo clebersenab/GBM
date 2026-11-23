@@ -127,8 +127,8 @@ os.makedirs(os.path.join(ROOT, "backend", "content", "livros"), exist_ok=True)
 json.dump(livro, open(os.path.join(ROOT, "backend", "content", "livros", "demo-leitor.json"), "w"), ensure_ascii=False, indent=1)
 print(sum(len(t.split()) for t, _, _ in TEXTOS), "palavras")
 
-# Moby Dick usa o mesmo texto provisório até a história definitiva ficar pronta.
-# "livre": abre sem assinatura, mas guarda o progresso na estante normalmente.
-moby = {**livro, "slug": "moby-dick", "titulo": "Moby Dick", "amostra": False, "livre": True, "capa": "images/capas/moby-dick.webp",
+# Moby Dick usa o mesmo texto provisório até a história definitiva ficar pronta (só com assinatura).
+# Um livro com "livre": True abriria sem assinatura; não usado por enquanto.
+moby = {**livro, "slug": "moby-dick", "titulo": "Moby Dick", "amostra": False, "capa": "images/capas/moby-dick.webp",
         "aviso": "Texto provisório para testar o leitor. A história do Moby Dick entra depois."}
 json.dump(moby, open(os.path.join(ROOT, "backend", "content", "livros", "moby-dick.json"), "w"), ensure_ascii=False, indent=1)

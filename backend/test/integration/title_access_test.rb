@@ -9,6 +9,14 @@ class TitleAccessTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
   end
 
+  test "com assinatura: o livro com conteúdo chega com as páginas" do
+    account = login
+    activate!(account)
+    get "/titles/#{title('moby-dick').slug}/read", headers: auth
+    assert_response :ok
+    assert_equal 12, response.parsed_body["paginas"].size
+  end
+
   test "com assinatura ativa: lê, baixa e o livro passa a ser da família" do
     account = login
     activate!(account)
@@ -66,9 +74,7 @@ class TitleAccessTest < ActionDispatch::IntegrationTest
     assert_response :ok
     assert response.parsed_body["paginas"].size >= 10
     get "/titles/#{title('moby-dick').slug}/read", headers: auth
-    assert_response :ok, "livro marcado como livre abre sem assinatura"
-    get "/titles/#{title('hamlet').slug}/read", headers: auth
-    assert_response :forbidden
+    assert_response :forbidden, "livro com conteúdo continua exigindo assinatura"
     get "/titles/../secrets/read", headers: auth
     assert_response :not_found
   end
