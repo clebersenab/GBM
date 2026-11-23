@@ -29,7 +29,7 @@
 <link rel="apple-touch-icon" href="../images/marca/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="../images/hero/hero-pai-e-filho.webp" fetchpriority="high">
+<link rel="preload" as="image" href="../images/hero/hero-pai-e-filho.webp" imagesrcset="../images/hero/hero-pai-e-filho-800.webp 800w, ../images/hero/hero-pai-e-filho-1200.webp 1200w, ../images/hero/hero-pai-e-filho.webp 1672w" imagesizes="100vw" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Literata:ital,opsz,wght@1,7..72,500;1,7..72,600&display=swap" rel="stylesheet">
 <style>
 /* VOICE  occasion: a bedtime-story catalogue for parents, warm and unhurried
@@ -515,6 +515,7 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
 @keyframes fadein{from{opacity:0}to{opacity:1}}
 @keyframes sheetin{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:none}}
 .hero>img{animation:zoom 2.8s cubic-bezier(.2,.7,.2,1) both}
+@media(max-width:760px){.hero>img,.hero .txt>*{animation:none}}
 .hero .txt>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) backwards}
 .hero .txt>:nth-child(2){animation-delay:.15s}.hero .txt>:nth-child(3){animation-delay:.3s}.hero .txt>:nth-child(4){animation-delay:.45s}.hero .txt>:nth-child(5){animation-delay:.6s}.hero .txt>:nth-child(6){animation-delay:.75s}
 .hero .btn-main{animation:glow 2.8s 1.6s ease-out infinite}
@@ -563,7 +564,7 @@ details[open] summary::after{transform:rotate(180deg)}
 </nav>
 
 <header class="hero" id="topo">
-  <img fetchpriority="high" width="1672" height="941" src="../images/hero/hero-pai-e-filho.webp" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
+  <img fetchpriority="high" width="1672" height="941" src="../images/hero/hero-pai-e-filho.webp" srcset="../images/hero/hero-pai-e-filho-800.webp 800w, ../images/hero/hero-pai-e-filho-1200.webp 1200w, ../images/hero/hero-pai-e-filho.webp 1672w" sizes="100vw" alt="Pai e filho lendo juntos à noite; da tela saem uma baleia branca, um navio no gelo e um castelo">
   <div class="txt">
     <p class="eyebrow">Do nascimento aos 8 anos</p>
     <h1>Histórias para ler <span>juntos</span></h1>
@@ -645,20 +646,20 @@ details[open] summary::after{transform:rotate(180deg)}
       <p class="lead">Do primeiro parágrafo ao quiz do fim, cada parte foi pensada para o adulto e a criança lerem juntos.</p>
     </div>
     <div class="tour rv" id="tour">
-      <ol class="steps" role="tablist" aria-label="Partes do produto">
-        <li><button class="tstep on" role="tab" aria-selected="true" data-i="0">
+      <ol class="steps" aria-label="Partes do produto">
+        <li><button class="tstep on" aria-pressed="true" data-i="0">
           <i>1</i><span><b>Página curta, ilustração grande</b>
           <small>Um ou dois parágrafos por página, numa história que prende a criança e interessa a quem lê em voz alta. E cada livro é sempre a semente de um clássico da literatura ou do cinema.</small></span></button>
-          <img class="mshot" loading="lazy" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos"></li>
-        <li><button class="tstep" role="tab" aria-selected="false" data-i="1">
+          <img class="mshot" aria-hidden="true" loading="lazy" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos"></li>
+        <li><button class="tstep" aria-pressed="false" data-i="1">
           <i>2</i><span><b>Um quiz no fim de cada história</b>
           <small>De 5 a 10 perguntas para ver se a criança entendeu. Os menores respondem apontando, e a última pergunta não tem resposta certa: é ela que puxa a conversa.</small></span></button>
           <div class="mquiz" id="mquiz"></div>
           </li>
-        <li><button class="tstep" role="tab" aria-selected="false" data-i="2">
+        <li><button class="tstep" aria-pressed="false" data-i="2">
           <i>3</i><span><b>Uma estante para cada filho</b>
           <small>Cada filho tem o seu perfil, continua de onde parou e recebe indicações a partir do que gostou e do que você escolheu cultivar.</small></span></button>
-          <img class="mshot" loading="lazy" src="../images/plataforma/estante.webp" alt="Tela da estante da Giovana com Continue lendo e Indicados para a Giovana"></li>
+          <img class="mshot" aria-hidden="true" loading="lazy" src="../images/plataforma/estante.webp" alt="Tela da estante da Giovana com Continue lendo e Indicados para a Giovana"></li>
       </ol>
       <div class="stage">
         <div class="device"><span class="dots"><i></i><i></i><i></i></span>
@@ -885,7 +886,7 @@ document.addEventListener("click",e=>{
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
 /* tour do produto */
 {const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],scr=[...tour.querySelectorAll(".screens>*")];
- function go(i){bs.forEach((b,k)=>{b.classList.toggle("on",k==i);b.setAttribute("aria-selected",k==i)});scr.forEach((m,k)=>m.classList.toggle("on",k==i))}
+ function go(i){bs.forEach((b,k)=>{b.classList.toggle("on",k==i);b.setAttribute("aria-pressed",k==i)});scr.forEach((m,k)=>m.classList.toggle("on",k==i))}
  bs.forEach((b,k)=>b.addEventListener("click",()=>go(k)));
  /* quiz: no tablet no computador, dentro do passo 2 no celular */
  const qa=$("#qapp"),home=qa.parentElement,slot=$("#mquiz"),mq=matchMedia("(max-width:1000px)");
