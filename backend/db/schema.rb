@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_22_000001) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_23_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -115,6 +115,11 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_22_000001) do
     t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "page", default: 0, null: false
+    t.integer "pages_total"
+    t.integer "quiz_score"
+    t.integer "quiz_total"
+    t.text "diary"
     t.index ["child_profile_id", "title_id"], name: "index_reading_entries_on_child_profile_id_and_title_id", unique: true
     t.index ["child_profile_id"], name: "index_reading_entries_on_child_profile_id"
     t.index ["title_id"], name: "index_reading_entries_on_title_id"

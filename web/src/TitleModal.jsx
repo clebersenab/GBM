@@ -1,5 +1,6 @@
 // Ficha do livro: sinopse, valores e jornadas, box, status de leitura, ler e baixar.
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { api } from './api'
 import { useLibrary } from './library'
 import { useShell } from './Shell'
@@ -12,6 +13,7 @@ export default function TitleModal({ t, onClose }) {
   const entry = bySlug[t.id]
   const [msg, setMsg] = useState(null)
   const [busy, setBusy] = useState(null)
+  const nav = useNavigate()
   const o = t.obra_mae
   const box = boxOf(t)
   const colecoes = (t.colecoes || []).map((id) => grupoById[id]).filter(Boolean)
@@ -31,9 +33,14 @@ export default function TitleModal({ t, onClose }) {
     setBusy(kind); setMsg(null)
     try {
       if (kind === 'ler') {
-        await api(`/titles/${t.id}/read`)
-        if (entry?.status !== 'lido') await save(t.id, { status: 'lendo' })
-        setMsg({ ok: true, text: 'Marcado como “lendo”. O leitor com as páginas chega na próxima etapa.' })
+        const book = await api(`/titles/${t.id}/read`)
+        if (!book.paginas) {
+          if (entry?.status !== 'lido') await save(t.id, { status: 'lendo' })
+          setMsg({ ok: true, text: 'Este livro ainda está sendo preparado. Ele ficou marcado como “lendo” e avisaremos quando estiver pronto.' })
+          return
+        }
+        onClose()
+        nav(`/ler/${t.id}`, { state: { book } })
       } else {
         const { url } = await api(`/titles/${t.id}/download`, { method: 'POST' })
         window.open(url, '_blank', 'noopener')
@@ -112,7 +119,7 @@ export default function TitleModal({ t, onClose }) {
           </div>
 
           <div className="acts">
-            <button className="btn btn-main" onClick={() => run('ler')} disabled={!!busy}><Icon name="play" size={18} />{busy === 'ler' ? 'Abrindo…' : 'Ler agora'}</button>
+            <button className="btn btn-main" onClick={() => run('ler')} disabled={!!busy}><Icon name="play" size={18} />{busy === 'ler' ? 'Abrindo…' : entry?.status === 'lendo' && entry.page > 0 ? 'Continuar lendo' : 'Ler agora'}</button>
             <button className="btn btn-ghost" onClick={() => run('baixar')} disabled={!!busy}><Icon name="download" size={18} />{busy === 'baixar' ? 'Gerando…' : 'Baixar PDF'}</button>
           </div>
           {msg && <p className={msg.ok ? 'form-ok' : 'form-error'}>{msg.text}</p>}

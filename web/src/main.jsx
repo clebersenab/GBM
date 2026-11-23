@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './index.css'
@@ -16,6 +16,8 @@ import Lista from './pages/Lista'
 import Conta from './pages/Conta'
 import Assinatura from './pages/Assinatura'
 import DesignSystem from './pages/DesignSystem'
+
+const Leitor = lazy(() => import('./pages/Leitor'))
 
 // Só entra quem está logado; sem perfil escolhido vai para "Quem vai ler hoje?".
 function Private({ children, needProfile }) {
@@ -50,6 +52,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/assinatura" element={<Assinatura />} />
             <Route path="/design" element={<DesignSystem />} />
           </Route>
+          <Route path="/ler/:slug" element={<Private needProfile><LibraryProvider><Suspense fallback={<div className="loading">Abrindo o livro…</div>}><Leitor /></Suspense></LibraryProvider></Private>} />
           <Route path="/estante" element={<Navigate to="/inicio" replace />} />
           <Route path="/cultivar" element={<Navigate to="/inicio" replace />} />
           <Route path="*" element={<Navigate to="/inicio" replace />} />

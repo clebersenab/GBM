@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Badge, Card, Cover, Empty, Icon, PageHead, Progress, Ring, Segmented, Stat, StatusTag, Tag, Toggle } from '../ds'
 import { Field } from '../ui'
 import { byId } from '../catalog'
@@ -16,6 +17,9 @@ export default function DesignSystem() {
   return (
     <div className="page">
       <PageHead title="Design system" sub="Menu superior com 4 abas (barra de abas embaixo no celular), busca e menu da foto à direita, widgets em cartões. Muda junto com o tema claro/escuro." />
+      <Card title="Leitor" sub="Fundo creme, fonte Andika, letra 22/28/30px com A−/A+, uma ilustração por página e texto sempre fora da imagem. Fixo, não muda com o tema.">
+        <Link className="btn btn-main" to="/ler/demo-leitor"><Icon name="book" size={18} />Abrir o livro de amostra</Link>
+      </Card>
       <Card title="Cores" sub="Sempre por variável: o tema troca os valores, não os nomes">
         <div className="ds-colors">{COLORS.map(([v, n, use]) => (
           <div key={v}><i style={{ background: `var(${v})` }} /><b>{n}</b><code>{v}</code>{use && <small>{use}</small>}</div>

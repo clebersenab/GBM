@@ -1,14 +1,18 @@
 class TitlesController < ApplicationController
-  before_action :load_title
+  before_action :load_title, except: :read
 
   # GET /titles/:slug/access
   def access = render(json: AccessPolicy.new(current_account, @title).to_h)
 
   # GET /titles/:slug/read -> conteúdo do leitor (só com assinatura ativa)
   def read
+    book = BookContent.find(params[:slug])
+    return render(json: book) if book&.dig("amostra")
+
+    load_title
     policy = AccessPolicy.new(current_account, @title)
     return render(json: { error: "assinaturas abrem em breve", code: "sem_acesso" }, status: :forbidden) unless policy.can_read?
-    render json: { slug: @title.slug, title: @title.title, pages_url: nil } # leitor entra numa próxima etapa
+    render json: book || { slug: @title.slug, titulo: @title.title, paginas: nil } # ainda em preparação
   end
 
   # POST /titles/:slug/download -> link temporário do PDF
