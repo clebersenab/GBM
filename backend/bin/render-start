@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Inicialização no Render: migra, carrega o catálogo, cria a conta liberada (se configurada) e sobe a API.
+# Inicialização no Render: migra, carrega o catálogo, cria a conta liberada (se configurada), garante os admins e sobe a API.
 set -e
 bin/rails db:prepare
 bin/rails db:seed
 bin/rails gbm:liberar_from_env
+bin/rails gbm:admins
 exec bundle exec puma -C config/puma.rb
