@@ -25,7 +25,7 @@
   {
    "id": "moby-dick",
    "titulo": "Moby Dick",
-   "sinopse": "Ismael, o grumete mais novo do Pequod, atravessa o mar com o capitão Ahab atrás de Moby Dick, a baleia branca que ninguém consegue alcançar.",
+   "sinopse": "Ismael, o menino mais novo a bordo do navio Pequod, atravessa o mar com o capitão Ahab atrás de Moby Dick, a baleia branca que ninguém consegue alcançar.",
    "obra_mae": {
     "titulo": "Moby Dick",
     "autor": "Herman Melville",
@@ -78,7 +78,7 @@
   {
    "id": "iracema",
    "titulo": "Iracema",
-   "sinopse": "Com a jandaia no ombro, a guerreira das lagoas do Ceará guarda uma terra que ainda não tinha nome.",
+   "sinopse": "Com a jandaia, um passarinho verde, no ombro, a guerreira das lagoas do Ceará guarda uma terra que ainda não tinha nome.",
    "obra_mae": {
     "titulo": "Iracema",
     "autor": "José de Alencar",
@@ -1135,7 +1135,7 @@
   {
    "id": "a-vila-de-muitas-portas",
    "titulo": "O Cortiço de João Romão",
-   "sinopse": "Na estalagem de São Romão, dezenas de famílias vivem lado a lado, e cada porta guarda uma história.",
+   "sinopse": "Na vila de São Romão, dezenas de famílias moram lado a lado, e cada porta guarda uma história.",
    "obra_mae": {
     "titulo": "O Cortiço",
     "autor": "Aluísio Azevedo",
@@ -1212,7 +1212,7 @@
   {
    "id": "ivanhoe-e-o-escudeiro",
    "titulo": "Ivanhoé e o Escudeiro Gurth",
-   "sinopse": "No torneio de Ashby, o pequeno Gurth segura o elmo de Ivanhoé, o cavaleiro que ninguém reconhece.",
+   "sinopse": "No torneio de Ashby, o pequeno Gurth segura o capacete de Ivanhoé, o cavaleiro que ninguém reconhece.",
    "obra_mae": {
     "titulo": "Ivanhoé",
     "autor": "Walter Scott",
@@ -1269,7 +1269,7 @@
   {
    "id": "padre-pio",
    "titulo": "Padre Pio",
-   "sinopse": "Desde pequeno, o menino Francesco queria ser frade.",
+   "sinopse": "Desde pequeno, o menino Francesco queria ser padre.",
    "obra_mae": {
     "titulo": "Padre Pio (2000)",
     "autor": "Carlo Carlei",
@@ -1665,7 +1665,7 @@
   {
    "id": "o-conde-de-monte-cristo",
    "titulo": "O Conde de Monte Cristo",
-   "sinopse": "Edmond Dantès é preso sem ter feito nada. Na cela vizinha, o velho abade Faria ensina tudo o que sabe e mostra o caminho de um tesouro escondido.",
+   "sinopse": "Edmond Dantès é preso sem ter feito nada. Na cela vizinha, o velho Faria, um homem muito sábio, ensina tudo o que sabe e mostra o caminho de um tesouro escondido.",
    "obra_mae": {
     "titulo": "O Conde de Monte Cristo",
     "autor": "Alexandre Dumas",
@@ -1748,7 +1748,7 @@
   {
    "id": "policarpo-quaresma",
    "titulo": "Policarpo Quaresma",
-   "sinopse": "Policarpo ama tudo o que é do Brasil: a modinha no violão, as frutas do quintal e até o tupi. No sítio do Sossego, ele resolve plantar o país inteiro.",
+   "sinopse": "Policarpo ama tudo o que é do Brasil: as cantigas no violão, as frutas do quintal e até a língua dos indígenas tupis. No sítio do Sossego, ele resolve plantar o país inteiro.",
    "obra_mae": {
     "titulo": "Triste Fim de Policarpo Quaresma",
     "autor": "Lima Barreto",
