@@ -26,4 +26,15 @@ namespace :gbm do
     ENV["ADMIN"] = ENV["LIBERAR_ADMIN"]
     Rake::Task["gbm:liberar"].invoke
   end
+
+  # Usada na inicialização do servidor: garante que as contas listadas sejam admin.
+  # Só promove contas que já existem; nunca tira o acesso de ninguém.
+  desc "Marca como admin as contas de ADMIN_EMAILS (padrão: o dono do GBM)"
+  task admins: :environment do
+    emails = ENV.fetch("ADMIN_EMAILS", "cleber.senab@gmail.com").split(",").map { |e| e.strip.downcase }.reject(&:empty?)
+    Account.where(email: emails, admin: false).find_each do |a|
+      a.update!(admin: true)
+      puts "#{a.email}: agora é admin"
+    end
+  end
 end
