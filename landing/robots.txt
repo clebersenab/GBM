@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /plataforma/
+Disallow: /app/
+
+Sitemap: https://gbm-six.vercel.app/sitemap.xml

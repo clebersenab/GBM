@@ -8,7 +8,7 @@ import BookAnim from '../BookAnim'
 import PlantBlock from '../PlantBlock'
 import { Card, Cover, Empty, Icon, Progress, Stat, StatusTag, Tag } from '../ds'
 import { api } from '../api'
-import { CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
+import { thumb, CAMINHOS, DESTAQUE_IMG, GRUPOS, LANCAMENTOS, TITULOS, VALORES, byId, valorImg, caminhoImg } from '../catalog'
 import { emphasis, recommend } from '../recommend'
 
 const saudacao = () => { const h = new Date().getHours(); return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite' }
@@ -84,7 +84,7 @@ export default function Inicio() {
           <Rail>{top.map(({ t }, i) => (
             <button key={t.id} className="t10" onClick={() => openTitle(t)} aria-label={`${i + 1}º lugar: ${t.titulo}`}>
               <span className="t10-n" aria-hidden="true">{i + 1}</span>
-              <span className="cv-img"><img loading="lazy" src={`/${t.capa}`} alt="" />
+              <span className="cv-img"><img loading="lazy" src={thumb(t.capa)} alt="" />
                 {bySlug[t.id] && <span className="cv-tag"><StatusTag status={bySlug[t.id].status} /></span>}
                 <b>{t.titulo}</b></span>
             </button>
@@ -125,7 +125,7 @@ export default function Inicio() {
             <div className="stack">
               {boxes.map(({ g, lidos: n }) => (
                 <button key={g.id} className="box-p" onClick={() => openTitle(byId[g.titulos.find((id) => bySlug[id]?.status !== 'lido') || g.titulos[0]])}>
-                  <img src={`/${g.arte}`} alt="" />
+                  <img src={thumb(g.arte)} alt="" />
                   <Progress value={n} max={g.titulos.length} tone="purple" label={g.titulo} right={`${n}/${g.titulos.length}`} />
                 </button>
               ))}

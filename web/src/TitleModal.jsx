@@ -4,7 +4,7 @@ import { api } from './api'
 import { useLibrary } from './library'
 import { useShell } from './Shell'
 import { Icon, Modal, STATUS } from './ds'
-import { boxOf, byId, grupoById, valorImg, caminhoImg } from './catalog'
+import { thumb, boxOf, byId, grupoById, valorImg, caminhoImg } from './catalog'
 
 export default function TitleModal({ t, onClose }) {
   const { bySlug, save, remove } = useLibrary()
@@ -58,7 +58,7 @@ export default function TitleModal({ t, onClose }) {
               <div className="tm-vols">
                 {box.grupo.titulos.map((id, k) => byId[id] && (
                   <button key={id} className={id === t.id ? 'now' : ''} onClick={() => id !== t.id && openTitle(byId[id])} title={byId[id].titulo}>
-                    <img src={`/${byId[id].capa}`} alt="" />
+                    <img src={thumb(byId[id].capa)} alt="" />
                     <span>{k + 1}</span>
                     {bySlug[id]?.status === 'lido' && <i><Icon name="check" size={12} /></i>}
                   </button>
