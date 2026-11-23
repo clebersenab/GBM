@@ -53,7 +53,7 @@ function Livro({ book, entry, save, profile, fechar }) {
   const folhas = useMemo(() => ['capa', ...book.paginas.map((_, k) => k), ...(temVocab ? ['vocab'] : []), ...(temQuiz ? ['quiz'] : []), 'fim'], [book, temVocab, temQuiz])
   const demoKey = `gbm-leitor-${book.slug}-${profile?.id}`
   const salvo = book.amostra ? pref(demoKey, { page: 0 }) : entry
-  const retomar = salvo && salvo.status !== 'lido' && salvo.page > 0 && salvo.page <= N ? salvo.page : 0
+  const retomar = salvo && salvo.page > 0 && salvo.page < N ? salvo.page : 0 // ao chegar ao fim a página vira N e a próxima leitura começa da capa
 
   const [i, setI] = useState(retomar)
   const [aviso, setAviso] = useState(retomar > 0)
