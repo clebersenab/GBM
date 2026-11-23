@@ -59,4 +59,13 @@ class TitleAccessTest < ActionDispatch::IntegrationTest
     get path
     assert_response :gone
   end
+
+  test "livro de amostra abre para qualquer conta logada; os outros seguem a assinatura" do
+    login
+    get "/titles/demo-leitor/read", headers: auth
+    assert_response :ok
+    assert response.parsed_body["paginas"].size >= 10
+    get "/titles/../secrets/read", headers: auth
+    assert_response :not_found
+  end
 end

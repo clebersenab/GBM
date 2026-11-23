@@ -1,0 +1,128 @@
+{
+ "slug": "demo-leitor",
+ "titulo": "O barquinho de papel",
+ "amostra": true,
+ "aviso": "Livro de amostra para testar o leitor. Texto e ilustrações provisórios.",
+ "capa": "images/livros/demo-leitor/p01.svg",
+ "paginas": [
+  {
+   "imagem": "images/livros/demo-leitor/p01.svg",
+   "texto": "Numa tarde de chuva em Fortaleza, Giovana, Bento e Maria acharam uma folha de jornal velha. Giovana dobrou, Bento apertou as pontas e Maria fez o mastro. Pronto: um barquinho de papel.",
+   "pergunta": "Se vocês fossem fazer um barquinho, que nome dariam a ele?",
+   "alt": "Três crianças em volta de uma mesa com um barquinho de papel."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p02.svg",
+   "texto": "A chuva caía forte lá fora. A rua virou um riozinho que corria ligeiro em direção ao mar. — Vamos ver até onde ele vai? — perguntou Bento.",
+   "pergunta": "Para onde você acha que a água da chuva vai?",
+   "alt": "As crianças olham a chuva com o barquinho nas mãos."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p03.svg",
+   "texto": "Maria colocou o barquinho na água com cuidado. Ele balançou, girou duas vezes e saiu navegando, todo valente, pelo meio-fio.",
+   "pergunta": "Como você acha que o barquinho está se sentindo agora?",
+   "alt": "O barquinho navega na enxurrada da rua."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p04.svg",
+   "texto": "De repente, o barquinho chegou perto de um bueiro. — Cuidado! — gritou Giovana. O barquinho rodopiou na beirada, quase caiu… e passou por cima, por um triz.",
+   "pergunta": "O que você faria se visse o barquinho chegando perto do bueiro?",
+   "alt": "O barquinho passa por cima de uma grade de bueiro."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p05.svg",
+   "texto": "A enxurrada levou o barquinho até o canal. Ali a água era larga e calma. O barquinho seguiu sozinho, cada vez mais longe das crianças.",
+   "pergunta": "Você já foi a algum lugar sozinho pela primeira vez? Como foi?",
+   "alt": "O barquinho navega num canal largo."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p06.svg",
+   "texto": "No canal, ele encontrou um pato amarelo. — Para onde você vai, barquinho? — Vou ver o mar — respondeu o barquinho, mesmo sem saber o caminho.",
+   "pergunta": "Por que será que o barquinho quer tanto ver o mar?",
+   "alt": "O barquinho conversa com um pato amarelo."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p07.svg",
+   "texto": "Passou debaixo de uma ponte grande. Lá em cima, os carros buzinavam. Lá embaixo, o barquinho seguia, pequeno e firme, sem desistir.",
+   "pergunta": "O que quer dizer não desistir? Você lembra de uma vez em que não desistiu?",
+   "alt": "O barquinho passa debaixo de uma ponte."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p08.svg",
+   "texto": "E então, no fim do canal, apareceu uma coisa enorme, azul e cheia de ondas. Era o mar! O barquinho nunca tinha visto tanta água junta.",
+   "pergunta": "Como você imagina o mar pela primeira vez?",
+   "alt": "O canal encontra o mar."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p09.svg",
+   "texto": "A noite chegou. O papel estava molhado e mole, mas as estrelas brilhavam lá em cima. O barquinho boiava devagar, olhando o céu.",
+   "pergunta": "O barquinho está cansado. O que ajuda você quando está cansado?",
+   "alt": "O barquinho boia no mar à noite, sob as estrelas."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p10.svg",
+   "texto": "De manhã, uma jangada de pescador passou por perto. O pescador viu o barquinho, sorriu e o colocou com cuidado na areia da praia.",
+   "pergunta": "Por que o pescador ajudou o barquinho?",
+   "alt": "Uma jangada passa perto do barquinho no mar."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p11.svg",
+   "texto": "Na praia, três crianças conhecidas corriam pela areia. Eram Giovana, Bento e Maria, que tinham vindo procurar o barquinho com a avó.",
+   "pergunta": "Como você acha que as crianças se sentiram ao encontrar o barquinho?",
+   "alt": "As crianças encontram o barquinho na areia."
+  },
+  {
+   "imagem": "images/livros/demo-leitor/p12.svg",
+   "texto": "O barquinho voltou para casa amassado, mas inteiro. Hoje ele mora na janela, e toda vez que chove as crianças lembram da grande viagem que ele fez.",
+   "pergunta": "Se o barquinho pudesse contar a viagem, o que ele contaria primeiro?",
+   "alt": "O barquinho na janela da casa das crianças."
+  }
+ ],
+ "vocabulario": [
+  {
+   "palavra": "Enxurrada",
+   "significado": "Muita água de chuva correndo pela rua."
+  },
+  {
+   "palavra": "Meio-fio",
+   "significado": "A beirada de pedra entre a calçada e a rua."
+  },
+  {
+   "palavra": "Jangada",
+   "significado": "Barco de pescador feito de troncos, com uma vela grande."
+  }
+ ],
+ "quiz": [
+  {
+   "pergunta": "Do que as crianças fizeram o barquinho?",
+   "opcoes": [
+    "De madeira",
+    "De jornal velho",
+    "De plástico"
+   ],
+   "certa": 1,
+   "explica": "Elas dobraram uma folha de jornal velha."
+  },
+  {
+   "pergunta": "Quem o barquinho encontrou no canal?",
+   "opcoes": [
+    "Um peixe",
+    "Um pato amarelo",
+    "Uma gaivota"
+   ],
+   "certa": 1,
+   "explica": "Foi o pato amarelo que perguntou para onde ele ia."
+  },
+  {
+   "pergunta": "Quem colocou o barquinho na areia?",
+   "opcoes": [
+    "Um pescador",
+    "A avó",
+    "O pato"
+   ],
+   "certa": 0,
+   "explica": "O pescador da jangada o colocou na praia com cuidado."
+  }
+ ],
+ "quando_crescer": null
+}

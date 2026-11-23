@@ -7,12 +7,14 @@ class LibraryController < ApplicationController
     render json: @profile.reading_entries.includes(:title).order(updated_at: :desc).map(&:view)
   end
 
-  # PUT /profiles/:profile_id/library/:slug { status, liked? }
+  # PUT /profiles/:profile_id/library/:slug { status?, liked?, page?, pages_total?, quiz_score?, quiz_total?, diary? }
   def upsert
     title = Title.find_by!(slug: params[:slug])
     entry = @profile.reading_entries.find_or_initialize_by(title: title)
     entry.status = params[:status] if params.key?(:status)
     entry.liked = ActiveModel::Type::Boolean.new.cast(params[:liked]) if params.key?(:liked)
+    %i[page pages_total quiz_score quiz_total].each { |k| entry[k] = params[k].to_i if params.key?(k) && !params[k].nil? }
+    entry.diary = params[:diary].to_s.strip.presence if params.key?(:diary)
     entry.status ||= "quero_ler"
     entry.save!
     render json: entry.view
