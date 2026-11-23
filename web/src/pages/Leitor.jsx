@@ -49,6 +49,7 @@ function Livro({ book, entry, save, profile, fechar }) {
   const N = book.paginas.length
   const temVocab = book.vocabulario?.length > 0
   const temQuiz = book.quiz?.length > 0
+  const temPerguntas = book.paginas.some((p) => p.pergunta)
   // Folhas: capa, páginas da história, vocabulário, quiz, fim.
   const folhas = useMemo(() => ['capa', ...book.paginas.map((_, k) => k), ...(temVocab ? ['vocab'] : []), ...(temQuiz ? ['quiz'] : []), 'fim'], [book, temVocab, temQuiz])
   const demoKey = `gbm-leitor-${book.slug}-${profile?.id}`
@@ -122,9 +123,11 @@ function Livro({ book, entry, save, profile, fechar }) {
       <header className="lt-top">
         <button className="lt-ic" onClick={fechar} aria-label="Fechar o livro"><Icon name="x" size={22} /></button>
         <b className="lt-tit">{book.titulo}</b>
-        <button className="lt-ic lt-perg" aria-pressed={perguntas} onClick={() => setPerguntas((v) => !v)} title="Perguntas para o adulto fazer durante a leitura">
-          <Icon name="chat" size={20} /><span>Perguntas</span>
-        </button>
+        {temPerguntas && (
+          <button className="lt-ic lt-perg" aria-pressed={perguntas} onClick={() => setPerguntas((v) => !v)} title="Perguntas para o adulto fazer durante a leitura">
+            <Icon name="chat" size={20} /><span>Perguntas</span>
+          </button>
+        )}
         <div className="lt-tam" role="group" aria-label="Tamanho da letra">
           <button className="lt-ic" onClick={() => setEscala((v) => Math.max(0, v - 1))} disabled={escala === 0} aria-label="Diminuir a letra">A−</button>
           <button className="lt-ic" onClick={() => setEscala((v) => Math.min(ESCALAS.length - 1, v + 1))} disabled={escala === ESCALAS.length - 1} aria-label="Aumentar a letra">A+</button>
