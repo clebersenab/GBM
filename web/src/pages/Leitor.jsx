@@ -502,16 +502,30 @@ function Fim({ book, entry, save, recomecar, fechar, nav }) {
   const proximo = box && byId[box.grupo.titulos[box.index + 1]]
   const [liked, setLiked] = useState(entry?.liked ?? null)
   const [diario, setDiario] = useState(entry?.diary || '')
-  const [ok, setOk] = useState(false)
+  const [estado, setEstado] = useState(null) // null | 'salvando' | 'salvo'
+  // O diário salva sozinho: pouco depois de parar de digitar, ao sair do campo e ao sair da tela.
+  const salvo = useRef(entry?.diary || '')
+  const atual = useRef(diario)
+  atual.current = diario
+  const guardar = useCallback(() => {
+    const txt = atual.current
+    if (txt === salvo.current) return
+    salvo.current = txt
+    if (book.amostra) { setEstado('salvo'); return }
+    setEstado('salvando')
+    save(book.slug, { diary: txt }).then(() => setEstado('salvo')).catch(() => { salvo.current = null; setEstado(null) })
+  }, [book, save])
+  useEffect(() => {
+    if (diario === salvo.current) return
+    const id = setTimeout(guardar, 900)
+    return () => clearTimeout(id)
+  }, [diario, guardar])
+  useEffect(() => () => guardar(), [guardar])
 
   function gostou(v) {
     const novo = liked === v ? null : v
     setLiked(novo)
     if (!book.amostra) save(book.slug, { status: 'lido', liked: novo }).catch(() => {})
-  }
-  function guardarDiario() {
-    if (!book.amostra) save(book.slug, { diary: diario }).catch(() => {})
-    setOk(true)
   }
 
   return (
@@ -526,14 +540,11 @@ function Fim({ book, entry, save, recomecar, fechar, nav }) {
         <p className="lt-crescer"><small>Quando crescer, {o.tipo === 'filme' ? 'assista' : 'leia'}</small><b>{o.titulo}</b>{o.autor && <span>de {o.autor}</span>}</p>
       )}
       <label className="lt-diario">
-        <span>Diário da leitura</span>
-        <textarea rows={3} maxLength={2000} value={diario} onChange={(e) => { setDiario(e.target.value); setOk(false) }}
+        <span>Diário da leitura{estado && <em className="lt-salvo">{estado === 'salvando' ? 'Salvando…' : 'Salvo'}</em>}</span>
+        <textarea rows={3} maxLength={2000} value={diario} onChange={(e) => { setDiario(e.target.value); setEstado(null) }} onBlur={guardar}
           placeholder="O que a criança disse ou perguntou durante a leitura? Ex.: quis saber se a baleia tinha mãe." />
       </label>
-      <div className="lt-acoes">
-        <button className="lt-btn lt-sec" onClick={guardarDiario} disabled={ok || !diario.trim()}>{ok ? 'Guardado no diário' : 'Guardar no diário'}</button>
-        {proximo && <button className="lt-btn" onClick={() => nav(`/ler/${proximo.id}`, { replace: true })}>Próximo do box: {proximo.titulo}</button>}
-      </div>
+      {proximo && <div className="lt-acoes"><button className="lt-btn" onClick={() => nav(`/ler/${proximo.id}`, { replace: true })}>Próximo do box: {proximo.titulo}</button></div>}
       <div className="lt-acoes">
         <button className="lt-link" onClick={recomecar}>Ler de novo</button>
         <button className="lt-link" onClick={fechar}>Voltar para a estante</button>
