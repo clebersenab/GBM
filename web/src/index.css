@@ -432,7 +432,8 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bk-txt i{display:block;height:4px;border-radius:3px;background:rgba(70,45,20,.26)}
 .bk-cap{font:800 30px/1 Poppins,serif;color:#b0560c;margin-bottom:-2%}
 .bk-spine{position:absolute;left:calc(50% - 3px);top:-2px;bottom:-2px;width:6px;border-radius:3px;background:linear-gradient(90deg,#c9b394,#efe2cb,#c9b394);z-index:6}
-@media(max-width:760px){.bk{display:block;width:120%;right:-45%;opacity:.35}.hero-card::before{background:linear-gradient(90deg,var(--hero-a) 30%,color-mix(in srgb,var(--hero-a) 60%,transparent))}}
+/* Celular: o livro fica centralizado atrás do texto, com um véu uniforme por cima para o texto continuar legível. */
+@media(max-width:760px){.bk{display:block;width:115%;left:50%;right:auto;transform:translate(-50%,-50%);opacity:.3;-webkit-mask-image:none;mask-image:none}.hero-card::before{background:color-mix(in srgb,var(--hero-a) 62%,transparent)}}
 /* plantar e cultivar: visão única */
 .legend{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .lg{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:var(--r-md);background:var(--card);border:1px solid var(--line);color:var(--ink2);font-size:14.5px}
