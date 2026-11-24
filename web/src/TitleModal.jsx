@@ -55,7 +55,10 @@ export default function TitleModal({ t, onClose }) {
   return (
     <Modal title={t.titulo} onClose={onClose} wide>
       <div className="titulo">
-        <span className={`tm-capa${t.em_breve ? ' eb' : ''}`}><img src={src(t.capa)} alt="" />{t.em_breve && <EmBreve />}</span>
+        <span className={`tm-capa${t.em_breve ? ' eb' : ''}`}>
+          <img src={src(t.capa)} alt="" />
+          {t.em_breve ? <EmBreve /> : <button className="tm-ler" onClick={() => run('ler')} disabled={!!busy} aria-label="Ler agora"><Icon name="play" size={30} /></button>}
+        </span>
         <div className="stack">
           <p>{t.sinopse}</p>
 

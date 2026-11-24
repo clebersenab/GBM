@@ -124,9 +124,45 @@ function Livro({ book, entry, save, profile, fechar }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [prox, ant, fechar])
 
-  // Deslizar o dedo para virar a página.
+  // Deslizar o dedo para virar a página, começando em qualquer ponto da tela.
+  // Nos primeiros pixels decide a direção: se for de lado, a página não rola e o gesto vira a folha;
+  // se for para cima ou para baixo, é rolagem normal do texto. No computador, arrastar com o mouse também vira.
+  const palco = useRef(null)
+  const vira = useRef({ prox, ant })
+  vira.current = { prox, ant }
+  useEffect(() => {
+    const el = palco.current
+    if (!el) return
+    let t0 = null
+    const ini = (e) => {
+      if (e.touches.length !== 1 || e.target.closest('textarea,input')) { t0 = null; return }
+      t0 = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now(), dir: null }
+    }
+    const mov = (e) => {
+      if (!t0) return
+      const dx = e.touches[0].clientX - t0.x, dy = e.touches[0].clientY - t0.y
+      if (!t0.dir && Math.hypot(dx, dy) > 8) t0.dir = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'
+      if (t0.dir === 'x' && e.cancelable) e.preventDefault()
+    }
+    const fim = (e) => {
+      if (!t0 || t0.dir !== 'x') { t0 = null; return }
+      const dx = e.changedTouches[0].clientX - t0.x
+      const rapido = Math.abs(dx) / Math.max(1, Date.now() - t0.t) > 0.25
+      if (Math.abs(dx) > 45 || (rapido && Math.abs(dx) > 24)) (dx < 0 ? vira.current.prox : vira.current.ant)()
+      t0 = null
+    }
+    const cancela = () => { t0 = null }
+    el.addEventListener('touchstart', ini, { passive: true })
+    el.addEventListener('touchmove', mov, { passive: false })
+    el.addEventListener('touchend', fim)
+    el.addEventListener('touchcancel', cancela)
+    return () => {
+      el.removeEventListener('touchstart', ini); el.removeEventListener('touchmove', mov)
+      el.removeEventListener('touchend', fim); el.removeEventListener('touchcancel', cancela)
+    }
+  }, [])
   const toque = useRef(null)
-  const onPointerDown = (e) => { toque.current = { x: e.clientX, y: e.clientY } }
+  const onPointerDown = (e) => { toque.current = e.pointerType === 'mouse' ? { x: e.clientX, y: e.clientY } : null }
   const onPointerUp = (e) => {
     const t0 = toque.current; toque.current = null
     if (!t0) return
@@ -179,7 +215,7 @@ function Livro({ book, entry, save, profile, fechar }) {
         </div>
       </header>
 
-      <main className="lt-palco" onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
+      <main className="lt-palco" ref={palco} onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
         <div className="lt-mesa" aria-live="polite">
           {livro ? (
             <div className="lt-livro">
@@ -349,6 +385,13 @@ function QuizPergunta({ qs, k, resp, escolher, prox }) {
   const esc = resp[k]
   return (
     <div className="lt-extra lt-quiz">
+      {k === 0 && (
+        <div className="lt-q-faixa" role="heading" aria-level={2}>
+          <span className="lt-q-brilhos" aria-hidden="true">{[0, 1, 2, 3, 4, 5].map((n) => <i key={n}>★</i>)}</span>
+          <b>Hora do quiz!</b>
+          <small>Cada resposta certa acende uma estrela</small>
+        </div>
+      )}
       <div className="lt-q-estrelas" aria-label={`Pergunta ${k + 1} de ${qs.length}`}>
         {qs.map((_, n) => <Estrela key={n} estado={n === k ? (esc == null ? 'agora' : esc === q.certa ? 'acesa' : 'apagada') : resp[n] == null ? (n < k ? 'pulada' : 'vazia') : resp[n] === qs[n].certa ? 'acesa' : 'apagada'} />)}
       </div>

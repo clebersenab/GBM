@@ -706,9 +706,7 @@ textarea:focus{outline:0;border-color:var(--blue)}
   .cv{flex-basis:112px}
   .t10 .cv-img{width:112px}
   .t10-n{font-size:72px}
-  .pblock .pick-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 6px;overflow:visible}
-  .pblock.k-j .pick-row{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .pk{width:auto;font-size:11.5px}
+  .pk{width:82px;font-size:11.5px}
   .pk-img{width:56px}.pk.arch .pk-img{width:46px}
   .pblock-h h2{font-size:20px}
   .card.flush>.card-h,.pblock-h{padding:0 16px}
@@ -719,7 +717,6 @@ textarea:focus{outline:0;border-color:var(--blue)}
   .modal-card{padding:20px 16px}
   .cover-grid{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:14px 10px}
 }
-@media(max-width:380px){.pblock .pick-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
 /* Em breve: títulos que ainda não abriram para leitura. Capa em preto e branco com o selo por cima. */
 .eb{position:relative}
 .eb img,.eb-img{filter:grayscale(1) brightness(.8) contrast(1.05)}
@@ -731,3 +728,27 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bk-txt-real{inset:11% 11% 10% 12%;gap:0;justify-content:center}
 .bk-txt-real p{margin:0;font:500 clamp(9px,.85vw,12.5px)/1.5 Andika,"Nunito Sans",system-ui,sans-serif;color:#3b2a1a;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
 .bk-txt-real small{position:absolute;bottom:-4%;left:0;right:0;text-align:center;font:600 10px "Nunito Sans",sans-serif;color:rgba(70,45,20,.55)}
+/* Celular: escolhas, jardim, portas, valores e jornadas do modal ficam em uma linha só, com rolagem de lado.
+   A borda direita esmaece para mostrar que tem mais. */
+@media(max-width:760px){
+  .pblock .pick-row,.beds,.portals,.plantou .chips{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent)}
+  .pblock .pick-row::-webkit-scrollbar,.beds::-webkit-scrollbar,.portals::-webkit-scrollbar,.plantou .chips::-webkit-scrollbar{display:none}
+  .pblock .pick-row{gap:10px;padding:4px 36px 4px 16px}
+  .pk,.bed,.portal,.chip{flex:0 0 auto}
+  .beds{gap:10px;padding:22px 36px 0 0;align-items:end}
+  .bed{width:92px}
+  .beds .plant{height:110px}
+  .portals{gap:16px;padding:6px 36px 8px 6px;align-items:start}
+  .portal{width:86px}
+  .plantou .chips{padding-right:36px}
+  .chip{white-space:nowrap}
+  /* modal do livro: Ler agora sempre à mão, preso no rodapé enquanto a ficha rola */
+  .modal-card .titulo,.modal-card .titulo>.stack{display:contents}
+  .modal-card .acts{position:sticky;bottom:-20px;z-index:3;margin:0 -16px -20px;padding:12px 16px 16px;background:linear-gradient(transparent,var(--bg2) 22%);flex-wrap:nowrap}
+  .modal-card .acts .btn{flex:1;justify-content:center}
+  .modal-card .acts .muted{display:none}
+}
+/* Botão de ler sobre a capa, no modal */
+.tm-ler{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;border:0;display:grid;place-items:center;background:rgba(11,13,23,.62);color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.75),0 10px 30px -8px rgba(0,0,0,.7);backdrop-filter:blur(4px);transition:transform .2s,background .2s}
+.tm-ler:hover{transform:translate(-50%,-50%) scale(1.07);background:var(--orange)}
+.tm-ler .ico{margin-left:4px}
