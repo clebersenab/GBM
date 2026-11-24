@@ -122,8 +122,8 @@
 .lt-estrela-g.acesa path{fill:#ffd65a;stroke:#fff3c4;stroke-dasharray:none;stroke-width:1.3}
 .lt-halo{opacity:0;animation:lt-halo 1.6s ease-out forwards}
 .lt-traco{stroke:#fff3c4;stroke-width:1.2;stroke-dasharray:3 4;opacity:0;animation:lt-fade .6s ease forwards}
-.lt-livro path{fill:#fffaf0;stroke:#c98a52;stroke-width:2}
-.lt-livro .lt-livro-meio{fill:none}
+.lt-ceu-livro path{fill:#fffaf0;stroke:#c98a52;stroke-width:2}
+.lt-ceu-livro .lt-livro-meio{fill:none}
 .lt-placar{fill:#fff4e0;font-family:Andika,sans-serif;opacity:0;animation:lt-fade .5s ease 1.2s forwards}
 .lt-placar .n{font-size:44px;font-weight:700}
 .lt-placar .de{font-size:16px;opacity:.85}
@@ -190,3 +190,8 @@
 /* Telas mais quadradas (tablet deitado): livro mais alto, para a página de texto respirar. */
 @media (min-aspect-ratio:11/10) and (max-aspect-ratio:17/10) and (min-width:640px){.lt-livro{--proporcao:2}}
 @media (min-aspect-ratio:11/10) and (max-aspect-ratio:3/2) and (min-width:640px){.lt-livro{--proporcao:1.8}.lt-mesa{padding-left:64px;padding-right:64px}}
+.lt-dica{margin:0;font-size:16px}
+.lt-resultado.ceu{align-content:center}
+.lt-resultado.resumo{align-content:center}
+.lt-res-tit{text-align:left!important;font-size:clamp(20px,5.5cqw,28px)!important}
+.lt-resultado.resumo .lt-acoes{justify-content:flex-start}
