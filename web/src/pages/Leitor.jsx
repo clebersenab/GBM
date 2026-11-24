@@ -51,7 +51,10 @@ function Livro({ book, entry, save, profile, fechar }) {
   const temQuiz = book.quiz?.length > 0
   const temPerguntas = book.paginas.some((p) => p.pergunta)
   // Folhas: capa, páginas da história, vocabulário, quiz, fim.
-  const folhas = useMemo(() => ['capa', ...book.paginas.map((_, k) => k), ...(temVocab ? ['vocab'] : []), ...(temQuiz ? ['quiz'] : []), 'fim'], [book, temVocab, temQuiz])
+  // Folhas do livro: capa, páginas da história, palavras novas, uma página por pergunta do quiz,
+  // o resultado (céu de estrelas) e o fim. Todas contam no progresso.
+  const folhas = useMemo(() => ['capa', ...book.paginas.map((_, k) => k), ...(temVocab ? ['vocab'] : []),
+    ...(temQuiz ? [...book.quiz.map((_, k) => `q${k}`), 'resultado'] : []), 'fim'], [book, temVocab, temQuiz])
   const demoKey = `gbm-leitor-${book.slug}-${profile?.id}`
   const salvo = book.amostra ? pref(demoKey, { page: 0 }) : entry
   const retomar = salvo && salvo.page > 0 && salvo.page < N ? salvo.page : 0 // ao chegar ao fim a página vira N e a próxima leitura começa da capa
@@ -63,6 +66,10 @@ function Livro({ book, entry, save, profile, fechar }) {
   const [virando, setVirando] = useState(null) // { de, para, dir } enquanto a folha vira
   const livro = useModoLivro()
   const folha = folhas[i]
+  // Respostas do quiz ficam aqui (e não dentro da pergunta) para sobreviver às viradas de página.
+  const [resp, setResp] = useState(() => (book.quiz || []).map(() => null))
+  const quizK = (f) => (typeof f === 'string' && /^q\d+$/.test(f) ? Number(f.slice(1)) : -1)
+  const bloqueado = quizK(folha) >= 0 && resp[quizK(folha)] == null // pergunta sem resposta: não avança
   const pagina = typeof folha === 'number' ? folha + 1 : folha === 'capa' ? 0 : N
 
   useEffect(() => guarda('gbm-leitor-escala', escala), [escala])
@@ -80,6 +87,18 @@ function Livro({ book, entry, save, profile, fechar }) {
     return () => clearTimeout(t)
   }, [pagina, folha]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  const quizSalvo = useRef('')
+  useEffect(() => {
+    if (folha !== 'resultado' || book.amostra || resp.some((r) => r == null)) return
+    const chave = resp.join(',')
+    if (quizSalvo.current === chave) return
+    quizSalvo.current = chave
+    save(book.slug, { quiz_score: resp.filter((r, n) => r === book.quiz[n].certa).length, quiz_total: book.quiz.length }).catch(() => {})
+  }, [folha, resp]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const escolher = (k, o) => setResp((r) => (r[k] != null ? r : r.map((x, n) => (n === k ? o : x))))
+  const deNovo = () => { setResp(book.quiz.map(() => null)); ir(() => folhas.indexOf('q0')) }
+
   // Virar a página: a folha gira sobre a lombada (ou sobre a borda esquerda, no celular).
   const virandoRef = useRef(false)
   const ir = useCallback((k) => {
@@ -92,7 +111,7 @@ function Livro({ book, entry, save, profile, fechar }) {
     setVirando({ de: i, para: novo, dir: novo > i ? 1 : -1 })
     setTimeout(() => { setI(novo); setVirando(null); virandoRef.current = false }, VIRAR_MS)
   }, [folhas.length, i])
-  const prox = useCallback(() => ir((a) => a + 1), [ir])
+  const prox = useCallback(() => { if (!bloqueado) ir((a) => a + 1) }, [ir, bloqueado])
   const ant = useCallback(() => ir((a) => a - 1), [ir])
 
   useEffect(() => {
@@ -131,14 +150,16 @@ function Livro({ book, entry, save, profile, fechar }) {
       return { esq: <PgImagem src={p.imagem} alt={p.alt} />, dir: <PgTexto p={p} n={f + 1} perguntas={perguntas} /> }
     }
     if (f === 'vocab') return { esq: <PgEtapa book={book} titulo="Palavras novas" sub="Palavras que apareceram na história" />, dir: <Vocabulario itens={book.vocabulario} semTitulo /> }
-    if (f === 'quiz') return { esq: <PgEtapa book={book} titulo="Hora do quiz" sub="Cada resposta certa acende uma estrela" />, dir: <Quiz book={book} entry={entry} save={save} /> }
+    if (quizK(f) >= 0) return { esq: <PgEtapa book={book} titulo="Hora do quiz" sub={`Pergunta ${quizK(f) + 1} de ${book.quiz.length}. Cada resposta certa acende uma estrela.`} />, dir: <QuizPergunta qs={book.quiz} k={quizK(f)} resp={resp} escolher={escolher} prox={prox} /> }
+    if (f === 'resultado') return { esq: <Resultado parte="ceu" qs={book.quiz} resp={resp} />, dir: <Resultado parte="resumo" qs={book.quiz} resp={resp} entry={entry} denovo={deNovo} /> }
     return { esq: <PgImagem src={book.paginas[N - 1].imagem} fim />, dir: <Fim book={book} entry={entry} save={save} {...extras} recomecar={extras.recomecar} /> }
   }
   function unica(f) {
     if (f === 'capa') return <Capa book={book} comecar={prox} />
     if (typeof f === 'number') return <Pagina p={book.paginas[f]} perguntas={perguntas} />
     if (f === 'vocab') return <Vocabulario itens={book.vocabulario} />
-    if (f === 'quiz') return <Quiz book={book} entry={entry} save={save} />
+    if (quizK(f) >= 0) return <QuizPergunta qs={book.quiz} k={quizK(f)} resp={resp} escolher={escolher} prox={prox} />
+    if (f === 'resultado') return <Resultado qs={book.quiz} resp={resp} entry={entry} denovo={deNovo} />
     return <Fim book={book} entry={entry} save={save} {...extras} />
   }
 
@@ -173,7 +194,7 @@ function Livro({ book, entry, save, profile, fechar }) {
           )}
         </div>
         {i > 0 && <button className="lt-seta esq" onClick={ant} aria-label="Página anterior"><Icon name="chev" size={28} /></button>}
-        {i < folhas.length - 1 && folha !== 'capa' && <button className="lt-seta dir" onClick={prox} aria-label="Próxima página"><Icon name="chev" size={28} /></button>}
+        {i < folhas.length - 1 && folha !== 'capa' && <button className="lt-seta dir" onClick={prox} disabled={bloqueado} title={bloqueado ? 'Responda para continuar' : undefined} aria-label="Próxima página"><Icon name="chev" size={28} /></button>}
       </main>
 
       <footer className="lt-pe">
@@ -183,8 +204,8 @@ function Livro({ book, entry, save, profile, fechar }) {
           <i style={{ width: `${(i / (folhas.length - 1)) * 100}%` }} />
           {folhas.length - 1 > N && <b className="lt-marca" style={{ left: `${(N / (folhas.length - 1)) * 100}%` }} title="Fim da história" />}
         </div>
-        <span>{historia ? `${pagina} de ${N}` : folha === 'capa' ? `${N} páginas` : folha === 'vocab' ? 'Palavras novas' : folha === 'quiz' ? 'Quiz' : 'Fim'}{!historia && folha !== 'capa' && ` · ${folhas.length - 1 - i === 0 ? 'última etapa' : `faltam ${folhas.length - 1 - i}`}`}</span>
-        <button className="lt-seta dir" onClick={prox} disabled={i === folhas.length - 1} aria-label="Próxima página"><Icon name="chev" size={26} /></button>
+        <span>{folha === 'capa' ? `${folhas.length - 1} páginas` : `${i} de ${folhas.length - 1}`}{!historia && folha !== 'capa' && ` · ${folha === 'vocab' ? 'Palavras novas' : quizK(folha) >= 0 ? 'Quiz' : folha === 'resultado' ? 'Resultado' : 'Fim'}`}</span>
+        <button className="lt-seta dir" onClick={prox} disabled={i === folhas.length - 1 || bloqueado} aria-label="Próxima página"><Icon name="chev" size={26} /></button>
       </footer>
 
       {aviso && (
@@ -320,46 +341,29 @@ function Vocabulario({ itens, semTitulo }) {
   )
 }
 
-function Quiz({ book, entry, save }) {
-  const qs = book.quiz
-  const [k, setK] = useState(0)
-  const [esc, setEsc] = useState(null)
-  const [resp, setResp] = useState([]) // índice escolhido em cada pergunta
+// Uma pergunta do quiz é uma página do livro. Responder libera a seta e o botão de avançar.
+function QuizPergunta({ qs, k, resp, escolher, prox }) {
   const q = qs[k]
-  const fim = k >= qs.length
-  const acertos = resp.filter((r, n) => r === qs[n].certa).length
-
-  function escolher(o) {
-    if (esc != null) return
-    setEsc(o)
-  }
-  function seguir() {
-    const novas = [...resp, esc]
-    setResp(novas); setEsc(null); setK((v) => v + 1)
-    if (k + 1 >= qs.length && !book.amostra) {
-      save(book.slug, { quiz_score: novas.filter((r, n) => r === qs[n].certa).length, quiz_total: qs.length }).catch(() => {})
-    }
-  }
-
-  if (fim) return <Resultado qs={qs} resp={resp} acertos={acertos} entry={entry} denovo={() => { setK(0); setResp([]) }} />
+  const esc = resp[k]
   return (
     <div className="lt-extra lt-quiz">
       <div className="lt-q-estrelas" aria-label={`Pergunta ${k + 1} de ${qs.length}`}>
-        {qs.map((_, n) => <Estrela key={n} estado={n < k ? (resp[n] === qs[n].certa ? 'acesa' : 'apagada') : n === k ? 'agora' : 'vazia'} />)}
+        {qs.map((_, n) => <Estrela key={n} estado={n === k ? (esc == null ? 'agora' : esc === q.certa ? 'acesa' : 'apagada') : resp[n] == null ? 'vazia' : resp[n] === qs[n].certa ? 'acesa' : 'apagada'} />)}
       </div>
       <h2>{q.pergunta}</h2>
       <div className="lt-opcoes">
         {q.opcoes.map((o, n) => (
-          <button key={o} onClick={() => escolher(n)} disabled={esc != null}
+          <button key={o} onClick={() => escolher(k, n)} disabled={esc != null}
             className={esc == null ? '' : n === q.certa ? 'certa' : n === esc ? 'errada' : 'apagada'}>
             {esc != null && n === q.certa && <Icon name="check" size={18} />}{o}
           </button>
         ))}
       </div>
+      {esc == null && <p className="lt-mudo lt-dica">Escolham uma resposta para continuar.</p>}
       {esc != null && (
         <div className="lt-feed">
           <p><b>{esc === q.certa ? 'Isso mesmo!' : 'Quase!'}</b> {q.explica}</p>
-          <button className="lt-btn" onClick={seguir}>{k + 1 < qs.length ? 'Próxima pergunta' : 'Ver o céu de vocês'}</button>
+          <button className="lt-btn" onClick={prox}>{k + 1 < qs.length ? 'Próxima pergunta' : 'Ver o céu de vocês'}</button>
         </div>
       )}
     </div>
@@ -374,8 +378,10 @@ const Estrela = ({ estado, delay = 0, size = 22 }) => (
 
 // Resultado do quiz: cada pergunta é uma estrela no céu do livro.
 // Acerto acende a estrela; erro deixa uma "estrela para buscar no livro", com a resposta certa ao lado.
-function Resultado({ qs, resp, acertos, entry, denovo }) {
+// parte: 'ceu' (céu + frase), 'resumo' (pergunta por pergunta + botões) ou as duas (celular).
+function Resultado({ qs, resp, entry, denovo, parte }) {
   const total = qs.length
+  const acertos = resp.filter((r, n) => r === qs[n].certa).length
   const tudo = acertos === total
   const frase = tudo ? 'Constelação completa!' : acertos >= total / 2 ? 'Que céu bonito vocês acenderam!' : 'O céu de vocês está começando a brilhar!'
   const sub = tudo ? 'Vocês acertaram todas. Leitores atentos de verdade.'
@@ -386,7 +392,8 @@ function Resultado({ qs, resp, acertos, entry, denovo }) {
     return { x: 160 - Math.cos(a) * 120, y: 150 - Math.sin(a) * 110 }
   })
   return (
-    <div className="lt-extra lt-resultado">
+    <div className={`lt-extra lt-resultado${parte ? ' ' + parte : ''}`}>
+      {parte !== 'resumo' && <>
       <div className="lt-ceu" role="img" aria-label={`${acertos} de ${total} estrelas acesas`}>
         <svg viewBox="0 0 320 200" className="lt-ceu-svg">
           <defs>
@@ -407,7 +414,7 @@ function Resultado({ qs, resp, acertos, entry, denovo }) {
             )
           })}
           <text x="160" y="128" textAnchor="middle" className="lt-placar"><tspan className="n">{acertos}</tspan><tspan dx="6" className="de">de {total}</tspan></text>
-          <g className="lt-livro" transform="translate(160 178)">
+          <g className="lt-ceu-livro" transform="translate(160 178)">
             <path d="M-70 -18 Q-35 -32 0 -18 Q35 -32 70 -18 L70 6 Q35 -8 0 6 Q-35 -8 -70 6 Z" />
             <path d="M0 -18 L0 6" className="lt-livro-meio" />
           </g>
@@ -415,6 +422,9 @@ function Resultado({ qs, resp, acertos, entry, denovo }) {
       </div>
       <h2>{frase}</h2>
       <p>{sub}</p>
+      </>}
+      {parte !== 'ceu' && <>
+      {parte === 'resumo' && <h2 className="lt-res-tit">Pergunta por pergunta</h2>}
       <ul className="lt-recap">
         {qs.map((x, n) => {
           const ok = resp[n] === x.certa
@@ -430,7 +440,8 @@ function Resultado({ qs, resp, acertos, entry, denovo }) {
         <button className="lt-btn lt-sec" onClick={denovo}>Acender de novo</button>
         {entry?.quiz_total > 0 && <span className="lt-mudo">Da última vez: {entry.quiz_score} de {entry.quiz_total}</span>}
       </div>
-      {tudo && <div className="lt-chuva" aria-hidden="true">{Array.from({ length: 18 }, (_, n) => <i key={n} style={{ left: `${(n * 53) % 100}%`, animationDelay: `${1800 + (n % 6) * 180}ms`, animationDuration: `${2.4 + (n % 4) * 0.5}s` }}>★</i>)}</div>}
+      </>}
+      {tudo && parte !== 'resumo' && <div className="lt-chuva" aria-hidden="true">{Array.from({ length: 18 }, (_, n) => <i key={n} style={{ left: `${(n * 53) % 100}%`, animationDelay: `${1800 + (n % 6) * 180}ms`, animationDuration: `${2.4 + (n % 4) * 0.5}s` }}>★</i>)}</div>}
     </div>
   )
 }
