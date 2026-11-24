@@ -218,3 +218,5 @@
 .lt-gostou span{flex-basis:100%}
 /* toda a área do livro aceita o gesto de lado; o navegador fica só com a rolagem vertical */
 .lt-palco,.lt-palco *{touch-action:pan-y}
+.lt-diario>span{display:flex;align-items:baseline;gap:10px}
+.lt-salvo{font-style:normal;font-weight:400;font-size:14px;color:var(--l-mute)}
