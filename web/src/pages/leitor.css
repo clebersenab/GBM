@@ -203,3 +203,18 @@
 .lt-estrela-g.pulada path{fill:none;stroke:#5b6194;stroke-width:1;stroke-dasharray:1.5 3}
 .lt-recap li.pulada{border-style:dotted;background:transparent}
 .lt-recap li.pulada em{font-style:normal;font-weight:700;color:var(--l-ink)}
+/* Faixa da primeira pergunta: marca que ali começa o quiz. */
+.lt-q-faixa{position:relative;overflow:hidden;display:grid;gap:2px;justify-items:center;text-align:center;padding:16px 18px 14px;border-radius:20px;color:#fff4e0;background:radial-gradient(ellipse at 50% 120%,#3a3366 0%,#1d2245 60%,#151a36 100%);box-shadow:inset 0 0 30px rgba(0,0,0,.35);animation:lt-faixa .6s cubic-bezier(.3,1.4,.5,1) both}
+.lt-q-faixa b{position:relative;font-size:clamp(28px,8cqw,40px);line-height:1.05;color:#ffd65a;text-shadow:0 2px 0 #8a4a10,0 0 18px rgba(255,214,90,.45);transform:rotate(-2deg)}
+.lt-q-faixa small{position:relative;font-size:15px;opacity:.85}
+.lt-q-brilhos i{position:absolute;font-style:normal;color:#ffd65a;font-size:14px;animation:lt-pisca 2.2s ease-in-out infinite}
+.lt-q-brilhos i:nth-child(1){left:8%;top:18%}.lt-q-brilhos i:nth-child(2){left:3%;bottom:14%;font-size:10px;animation-delay:.4s}
+.lt-q-brilhos i:nth-child(3){right:9%;top:22%;font-size:18px;animation-delay:.8s}.lt-q-brilhos i:nth-child(4){right:3%;bottom:14%;font-size:10px;animation-delay:1.2s}
+.lt-q-brilhos i:nth-child(5){left:34%;top:8%;font-size:9px;animation-delay:1.6s}.lt-q-brilhos i:nth-child(6){right:36%;top:6%;font-size:9px;animation-delay:.2s}
+@keyframes lt-pisca{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes lt-faixa{0%{opacity:0;transform:scale(.85) translateY(10px)}100%{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.lt-q-faixa,.lt-q-brilhos i{animation:none}}
+/* avaliação no fim: a pergunta em uma linha, os dois botões juntos na seguinte */
+.lt-gostou span{flex-basis:100%}
+/* toda a área do livro aceita o gesto de lado; o navegador fica só com a rolagem vertical */
+.lt-palco,.lt-palco *{touch-action:pan-y}
