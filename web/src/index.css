@@ -729,19 +729,19 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bk-txt-real p{margin:0;font:500 clamp(9px,.85vw,12.5px)/1.5 Andika,"Nunito Sans",system-ui,sans-serif;color:#3b2a1a;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
 .bk-txt-real small{position:absolute;bottom:-4%;left:0;right:0;text-align:center;font:600 10px "Nunito Sans",sans-serif;color:rgba(70,45,20,.55)}
 /* Celular: escolhas, jardim, portas, valores e jornadas do modal ficam em uma linha só, com rolagem de lado.
-   A borda direita esmaece para mostrar que tem mais. */
+   Regra única: cabem uns 3 itens e meio, então o próximo sempre aparece cortado; a borda direita esmaece. */
 @media(max-width:760px){
-  .pblock .pick-row,.beds,.portals,.plantou .chips{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent)}
+  .pblock .pick-row,.beds,.portals,.plantou .chips{--vis:3.55;--gap:10px;display:flex;flex-wrap:nowrap;gap:var(--gap);overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent)}
   .pblock .pick-row::-webkit-scrollbar,.beds::-webkit-scrollbar,.portals::-webkit-scrollbar,.plantou .chips::-webkit-scrollbar{display:none}
-  .pblock .pick-row{gap:10px;padding:4px 36px 4px 16px}
-  .pk,.bed,.portal,.chip{flex:0 0 auto}
-  .beds{gap:10px;padding:22px 36px 0 0;align-items:end}
-  .bed{width:92px}
+  .pk,.bed,.portal{flex:0 0 calc(100% / var(--vis) - var(--gap));width:auto;min-width:0}
+  .pblock .pick-row{padding:4px 16px}
+  .pk-img{width:min(64px,90%)}.pk.arch .pk-img{width:min(52px,74%)}
+  .pk>span:last-child{max-width:100%;overflow-wrap:anywhere}
+  .beds{padding:22px 0 0;align-items:end}
   .beds .plant{height:110px}
-  .portals{gap:16px;padding:6px 36px 8px 6px;align-items:start}
-  .portal{width:86px}
-  .plantou .chips{padding-right:36px}
-  .chip{white-space:nowrap}
+  .portals{padding:6px 0 8px 6px;align-items:start}
+  .chip{flex:0 0 auto;white-space:nowrap}
+  .plantou .chips:has(.chip:nth-child(3)){padding-right:40px}
   /* modal do livro: Ler agora sempre à mão, preso no rodapé enquanto a ficha rola */
   .modal-card .titulo,.modal-card .titulo>.stack{display:contents}
   .modal-card .acts{position:sticky;bottom:-20px;z-index:3;margin:0 -16px -20px;padding:12px 16px 16px;background:linear-gradient(transparent,var(--bg2) 22%);flex-wrap:nowrap}
