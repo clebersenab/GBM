@@ -137,14 +137,14 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
 .origin img{border-radius:16px;width:100%;box-shadow:var(--shadow)}
 /* Cena do antes e depois. Do lado animado, o Bento surge por trás do sofá de tempos em tempos (como no vídeo da família).
    A janela dele termina exatamente no encosto do sofá, então ele sobe "de trás" do sofá. */
-.origem-cena{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1740/900}
+.origem-cena{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1740/871}
 .origem-cena>img{display:block;width:100%;height:100%;border-radius:0;box-shadow:none}
-.origem-bento{position:absolute;left:74.7%;width:5.75%;top:17.6%;height:14.6%;overflow:hidden;pointer-events:none}
-.origem-bento img{position:absolute;left:0;bottom:0;width:100%;height:78.2%;border-radius:0;box-shadow:none}
+.origem-bento{position:absolute;left:74.7%;width:5.73%;top:21.5%;height:15.09%;overflow:hidden;pointer-events:none}
+.origem-bento img{position:absolute;left:0;bottom:0;width:100%;height:78.1%;border-radius:0;box-shadow:none}
 /* Com JavaScript, o Bento começa escondido e surge uma vez só quando a seção aparece; termina na tela. Sem JavaScript ou com movimento reduzido, ele já está lá. */
 .origem-cena.anima .origem-bento img{transform:translateY(105%)}
 .origem-cena.anima.viva .origem-bento img{animation:bento-espia 1.4s ease-out 1s both}
-.origem-brilho{position:absolute;left:87.2%;top:61.4%;width:22%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,200,110,.45),rgba(255,200,110,0));mix-blend-mode:screen;pointer-events:none;opacity:0}
+.origem-brilho{position:absolute;left:87.2%;top:66.7%;width:22%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,200,110,.45),rgba(255,200,110,0));mix-blend-mode:screen;pointer-events:none;opacity:0}
 .origem-cena.viva .origem-brilho{animation:tablet-brilho 2.4s ease-out .2s both}
 @keyframes bento-espia{
   0%{transform:translateY(105%)}
@@ -613,9 +613,9 @@ details[open] summary::after{transform:rotate(180deg)}
 <section class="band origin">
   <div class="wrap">
     <div class="origem-cena" role="img" aria-label="O mesmo pai e a mesma filha com o mesmo tablet: à esquerda entediados; à direita encantados, com uma baleia saindo da tela, e o irmão aparecendo por trás do sofá para ver">
-      <img loading="lazy" decoding="async" width="1740" height="900" src="../images/secoes/origem-cena.webp" srcset="../images/secoes/origem-cena-1100.webp 1100w, ../images/secoes/origem-cena.webp 1740w" sizes="(max-width: 900px) 100vw, 60vw" alt="">
+      <img loading="lazy" decoding="async" width="1740" height="871" src="../images/secoes/origem-cena.webp?v=2" srcset="../images/secoes/origem-cena-1100.webp?v=2 1100w, ../images/secoes/origem-cena.webp?v=2 1740w" sizes="(max-width: 900px) 100vw, 60vw" alt="">
       <i class="origem-brilho" aria-hidden="true"></i>
-      <span class="origem-bento" aria-hidden="true"><img loading="lazy" decoding="async" src="../images/secoes/origem-bento.webp" alt=""></span>
+      <span class="origem-bento" aria-hidden="true"><img loading="lazy" decoding="async" src="../images/secoes/origem-bento.webp?v=2" alt=""></span>
     </div>
     <div class="story">
       <h2>Começou com a Giovana</h2>
