@@ -175,7 +175,7 @@ function Garden({ rows, name }) {
           const size = r.w ? 0.42 + 0.58 * (r.w / max) : 0.26
           return (
             <li key={r.key} className={`bed${r.w ? '' : ' sprout'}${i === 0 && r.w ? ' first' : ''}`} title={r.w ? `${Math.round(r.pct * 100)}% das leituras` : 'Ainda não apareceu'}>
-              <span className="plant">{r.w > 0 && i < 3 && <span className={`medal m${i + 1}`}>{i + 1}º</span>}<img src={valorImg(r.key)} alt="" style={{ width: `${(grown ? size : 0.15) * 100}%` }} /></span>
+              <span className="plant">{r.w > 0 && i < 3 && <span className={`medal m${i + 1}`}>{i + 1}º</span>}<img src={valorImg(r.key)} alt="" style={{ width: `calc(${grown ? size : 0.15} * var(--planta))` }} /></span>
               <b>{r.key}</b>
               <small>{r.read ? `${r.read} ${r.read === 1 ? 'livro' : 'livros'}` : 'broto'}</small>
             </li>
