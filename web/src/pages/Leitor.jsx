@@ -69,7 +69,6 @@ function Livro({ book, entry, save, profile, fechar }) {
   // Respostas do quiz ficam aqui (e não dentro da pergunta) para sobreviver às viradas de página.
   const [resp, setResp] = useState(() => (book.quiz || []).map(() => null))
   const quizK = (f) => (typeof f === 'string' && /^q\d+$/.test(f) ? Number(f.slice(1)) : -1)
-  const bloqueado = quizK(folha) >= 0 && resp[quizK(folha)] == null // pergunta sem resposta: não avança
   const pagina = typeof folha === 'number' ? folha + 1 : folha === 'capa' ? 0 : N
 
   useEffect(() => guarda('gbm-leitor-escala', escala), [escala])
@@ -89,7 +88,7 @@ function Livro({ book, entry, save, profile, fechar }) {
 
   const quizSalvo = useRef('')
   useEffect(() => {
-    if (folha !== 'resultado' || book.amostra || resp.some((r) => r == null)) return
+    if (folha !== 'resultado' || book.amostra) return
     const chave = resp.join(',')
     if (quizSalvo.current === chave) return
     quizSalvo.current = chave
@@ -111,7 +110,7 @@ function Livro({ book, entry, save, profile, fechar }) {
     setVirando({ de: i, para: novo, dir: novo > i ? 1 : -1 })
     setTimeout(() => { setI(novo); setVirando(null); virandoRef.current = false }, VIRAR_MS)
   }, [folhas.length, i])
-  const prox = useCallback(() => { if (!bloqueado) ir((a) => a + 1) }, [ir, bloqueado])
+  const prox = useCallback(() => ir((a) => a + 1), [ir])
   const ant = useCallback(() => ir((a) => a - 1), [ir])
 
   useEffect(() => {
@@ -194,18 +193,21 @@ function Livro({ book, entry, save, profile, fechar }) {
           )}
         </div>
         {i > 0 && <button className="lt-seta esq" onClick={ant} aria-label="Página anterior"><Icon name="chev" size={28} /></button>}
-        {i < folhas.length - 1 && folha !== 'capa' && <button className="lt-seta dir" onClick={prox} disabled={bloqueado} title={bloqueado ? 'Responda para continuar' : undefined} aria-label="Próxima página"><Icon name="chev" size={28} /></button>}
+        {i < folhas.length - 1 && folha !== 'capa' && <button className="lt-seta dir" onClick={prox} aria-label="Próxima página"><Icon name="chev" size={28} /></button>}
       </main>
 
       <footer className="lt-pe">
         <button className="lt-seta esq" onClick={ant} disabled={i === 0} aria-label="Página anterior"><Icon name="chev" size={26} /></button>
         {/* A barra mede a experiência inteira (história + palavras novas + quiz + fim); a marca mostra onde a história termina. */}
+        {/* Dois trechos: a leitura da história (laranja) e as atividades depois dela (palavras novas, quiz, resultado, fim). */}
         <div className="lt-barra" role="progressbar" aria-valuemin={0} aria-valuemax={folhas.length - 1} aria-valuenow={i} aria-label="Progresso do livro">
-          <i style={{ width: `${(i / (folhas.length - 1)) * 100}%` }} />
-          {folhas.length - 1 > N && <b className="lt-marca" style={{ left: `${(N / (folhas.length - 1)) * 100}%` }} title="Fim da história" />}
+          <span className="lt-trilho leitura" style={{ flexGrow: N }} title="História"><i style={{ width: `${(Math.min(i, N) / N) * 100}%` }} /></span>
+          {folhas.length - 1 > N && (
+            <span className="lt-trilho atividades" style={{ flexGrow: folhas.length - 1 - N }} title="Atividades"><i style={{ width: `${(Math.max(0, i - N) / (folhas.length - 1 - N)) * 100}%` }} /></span>
+          )}
         </div>
         <span>{folha === 'capa' ? `${folhas.length - 1} páginas` : `${i} de ${folhas.length - 1}`}{!historia && folha !== 'capa' && ` · ${folha === 'vocab' ? 'Palavras novas' : quizK(folha) >= 0 ? 'Quiz' : folha === 'resultado' ? 'Resultado' : 'Fim'}`}</span>
-        <button className="lt-seta dir" onClick={prox} disabled={i === folhas.length - 1 || bloqueado} aria-label="Próxima página"><Icon name="chev" size={26} /></button>
+        <button className="lt-seta dir" onClick={prox} disabled={i === folhas.length - 1} aria-label="Próxima página"><Icon name="chev" size={26} /></button>
       </footer>
 
       {aviso && (
@@ -341,14 +343,14 @@ function Vocabulario({ itens, semTitulo }) {
   )
 }
 
-// Uma pergunta do quiz é uma página do livro. Responder libera a seta e o botão de avançar.
+// Uma pergunta do quiz é uma página do livro. Dá para pular: no resultado ela aparece como sem resposta.
 function QuizPergunta({ qs, k, resp, escolher, prox }) {
   const q = qs[k]
   const esc = resp[k]
   return (
     <div className="lt-extra lt-quiz">
       <div className="lt-q-estrelas" aria-label={`Pergunta ${k + 1} de ${qs.length}`}>
-        {qs.map((_, n) => <Estrela key={n} estado={n === k ? (esc == null ? 'agora' : esc === q.certa ? 'acesa' : 'apagada') : resp[n] == null ? 'vazia' : resp[n] === qs[n].certa ? 'acesa' : 'apagada'} />)}
+        {qs.map((_, n) => <Estrela key={n} estado={n === k ? (esc == null ? 'agora' : esc === q.certa ? 'acesa' : 'apagada') : resp[n] == null ? (n < k ? 'pulada' : 'vazia') : resp[n] === qs[n].certa ? 'acesa' : 'apagada'} />)}
       </div>
       <h2>{q.pergunta}</h2>
       <div className="lt-opcoes">
@@ -359,7 +361,6 @@ function QuizPergunta({ qs, k, resp, escolher, prox }) {
           </button>
         ))}
       </div>
-      {esc == null && <p className="lt-mudo lt-dica">Escolham uma resposta para continuar.</p>}
       {esc != null && (
         <div className="lt-feed">
           <p><b>{esc === q.certa ? 'Isso mesmo!' : 'Quase!'}</b> {q.explica}</p>
@@ -382,10 +383,11 @@ const Estrela = ({ estado, delay = 0, size = 22 }) => (
 function Resultado({ qs, resp, entry, denovo, parte }) {
   const total = qs.length
   const acertos = resp.filter((r, n) => r === qs[n].certa).length
+  const puladas = resp.filter((r) => r == null).length
   const tudo = acertos === total
   const frase = tudo ? 'Constelação completa!' : acertos >= total / 2 ? 'Que céu bonito vocês acenderam!' : 'O céu de vocês está começando a brilhar!'
   const sub = tudo ? 'Vocês acertaram todas. Leitores atentos de verdade.'
-    : `Vocês acenderam ${acertos} de ${total} ${total === 1 ? 'estrela' : 'estrelas'}. As apagadas estão escondidas nas páginas: que tal procurar juntos?`
+    : `Vocês acenderam ${acertos} de ${total} ${total === 1 ? 'estrela' : 'estrelas'}.${puladas ? ` ${puladas === 1 ? 'Uma ficou' : `${puladas} ficaram`} sem resposta.` : ''} As apagadas estão escondidas nas páginas: que tal procurar juntos?`
   // estrelas em arco sobre o livro
   const pos = qs.map((_, n) => {
     const a = Math.PI * (0.15 + 0.7 * (total === 1 ? 0.5 : n / (total - 1)))
@@ -404,10 +406,11 @@ function Resultado({ qs, resp, entry, denovo, parte }) {
           ))}
           {pos.map((p, n) => {
             const ok = resp[n] === qs[n].certa
+            const pulou = resp[n] == null
             return (
               <g key={n} transform={`translate(${p.x} ${p.y})`}>
                 {ok && <circle r="26" fill="url(#lt-brilho)" className="lt-halo" style={{ animationDelay: `${300 + n * 450}ms` }} />}
-                <g className={`lt-estrela-g ${ok ? 'acesa' : 'apagada'}`} style={{ animationDelay: `${300 + n * 450}ms` }}>
+                <g className={`lt-estrela-g ${ok ? 'acesa' : pulou ? 'pulada' : 'apagada'}`} style={{ animationDelay: `${300 + n * 450}ms` }}>
                   <path transform="translate(-16 -16) scale(1.33)" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" />
                 </g>
               </g>
@@ -428,10 +431,13 @@ function Resultado({ qs, resp, entry, denovo, parte }) {
       <ul className="lt-recap">
         {qs.map((x, n) => {
           const ok = resp[n] === x.certa
+          const pulou = resp[n] == null
           return (
-            <li key={n} className={ok ? 'ok' : 'busca'}>
-              <Estrela estado={ok ? 'acesa' : 'apagada'} size={20} />
-              <span><b>{x.pergunta}</b>{ok ? <small>Vocês acertaram: {x.opcoes[x.certa]}</small> : <small>Para buscar no livro: a resposta é “{x.opcoes[x.certa]}”</small>}</span>
+            <li key={n} className={ok ? 'ok' : pulou ? 'pulada' : 'busca'}>
+              <Estrela estado={ok ? 'acesa' : pulou ? 'pulada' : 'apagada'} size={20} />
+              <span><b>{x.pergunta}</b>{ok ? <small>Vocês acertaram: {x.opcoes[x.certa]}</small>
+                : pulou ? <small><em>Ficou sem resposta.</em> A resposta é “{x.opcoes[x.certa]}”</small>
+                : <small>Para buscar no livro: a resposta é “{x.opcoes[x.certa]}”</small>}</span>
             </li>
           )
         })}
