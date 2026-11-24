@@ -186,7 +186,7 @@ function Livro({ book, entry, save, profile, fechar }) {
     }
     if (f === 'vocab') return { esq: <PgEtapa book={book} titulo="Palavras novas" sub="Palavras que apareceram na história" />, dir: <Vocabulario itens={book.vocabulario} semTitulo /> }
     if (quizK(f) >= 0) return { esq: <PgEtapa book={book} titulo="Hora do quiz" sub={`Pergunta ${quizK(f) + 1} de ${book.quiz.length}. Cada resposta certa acende uma estrela.`} />, dir: <QuizPergunta qs={book.quiz} k={quizK(f)} resp={resp} escolher={escolher} prox={prox} /> }
-    if (f === 'resultado') return { esq: <Resultado parte="ceu" qs={book.quiz} resp={resp} />, dir: <Resultado parte="resumo" qs={book.quiz} resp={resp} entry={entry} denovo={deNovo} /> }
+    if (f === 'resultado') return { esq: <Resultado parte="ceu" qs={book.quiz} resp={resp} />, dir: <Resultado parte="resumo" qs={book.quiz} resp={resp} entry={entry} denovo={deNovo} seguir={prox} /> }
     return { esq: <PgImagem src={book.paginas[N - 1].imagem} fim />, dir: <Fim book={book} entry={entry} save={save} {...extras} recomecar={extras.recomecar} /> }
   }
   function unica(f) {
@@ -194,7 +194,7 @@ function Livro({ book, entry, save, profile, fechar }) {
     if (typeof f === 'number') return <Pagina p={book.paginas[f]} perguntas={perguntas} />
     if (f === 'vocab') return <Vocabulario itens={book.vocabulario} />
     if (quizK(f) >= 0) return <QuizPergunta qs={book.quiz} k={quizK(f)} resp={resp} escolher={escolher} prox={prox} />
-    if (f === 'resultado') return <Resultado qs={book.quiz} resp={resp} entry={entry} denovo={deNovo} />
+    if (f === 'resultado') return <Resultado qs={book.quiz} resp={resp} entry={entry} denovo={deNovo} seguir={prox} />
     return <Fim book={book} entry={entry} save={save} {...extras} />
   }
 
@@ -423,14 +423,14 @@ const Estrela = ({ estado, delay = 0, size = 22 }) => (
 // Resultado do quiz: cada pergunta é uma estrela no céu do livro.
 // Acerto acende a estrela; erro deixa uma "estrela para buscar no livro", com a resposta certa ao lado.
 // parte: 'ceu' (céu + frase), 'resumo' (pergunta por pergunta + botões) ou as duas (celular).
-function Resultado({ qs, resp, entry, denovo, parte }) {
+function Resultado({ qs, resp, entry, denovo, seguir, parte }) {
   const total = qs.length
   const acertos = resp.filter((r, n) => r === qs[n].certa).length
   const puladas = resp.filter((r) => r == null).length
   const tudo = acertos === total
   const frase = tudo ? 'Constelação completa!' : acertos >= total / 2 ? 'Que céu bonito vocês acenderam!' : 'O céu de vocês está começando a brilhar!'
   const sub = tudo ? 'Vocês acertaram todas. Leitores atentos de verdade.'
-    : `Vocês acenderam ${acertos} de ${total} ${total === 1 ? 'estrela' : 'estrelas'}.${puladas ? ` ${puladas === 1 ? 'Uma ficou' : `${puladas} ficaram`} sem resposta.` : ''} As apagadas estão escondidas nas páginas: que tal procurar juntos?`
+    : `Vocês acenderam ${acertos} de ${total} ${total === 1 ? 'estrela' : 'estrelas'}.${puladas ? ` ${puladas === 1 ? 'Ficou uma' : `Ficaram ${puladas}`} sem resposta.` : ''} As apagadas estão escondidas nas páginas: que tal procurar juntos?`
   // estrelas em arco sobre o livro
   const pos = qs.map((_, n) => {
     const a = Math.PI * (0.15 + 0.7 * (total === 1 ? 0.5 : n / (total - 1)))
@@ -485,10 +485,12 @@ function Resultado({ qs, resp, entry, denovo, parte }) {
           )
         })}
       </ul>
+      {/* Seguir é o caminho principal; responder de novo fica como opção discreta. */}
       <div className="lt-acoes">
-        <button className="lt-btn lt-sec" onClick={denovo}>Acender de novo</button>
-        {entry?.quiz_total > 0 && <span className="lt-mudo">Da última vez: {entry.quiz_score} de {entry.quiz_total}</span>}
+        <button className="lt-btn" onClick={seguir}>Continuar <Icon name="chev" size={20} /></button>
+        <button className="lt-link" onClick={denovo}>Responder de novo</button>
       </div>
+      {entry?.quiz_total > 0 && <p className="lt-mudo lt-ultima">Da última vez: {entry.quiz_score} de {entry.quiz_total}</p>}
       </>}
       {tudo && parte !== 'resumo' && <div className="lt-chuva" aria-hidden="true">{Array.from({ length: 18 }, (_, n) => <i key={n} style={{ left: `${(n * 53) % 100}%`, animationDelay: `${1800 + (n % 6) * 180}ms`, animationDuration: `${2.4 + (n % 4) * 0.5}s` }}>★</i>)}</div>}
     </div>
