@@ -220,3 +220,5 @@
 .lt-palco,.lt-palco *{touch-action:pan-y}
 .lt-diario>span{display:flex;align-items:baseline;gap:10px}
 .lt-salvo{font-style:normal;font-weight:400;font-size:14px;color:var(--l-mute)}
+.lt-ultima{margin:0;font-size:15px}
+.lt-resultado .lt-ultima{text-align:left;margin:0;max-width:none}
