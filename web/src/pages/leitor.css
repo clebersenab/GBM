@@ -28,14 +28,14 @@
 /* Página: no celular em pé, imagem em cima e texto embaixo; deitado ou em tela larga, imagem à esquerda (60%) e texto ao lado. */
 .lt-pag{min-height:100%;display:grid;grid-template-rows:auto 1fr}
 .lt-pag figure{margin:0;padding:16px 16px 0;display:grid;place-items:center}
-.lt-pag img{width:100%;max-height:48vh;object-fit:contain;border-radius:14px;display:block}
+.lt-pag img{width:100%;max-height:48vh;max-height:48dvh;object-fit:contain;border-radius:14px;display:block}
 .lt-texto{padding:20px 24px 28px;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:18px}
 .lt-texto p{margin:0;font-size:calc(var(--l-fs) * var(--esc,1));line-height:1.5;max-width:30em}
 @media (min-aspect-ratio:11/10) and (min-width:640px){
   .lt-pag{height:100%;min-height:0;grid-template-rows:none;grid-template-columns:60% 40%}
   .lt-texto{overflow:auto;justify-content:safe center}
   .lt-pag figure{padding:24px 0 24px 64px}
-  .lt-pag img{max-height:calc(100vh - 150px)}
+  .lt-pag img{max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px)}
   .lt-texto{padding:24px 72px 24px 40px}
 }
 .lt-conversa{font-size:calc(17px * var(--esc,1));line-height:1.45;color:var(--l-ink);background:var(--l-panel);border:1px dashed var(--l-acc);border-left:5px solid var(--l-acc);border-radius:12px;padding:12px 16px;max-width:30em}
@@ -68,11 +68,11 @@
 .lt-mudo{color:var(--l-mute)}
 
 .lt-capa{min-height:100%;display:grid;align-content:center;justify-items:center;gap:20px;padding:24px;text-align:center}
-.lt-capa img{width:min(60vw,420px);max-height:50vh;object-fit:contain;border-radius:16px;box-shadow:0 20px 40px -20px #2b211880}
+.lt-capa img{width:min(60vw,420px);max-height:50vh;max-height:50dvh;object-fit:contain;border-radius:16px;box-shadow:0 20px 40px -20px #2b211880}
 .lt-capa h1{font-size:clamp(30px,5vw,48px);line-height:1.15;margin:0 0 8px}
 .lt-capa div{display:grid;justify-items:center;align-content:center;gap:12px}
 .lt-aviso{margin:0;font-size:15px;color:var(--l-mute);max-width:28em}
-@media (min-aspect-ratio:11/10) and (min-width:640px){.lt-capa{grid-template-columns:auto auto;justify-content:center;gap:56px;text-align:left}.lt-capa div{justify-items:start}.lt-capa img{max-height:70vh}}
+@media (min-aspect-ratio:11/10) and (min-width:640px){.lt-capa{grid-template-columns:auto auto;justify-content:center;gap:56px;text-align:left}.lt-capa div{justify-items:start}.lt-capa img{max-height:70vh;max-height:70dvh}}
 
 .lt-extra{min-height:100%;max-width:720px;margin:0 auto;padding:28px 24px;display:grid;align-content:center;gap:18px}
 .lt-extra h2{font-size:clamp(26px,4vw,36px);line-height:1.2;margin:0}
@@ -165,8 +165,11 @@
 /* ===== Livro aberto (tela deitada) ===== */
 @media (min-aspect-ratio:11/10) and (min-width:640px){
   .lt-palco{background:radial-gradient(ellipse at 50% 40%,#f3e7cd,#e6d6b4)}
-  .lt-mesa{display:grid;place-items:center;padding:18px 78px 22px}
-  .lt-livro{--proporcao:2.3;position:relative;width:min(100%,calc((100vh - 165px) * var(--proporcao)));aspect-ratio:var(--proporcao);perspective:2800px}
+  /* O livro é medido pelo espaço que sobra entre o cabeçalho e o rodapé (unidades do contêiner), e não pela altura
+     da janela: no Safari do iPad, 100vh não desconta as barras do navegador. Em telas mais quadradas o livro fica
+     mais alto (até 1,6 de proporção) em vez de achatar. */
+  .lt-mesa{display:grid;place-items:center;padding:16px 78px 18px;container-type:size}
+  .lt-livro{position:relative;width:min(100cqw,calc(100cqh * 2.3));height:min(100cqh,calc(100cqw / 1.6));perspective:2800px}
   .lt-pg{position:absolute;top:0;bottom:0;width:50%;background:var(--l-bg);overflow:hidden;container-type:inline-size}
   .lt-pg.esq{left:0;border-radius:14px 3px 3px 14px;background-image:linear-gradient(270deg,rgba(60,35,10,.16),rgba(60,35,10,0) 9%);box-shadow:-10px 22px 40px -22px rgba(60,40,10,.55)}
   .lt-pg.dir{left:50%;border-radius:3px 14px 14px 3px;background-image:linear-gradient(90deg,rgba(60,35,10,.18),rgba(60,35,10,0) 9%);box-shadow:10px 22px 40px -22px rgba(60,40,10,.55)}
@@ -192,8 +195,7 @@
 .lt-capa.so-texto div{justify-items:start}
 @media (prefers-reduced-motion:reduce){.lt-folha3d{display:none}}
 /* Telas mais quadradas (tablet deitado): livro mais alto, para a página de texto respirar. */
-@media (min-aspect-ratio:11/10) and (max-aspect-ratio:17/10) and (min-width:640px){.lt-livro{--proporcao:2}}
-@media (min-aspect-ratio:11/10) and (max-aspect-ratio:3/2) and (min-width:640px){.lt-livro{--proporcao:1.8}.lt-mesa{padding-left:64px;padding-right:64px}}
+@media (min-aspect-ratio:11/10) and (max-aspect-ratio:3/2) and (min-width:640px){.lt-mesa{padding-left:64px;padding-right:64px}}
 .lt-dica{margin:0;font-size:16px}
 .lt-resultado.ceu{align-content:center}
 .lt-resultado.resumo{align-content:center}
