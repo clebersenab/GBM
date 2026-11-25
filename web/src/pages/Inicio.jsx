@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSession } from '../session'
 import { useLibrary } from '../library'
@@ -170,7 +170,7 @@ function Garden({ rows, name }) {
   return (
     <div className="garden">
       <p className="garden-lead">{lead ? <><b>{lead.key}</b> é o que mais tem crescido em {name}.</> : <>Ainda não brotou nada. Cada livro lido rega o jardim.</>}</p>
-      <ol className="beds">
+      <ol className="beds" ref={useBordas()}>
         {all.map((r, i) => {
           const size = r.w ? 0.42 + 0.58 * (r.w / max) : 0.26
           return (
@@ -196,7 +196,7 @@ function Doors({ rows, name }) {
   return (
     <div className="doors2">
       <p className="race-lead">{top ? <>A porta de <b>{top.key}</b> é a que mais se abriu para {name}{top.liked ? `: gostou de ${top.liked} de ${top.read}` : ''}.</> : <>Todas as portas ainda estão fechadas. Cada história lida abre um pouco uma delas.</>}</p>
-      <ol className="portals">
+      <ol className="portals" ref={useBordas()}>
         {all.map((r, i) => {
           const k = r.w ? 0.3 + 0.7 * (r.w / max) : 0
           return (
@@ -223,3 +223,22 @@ function useGrow() {
   return on
 }
 
+
+// Fileira que rola de lado: marca se há mais itens à esquerda ou à direita, para a borda esmaecer só desse lado.
+function useBordas() {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const upd = () => {
+      el.classList.toggle('mais-e', el.scrollLeft > 4)
+      el.classList.toggle('mais-d', el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
+    }
+    upd()
+    el.addEventListener('scroll', upd, { passive: true })
+    const ro = window.ResizeObserver ? new ResizeObserver(upd) : null
+    if (ro) ro.observe(el); else window.addEventListener('resize', upd)
+    return () => { el.removeEventListener('scroll', upd); if (ro) ro.disconnect(); else window.removeEventListener('resize', upd) }
+  }, [])
+  return ref
+}
