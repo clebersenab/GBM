@@ -22,6 +22,13 @@
 <meta name="twitter:title" content="GBM - Histórias para ler juntos">
 <meta name="twitter:description" content="Livros que plantam nas crianças a semente dos grandes clássicos. Do nascimento aos 8 anos.">
 <meta name="twitter:image" content="https://gbm-six.vercel.app/images/marca/og-image.jpg">
+<script>
+/* Diagnóstico: abra a página com ?debug no endereço para ver na tela os erros de JavaScript (útil no Safari do iPad). */
+(function(){if(location.search.indexOf("debug")<0)return;var L=[];function show(m){L.push(m);var b=document.getElementById("dbg");if(!b){b=document.createElement("pre");b.id="dbg";b.style.cssText="position:fixed;left:8px;right:8px;bottom:8px;z-index:99999;max-height:45vh;overflow:auto;background:#300;color:#fff;font:12px/1.4 monospace;padding:10px;border-radius:8px;white-space:pre-wrap";(document.body||document.documentElement).appendChild(b)}b.textContent=L.join("\n")}
+window.addEventListener("error",function(e){show("ERRO: "+e.message+" ("+(e.filename||"").split("/").pop()+":"+e.lineno+":"+e.colno+")")});
+window.addEventListener("unhandledrejection",function(e){show("PROMESSA: "+(e.reason&&e.reason.message||e.reason))});
+window.addEventListener("load",function(){show("ok: carregou. "+navigator.userAgent)})})();
+</script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "GBM - Histórias para ler juntos", "alternateName": "GBM", "url": "https://gbm-six.vercel.app/", "logo": "https://gbm-six.vercel.app/images/marca/logo-web.png", "email": "contato@gbmhistorias.com.br", "taxID": "24.217.073/0001-06"}, {"@context": "https://schema.org", "@type": "Product", "name": "Assinatura GBM", "description": "E-books infantis que plantam a semente dos grandes clássicos da literatura e do cinema, para crianças do nascimento aos 8 anos. Uma assinatura para a família inteira.", "brand": {"@type": "Brand", "name": "GBM - Histórias para ler juntos"}, "image": "https://gbm-six.vercel.app/images/marca/og-image.jpg", "offers": {"@type": "Offer", "price": "19.90", "priceCurrency": "BRL", "url": "https://gbm-six.vercel.app/#preco", "availability": "https://schema.org/PreOrder"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Para que idade é o GBM?", "acceptedAnswer": {"@type": "Answer", "text": "Do nascimento aos 8 anos. Com os bebês, o adulto lê em voz alta e as ilustrações prendem o olhar: o hábito da leitura começa antes de a criança entender as palavras. Os maiores acompanham, respondem o quiz e leem trechos sozinhos."}}, {"@type": "Question", "name": "As histórias são resumos dos clássicos?", "acceptedAnswer": {"@type": "Answer", "text": "Não. São histórias novas, inspiradas nos temas das grandes obras e simplificadas para a idade da criança, sem os temas delicados do original. Cada uma termina com a indicação do clássico para ler ou assistir quando crescer."}}, {"@type": "Question", "name": "Posso baixar os livros?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Os e-books ficam disponíveis em PDF para download."}}, {"@type": "Question", "name": "Quantos filhos posso cadastrar?", "acceptedAnswer": {"@type": "Answer", "text": "Todos. A assinatura é da família, e cada filho tem o seu perfil."}}]}]</script>
 <link rel="icon" href="../images/marca/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../images/marca/favicon-32.png" sizes="32x32" type="image/png">
@@ -832,7 +839,7 @@ function rows(){
   +row("Boxes","var(--purple)",`${boxes.length} boxes`,boxes.map(boxCard).join(""),"Histórias com continuação: um volume depende do outro, e a leitura segue em ordem.")
   +row("Coleções","var(--blue)",`${cols.length} coleções`,cols.map(colCard).join(""),"Histórias do mesmo tema, para ler em qualquer ordem.");
  $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=byId(id);if(!x)return"";const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${A}${T_(x.capa)}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
- seeds(); arrows(); watch();
+ for(const f of [seeds,arrows,watch])try{f()}catch(e){console.error(e)}
  {const m=byId("moby-dick");if(m)$("#qaVals").innerHTML=[...m.valores.map(v=>`<span class="qa-val"><img src="${A}images/t/cards/valor-${slug(v)}.webp" alt="">${v}</span>`),...m.caminhos.map(c=>`<span class="qa-val j"><img src="${A}images/t/cards/caminho-${slug(c)}.webp" alt="">${c}</span>`)].join("")}
 }
 /* plantar: escolha única */
@@ -915,7 +922,7 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
 /* tour do produto */
-{const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],scr=[...tour.querySelectorAll(".screens>*")];
+try{const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],scr=[...tour.querySelectorAll(".screens>*")];
  function go(i){bs.forEach((b,k)=>{b.classList.toggle("on",k==i);b.setAttribute("aria-pressed",k==i)});scr.forEach((m,k)=>m.classList.toggle("on",k==i))}
  bs.forEach((b,k)=>b.addEventListener("click",()=>go(k)));
  /* quiz: no tablet no computador, dentro do passo 2 no celular */
@@ -939,8 +946,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contain
    o.classList.remove("no");void o.offsetWidth;o.classList.add(ok?"ok":"no");M.querySelector(".qa-fb").textContent=ok?x.ok:x.no;
    if(ok){wrap.classList.add("done");if(!wrap.dataset.miss)hits++;M.querySelector(".qa-next").disabled=false}else wrap.dataset.miss=1;return}
   const n=e.target.closest(".qa-next");if(n&&!n.disabled){if(n.dataset.act=="again"){qi=0;hits=0}else qi++;draw()}});
- draw();}
-fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{cat=c;T=c.titulos;G=c.grupos;rows()}).catch(()=>{$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>'});
+ draw();}catch(e){console.error(e)}
+watch();
+fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{cat=c;T=c.titulos;G=c.grupos;rows()}).catch(e=>{console.error(e);$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>';watch()});
+/* Rede de segurança: se algo ainda estiver invisível depois de 3 segundos, aparece mesmo assim. */
+setTimeout(()=>document.querySelectorAll(".rv:not(.in),.st:not(.in)").forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add("in")}),3000);
 }
 </script>
 </body>
