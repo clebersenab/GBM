@@ -773,6 +773,17 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bed,.portal{gap:3px}
 /* Safari 15: imagens dentro de linhas flexíveis encolhem e deformam; avatares e capas não encolhem. */
 .um-head img,.who img,.avatars img{flex:none;object-fit:cover}
-/* Jardim de valores e Portas: lado a lado só em tela larga; abaixo de 1280 px cada um ocupa a linha toda
+/* Jardim de valores e Portas: lado a lado só em tela larga; abaixo de 1500 px cada um ocupa a linha toda
    (em tablet, metade da largura não comporta 7 plantas e 6 portas e os nomes se atropelam). */
-@media(max-width:1279px){.grid-2{grid-template-columns:1fr}}
+@media(max-width:1499px){.grid-2{grid-template-columns:1fr}}
+/* Jardim e Portas em qualquer largura: as plantas e as portas ficam em uma fileira que nunca aperta os itens
+   abaixo de um tamanho mínimo; se não couberem, a fileira rola de lado em vez de sobrepor imagens e nomes. */
+.beds,.portals{display:flex!important;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
+.beds::-webkit-scrollbar,.portals::-webkit-scrollbar{display:none}
+.bed{flex:1 0 88px;min-width:88px}
+.portals{gap:18px}
+.portal{flex:1 0 108px;min-width:108px}
+.bed b,.portal b,.bed small,.portal small{max-width:100%;overflow-wrap:anywhere;hyphens:manual}
+/* Banner do Início em tela larga: a sinopse nunca entra embaixo do livro animado, e ganha sombra para ler sobre o fundo. */
+@media(min-width:1024px){.hero-txt{max-width:calc(100% - clamp(360px,36vw,540px) - 24px)}}
+.hero-txt h1,.hero-sin,.hero-txt .eyebrow{text-shadow:0 1px 10px var(--hero-a),0 0 2px var(--hero-a)}
