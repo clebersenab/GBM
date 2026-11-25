@@ -435,7 +435,7 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bk-cap{font:800 30px/1 Poppins,serif;color:#b0560c;margin-bottom:-2%}
 .bk-spine{position:absolute;left:calc(50% - 3px);top:-2px;bottom:-2px;width:6px;border-radius:3px;background:linear-gradient(90deg,#c9b394,#efe2cb,#c9b394);z-index:6}
 /* Celular e tablet em pé: o livro fica centralizado atrás do texto, com um véu uniforme por cima para o texto continuar legível. */
-@media(max-width:1023px){.bk{display:block;width:115%;left:50%;right:auto;transform:translate(-50%,-50%);opacity:.3;-webkit-mask-image:none;mask-image:none}.hero-card::before{background:color-mix(in srgb,var(--hero-a) 62%,transparent)}}
+@media(max-width:1023px){.bk{display:block;width:115%;left:50%;right:auto;transform:translate(-50%,-50%);opacity:.3;-webkit-mask-image:none;mask-image:none}.hero-card::before{background:color-mix(in srgb,var(--hero-a) 80%,transparent)}.bk-txt,.bk-cap{visibility:hidden}}
 /* plantar e cultivar: visão única */
 .legend{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .lg{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:var(--r-md);background:var(--card);border:1px solid var(--line);color:var(--ink2);font-size:14.5px}
@@ -773,3 +773,6 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bed,.portal{gap:3px}
 /* Safari 15: imagens dentro de linhas flexíveis encolhem e deformam; avatares e capas não encolhem. */
 .um-head img,.who img,.avatars img{flex:none;object-fit:cover}
+/* Jardim de valores e Portas: lado a lado só em tela larga; abaixo de 1280 px cada um ocupa a linha toda
+   (em tablet, metade da largura não comporta 7 plantas e 6 portas e os nomes se atropelam). */
+@media(max-width:1279px){.grid-2{grid-template-columns:1fr}}
