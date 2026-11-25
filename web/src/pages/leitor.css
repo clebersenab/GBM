@@ -169,7 +169,9 @@
      da janela: no Safari do iPad, 100vh não desconta as barras do navegador. Em telas mais quadradas o livro fica
      mais alto (até 1,6 de proporção) em vez de achatar. */
   .lt-mesa{display:grid;place-items:center;padding:16px 78px 18px;container-type:size}
-  .lt-livro{position:relative;width:min(100cqw,calc(100cqh * 2.3));height:min(100cqh,calc(100cqw / 1.6));perspective:2800px}
+  /* Reserva para Safari anterior ao 16 (sem unidades de contêiner): tamanho pela janela, como antes. */
+  .lt-livro{position:relative;width:min(100%,calc((100vh - 165px) * 2));aspect-ratio:2;perspective:2800px}
+  @supports (width:1cqw){.lt-livro{width:min(100cqw,calc(100cqh * 2.3));height:min(100cqh,calc(100cqw / 1.6));aspect-ratio:auto}}
   .lt-pg{position:absolute;top:0;bottom:0;width:50%;background:var(--l-bg);overflow:hidden;container-type:inline-size}
   .lt-pg.esq{left:0;border-radius:14px 3px 3px 14px;background-image:linear-gradient(270deg,rgba(60,35,10,.16),rgba(60,35,10,0) 9%);box-shadow:-10px 22px 40px -22px rgba(60,40,10,.55)}
   .lt-pg.dir{left:50%;border-radius:3px 14px 14px 3px;background-image:linear-gradient(90deg,rgba(60,35,10,.18),rgba(60,35,10,0) 9%);box-shadow:10px 22px 40px -22px rgba(60,40,10,.55)}
