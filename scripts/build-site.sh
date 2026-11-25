@@ -14,4 +14,6 @@ cp landing/robots.txt landing/sitemap.xml .site/
 cp favicon.ico .site/ 2>/dev/null || true
 (cd web && npm ci --no-audit --no-fund && npm run build)
 cp -r web/dist .site/plataforma
+# cores de reserva para navegadores sem color-mix (Safari antes do 16.2, iPadOS 15)
+node scripts/css-reserva.mjs .site/landing/index.html .site/plataforma/assets/*.css
 echo "site montado em .site/"
