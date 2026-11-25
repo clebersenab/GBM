@@ -15,5 +15,6 @@ cp favicon.ico .site/ 2>/dev/null || true
 (cd web && npm ci --no-audit --no-fund && npm run build)
 cp -r web/dist .site/plataforma
 # cores de reserva para navegadores sem color-mix (Safari antes do 16.2, iPadOS 15)
-node scripts/css-reserva.mjs .site/landing/index.html .site/plataforma/assets/*.css
+node scripts/css-reserva.mjs .site/landing/index.html
+node scripts/css-reserva.mjs --cq=0.43vw .site/plataforma/assets/*.css
 echo "site montado em .site/"

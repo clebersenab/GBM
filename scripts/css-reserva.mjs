@@ -4,7 +4,9 @@
 // os navegadores novos usam a mistura, que vem depois.
 // Variáveis CSS (--x: color-mix(...)) não descartam valor inválido; nelas a reserva fica na variável
 // e a mistura volta dentro de @supports, só para quem a entende.
-// Uso: node scripts/css-reserva.mjs arquivo.css|arquivo.html ...
+// Também dá reserva às unidades de contêiner (cqw/cqi, Safari antes do 16): com --cq=0.43vw, "5cqw" vira
+// "calc(5 * 0.43vw)" numa linha antes da original (no leitor, cada página tem cerca de 43% da largura da tela).
+// Uso: node scripts/css-reserva.mjs [--cq=0.43vw] arquivo.css|arquivo.html ...
 import { readFileSync, writeFileSync } from 'node:fs'
 
 const SUPORTA = '@supports (color:color-mix(in srgb,red 50%,blue))'
@@ -91,11 +93,23 @@ export function reserva(css) {
   return out + (extras.length ? '\n' + extras.join('\n') + '\n' : '')
 }
 
-for (const arq of process.argv.slice(2)) {
+// reserva para cqw/cqi: mesma declaração com a unidade trocada, antes da original (fora de variáveis)
+export function reservaCq(css, un) {
+  return css.replace(/(^|[{;])(\s*)([a-z-]+)\s*:([^;{}]*\d(?:cqw|cqi)\b[^;{}]*)(?=[;}])/g, (t, a, esp, prop, val) => {
+    if (/cq[hb]|cqmin|cqmax/.test(val)) return t
+    const simples = val.replace(/(-?\d*\.?\d+)(cqw|cqi)\b/g, (_, n) => `calc(${n} * ${un})`)
+    return `${a}${esp}${prop}:${simples};${prop}:${val}`
+  })
+}
+
+const args = process.argv.slice(2)
+const cq = (args.find((a) => a.startsWith('--cq=')) || '').slice(5)
+for (const arq of args.filter((a) => !a.startsWith('--'))) {
   const txt = readFileSync(arq, 'utf8')
   let novo
   if (arq.endsWith('.html')) novo = txt.replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g, (_, a, css, c) => a + reserva(css) + c)
   else novo = reserva(txt)
+  if (cq && !arq.endsWith('.html')) novo = reservaCq(novo, cq)
   const antes = (txt.match(/color-mix\(/g) || []).length
   writeFileSync(arq, novo)
   console.log(`css-reserva: ${arq} — ${antes} color-mix com reserva`)
