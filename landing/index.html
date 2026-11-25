@@ -591,6 +591,19 @@ details[open] summary::after{transform:rotate(180deg)}
 .final .btn-main{animation:glow 2.8s ease-out infinite}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv,.st>*{opacity:1!important;transform:none!important}}
 
+.tstep .ver{display:none}
+/* Celular e tablet em pé: cada passo é uma sanfona. Tocar no passo abre a tela dele logo abaixo; tocar de novo recolhe.
+   A seta e o "Ver a tela" mostram que o passo é clicável. */
+@media(max-width:1000px){
+ .tstep{cursor:pointer;padding-right:48px}
+ .tstep::after{content:"";position:absolute;right:20px;top:24px;width:9px;height:9px;border-right:2.5px solid var(--orange);border-bottom:2.5px solid var(--orange);transform:rotate(45deg);transition:transform .3s}
+ .steps li.aberto .tstep::after{transform:rotate(-135deg);top:28px}
+ .tstep .ver{display:inline-flex;font:700 14px Poppins,sans-serif;color:var(--orange)}
+ .tstep .ver::before{content:"Ver a tela"}
+ .steps li.aberto .tstep .ver::before{content:"Esconder a tela"}
+ .mshot{max-height:0;margin-top:0!important;opacity:0;box-shadow:none!important;transition:max-height .45s ease,opacity .35s,margin-top .35s}
+ .steps li.aberto .mshot{max-height:640px;margin-top:12px!important;opacity:1;box-shadow:0 0 0 1px var(--line),var(--shadow)!important}
+}
 </style>
 </head>
 <body>
@@ -695,18 +708,18 @@ details[open] summary::after{transform:rotate(180deg)}
     </div>
     <div class="tour rv" id="tour">
       <ol class="steps" aria-label="Partes do produto">
-        <li><button class="tstep on" aria-pressed="true" data-i="0">
+        <li class="aberto"><button class="tstep on" aria-pressed="true" data-i="0">
           <i>1</i><span><b>Página curta, ilustração grande</b>
-          <small>Um ou dois parágrafos por página, em uma história que prende a criança e interessa a quem lê em voz alta. E cada livro é sempre a semente de um clássico da literatura ou do cinema.</small></span></button>
+          <small>Um ou dois parágrafos por página, em uma história que prende a criança e interessa a quem lê em voz alta. E cada livro é sempre a semente de um clássico da literatura ou do cinema.</small><em class="ver" aria-hidden="true"></em></span></button>
           <img class="mshot" aria-hidden="true" loading="lazy" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos"></li>
         <li><button class="tstep" aria-pressed="false" data-i="1">
           <i>2</i><span><b>Um quiz no fim de cada história</b>
-          <small>Perguntas curtas para ver se a criança entendeu. Cada resposta certa acende uma estrela, e no fim o resultado vira um céu para comemorar juntos.</small></span></button>
+          <small>Perguntas curtas para ver se a criança entendeu. Cada resposta certa acende uma estrela, e no fim o resultado vira um céu para comemorar juntos.</small><em class="ver" aria-hidden="true"></em></span></button>
           <img class="mshot" aria-hidden="true" loading="lazy" src="../images/plataforma/quiz.webp" alt="">
           </li>
         <li><button class="tstep" aria-pressed="false" data-i="2">
           <i>3</i><span><b>Uma estante para cada filho</b>
-          <small>Cada filho tem o seu perfil, continua de onde parou e recebe indicações a partir do que gostou e do que você escolheu cultivar.</small></span></button>
+          <small>Cada filho tem o seu perfil, continua de onde parou e recebe indicações a partir do que gostou e do que você escolheu cultivar.</small><em class="ver" aria-hidden="true"></em></span></button>
           <img class="mshot" aria-hidden="true" loading="lazy" src="../images/plataforma/estante.webp" alt="Tela da estante da Giovana com Continue lendo e Indicados para a Giovana"></li>
       </ol>
       <div class="stage">
@@ -929,6 +942,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contain
 try{const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],scr=[...tour.querySelectorAll(".screens>*")];
  const go=function(i){bs.forEach((b,k)=>{b.classList.toggle("on",k==i);b.setAttribute("aria-pressed",k==i)});scr.forEach((m,k)=>m.classList.toggle("on",k==i))};
  bs.forEach((b,k)=>b.addEventListener("click",()=>go(k)));
+ /* celular: sanfona */
+ const mob=matchMedia("(max-width:1000px)");
+ bs.forEach(b=>{const li=b.closest("li");b.setAttribute("aria-expanded",li.classList.contains("aberto"));
+  b.addEventListener("click",()=>{if(!mob.matches)return;const ab=li.classList.toggle("aberto");b.setAttribute("aria-expanded",ab)})});
 }catch(e){console.error(e)}
 watch();
 fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{cat=c;T=c.titulos;G=c.grupos;rows()}).catch(e=>{console.error(e);$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>';watch()});
