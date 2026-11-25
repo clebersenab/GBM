@@ -783,7 +783,17 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bed{flex:1 0 88px;min-width:88px}
 .portals{gap:18px}
 .portal{flex:1 0 108px;min-width:108px}
-.bed b,.portal b,.bed small,.portal small{max-width:100%;overflow-wrap:anywhere;hyphens:manual}
+.bed b,.portal b,.bed small,.portal small{max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:manual}
+@media(max-width:760px){.bed b,.portal b{font-size:12px;letter-spacing:-.01em}}
 /* Banner do Início em tela larga: a sinopse nunca entra embaixo do livro animado, e ganha sombra para ler sobre o fundo. */
 @media(min-width:1024px){.hero-txt{max-width:calc(100% - clamp(360px,36vw,540px) - 24px)}}
-.hero-txt h1,.hero-sin,.hero-txt .eyebrow{text-shadow:0 1px 10px var(--hero-a),0 0 2px var(--hero-a)}
+/* Texto do banner nítido sobre a animação: uma mancha suave da cor do cartão atrás do bloco de texto
+   e uma sombra curta e firme em volta das letras (a sombra larga borrava o contorno). */
+.hero-txt::before{content:"";position:absolute;z-index:-1;inset:-28px -56px -28px -40px;pointer-events:none;
+  background:radial-gradient(ellipse 70% 75% at 42% 50%,var(--hero-a) 52%,transparent 100%);opacity:.9}
+.hero-txt h1,.hero-sin,.hero-txt .eyebrow,.hero-txt p{text-shadow:0 0 1px var(--hero-a),0 1px 2px var(--hero-a),0 0 6px var(--hero-a)}
+/* Fileiras do Jardim e das Portas: a borda esmaece do lado em que ainda há itens (corte suave e sinal de carrossel). */
+.beds,.portals{-webkit-mask-image:none;mask-image:none}
+.beds.mais-d,.portals.mais-d{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent)}
+.beds.mais-e,.portals.mais-e{-webkit-mask-image:linear-gradient(90deg,transparent,#000 56px);mask-image:linear-gradient(90deg,transparent,#000 56px)}
+.beds.mais-e.mais-d,.portals.mais-e.mais-d{-webkit-mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent)}
