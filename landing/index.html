@@ -701,8 +701,8 @@ details[open] summary::after{transform:rotate(180deg)}
           <img class="mshot" aria-hidden="true" loading="lazy" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos"></li>
         <li><button class="tstep" aria-pressed="false" data-i="1">
           <i>2</i><span><b>Um quiz no fim de cada história</b>
-          <small>De 5 a 10 perguntas para ver se a criança entendeu. Os menores respondem apontando, e a última pergunta não tem resposta certa: é ela que puxa a conversa.</small></span></button>
-          <div class="mquiz" id="mquiz"></div>
+          <small>Perguntas curtas para ver se a criança entendeu. Cada resposta certa acende uma estrela, e no fim o resultado vira um céu para comemorar juntos.</small></span></button>
+          <img class="mshot" aria-hidden="true" loading="lazy" src="../images/plataforma/quiz.webp" alt="">
           </li>
         <li><button class="tstep" aria-pressed="false" data-i="2">
           <i>3</i><span><b>Uma estante para cada filho</b>
@@ -713,19 +713,8 @@ details[open] summary::after{transform:rotate(180deg)}
         <div class="device"><span class="dots"><i></i><i></i><i></i></span>
           <div class="screens">
             <img loading="lazy" decoding="async" class="on" src="../images/plataforma/leitor.webp" alt="Tela do leitor: a ilustração de Moby Dick ao lado de dois parágrafos curtos">
-            <div class="qapp" id="qapp" aria-label="Protótipo do quiz">
-              <div class="qa-top"><img src="../images/marca/logo-nav.png" alt="GBM"><span><img src="../images/avatares/avatar-raposa.webp" alt="">Giovana</span></div>
-              <div class="qa-body">
-                <div class="qa-card qa-main" id="qaMain"></div>
-                <div class="qa-card qa-side">
-                  <b class="qa-h">O que vocês acharam?</b>
-                  <div class="qa-rate"><button data-r="1">👍 Gostei</button><button data-r="0">👎 Não gostei</button></div>
-                  <div class="qa-later"><small>Quando crescer, leia</small><b>Moby Dick</b><small>Herman Melville · idade sugerida: 14+</small></div>
-                  <div class="qa-vals"><small>Esta história plantou</small><div id="qaVals"></div></div>
-                </div>
-              </div>
-            </div>
-            <img loading="lazy" src="../images/plataforma/estante.webp" alt="Tela da estante da Giovana">
+            <img loading="lazy" decoding="async" src="../images/plataforma/quiz.webp" alt="Tela do quiz de Moby Dick: a pergunta Onde o Ismael ficava para procurar baleias, com a resposta certa marcada e a primeira estrela acesa">
+      <img loading="lazy" src="../images/plataforma/estante.webp" alt="Tela da estante da Giovana">
           </div>
         </div>
       </div>
@@ -856,7 +845,6 @@ function rows(){
   +row("Coleções","var(--blue)",`${cols.length} coleções`,cols.map(colCard).join(""),"Histórias do mesmo tema, para ler em qualquer ordem.");
  $("#pairs").innerHTML=["bentinho-e-capitu","ze-candeia","a-cozinha-de-giz"].map(id=>{const x=byId(id);if(!x)return"";const o=x.obra_mae;return `<article class="pair"><img loading="lazy" src="${A}${T_(x.capa)}" alt=""><div><h3>${x.titulo}</h3><p style="color:var(--mute);font-size:15px">${x.sinopse}</p><p class="later">Quando crescer, ${o.tipo=="livro"?"leia":"assista"}:<strong>${o.titulo}${o.autor?", de "+o.autor:""}</strong>Idade sugerida: ${o.idade}</p></div></article>`}).join("");
  for(const f of [seeds,arrows,watch])try{f()}catch(e){console.error(e)}
- {const m=byId("moby-dick");if(m)$("#qaVals").innerHTML=[...m.valores.map(v=>`<span class="qa-val"><img src="${A}images/t/cards/valor-${slug(v)}.webp" alt="">${v}</span>`),...m.caminhos.map(c=>`<span class="qa-val j"><img src="${A}images/t/cards/caminho-${slug(c)}.webp" alt="">${c}</span>`)].join("")}
 }
 /* plantar: escolha única */
 const SUB={valores:"Agora, toque no valor que você quer ver crescer nele",jornadas:"Agora, toque na jornada que ele vai descobrir"};
@@ -941,33 +929,6 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contain
 try{const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],scr=[...tour.querySelectorAll(".screens>*")];
  const go=function(i){bs.forEach((b,k)=>{b.classList.toggle("on",k==i);b.setAttribute("aria-pressed",k==i)});scr.forEach((m,k)=>m.classList.toggle("on",k==i))};
  bs.forEach((b,k)=>b.addEventListener("click",()=>go(k)));
- /* quiz: no tablet no computador, dentro do passo 2 no celular */
- const qa=$("#qapp"),home=qa.parentElement,slot=$("#mquiz"),mq=matchMedia("(max-width:1000px)");
- const place=()=>{if(mq.matches){slot.appendChild(qa);qa.classList.add("on")}else{home.insertBefore(qa,home.children[1]);qa.classList.toggle("on",bs[1].classList.contains("on"))}};
- mq.addEventListener?mq.addEventListener("change",place):mq.addListener(place);place();
- const Q=[{q:"De que cor era a baleia?",o:[["sw","#2f5fc4","Azul"],["sw","#f4efe6","Branca"],["sw","#7d8494","Cinza"]],c:1,ok:"Isso! Branca como a espuma do mar.",no:"Quase! Lembra da espuma do mar?"},
-  {q:"Onde o Ismael estava quando viu o mar tão grande?",o:[["em","⛵","No alto do mastro"],["em","🏖️","Na areia da praia"],["em","🏠","Na janela de casa"]],c:0,ok:"Isso! Lá de cima dava para ver tudo.",no:"Quase! Ele estava em um lugar bem alto do navio."},
-  {q:"E você, o que perguntaria para a baleia branca?",open:"Essa não tem resposta certa. Conversem sobre ela antes de dormir."}];
- let qi=0,hits=0;const M=$("#qaMain");
- const dots=()=>`<span class="qa-dots">${Q.map((_,k)=>`<i class="${k<qi?"d":k==qi?"c":""}"></i>`).join("")}</span>`;
- const draw=function(){
-  if(qi>=Q.length){M.innerHTML=`<div class="qa-meta"><span>Moby Dick · fim do quiz</span>${dots()}</div><p class="qa-end">Muito bem, Giovana!<br><span>${hits} de 2</span> certinhas.</p><p class="qa-fb">Agora contem um para o outro qual foi a parte favorita.</p><button class="qa-next" data-act="again">Fazer de novo</button>`;return}
-  const x=Q[qi];
-  M.innerHTML=`<div class="qa-meta"><span>Moby Dick · pergunta ${qi+1} de ${Q.length}</span>${dots()}</div><p class="qa-q">${x.q}</p>`+
-   (x.open?`<div class="qa-open">💬 ${x.open}</div><button class="qa-next" data-act="next">Conversamos!</button>`:
-   `<div class="qa-opts">${x.o.map((o,k)=>`<button data-k="${k}">${o[0]=="sw"?`<i class="sw" style="background:${o[1]}"></i>`:`<i class="em">${o[1]}</i>`}${o[2]}</button>`).join("")}</div><p class="qa-fb">Toque em uma resposta.</p><button class="qa-next" data-act="next" disabled>Próxima</button>`)};
- qa.addEventListener("click",e=>{
-  const r=e.target.closest(".qa-rate button");if(r){qa.querySelectorAll(".qa-rate button").forEach(b=>b.classList.toggle("on",b===r));return}
-  const o=e.target.closest(".qa-opts button");if(o){const wrap=o.parentElement;if(wrap.classList.contains("done"))return;const x=Q[qi],ok=+o.dataset.k==x.c;
-   o.classList.remove("no");void o.offsetWidth;o.classList.add(ok?"ok":"no");M.querySelector(".qa-fb").textContent=ok?x.ok:x.no;
-   if(ok){wrap.classList.add("done");if(!wrap.dataset.miss)hits++;M.querySelector(".qa-next").disabled=false}else wrap.dataset.miss=1;return}
-  const n=e.target.closest(".qa-next");if(n&&!n.disabled){if(n.dataset.act=="again"){qi=0;hits=0}else qi++;draw()}});
- draw();
- /* Safari 15 (iPadOS 15) não conhece cqw: calcula a unidade --u do quiz em pixels pela largura do contêiner. */
- if(!(window.CSS&&CSS.supports("width:1cqw"))){
-  const mede=()=>{const box=qa.closest(".mquiz")||qa.closest(".screens");if(!box)return;const w=box.clientWidth;qa.style.setProperty("--u",(w*(box.classList.contains("mquiz")?2.3:1.18)/100)+"px")};
-  mede();addEventListener("resize",mede);mq.addEventListener?mq.addEventListener("change",()=>setTimeout(mede,0)):mq.addListener(()=>setTimeout(mede,0));
-  if(window.ResizeObserver){const ro=new ResizeObserver(mede);[home,slot].forEach(e=>e&&ro.observe(e))}}
 }catch(e){console.error(e)}
 watch();
 fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{cat=c;T=c.titulos;G=c.grupos;rows()}).catch(e=>{console.error(e);$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>';watch()});
