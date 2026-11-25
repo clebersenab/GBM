@@ -31,13 +31,12 @@
 .lt-pag img{width:100%;max-height:48vh;max-height:48dvh;object-fit:contain;border-radius:14px;display:block}
 .lt-texto{padding:20px 24px 28px;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:18px}
 .lt-texto p{margin:0;font-size:calc(var(--l-fs) * var(--esc,1));line-height:1.5;max-width:30em}
-@media (min-aspect-ratio:11/10) and (min-width:640px){
-  .lt-pag{height:100%;min-height:0;grid-template-rows:none;grid-template-columns:60% 40%}
-  .lt-texto{overflow:auto;justify-content:safe center}
-  .lt-pag figure{padding:24px 0 24px 64px}
-  .lt-pag img{max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px)}
-  .lt-texto{padding:24px 72px 24px 40px}
-}
+
+  .leitor.modo-livro .lt-pag{height:100%;min-height:0;grid-template-rows:none;grid-template-columns:60% 40%}
+  .leitor.modo-livro .lt-texto{overflow:auto;justify-content:safe center}
+  .leitor.modo-livro .lt-pag figure{padding:24px 0 24px 64px}
+  .leitor.modo-livro .lt-pag img{max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px)}
+  .leitor.modo-livro .lt-texto{padding:24px 72px 24px 40px}
 .lt-conversa{font-size:calc(17px * var(--esc,1));line-height:1.45;color:var(--l-ink);background:var(--l-panel);border:1px dashed var(--l-acc);border-left:5px solid var(--l-acc);border-radius:12px;padding:12px 16px;max-width:30em}
 .lt-conversa small{display:block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--l-acc);margin-bottom:4px}
 
@@ -47,10 +46,9 @@
 .lt-seta.dir{right:8px}
 /* Em pé (ou tela estreita) as setas vão para o rodapé, para não cobrir o texto. */
 .lt-pe .lt-seta{position:static;transform:none;width:44px;height:44px;opacity:.8;display:none}
-@media not ((min-aspect-ratio:11/10) and (min-width:640px)){
-  .lt-palco>.lt-seta{display:none}
-  .lt-pe .lt-seta{display:grid}
-}
+
+  .leitor:not(.modo-livro) .lt-palco>.lt-seta{display:none}
+  .leitor:not(.modo-livro) .lt-pe .lt-seta{display:grid}
 
 .lt-pe{display:flex;align-items:center;gap:12px;padding:10px 16px 14px;font-size:14px;color:var(--l-mute)}
 .lt-barra{flex:1;display:flex;gap:4px;height:6px}
@@ -72,7 +70,7 @@
 .lt-capa h1{font-size:clamp(30px,5vw,48px);line-height:1.15;margin:0 0 8px}
 .lt-capa div{display:grid;justify-items:center;align-content:center;gap:12px}
 .lt-aviso{margin:0;font-size:15px;color:var(--l-mute);max-width:28em}
-@media (min-aspect-ratio:11/10) and (min-width:640px){.lt-capa{grid-template-columns:auto auto;justify-content:center;gap:56px;text-align:left}.lt-capa div{justify-items:start}.lt-capa img{max-height:70vh;max-height:70dvh}}
+.leitor.modo-livro .lt-capa{grid-template-columns:auto auto;justify-content:center;gap:56px;text-align:left}.leitor.modo-livro .lt-capa div{justify-items:start}.leitor.modo-livro .lt-capa img{max-height:70vh;max-height:70dvh}
 
 .lt-extra{min-height:100%;max-width:720px;margin:0 auto;padding:28px 24px;display:grid;align-content:center;gap:18px}
 .lt-extra h2{font-size:clamp(26px,4vw,36px);line-height:1.2;margin:0}
@@ -157,29 +155,33 @@
 @keyframes lt-desvira{from{transform:rotateY(-180deg)}to{transform:rotateY(0)}}
 .lt-face{position:absolute!important;inset:0!important;left:0!important;width:100%!important;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .lt-face.verso{transform:rotateY(180deg)}
+/* Cada face aparece só na sua metade do giro. Não depende só de backface-visibility, que o Safari erra em vários
+   casos (o verso aparecia espelhado por cima da imagem). */
+.lt-folha3d.vai .lt-face.frente,.lt-folha3d.volta .lt-face.verso{animation:lt-ate-meio 800ms linear both}
+.lt-folha3d.vai .lt-face.verso,.lt-folha3d.volta .lt-face.frente{animation:lt-depois-meio 800ms linear both}
+@keyframes lt-ate-meio{0%,49.9%{visibility:visible}50%,100%{visibility:hidden}}
+@keyframes lt-depois-meio{0%,49.9%{visibility:hidden}50%,100%{visibility:visible}}
 /* sombra que corre pela folha enquanto ela gira */
-.lt-face::after{content:"";position:absolute;inset:0;pointer-events:none;animation:inherit;animation-name:lt-sombra;animation-duration:inherit}
+.lt-face::after{content:"";position:absolute;inset:0;pointer-events:none;animation:lt-sombra 800ms linear both}
 .lt-folha3d .lt-face::after{animation-duration:800ms}
 @keyframes lt-sombra{0%{background:rgba(40,25,10,0)}50%{background:rgba(40,25,10,.18)}100%{background:rgba(40,25,10,0)}}
 
 /* ===== Livro aberto (tela deitada) ===== */
-@media (min-aspect-ratio:11/10) and (min-width:640px){
-  .lt-palco{background:radial-gradient(ellipse at 50% 40%,#f3e7cd,#e6d6b4)}
+
+  .leitor.modo-livro .lt-palco{background:radial-gradient(ellipse at 50% 40%,#f3e7cd,#e6d6b4)}
   /* O livro é medido pelo espaço que sobra entre o cabeçalho e o rodapé (unidades do contêiner), e não pela altura
      da janela: no Safari do iPad, 100vh não desconta as barras do navegador. Em telas mais quadradas o livro fica
      mais alto (até 1,6 de proporção) em vez de achatar. */
-  .lt-mesa{display:grid;place-items:center;padding:16px 78px 18px;container-type:size}
+  .leitor.modo-livro .lt-mesa{display:grid;place-items:center;padding:16px 78px 18px;container-type:size}
   /* Reserva para Safari anterior ao 16 (sem unidades de contêiner): tamanho pela janela, como antes. */
-  .lt-livro{position:relative;width:min(100%,calc((100vh - 165px) * 2));aspect-ratio:2;perspective:2800px}
-  @supports (width:1cqw){.lt-livro{width:min(100cqw,calc(100cqh * 2.3));height:min(100cqh,calc(100cqw / 1.6));aspect-ratio:auto}}
-  .lt-pg{position:absolute;top:0;bottom:0;width:50%;background:var(--l-bg);overflow:hidden;container-type:inline-size}
-  .lt-pg.esq{left:0;border-radius:14px 3px 3px 14px;background-image:linear-gradient(270deg,rgba(60,35,10,.16),rgba(60,35,10,0) 9%);box-shadow:-10px 22px 40px -22px rgba(60,40,10,.55)}
-  .lt-pg.dir{left:50%;border-radius:3px 14px 14px 3px;background-image:linear-gradient(90deg,rgba(60,35,10,.18),rgba(60,35,10,0) 9%);box-shadow:10px 22px 40px -22px rgba(60,40,10,.55)}
-  .lt-lombada{position:absolute;left:calc(50% - 2px);top:0;bottom:0;width:4px;background:linear-gradient(90deg,rgba(90,60,25,.25),rgba(255,250,240,.6),rgba(90,60,25,.25));z-index:4;pointer-events:none}
-  .lt-pg .lt-extra,.lt-pg .lt-capa{position:absolute;inset:0;overflow:auto;min-height:0;max-width:none;margin:0;padding:7% 8%}
-  .lt-pg .lt-extra h2{font-size:clamp(20px,6cqw,32px)}
-  .lt-pg .lt-extra p{font-size:clamp(15px,3.6cqw,20px)}
-}
+  .leitor.modo-livro .lt-livro{position:relative;width:min(100%,calc((100vh - 165px) * 2));aspect-ratio:2;perspective:2800px}@supports (width:1cqw){.leitor.modo-livro .lt-livro{width:min(100cqw,calc(100cqh * 2.3));height:min(100cqh,calc(100cqw / 1.6));aspect-ratio:auto}}
+  .leitor.modo-livro .lt-pg{position:absolute;top:0;bottom:0;width:50%;background:var(--l-bg);overflow:hidden;container-type:inline-size}
+  .leitor.modo-livro .lt-pg.esq{left:0;border-radius:14px 3px 3px 14px;background-image:linear-gradient(270deg,rgba(60,35,10,.16),rgba(60,35,10,0) 9%);box-shadow:-10px 22px 40px -22px rgba(60,40,10,.55)}
+  .leitor.modo-livro .lt-pg.dir{left:50%;border-radius:3px 14px 14px 3px;background-image:linear-gradient(90deg,rgba(60,35,10,.18),rgba(60,35,10,0) 9%);box-shadow:10px 22px 40px -22px rgba(60,40,10,.55)}
+  .leitor.modo-livro .lt-lombada{position:absolute;left:calc(50% - 2px);top:0;bottom:0;width:4px;background:linear-gradient(90deg,rgba(90,60,25,.25),rgba(255,250,240,.6),rgba(90,60,25,.25));z-index:4;pointer-events:none}
+  .leitor.modo-livro .lt-pg .lt-extra,.leitor.modo-livro .lt-pg .lt-capa{position:absolute;inset:0;overflow:auto;min-height:0;max-width:none;margin:0;padding:7% 8%}
+  .leitor.modo-livro .lt-pg .lt-extra h2{font-size:clamp(20px,6cqw,32px)}
+  .leitor.modo-livro .lt-pg .lt-extra p{font-size:clamp(15px,3.6cqw,20px)}
 .lt-pg-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:7% 6% 7% 7%}
 .lt-pg-img img{display:block;max-width:100%;max-height:100%;min-width:0;min-height:0;object-fit:contain;border-radius:8px;box-shadow:0 3px 10px -2px rgba(60,40,10,.3)}
 .lt-pg-img.capa img{max-height:100%;width:auto;border-radius:10px}
@@ -197,7 +199,7 @@
 .lt-capa.so-texto div{justify-items:start}
 @media (prefers-reduced-motion:reduce){.lt-folha3d{display:none}}
 /* Telas mais quadradas (tablet deitado): livro mais alto, para a página de texto respirar. */
-@media (min-aspect-ratio:11/10) and (max-aspect-ratio:3/2) and (min-width:640px){.lt-mesa{padding-left:64px;padding-right:64px}}
+@media (max-aspect-ratio:3/2){.leitor.modo-livro .lt-mesa{padding-left:64px;padding-right:64px}}
 .lt-dica{margin:0;font-size:16px}
 .lt-resultado.ceu{align-content:center}
 .lt-resultado.resumo{align-content:center}

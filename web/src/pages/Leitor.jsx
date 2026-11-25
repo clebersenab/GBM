@@ -200,7 +200,7 @@ function Livro({ book, entry, save, profile, fechar }) {
 
   const historia = typeof folha === 'number'
   return (
-    <div className="leitor" style={{ '--esc': ESCALAS[escala] }}>
+    <div className={`leitor${livro ? ' modo-livro' : ''}`} style={{ '--esc': ESCALAS[escala] }}>
       <header className="lt-top">
         <button className="lt-ic" onClick={fechar} aria-label="Fechar o livro"><Icon name="x" size={22} /></button>
         <b className="lt-tit">{book.titulo}</b>
@@ -260,14 +260,17 @@ function Livro({ book, entry, save, profile, fechar }) {
 const VIRAR_MS = 800
 
 // Livro aberto na tela deitada: duas páginas e a lombada no meio.
+// A decisão fica só aqui: o CSS segue a classe .modo-livro (e não uma media query própria), para os dois
+// nunca discordarem; no iPad a mudança de orientação às vezes chega atrasada, então também reavalia ao girar.
 function useModoLivro() {
-  const q = '(min-aspect-ratio: 11/10) and (min-width: 640px)'
-  const [sim, setSim] = useState(() => window.matchMedia(q).matches)
+  const calc = () => window.innerWidth >= 640 && window.innerWidth * 10 >= window.innerHeight * 11
+  const [sim, setSim] = useState(calc)
   useEffect(() => {
-    const m = window.matchMedia(q)
-    const f = () => setSim(m.matches)
-    m.addEventListener('change', f)
-    return () => m.removeEventListener('change', f)
+    const f = () => setSim(calc())
+    const tarde = () => { f(); setTimeout(f, 250) }
+    window.addEventListener('resize', f)
+    window.addEventListener('orientationchange', tarde)
+    return () => { window.removeEventListener('resize', f); window.removeEventListener('orientationchange', tarde) }
   }, [])
   return sim
 }
