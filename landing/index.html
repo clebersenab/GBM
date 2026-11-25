@@ -162,8 +162,6 @@ nav .btn{min-height:40px;padding:0 18px;font-size:14px}
   87%{transform:translateY(4%)}
   100%{transform:translateY(0)}
 }
-}
-}
 @keyframes tablet-brilho{0%{opacity:0}45%{opacity:.9}100%{opacity:.35}}
 .origin .story{display:grid;gap:16px;font-size:18px}
 .origin .story p{color:var(--ink2)}
@@ -486,6 +484,14 @@ html.lock body *:not(.modal):not(.modal *){animation-play-state:paused!important
  .tstep i{width:32px;height:32px;font-size:14px}
  .tstep b{font-size:18px}
  .mshot{display:block;margin-top:12px;border-radius:12px;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;box-shadow:0 0 0 1px var(--line),var(--shadow)}
+}
+/* Tablet em pé: a foto do topo aparece inteira, sem corte, e o texto vem logo abaixo (como no celular). */
+@media(min-width:761px) and (max-aspect-ratio:1/1){
+ .hero{min-height:0;padding:0 0 56px;align-items:end;--hx:max(5vw,24px)}
+ .hero>img{position:relative;height:auto;aspect-ratio:16/9;object-position:50% 50%}
+ .hero::before{background:linear-gradient(0deg,var(--bg) 34%,transparent 58%)}
+ .hero .txt{margin-top:-64px;width:calc(100% - 2 * var(--hx))}
+ .hero .lead{max-width:none}
 }
 @media(max-width:760px){
  body{font-size:17.5px}
@@ -815,7 +821,8 @@ details[open] summary::after{transform:rotate(180deg)}
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-{
+/* Tudo dentro de uma função (e não de um bloco { }): o Safari 15 perde variáveis do bloco em funções declaradas dentro dele. */
+(function(){
 const $=s=>document.querySelector(s);
 const A="../";
 const COL={"Clássicos da literatura":"var(--blue)","Do cinema e das séries":"var(--purple)","Histórias reais e de fé":"var(--orange)"};
@@ -924,7 +931,7 @@ document.addEventListener("click",e=>{
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&M.classList.contains("on"))close()});
 /* tour do produto */
 try{const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],scr=[...tour.querySelectorAll(".screens>*")];
- function go(i){bs.forEach((b,k)=>{b.classList.toggle("on",k==i);b.setAttribute("aria-pressed",k==i)});scr.forEach((m,k)=>m.classList.toggle("on",k==i))}
+ const go=function(i){bs.forEach((b,k)=>{b.classList.toggle("on",k==i);b.setAttribute("aria-pressed",k==i)});scr.forEach((m,k)=>m.classList.toggle("on",k==i))};
  bs.forEach((b,k)=>b.addEventListener("click",()=>go(k)));
  /* quiz: no tablet no computador, dentro do passo 2 no celular */
  const qa=$("#qapp"),home=qa.parentElement,slot=$("#mquiz"),mq=matchMedia("(max-width:1000px)");
@@ -935,12 +942,12 @@ try{const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],scr=[...tour.q
   {q:"E você, o que perguntaria para a baleia branca?",open:"Essa não tem resposta certa. Conversem sobre ela antes de dormir."}];
  let qi=0,hits=0;const M=$("#qaMain");
  const dots=()=>`<span class="qa-dots">${Q.map((_,k)=>`<i class="${k<qi?"d":k==qi?"c":""}"></i>`).join("")}</span>`;
- function draw(){
+ const draw=function(){
   if(qi>=Q.length){M.innerHTML=`<div class="qa-meta"><span>Moby Dick · fim do quiz</span>${dots()}</div><p class="qa-end">Muito bem, Giovana!<br><span>${hits} de 2</span> certinhas.</p><p class="qa-fb">Agora contem um para o outro qual foi a parte favorita.</p><button class="qa-next" data-act="again">Fazer de novo</button>`;return}
   const x=Q[qi];
   M.innerHTML=`<div class="qa-meta"><span>Moby Dick · pergunta ${qi+1} de ${Q.length}</span>${dots()}</div><p class="qa-q">${x.q}</p>`+
    (x.open?`<div class="qa-open">💬 ${x.open}</div><button class="qa-next" data-act="next">Conversamos!</button>`:
-   `<div class="qa-opts">${x.o.map((o,k)=>`<button data-k="${k}">${o[0]=="sw"?`<i class="sw" style="background:${o[1]}"></i>`:`<i class="em">${o[1]}</i>`}${o[2]}</button>`).join("")}</div><p class="qa-fb">Toque em uma resposta.</p><button class="qa-next" data-act="next" disabled>Próxima</button>`)}
+   `<div class="qa-opts">${x.o.map((o,k)=>`<button data-k="${k}">${o[0]=="sw"?`<i class="sw" style="background:${o[1]}"></i>`:`<i class="em">${o[1]}</i>`}${o[2]}</button>`).join("")}</div><p class="qa-fb">Toque em uma resposta.</p><button class="qa-next" data-act="next" disabled>Próxima</button>`)};
  qa.addEventListener("click",e=>{
   const r=e.target.closest(".qa-rate button");if(r){qa.querySelectorAll(".qa-rate button").forEach(b=>b.classList.toggle("on",b===r));return}
   const o=e.target.closest(".qa-opts button");if(o){const wrap=o.parentElement;if(wrap.classList.contains("done"))return;const x=Q[qi],ok=+o.dataset.k==x.c;
@@ -952,7 +959,7 @@ watch();
 fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{cat=c;T=c.titulos;G=c.grupos;rows()}).catch(e=>{console.error(e);$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>';watch()});
 /* Rede de segurança: se algo ainda estiver invisível depois de 3 segundos, aparece mesmo assim. */
 setTimeout(()=>document.querySelectorAll(".rv:not(.in),.st:not(.in)").forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add("in")}),3000);
-}
+})();
 </script>
 </body>
 </html>

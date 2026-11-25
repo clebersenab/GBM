@@ -245,7 +245,7 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .search-all{border:0;background:none;color:var(--link);font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px;padding:10px;border-top:1px solid var(--line);margin-top:4px}
 .um{position:relative}
 .um-btn{display:flex;align-items:center;gap:12px;border:0;background:none;padding:2px;text-align:right}
-.um-btn img{width:42px;height:42px;border-radius:50%;box-shadow:0 0 0 2px var(--orange)}
+.um-btn img{width:42px;height:42px;flex:none;object-fit:cover;border-radius:50%;box-shadow:0 0 0 2px var(--orange)}
 .um-name{display:grid;line-height:1.2}
 .um-name b{font:700 14px Poppins,sans-serif}.um-name small{color:var(--mute);font-size:12px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .um-pop{position:absolute;right:0;top:calc(100% + 14px);width:270px;background:var(--bg2);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);padding:8px;display:grid;animation:rise .2s var(--ease)}
@@ -432,8 +432,8 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bk-txt i{display:block;height:4px;border-radius:3px;background:rgba(70,45,20,.26)}
 .bk-cap{font:800 30px/1 Poppins,serif;color:#b0560c;margin-bottom:-2%}
 .bk-spine{position:absolute;left:calc(50% - 3px);top:-2px;bottom:-2px;width:6px;border-radius:3px;background:linear-gradient(90deg,#c9b394,#efe2cb,#c9b394);z-index:6}
-/* Celular: o livro fica centralizado atrás do texto, com um véu uniforme por cima para o texto continuar legível. */
-@media(max-width:760px){.bk{display:block;width:115%;left:50%;right:auto;transform:translate(-50%,-50%);opacity:.3;-webkit-mask-image:none;mask-image:none}.hero-card::before{background:color-mix(in srgb,var(--hero-a) 62%,transparent)}}
+/* Celular e tablet em pé: o livro fica centralizado atrás do texto, com um véu uniforme por cima para o texto continuar legível. */
+@media(max-width:1023px){.bk{display:block;width:115%;left:50%;right:auto;transform:translate(-50%,-50%);opacity:.3;-webkit-mask-image:none;mask-image:none}.hero-card::before{background:color-mix(in srgb,var(--hero-a) 62%,transparent)}}
 /* plantar e cultivar: visão única */
 .legend{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .lg{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:var(--r-md);background:var(--card);border:1px solid var(--line);color:var(--ink2);font-size:14.5px}
@@ -759,7 +759,7 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .beds,.portals{padding-top:8px}
 .plant{box-sizing:border-box;height:var(--alto);--planta:min(100%,calc(var(--alto) - 34px))}
 .beds .plant{height:var(--alto)}
-.frame{width:auto;height:var(--alto);max-width:100%;aspect-ratio:3/4}
+.frame{width:calc(var(--alto) * .75);height:var(--alto);max-width:100%;aspect-ratio:auto;flex:none}
 .bed b,.portal b{margin-top:12px;font:700 13px/1.15 Poppins,sans-serif}
 .bed,.portal{padding-bottom:0}
 @media(max-width:760px){.garden,.doors2{--alto:104px}}
@@ -769,3 +769,5 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .bed b,.portal b{min-height:2.3em;display:flex;align-items:flex-start;justify-content:center}
 .bed small,.portal small{line-height:1.4;min-height:2.8em}
 .bed,.portal{gap:3px}
+/* Safari 15: imagens dentro de linhas flexíveis encolhem e deformam; avatares e capas não encolhem. */
+.um-head img,.who img,.avatars img{flex:none;object-fit:cover}
