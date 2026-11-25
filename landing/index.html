@@ -962,7 +962,13 @@ try{const tour=$("#tour"),bs=[...tour.querySelectorAll(".tstep")],scr=[...tour.q
    o.classList.remove("no");void o.offsetWidth;o.classList.add(ok?"ok":"no");M.querySelector(".qa-fb").textContent=ok?x.ok:x.no;
    if(ok){wrap.classList.add("done");if(!wrap.dataset.miss)hits++;M.querySelector(".qa-next").disabled=false}else wrap.dataset.miss=1;return}
   const n=e.target.closest(".qa-next");if(n&&!n.disabled){if(n.dataset.act=="again"){qi=0;hits=0}else qi++;draw()}});
- draw();}catch(e){console.error(e)}
+ draw();
+ /* Safari 15 (iPadOS 15) não conhece cqw: calcula a unidade --u do quiz em pixels pela largura do contêiner. */
+ if(!(window.CSS&&CSS.supports("width:1cqw"))){
+  const mede=()=>{const box=qa.closest(".mquiz")||qa.closest(".screens");if(!box)return;const w=box.clientWidth;qa.style.setProperty("--u",(w*(box.classList.contains("mquiz")?2.3:1.18)/100)+"px")};
+  mede();addEventListener("resize",mede);mq.addEventListener?mq.addEventListener("change",()=>setTimeout(mede,0)):mq.addListener(()=>setTimeout(mede,0));
+  if(window.ResizeObserver){const ro=new ResizeObserver(mede);[home,slot].forEach(e=>e&&ro.observe(e))}}
+}catch(e){console.error(e)}
 watch();
 fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{cat=c;T=c.titulos;G=c.grupos;rows()}).catch(e=>{console.error(e);$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>';watch()});
 /* Rede de segurança: se algo ainda estiver invisível depois de 3 segundos, aparece mesmo assim. */
