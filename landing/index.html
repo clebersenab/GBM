@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+/* iPad/iPhone: ao girar a tela, o Safari às vezes mantém o zoom anterior e a página parece ampliada.
+   Trava a escala em 1 por um instante na rotação e depois libera (o zoom com dois dedos continua funcionando). */
+(function(){var m=document.querySelector('meta[name="viewport"]');if(!m||!/iP(ad|hone|od)|Macintosh/.test(navigator.userAgent)||!("ontouchend" in document))return;var base=m.getAttribute("content");
+function gira(){m.setAttribute("content",base+",maximum-scale=1");setTimeout(function(){m.setAttribute("content",base)},400)}
+var deitado=innerWidth>innerHeight;window.addEventListener("orientationchange",gira);window.addEventListener("resize",function(){var d=innerWidth>innerHeight;if(d!==deitado){deitado=d;gira()}})})();
+</script>
+
 <title>GBM - Histórias para ler juntos · Clássicos recontados para crianças de 0 a 8 anos</title>
 <meta name="description" content="E-books infantis que plantam a semente dos grandes clássicos da literatura e do cinema. Valores para cultivar e jornadas para descobrir, do nascimento aos 8 anos. R$ 19,90 por mês para a família inteira.">
 <link rel="canonical" href="https://gbm-six.vercel.app/">
@@ -38,7 +46,7 @@ window.addEventListener("load",function(){show("ok: carregou. "+navigator.userAg
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="../images/hero/hero-pai-e-filho.webp?v=2" imagesrcset="../images/hero/hero-pai-e-filho-800.webp?v=2 800w, ../images/hero/hero-pai-e-filho-1200.webp?v=2 1200w, ../images/hero/hero-pai-e-filho.webp?v=2 1672w" imagesizes="100vw" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Literata:ital,opsz,wght@1,7..72,500;1,7..72,600&display=swap" rel="stylesheet">
-<style>
+<style>html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 /* VOICE  occasion: a bedtime-story catalogue for parents, warm and unhurried
    IDEA   a streaming shelf lit by a reading lamp; every book points to the classic it seeds
    PICTURE the full-bleed bedtime scene, then real shelves of covers you can open
