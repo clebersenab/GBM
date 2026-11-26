@@ -22,10 +22,13 @@ class Catalog
                 end
       g.merge("titulos" => membros)
     end
-    # Ordem antiga preservada (o primeiro vira o banner do Início); histórias criadas na
-    # administração e marcadas como lançamento entram na frente, a mais nova primeiro.
+    # Lançamentos: os livros já publicados vêm primeiro, o publicado mais recentemente na frente
+    # (o primeiro vira o banner do Início). Depois, os que estão "em breve", na ordem antiga do
+    # catálogo, e por fim os criados na administração que ainda não foram publicados.
+    lanc = titles.select(&:lancamento)
+    no_ar = lanc.select { |t| t.status == "publicado" }.sort_by { |t| -(t.published_at || t.created_at).to_f }.map(&:slug)
     fixos = s["lancamentos_ordem"].select { |id| published[id]&.lancamento }
-    novos = titles.select { |t| t.lancamento && !originais.include?(t.slug) }.sort_by { |t| -(t.published_at || t.created_at).to_f }.map(&:slug)
-    s.merge("titulos" => views, "grupos" => grupos, "lancamentos_ordem" => novos + fixos)
+    novos = lanc.reject { |t| originais.include?(t.slug) }.sort_by { |t| -(t.published_at || t.created_at).to_f }.map(&:slug)
+    s.merge("titulos" => views, "grupos" => grupos, "lancamentos_ordem" => (no_ar + fixos + novos).uniq)
   end
 end

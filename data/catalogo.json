@@ -258,7 +258,7 @@
    ]
   },
   {
-   "id": "as-baquetas-de-teo",
+   "id": "as-baquetas-do-bento",
    "titulo": "As Baquetas do Bento",
    "sinopse": "Todo dia, depois da escola, Bento treina na bateria até o braço cansar. Ele quer ser o melhor.",
    "obra_mae": {
@@ -279,7 +279,7 @@
    ],
    "vitrine": true,
    "capa": "images/capas/as-baquetas-do-bento.webp",
-   "lancamento": false,
+   "lancamento": true,
    "box": null,
    "colecoes": [
     "colecao-ritmo"
@@ -2515,7 +2515,7 @@
    "vitrine": true,
    "titulos": [
     "a-banda-da-garagem",
-    "as-baquetas-de-teo"
+    "as-baquetas-do-bento"
    ],
    "descricao": "Duas histórias sobre música: a banda de amigos que vai parar no rádio e o menino que treina até o braço cansar."
   },
@@ -2690,6 +2690,7 @@
   }
  ],
  "lancamentos_ordem": [
+  "as-baquetas-do-bento",
   "moby-dick",
   "ze-candeia",
   "a-causa-de-caio",
