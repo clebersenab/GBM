@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { api } from '../api'
 import { useSession } from '../session'
@@ -14,10 +14,11 @@ export default function Conta() {
     <div className="page narrow">
       <PageHead title="Editar perfil" sub="Seus dados de cadastro, a senha e os perfis das crianças" />
       <Segmented label="Seções" value={aba} onChange={(v) => setParams(v === 'dados' ? {} : { aba: v })}
-        options={[{ value: 'dados', label: 'Dados da conta' }, { value: 'criancas', label: 'Crianças' }, { value: 'senha', label: 'Senha' }]} />
+        options={[{ value: 'dados', label: 'Dados da conta' }, { value: 'criancas', label: 'Crianças' }, { value: 'senha', label: 'Senha' }, { value: 'aparelhos', label: 'Aparelhos' }]} />
       {aba === 'dados' && <Dados />}
       {aba === 'criancas' && <Criancas />}
       {aba === 'senha' && <Senha />}
+      {aba === 'aparelhos' && <Aparelhos />}
     </div>
   )
 }
@@ -69,6 +70,44 @@ function Senha() {
         {state.ok && <p className="form-ok">Senha trocada.</p>}
         <div><Submit busy={state.busy}>Trocar senha</Submit></div>
       </form>
+    </Card>
+  )
+}
+
+function quando(iso) {
+  const min = Math.round((Date.now() - new Date(iso)) / 60000)
+  if (min < 2) return 'agora'
+  if (min < 60) return `há ${min} minutos`
+  const h = Math.round(min / 60)
+  if (h < 24) return h === 1 ? 'há 1 hora' : `há ${h} horas`
+  const d = Math.round(h / 24)
+  return d === 1 ? 'ontem' : `há ${d} dias`
+}
+
+// Aparelhos conectados: até 6. Entrar no sétimo tira o de uso mais antigo.
+function Aparelhos() {
+  const [lista, setLista] = useState(null)
+  const [erro, setErro] = useState(null)
+  const carregar = () => api('/auth/sessions').then((r) => setLista(r.aparelhos)).catch((e) => setErro(e.message))
+  useEffect(() => { carregar() }, [])
+  async function sair(a) {
+    if (!window.confirm(`Tirar ${a.aparelho} da conta? Quem estiver usando lá vai precisar entrar de novo.`)) return
+    try { await api(`/auth/sessions/${a.id}`, { method: 'DELETE' }); carregar() } catch (e) { setErro(e.message) }
+  }
+  return (
+    <Card title="Aparelhos conectados" sub="Até 6 aparelhos e 2 leituras ao mesmo tempo. Ao entrar em um sétimo aparelho, sai o que está há mais tempo sem uso">
+      <FormError error={erro} />
+      {!lista ? <p className="muted">Carregando…</p> : (
+        <ul className="aparelhos">
+          {lista.map((a) => (
+            <li key={a.id}>
+              <div><b>{a.aparelho}</b>{a.atual && <Tag>este aparelho</Tag>}
+                <small>{a.lendo ? 'lendo agora' : `último uso ${quando(a.ultimo_uso)}`}</small></div>
+              {!a.atual && <button className="btn btn-sm btn-ghost" onClick={() => sair(a)}>Sair</button>}
+            </li>
+          ))}
+        </ul>
+      )}
     </Card>
   )
 }

@@ -1,5 +1,5 @@
-# Entrega o PDF por um link assinado de curta duração.
-# O armazenamento definitivo (S3 ou similar) e o nome do comprador no PDF entram depois.
+# Entrega o PDF por um link assinado de curta duração, carimbado com o nome e o e-mail de quem baixou.
+# O armazenamento definitivo (S3 ou similar) entra depois.
 class FilesController < ApplicationController
   allow_anonymous only: :show
   LINK_TTL = 5.minutes
@@ -12,6 +12,7 @@ class FilesController < ApplicationController
     title = Title.find(data["t"])
     path = title.pdf_path.present? && Rails.root.join("storage", "pdfs", File.basename(title.pdf_path))
     return render(json: { error: "PDF ainda não disponível" }, status: :not_found) unless path && File.exist?(path)
-    send_file path, type: "application/pdf", filename: "#{title.slug}.pdf"
+    account = Account.find(data["a"])
+    send_data PdfStamp.call(path.to_s, PdfStamp.label_for(account)), type: "application/pdf", filename: "#{title.slug}.pdf"
   end
 end

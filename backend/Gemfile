@@ -26,3 +26,6 @@ end
 
 gem "bcrypt", "~> 3.1"
 gem "rack-cors"
+
+gem "prawn", "~> 2.4"
+gem "combine_pdf", "~> 1.0"

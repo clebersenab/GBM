@@ -14,17 +14,18 @@ export class ApiError extends Error {
     super(body?.error || 'Algo deu errado. Tente de novo.')
     this.status = status
     this.code = body?.code
+    this.body = body
   }
 }
 
-export async function api(path, { method = 'GET', body } = {}) {
+export async function api(path, { method = 'GET', body, keepalive } = {}) {
   const headers = { Accept: 'application/json' }
   if (body) headers['Content-Type'] = 'application/json'
   const token = getToken()
   if (token) headers.Authorization = `Bearer ${token}`
   let res
   try {
-    res = await fetch(BASE + path, { method, headers, body: body ? JSON.stringify(body) : undefined })
+    res = await fetch(BASE + path, { method, headers, body: body ? JSON.stringify(body) : undefined, keepalive })
   } catch {
     throw new ApiError(0, { error: 'Sem conexão com o servidor. Ele pode estar acordando: tente de novo em alguns segundos.' })
   }

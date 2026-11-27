@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   post "auth/password/reset", to: "auth#reset_password"
   delete "auth/session", to: "auth#destroy"
   delete "auth/sessions", to: "auth#destroy_all"
+  get "auth/sessions", to: "auth#sessions"
+  delete "auth/sessions/:id", to: "auth#destroy_one"
+
+  post "reading", to: "reading#claim"
+  post "reading/takeover", to: "reading#takeover"
+  delete "reading", to: "reading#release"
 
   get "me", to: "me#show"
   patch "me/preferences", to: "me#preferences"

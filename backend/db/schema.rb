@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_26_000001) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_27_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -150,6 +150,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_26_000001) do
     t.datetime "revoked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "reading_until"
+    t.string "reading_slug"
+    t.datetime "reading_kicked_at"
     t.index ["account_id"], name: "index_sessions_on_account_id"
     t.index ["token_digest"], name: "index_sessions_on_token_digest", unique: true
   end
