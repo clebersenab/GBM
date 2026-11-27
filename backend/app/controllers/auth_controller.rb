@@ -66,6 +66,18 @@ class AuthController < ApplicationController
     head :no_content
   end
 
+  # GET /auth/sessions -> aparelhos conectados
+  def sessions
+    list = current_account.sessions.live.order(last_used_at: :desc)
+    render json: { aparelhos: list.map { |x| x.view(current_session.id) }, max: Session::MAX_DEVICES }
+  end
+
+  # DELETE /auth/sessions/:id -> tira um aparelho da conta
+  def destroy_one
+    current_account.sessions.live.find(params[:id]).revoke!
+    head :no_content
+  end
+
   private
 
   def start_session(account, status)

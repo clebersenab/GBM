@@ -843,3 +843,9 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .m-voltar b{color:var(--ink);font-weight:700}
 .m-voltar:hover,.m-voltar:hover b{color:var(--orange)}
 @media(max-width:760px){.titulo p.tm-later{margin-bottom:18px}.tm-info .tm-status{padding-top:18px}}
+/* Conta > Aparelhos conectados */
+.aparelhos{list-style:none;margin:0;padding:0;display:grid}
+.aparelhos li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.aparelhos li:last-child{border-bottom:0}
+.aparelhos li>div{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.aparelhos small{flex-basis:100%;color:var(--mute);font-size:14px}

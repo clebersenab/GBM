@@ -228,3 +228,10 @@
 .lt-salvo{font-style:normal;font-weight:400;font-size:14px;color:var(--l-mute)}
 .lt-ultima{margin:0;font-size:15px}
 .lt-resultado .lt-ultima{text-align:left;margin:0;max-width:none}
+/* Vagas de leitura ocupadas: lista dos aparelhos que estão lendo */
+.leitor-msg.vaga{max-width:560px;margin:0 auto;font-size:18px}
+.leitor-msg.vaga p{margin:0;line-height:1.5}
+.vaga-lista{list-style:none;margin:0;padding:0;display:grid;gap:10px;width:100%}
+.vaga-lista li{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 16px;border-radius:14px;background:var(--l-panel);border:1px solid var(--l-line);text-align:left}
+.vaga-lista span{display:grid;gap:2px}
+.vaga-lista small{font-size:14px;opacity:.75}

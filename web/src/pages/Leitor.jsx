@@ -38,10 +38,66 @@ export default function Leitor() {
   }, [slug, book])
 
   const fechar = () => (window.history.length > 1 ? nav(-1) : nav('/inicio'))
+  const previa = useLocation().pathname.startsWith('/previa') // prévia da equipe não ocupa vaga
+  const vaga = useVaga(book && !book.amostra && !previa ? slug : null)
 
   if (erro) return <div className="leitor leitor-msg"><p>{erro}</p><button className="lt-btn" onClick={fechar}>Voltar</button></div>
   if (!book || (!book.amostra && !ready)) return <div className="leitor leitor-msg"><p>Abrindo o livro…</p></div>
+  if (vaga.estado !== 'ok') return <VagaOcupada vaga={vaga} fechar={fechar} />
   return <Livro key={`${slug}-${profile?.id}`} book={book} entry={bySlug[slug]} save={save} profile={profile} fechar={fechar} />
+}
+
+// Leituras ao mesmo tempo (como as telas da Netflix): enquanto o livro está aberto e visível, o leitor
+// avisa a API a cada minuto. Sem aviso por 2 minutos e meio, a vaga se libera sozinha.
+function useVaga(slug) {
+  const [st, setSt] = useState({ estado: 'ok', outros: [] })
+  const tinha = useRef(false)
+  const pedir = useCallback(async (path, body) => {
+    try {
+      await api(path, { method: 'POST', body })
+      tinha.current = true
+      setSt({ estado: 'ok', outros: [] })
+    } catch (e) {
+      if (e.status !== 409) return // sem conexão ou outro erro: não bloqueia a leitura
+      const perdeu = tinha.current || e.code === 'assumida'
+      tinha.current = false
+      setSt({ estado: perdeu ? 'perdeu' : 'lotado', outros: e.body?.outros || [], msg: e.message })
+    }
+  }, [])
+  useEffect(() => {
+    if (!slug) return
+    const ping = () => document.visibilityState === 'visible' && pedir('/reading', { slug })
+    ping()
+    const t = setInterval(ping, 60000)
+    document.addEventListener('visibilitychange', ping)
+    return () => {
+      clearInterval(t)
+      document.removeEventListener('visibilitychange', ping)
+      if (tinha.current) api('/reading', { method: 'DELETE', keepalive: true }).catch(() => {})
+      tinha.current = false
+    }
+  }, [slug, pedir])
+  const tomar = (id) => pedir('/reading/takeover', { session_id: id, slug })
+  return slug ? { ...st, tomar } : { estado: 'ok', outros: [], tomar }
+}
+
+function VagaOcupada({ vaga, fechar }) {
+  const titulo = vaga.estado === 'perdeu' ? 'A leitura continuou em outro aparelho.' : vaga.msg
+  return (
+    <div className="leitor leitor-msg vaga">
+      <p><b>{titulo}</b></p>
+      <p>A assinatura permite 2 leituras ao mesmo tempo. Para ler aqui, pare a leitura em um destes aparelhos:</p>
+      <ul className="vaga-lista">
+        {vaga.outros.map((o) => (
+          <li key={o.id}>
+            <span><b>{o.aparelho}</b>{o.lendo && <small>lendo agora</small>}</span>
+            <button className="lt-btn" onClick={() => vaga.tomar(o.id)}>Parar lá e ler aqui</button>
+          </li>
+        ))}
+      </ul>
+      <button className="lt-btn" onClick={fechar}>Voltar</button>
+    </div>
+  )
 }
 
 function Livro({ book, entry, save, profile, fechar }) {
