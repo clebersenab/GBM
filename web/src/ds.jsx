@@ -22,6 +22,7 @@ const P = {
   up: 'M7 11v9H4v-9zM7 11l4-7c2 0 3 1 3 3v3h5c1 0 2 1 2 2l-2 6c0 1-1 2-2 2H7',
   down: 'M7 13V4H4v9zM7 13l4 7c2 0 3-1 3-3v-3h5c1 0 2-1 2-2l-2-6c0-1-1-2-2-2H7',
   chev: 'M9 6l6 6-6 6',
+  back: 'M15 6l-6 6 6 6',
   pin: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
   x: 'M6 6l12 12M18 6L6 18',
   chat: 'M4 5h16v11H10l-5 4v-4H4z',
@@ -168,18 +169,19 @@ export function useDismiss(open, onClose) {
   return ref
 }
 
-export function Modal({ title, onClose, children, wide }) {
+export function Modal({ title, onClose, children, wide, back }) {
   useEffect(() => {
-    const key = (e) => e.key === 'Escape' && onClose()
+    const key = (e) => e.key === 'Escape' && (back ? back.onClick() : onClose())
     document.addEventListener('keydown', key)
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => { document.removeEventListener('keydown', key); document.body.style.overflow = prev }
-  }, [onClose])
+  }, [onClose, back])
   return (
     <div className="modal" role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className={`modal-card${wide ? ' wide' : ''}`}>
         <button className="x" onClick={onClose} aria-label="Fechar"><Icon name="x" /></button>
+        {back && <button className="m-voltar" onClick={back.onClick}><Icon name="back" size={16} />Voltar para <b>{back.label}</b></button>}
         {title && <h2>{title}</h2>}
         {children}
       </div>
