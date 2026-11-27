@@ -83,8 +83,8 @@ function Criancas() {
     await refresh()
   }
   return (
-    <Card title="Perfis das crianças" sub="Até 6 perfis. Cada um tem a própria estante e recomendações"
-      action={me.profiles.length < 6 && <button className="btn btn-sm btn-main" onClick={() => setEdit('novo')}>+ Adicionar</button>}>
+    <Card title="Perfis das crianças" sub="Até 5 perfis. Cada um tem a própria estante e recomendações"
+      action={me.profiles.length < 5 && <button className="btn btn-sm btn-main" onClick={() => setEdit('novo')}>+ Adicionar</button>}>
       <ul className="kids">
         {me.profiles.map((p) => (
           <li key={p.id}>

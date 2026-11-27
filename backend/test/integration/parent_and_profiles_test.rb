@@ -27,10 +27,10 @@ class ParentAndProfilesTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test "limite de 6 perfis" do
+  test "limite de 5 perfis" do
     account = login
-    6.times { |i| account.child_profiles.create!(name: "Filho #{i}") }
-    post "/profiles", params: { profile: { name: "Sétimo" } }, headers: auth
+    5.times { |i| account.child_profiles.create!(name: "Filho #{i}") }
+    post "/profiles", params: { profile: { name: "Sexto" } }, headers: auth
     assert_response :unprocessable_entity
   end
 end
