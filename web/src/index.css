@@ -345,6 +345,9 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .modal-card{text-align:left;position:relative;width:min(560px,100%);max-height:92svh;overflow:auto;background:var(--bg2);border:1px solid var(--line);border-radius:22px;padding:26px;display:grid;gap:14px;animation:rise .3s var(--ease)}
 .modal-card.wide{width:min(780px,100%)}
 .x{position:sticky;top:0;justify-self:end;margin:-10px -10px -50px 0;z-index:2;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;color:var(--ink)}
+/* Safari no iPad aplica padding e linha de texto padrão em botões: zera para o X ficar no centro da bola */
+.x{padding:0;-webkit-appearance:none;appearance:none;line-height:0;box-sizing:border-box}
+.x .ico{display:block}
 .titulo{grid-template-columns:190px minmax(0,1fr)}
 .tm-box{background:var(--card);border-radius:var(--r-md);padding:12px 14px;display:grid;gap:10px;border-left:4px solid var(--purple)}
 .tm-box small b{color:var(--ink)}
