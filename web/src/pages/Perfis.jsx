@@ -29,7 +29,7 @@ export default function Perfis() {
             {p.name}
           </button>
         ))}
-        {me.profiles.length < 6 && (
+        {me.profiles.length < 5 && (
           <button onClick={() => setNovo(true)}>
             <span className="add" aria-hidden="true">+</span>
             Adicionar

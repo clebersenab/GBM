@@ -9,7 +9,7 @@ class Account < ApplicationRecord
   has_many :downloads, dependent: :destroy
   has_many :owned_titles, through: :downloads, source: :title
 
-  MAX_PROFILES = 6
+  MAX_PROFILES = 5
   ACCESS_STATUSES = %w[cadastrado liberado bloqueado].freeze
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
