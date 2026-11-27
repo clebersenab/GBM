@@ -956,8 +956,10 @@ watch();
 {const API="https://gbm-api-dly2.onrender.com",CK="gbm-landing-catalogo";let atual="";
  const usar=c=>{if(!c||!c.titulos)return false;const t=JSON.stringify(c);if(t===atual)return false;atual=t;cat=c;T=c.titulos;G=c.grupos;rows();return true};
  let guard=null;try{guard=JSON.parse(localStorage.getItem(CK)||"null")}catch(e){}
- const vivo=()=>{const ctl=window.AbortController?new AbortController():null;const tm=setTimeout(()=>ctl&&ctl.abort(),45000);
-  return fetch(API+"/catalog",ctl?{signal:ctl.signal}:{}).then(r=>r.ok?r.json():null).then(c=>{clearTimeout(tm);if(c&&c.titulos){try{localStorage.setItem(CK,JSON.stringify(c))}catch(e){}usar(c)}}).catch(e=>{clearTimeout(tm);console.warn("catálogo da API indisponível",e)})};
+ // A API dorme quando fica parada (plano gratuito do Render) e pode levar mais de um minuto para acordar.
+ // Tenta de novo até conseguir (5, 10, 20, 40 s de espera entre as tentativas), por até uns 4 minutos.
+ const vivo=(n=0)=>{const ctl=window.AbortController?new AbortController():null;const tm=setTimeout(()=>ctl&&ctl.abort(),70000);
+  return fetch(API+"/catalog",ctl?{signal:ctl.signal,cache:"no-store"}:{cache:"no-store"}).then(r=>r.ok?r.json():null).then(c=>{clearTimeout(tm);if(c&&c.titulos){try{localStorage.setItem(CK,JSON.stringify(c))}catch(e){}usar(c)}else throw new Error("resposta vazia")}).catch(e=>{clearTimeout(tm);console.warn("catálogo da API indisponível",e);if(n<4)return new Promise(ok=>setTimeout(ok,5000*Math.pow(2,n))).then(()=>vivo(n+1))})};
  if(guard&&guard.titulos){usar(guard);vivo()}
  else fetch(A+"data/catalogo.json").then(r=>r.json()).then(c=>{usar(c);vivo()}).catch(e=>{console.error(e);vivo().then(()=>{if(!atual){$("#rows").innerHTML='<p class="lead">Não foi possível carregar o catálogo agora.</p>';watch()}})});}
 /* Rede de segurança: se algo ainda estiver invisível depois de 3 segundos, aparece mesmo assim. */
