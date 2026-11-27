@@ -7,9 +7,9 @@ import { useShell } from './Shell'
 import { EmBreve, Icon, Modal, STATUS } from './ds'
 import { src, thumb, boxOf, byId, grupoById, valorImg, caminhoImg } from './catalog'
 
-export default function TitleModal({ t, onClose }) {
+export default function TitleModal({ t, onClose, back }) {
   const { bySlug, save, remove } = useLibrary()
-  const { openTitle, openGroup } = useShell()
+  const { pushTitle, pushGroup } = useShell()
   const entry = bySlug[t.id]
   const [msg, setMsg] = useState(null)
   const [busy, setBusy] = useState(null)
@@ -53,7 +53,7 @@ export default function TitleModal({ t, onClose }) {
   }
 
   return (
-    <Modal title={t.titulo} onClose={onClose} wide>
+    <Modal title={t.titulo} onClose={onClose} back={back} wide>
       <div className="titulo">
         <div className="tm-lado">
           <span className={`tm-capa${t.em_breve ? ' eb' : ''}`}>
@@ -76,7 +76,7 @@ export default function TitleModal({ t, onClose }) {
               <small>Volume {box.index + 1} de {box.total} do box <b>{box.grupo.titulo}</b></small>
               <div className="tm-vols">
                 {box.grupo.titulos.map((id, k) => byId[id] && (
-                  <button key={id} className={id === t.id ? 'now' : ''} onClick={() => id !== t.id && openTitle(byId[id])} title={byId[id].titulo}>
+                  <button key={id} className={id === t.id ? 'now' : ''} onClick={() => id !== t.id && pushTitle(byId[id])} title={byId[id].titulo}>
                     <img src={thumb(byId[id].capa)} alt="" className={byId[id].em_breve ? 'eb-img' : ''} />
                     <span>{k + 1}</span>
                     {bySlug[id]?.status === 'lido' && <i><Icon name="check" size={12} /></i>}
@@ -86,17 +86,17 @@ export default function TitleModal({ t, onClose }) {
               {box.index > 0 && bySlug[box.grupo.titulos[box.index - 1]]?.status !== 'lido' && (
                 <p className="muted sm">Para uma experiência melhor, leia antes <b>{byId[box.grupo.titulos[box.index - 1]]?.titulo}</b>.</p>
               )}
-              <button className="tlink sm" onClick={() => { onClose(); openGroup(box.grupo) }}>Ver o roteiro do box</button>
+              <button className="tlink sm" onClick={() => pushGroup(box.grupo)}>Ver o roteiro do box</button>
             </div>
           )}
           {colecoes.map((g) => (
             <p key={g.id} className="tm-col">
               Coleção <b>{g.titulo}</b> · {g.titulos.length} {g.titulos.length === 1 ? 'livro' : 'livros'} para ler em qualquer ordem.{' '}
-              <button className="tlink" onClick={() => { onClose(); openGroup(g) }}>Ver a coleção</button>
+              <button className="tlink" onClick={() => pushGroup(g)}>Ver a coleção</button>
             </p>
           ))}
 
-          {(t.valores?.length > 0 || t.caminhos?.length > 0 || o) && (
+          {(t.valores?.length > 0 || t.caminhos?.length > 0) && (
             <dl className="tm-meta">
               {t.valores?.length > 0 && (
                 <div><dt>{t.valores.length === 1 ? 'Valor' : 'Valores'}</dt><dd>
@@ -108,9 +108,9 @@ export default function TitleModal({ t, onClose }) {
                   {t.caminhos.map((c) => <span className="tm-tag j" key={c}><img src={caminhoImg(c)} alt="" />{c}</span>)}
                 </dd></div>
               )}
-              {o && <div className="tm-later"><dt>Quando crescer, {o.tipo === 'livro' ? 'leia' : 'assista'}</dt><dd><b>{o.titulo}</b></dd></div>}
             </dl>
           )}
+          {o && <p className="tm-later"><small>Quando crescer, {o.tipo === 'livro' ? 'leia' : 'assista'}</small><b>{o.titulo}</b></p>}
 
           <div className="tm-status">
             <small>Na estante</small>

@@ -21,8 +21,10 @@ const NAV = [
 ]
 
 export default function Shell() {
-  const [title, setTitle] = useState(null)
-  const [group, setGroup] = useState(null)
+  // Fichas abertas em pilha: do livro para a coleção e de volta. Abrir pela página começa uma
+  // pilha nova; abrir de dentro de uma ficha empilha (e, se aquela ficha já estava na pilha,
+  // volta até ela em vez de repetir).
+  const [pilha, setPilha] = useState([])
   const [scrolled, setScrolled] = useState(false)
   const loc = useLocation()
   useEffect(() => { window.scrollTo(0, 0) }, [loc.pathname])
@@ -32,7 +34,22 @@ export default function Shell() {
     return () => window.removeEventListener('scroll', on)
   }, [])
 
-  const ctx = useMemo(() => ({ openTitle: setTitle, openGroup: setGroup }), [])
+  const ctx = useMemo(() => {
+    const empilha = (k, v) => setPilha((s) => {
+      const i = s.findIndex((x) => x.k === k && x.v.id === v.id)
+      return i >= 0 ? s.slice(0, i + 1) : [...s, { k, v }]
+    })
+    return {
+      openTitle: (t) => setPilha(t ? [{ k: 't', v: t }] : []),
+      openGroup: (g) => setPilha(g ? [{ k: 'g', v: g }] : []),
+      pushTitle: (t) => empilha('t', t),
+      pushGroup: (g) => empilha('g', g),
+    }
+  }, [])
+  const topo = pilha[pilha.length - 1]
+  const antes = pilha[pilha.length - 2]
+  const fechar = () => setPilha([])
+  const voltar = antes ? { label: antes.v.titulo, onClick: () => setPilha((s) => s.slice(0, -1)) } : null
   return (
     <ShellCtx.Provider value={ctx}>
       <div className="shell">
@@ -50,8 +67,8 @@ export default function Shell() {
         <main className="content"><Outlet /></main>
         <Nav className="tabbar" mobile />
       </div>
-      {group && <GroupModal g={group} onClose={() => setGroup(null)} />}
-      {title && <TitleModal key={title.id} t={title} onClose={() => setTitle(null)} />}
+      {topo?.k === 'g' && <GroupModal key={'g' + topo.v.id} g={topo.v} onClose={fechar} back={voltar} />}
+      {topo?.k === 't' && <TitleModal key={'t' + topo.v.id} t={topo.v} onClose={fechar} back={voltar} />}
     </ShellCtx.Provider>
   )
 }

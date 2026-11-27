@@ -17,16 +17,16 @@ export function GroupArt({ g, className = '' }) {
   )
 }
 
-export default function GroupModal({ g, onClose }) {
+export default function GroupModal({ g, onClose, back }) {
   const { bySlug } = useLibrary()
-  const { openTitle } = useShell()
+  const { pushTitle } = useShell()
   const isBox = g.tipo === 'box'
   const vols = g.titulos.map((id) => byId[id]).filter(Boolean)
   const next = isBox && vols.find((v) => bySlug[v.id]?.status !== 'lido')
-  const open = (t) => { onClose(); openTitle(t) }
+  const open = (t) => pushTitle(t)
 
   return (
-    <Modal title={g.titulo} onClose={onClose} wide>
+    <Modal title={g.titulo} onClose={onClose} back={back} wide>
       <GroupArt g={g} className="gm-art" />
       <div className="gm-meta">
         {isBox ? <Tag tone="purple">Box · {vols.length} volumes</Tag> : <Tag tone="blue">Coleção · {vols.length} {vols.length === 1 ? 'livro' : 'livros'}</Tag>}

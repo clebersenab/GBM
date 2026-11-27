@@ -829,3 +829,14 @@ textarea:focus{outline:0;border-color:var(--blue)}
   .tm-meta>div{grid-template-columns:1fr;gap:6px}
   .tm-info .tm-status{margin-bottom:18px}
 }
+/* "Quando crescer": bloco à parte, abaixo de valores e jornadas, com o rótulo em cima do título */
+.titulo p.tm-later{background:none;border:0;border-left:3px solid var(--orange);border-radius:0;padding:2px 0 2px 14px;display:grid;gap:4px;color:var(--ink)}
+.tm-later small{color:var(--mute);font-size:14px;font-weight:600}
+.tm-later b{font:700 16px/1.4 Poppins,sans-serif}
+.tm-meta{border-bottom:0;padding-bottom:0}
+.tm-info .tm-status{border-top:1px solid var(--line);padding-top:22px}
+/* Voltar para a ficha anterior (do livro para a coleção e de volta) */
+.m-voltar{justify-self:start;display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;margin:-6px 0 -4px;color:var(--mute);font-size:14px;font-weight:600}
+.m-voltar b{color:var(--ink);font-weight:700}
+.m-voltar:hover,.m-voltar:hover b{color:var(--orange)}
+@media(max-width:760px){.titulo p.tm-later{margin-bottom:18px}.tm-info .tm-status{padding-top:18px}}
