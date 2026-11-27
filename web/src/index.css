@@ -797,3 +797,35 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .beds.mais-d,.portals.mais-d{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent)}
 .beds.mais-e,.portals.mais-e{-webkit-mask-image:linear-gradient(90deg,transparent,#000 56px);mask-image:linear-gradient(90deg,transparent,#000 56px)}
 .beds.mais-e.mais-d,.portals.mais-e.mais-d{-webkit-mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent)}
+/* Ficha do livro (modal): mais respiro e menos caixas. Capa e "Gostou?" na coluna da esquerda;
+   à direita, sinopse, coleção em uma linha, valores/jornadas/obra em lista simples e, separados
+   por uma linha, a estante e os botões. */
+.modal-card .titulo{grid-template-columns:220px minmax(0,1fr);gap:36px}
+.tm-lado{display:grid;gap:16px;align-content:start}
+.tm-lado .tm-like{justify-content:center;gap:10px;color:var(--mute);font-size:14px}
+.tm-lado .tm-like button{width:42px;height:42px;padding:0;justify-content:center;border-radius:50%;color:var(--ink2)}
+.tm-info.stack{gap:24px;align-content:start}
+.titulo p.tm-sinopse{font-size:18px;line-height:1.6;color:var(--ink)}
+.titulo p.tm-col{background:none;border:0;padding:0;display:block;color:var(--mute);font-size:15px;line-height:1.6}
+.tm-col b{color:var(--ink)}
+.tm-col .tlink{display:inline;font-size:15px}
+.tm-meta{margin:0;display:grid;gap:14px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tm-meta>div{display:grid;grid-template-columns:150px minmax(0,1fr);align-items:start;gap:12px}
+.tm-meta dt{padding-top:3px}
+.tm-meta dt{color:var(--mute);font-size:14px;font-weight:600}
+.tm-meta dd{margin:0;display:flex;flex-wrap:wrap;gap:8px 18px}
+.tm-tag{display:inline-flex;align-items:center;gap:8px;font:700 15px Poppins,sans-serif}
+.tm-tag img{width:26px;height:26px;border-radius:50%;object-fit:cover}
+.tm-tag.v{color:var(--v-ink)}.tm-tag.j{color:var(--j-ink)}
+.tm-later dd b{font:700 15px/1.4 Poppins,sans-serif;color:var(--ink)}
+.tm-info .tm-status{gap:10px}
+.tm-info .acts{gap:12px}
+@media(max-width:760px){
+  .tm-lado{display:grid;justify-items:center;margin-bottom:18px}
+  .tm-lado .tm-capa{width:min(180px,52vw)}
+  .titulo p.tm-sinopse{font-size:16px;margin-bottom:18px}
+  .titulo p.tm-col{margin-bottom:18px}
+  .tm-meta{margin-bottom:20px;padding:16px 0}
+  .tm-meta>div{grid-template-columns:1fr;gap:6px}
+  .tm-info .tm-status{margin-bottom:18px}
+}

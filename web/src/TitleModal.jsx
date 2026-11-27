@@ -55,12 +55,21 @@ export default function TitleModal({ t, onClose }) {
   return (
     <Modal title={t.titulo} onClose={onClose} wide>
       <div className="titulo">
-        <span className={`tm-capa${t.em_breve ? ' eb' : ''}`}>
-          <img src={src(t.capa)} alt="" />
-          {t.em_breve ? <EmBreve /> : <button className="tm-ler" onClick={() => run('ler')} disabled={!!busy} aria-label="Ler agora"><Icon name="play" size={30} /></button>}
-        </span>
-        <div className="stack">
-          <p>{t.sinopse}</p>
+        <div className="tm-lado">
+          <span className={`tm-capa${t.em_breve ? ' eb' : ''}`}>
+            <img src={src(t.capa)} alt="" />
+            {t.em_breve ? <EmBreve /> : <button className="tm-ler" onClick={() => run('ler')} disabled={!!busy} aria-label="Ler agora"><Icon name="play" size={30} /></button>}
+          </span>
+          {entry?.status === 'lido' && (
+            <div className="tm-like">
+              <span>Gostou?</span>
+              <button aria-pressed={entry.liked === true} onClick={() => like(true)} aria-label="Gostei" title="Gostei"><Icon name="up" size={18} /></button>
+              <button aria-pressed={entry.liked === false} onClick={() => like(false)} aria-label="Não gostei" title="Não gostei"><Icon name="down" size={18} /></button>
+            </div>
+          )}
+        </div>
+        <div className="stack tm-info">
+          <p className="tm-sinopse">{t.sinopse}</p>
 
           {box && (
             <div className="tm-box">
@@ -81,27 +90,27 @@ export default function TitleModal({ t, onClose }) {
             </div>
           )}
           {colecoes.map((g) => (
-            <div key={g.id} className="tm-col">
-              <small>Faz parte da coleção <b>{g.titulo}</b>, {g.titulos.length} {g.titulos.length === 1 ? 'livro' : 'livros'} para ler em qualquer ordem.</small>
-              <button className="tlink sm" onClick={() => { onClose(); openGroup(g) }}>Ver a coleção</button>
-            </div>
+            <p key={g.id} className="tm-col">
+              Coleção <b>{g.titulo}</b> · {g.titulos.length} {g.titulos.length === 1 ? 'livro' : 'livros'} para ler em qualquer ordem.{' '}
+              <button className="tlink" onClick={() => { onClose(); openGroup(g) }}>Ver a coleção</button>
+            </p>
           ))}
 
-          {(t.valores?.length > 0 || t.caminhos?.length > 0) && (
-            <div className="plantou">
+          {(t.valores?.length > 0 || t.caminhos?.length > 0 || o) && (
+            <dl className="tm-meta">
               {t.valores?.length > 0 && (
-                <div><small>Valores</small><div className="chips">
-                  {t.valores.map((v) => <span className="chip v" key={v}><img src={valorImg(v)} alt="" />{v}</span>)}
-                </div></div>
+                <div><dt>{t.valores.length === 1 ? 'Valor' : 'Valores'}</dt><dd>
+                  {t.valores.map((v) => <span className="tm-tag v" key={v}><img src={valorImg(v)} alt="" />{v}</span>)}
+                </dd></div>
               )}
               {t.caminhos?.length > 0 && (
-                <div><small>Jornadas</small><div className="chips">
-                  {t.caminhos.map((c) => <span className="chip j" key={c}><img src={caminhoImg(c)} alt="" />{c}</span>)}
-                </div></div>
+                <div><dt>{t.caminhos.length === 1 ? 'Jornada' : 'Jornadas'}</dt><dd>
+                  {t.caminhos.map((c) => <span className="tm-tag j" key={c}><img src={caminhoImg(c)} alt="" />{c}</span>)}
+                </dd></div>
               )}
-            </div>
+              {o && <div className="tm-later"><dt>Quando crescer, {o.tipo === 'livro' ? 'leia' : 'assista'}</dt><dd><b>{o.titulo}</b></dd></div>}
+            </dl>
           )}
-          {o && <p className="later"><small>Quando crescer, {o.tipo === 'livro' ? 'leia' : 'assista'}</small><b>{o.titulo}</b></p>}
 
           <div className="tm-status">
             <small>Na estante</small>
@@ -112,13 +121,6 @@ export default function TitleModal({ t, onClose }) {
                 </button>
               ))}
             </div>
-            {entry?.status === 'lido' && (
-              <div className="tm-like">
-                <span>Gostou?</span>
-                <button aria-pressed={entry.liked === true} onClick={() => like(true)}><Icon name="up" size={16} />Gostei</button>
-                <button aria-pressed={entry.liked === false} onClick={() => like(false)}><Icon name="down" size={16} />Não gostei</button>
-              </div>
-            )}
           </div>
 
           {t.em_breve ? (
