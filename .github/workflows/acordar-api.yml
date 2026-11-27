@@ -1,0 +1,14 @@
+# O Render (plano gratuito) desliga a API depois de 15 minutos sem visitas, e ela leva
+# perto de um minuto para voltar. Este agendamento visita a API a cada 10 minutos para
+# mantê-la acordada; assim a landing e a plataforma abrem com o catálogo na hora.
+name: Manter a API acordada
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - run: curl -fsS -m 120 -o /dev/null -w "%{http_code} em %{time_total}s\n" https://gbm-api-dly2.onrender.com/up
