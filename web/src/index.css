@@ -856,3 +856,6 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .pk{width:auto;min-width:clamp(70px,7vw,92px);padding:4px 4px}
 .pk>span:last-child{white-space:nowrap}
 .pk.arch>span:last-child{white-space:normal;max-width:9em}
+/* Os números do Início levam à Minha lista: a setinha mostra que dá para tocar (tablet não tem hover) */
+.stat-go{margin-left:auto;color:var(--mute);display:grid;place-items:center}
+button.stat:hover .stat-go{color:var(--tone)}

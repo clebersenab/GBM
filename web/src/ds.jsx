@@ -62,6 +62,7 @@ export function Stat({ icon, tone = 'orange', value, label, onClick }) {
     <Tag className={`stat t-${tone}`} onClick={onClick}>
       <span className="stat-i"><Icon name={icon} /></span>
       <span><b>{value}</b><small>{label}</small></span>
+      {onClick && <span className="stat-go"><Icon name="chev" size={18} /></span>}
     </Tag>
   )
 }
