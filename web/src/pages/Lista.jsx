@@ -6,7 +6,7 @@ import { Card, Cover, Empty, PageHead, Segmented } from '../ds'
 import { byId } from '../catalog'
 import { quando } from './Inicio'
 
-const FILTERS = [['todos', 'Todos'], ['quero_ler', 'Não lidos'], ['lendo', 'Lendo'], ['lido', 'Lidos']]
+const FILTERS = [['todos', 'Todos'], ['quero_ler', 'Quero ler'], ['lendo', 'Lendo'], ['lido', 'Lidos']]
 
 export default function Lista() {
   const { entries } = useLibrary()

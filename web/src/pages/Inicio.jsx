@@ -105,6 +105,13 @@ export default function Inicio() {
         </Card>
       )}
 
+      {quero.length > 0 && (
+        <Card title="Para ler depois" sub="Os livros que vocês marcaram como “Quero ler”" pad={false}
+          action={<button className="tlink sm" onClick={() => nav('/lista?f=quero_ler')}>Ver todos</button>}>
+          <Rail>{quero.map((e) => byId[e.slug] && <Cover key={e.slug} t={byId[e.slug]} status="quero_ler" onClick={openTitle} />)}</Rail>
+        </Card>
+      )}
+
       {ready && <PlantBlock kind="caminho" />}
 
 
