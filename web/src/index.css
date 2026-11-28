@@ -851,3 +851,8 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .aparelhos li:last-child{border-bottom:0}
 .aparelhos li>div{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
 .aparelhos small{flex-basis:100%;color:var(--mute);font-size:14px}
+/* Valores e jornadas para escolher: cada item fica pelo menos do tamanho do próprio nome
+   ("Perseverança", "Ciência e Inovação"), para os nomes nunca se encostarem; se faltar espaço, a fileira rola. */
+.pk{width:auto;min-width:clamp(70px,7vw,92px);padding:4px 4px}
+.pk>span:last-child{white-space:nowrap}
+.pk.arch>span:last-child{white-space:normal;max-width:9em}
