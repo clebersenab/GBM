@@ -39,7 +39,47 @@ function corPeso(a) {
   return m ? { cor: m[1].trim(), p: parseFloat(m[2]) } : { cor: a.trim(), p: null }
 }
 
-// troca todos os color-mix(...) de um valor pela cor de maior peso (dos mais internos para fora)
+// Cores conhecidas: variáveis definidas uma única vez no arquivo (no site claro/escuro da plataforma, as que
+// mudam com o tema ficam de fora e caem na regra antiga, da cor de maior peso).
+let VARS = {}
+export function lerVars(txt) {
+  const defs = {}
+  for (const m of txt.matchAll(/(--[\w-]+)\s*:\s*([^;{}]+)/g)) (defs[m[1]] ||= new Set()).add(m[2].trim())
+  VARS = Object.fromEntries(Object.entries(defs).filter(([, v]) => v.size === 1).map(([k, v]) => [k, [...v][0]]))
+}
+// "#0b0d17", "rgba(…)", "transparent", "var(--bg)" -> [r,g,b,a] ou null
+function rgba(c, fundo = 0) {
+  c = c.trim()
+  if (fundo > 5) return null
+  const v = c.match(/^var\((--[\w-]+)\)$/)
+  if (v) return VARS[v[1]] ? rgba(VARS[v[1]], fundo + 1) : null
+  if (c === 'transparent') return [0, 0, 0, 0]
+  let m = c.match(/^#([0-9a-f]{3,8})$/i)
+  if (m) {
+    let h = m[1]
+    if (h.length <= 4) h = [...h].map((x) => x + x).join('')
+    const n = (i) => parseInt(h.slice(i, i + 2), 16)
+    return [n(0), n(2), n(4), h.length === 8 ? n(6) / 255 : 1]
+  }
+  m = c.match(/^rgba?\(([^)]+)\)$/)
+  if (m) {
+    const p = m[1].split(/[\s,\/]+/).filter(Boolean).map(parseFloat)
+    return [p[0], p[1], p[2], p[3] ?? 1]
+  }
+  return null
+}
+// mistura exata em srgb (com transparência pré-multiplicada, como o navegador faz)
+function mistura(c1, p1, c2) {
+  const a = rgba(c1), b = rgba(c2)
+  if (!a || !b) return null
+  const t = p1 / 100, al = a[3] * t + b[3] * (1 - t)
+  if (al === 0) return 'transparent'
+  const ch = (i) => Math.round((a[i] * a[3] * t + b[i] * b[3] * (1 - t)) / al)
+  return `rgba(${ch(0)},${ch(1)},${ch(2)},${+al.toFixed(3)})`
+}
+
+// troca todos os color-mix(...) de um valor por uma cor simples (dos mais internos para fora):
+// a mistura exata quando as duas cores são conhecidas; senão, a cor de maior peso
 export function simplifica(v) {
   for (let guarda = 0; guarda < 50; guarda++) {
     const i = v.lastIndexOf('color-mix(')
@@ -49,7 +89,8 @@ export function simplifica(v) {
     const [, x, y] = partes(v.slice(a + 1, f))
     const c1 = corPeso(x), c2 = corPeso(y || 'transparent')
     const p1 = c1.p ?? (c2.p != null ? 100 - c2.p : 50)
-    v = v.slice(0, i) + (p1 >= 50 ? c1.cor : c2.cor) + v.slice(f + 1)
+    const exata = mistura(c1.cor, p1, c2.cor)
+    v = v.slice(0, i) + (exata || (p1 >= 50 ? c1.cor : c2.cor)) + v.slice(f + 1)
   }
   return v
 }
@@ -106,6 +147,7 @@ const args = process.argv.slice(2)
 const cq = (args.find((a) => a.startsWith('--cq=')) || '').slice(5)
 for (const arq of args.filter((a) => !a.startsWith('--'))) {
   const txt = readFileSync(arq, 'utf8')
+  lerVars(txt)
   let novo
   if (arq.endsWith('.html')) novo = txt.replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g, (_, a, css, c) => a + reserva(css) + c)
   else novo = reserva(txt)
