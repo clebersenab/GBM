@@ -216,8 +216,8 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .um-caret{transform:rotate(90deg);color:var(--mute);transition:transform .2s}
 .um-btn[aria-expanded=true] .um-caret{transform:rotate(-90deg)}
 @media(max-width:1100px){.nav-a{padding:9px 12px;font-size:14px}.hdr-in{gap:14px}.um-name{display:none}}
-/* Menu na barra de baixo: celular e qualquer tablet em pé (no iPad, o Chrome pode montar a página mais larga que 900 px) */
-@media(max-width:900px),(orientation:portrait) and (pointer:coarse) and (max-width:1366px){
+/* Menu na barra de baixo no celular (até 900 px) */
+@media(max-width:900px){
   .hdr-in{height:62px;padding:0 14px;gap:10px}
   .hdr-logo img{height:32px}
   .hdr-nav,.search kbd{display:none}
@@ -233,6 +233,25 @@ textarea:focus{outline:0;border-color:var(--blue)}
   .tabbar .nav-a{flex-direction:column;gap:3px;padding:6px 4px;border-radius:12px;font-size:11.5px;font-weight:700}
   .tabbar .nav-a.active{color:var(--orange)}
   .tabbar .nav-a .badge{position:absolute;top:2px;left:calc(50% + 6px)}
+}
+/* ...e em qualquer tablet em pé. A classe "toque" vem do index.html (tela de toque): no iPad, o Chrome em modo
+   computador monta a página mais larga que 900 px e diz que o ponteiro é fino, então nem a largura nem pointer:coarse servem. */
+@media(orientation:portrait) and (max-width:1366px){
+  html.toque .hdr-in{height:62px;padding:0 14px;gap:10px}
+  html.toque .hdr-logo img{height:32px}
+  html.toque .hdr-nav,html.toque .search kbd{display:none}
+  html.toque .search{width:42px;padding:0;border-color:transparent;background:none}
+  html.toque .search-btn{pointer-events:auto;width:42px;height:42px}
+  html.toque .search input,html.toque .search .search-clear{display:none}
+  html.toque .search.is-open{position:fixed;left:10px;right:10px;top:10px;width:auto;height:44px;z-index:5;background:var(--bg2);border-color:var(--blue);padding:0 10px 0 4px}
+  html.toque .search.is-open input,html.toque .search.is-open .search-clear{display:block}
+  html.toque .search.is-open .search-clear{display:grid}
+  html.toque .search.is-open .search-pop{left:-4px;right:-4px;width:auto;min-width:0}
+  html.toque .content{padding:12px 14px 100px}
+  html.toque .tabbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--glass);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+  html.toque .tabbar .nav-a{flex-direction:column;gap:3px;padding:6px 4px;border-radius:12px;font-size:11.5px;font-weight:700}
+  html.toque .tabbar .nav-a.active{color:var(--orange)}
+  html.toque .tabbar .nav-a .badge{position:absolute;top:2px;left:calc(50% + 6px)}
 }
 .search{position:relative;display:flex;align-items:center;gap:6px;color:var(--mute)}
 .search input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--ink);font:inherit;font-size:15px;padding:10px 0}
