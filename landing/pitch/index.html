@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBM — Pitch</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/*
+VOICE: pitch de negócio, direto, números primeiro, no formato do deck do ENAMED.
+IDEA: um relatório de investimento noturno: cada slide tem uma conclusão no título e a prova embaixo.
+PICTURE: gráficos e diagramas em HTML (barras, linha do tempo, mapa 2x2, fluxos), sem fotos.
+COLOUR and TYPE: noite #0b0d17, laranja GBM #f28c28, azul #62c8ed, roxo #b06fd3; Poppins + Inter.
+LAYOUT: deck de 19 slides, 72px de margem, um bloco visual dominante por slide.
+*/
+:root{--noite:#0b0d17;--card:#141831;--laranja:#f28c28;--azul:#62c8ed;--roxo:#b06fd3;--verde:#7ee0a1;--verm:#ff7a6b;--amar:#f3c56b;
+  --branco:#fff4e0;--branco2:#e6dccb;--cinza:#b3aa98;--cinza2:#7d7566;--linha:rgba(255,244,224,.1)}
+*{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',sans-serif;background:var(--noite);color:var(--branco);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.sg{font-family:'Poppins',sans-serif}
+.deck{position:relative;width:100vw;height:100vh;height:100dvh;overflow:hidden}
+.slide{position:absolute;inset:0;padding:70px 90px 80px;display:flex;flex-direction:column;justify-content:center;opacity:0;visibility:hidden;
+  transform:translateX(40px);transition:opacity .55s ease,transform .55s ease,visibility .55s;overflow-y:auto;
+  background:radial-gradient(ellipse at 85% -10%,#1d2252 0%,transparent 55%),radial-gradient(ellipse at -10% 110%,#1a1230 0%,transparent 50%),var(--noite)}
+.slide.active{opacity:1;visibility:visible;transform:none}.slide.prev{transform:translateX(-40px)}
+.slide.active .anim{animation:rise .65s ease both}
+.slide.active .anim:nth-child(2){animation-delay:.1s}.slide.active .anim:nth-child(3){animation-delay:.2s}
+.slide.active .anim:nth-child(4){animation-delay:.3s}.slide.active .anim:nth-child(5){animation-delay:.4s}.slide.active .anim:nth-child(6){animation-delay:.5s}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.slide,.slide.active .anim{transition:none;animation:none}}
+.kicker{font:600 13px Poppins;letter-spacing:.2em;text-transform:uppercase;color:var(--laranja);margin-bottom:14px}
+.slide h2{font-size:42px;font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px;max-width:1100px;text-wrap:balance}
+.slide h2 .c{color:var(--laranja)}.slide h2 .b{color:var(--azul)}
+.lead{font-size:19px;line-height:1.5;color:var(--branco2);max-width:860px;font-weight:300}
+.lead b,.lead strong{font-weight:600;color:#fff}
+p{color:var(--cinza);line-height:1.55}
+.src{font-size:12px;color:var(--cinza2);margin-top:16px;font-style:italic;line-height:1.45}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:rgba(255,244,224,.045);border:1px solid var(--linha);border-radius:16px;padding:20px 22px;position:relative}
+.card h4{font-size:16px;color:#fff;margin-bottom:6px;font-weight:600}
+.card p{font-size:14px}
+.card.hl{background:rgba(242,140,40,.09);border-color:rgba(242,140,40,.32)}
+.num{font:800 40px/1 Poppins;color:var(--laranja);margin-bottom:8px;letter-spacing:-.02em}
+.num.b{color:var(--azul)}.num.v{color:var(--verde)}.num.r{color:var(--roxo)}
+.num small{font-size:18px;font-weight:700}
+ul.lst{list-style:none;display:grid;gap:8px}
+ul.lst li{font-size:14.5px;color:var(--branco2);line-height:1.45;padding-left:18px;position:relative}
+ul.lst li::before{content:'';position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--dot,var(--laranja))}
+ul.lst b{color:#fff}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
+.pill{display:inline-block;font:600 12px Poppins;letter-spacing:.12em;text-transform:uppercase;background:rgba(242,140,40,.13);color:var(--laranja);
+  border:1px solid rgba(242,140,40,.3);border-radius:30px;padding:7px 15px;margin-bottom:22px;width:fit-content}
+/* barras horizontais */
+.bars{display:grid;gap:12px}
+.bar-row{display:grid;grid-template-columns:200px minmax(0,1fr) 92px;align-items:center;gap:14px;font-size:14px;color:var(--branco2)}
+.bar-row .v{font:700 15px Poppins;color:#fff;text-align:right;white-space:nowrap}
+.track{height:22px;border-radius:6px;background:rgba(255,244,224,.06);overflow:hidden}
+.track i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--laranja),#ffb25e);transition:width 1.1s cubic-bezier(.2,.7,.3,1)}
+.track i.b{background:linear-gradient(90deg,#2f8fb5,var(--azul))}.track i.r{background:linear-gradient(90deg,#7b3aa0,var(--roxo))}.track i.g{background:linear-gradient(90deg,#3f9e66,var(--verde))}.track i.x{background:linear-gradient(90deg,#a3463b,var(--verm))}
+/* tabela */
+table.t{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;border:1px solid var(--linha);border-radius:14px;overflow:hidden}
+.t th,.t td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--linha);vertical-align:top}
+.t th{font:600 11.5px Poppins;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza);background:rgba(255,244,224,.04)}
+.t td{color:var(--branco2)}.t tr:last-child td{border-bottom:0}
+.t td:first-child{font-weight:600;color:#fff;white-space:nowrap}
+.t tr.nos td{background:rgba(242,140,40,.1)}.t tr.nos td:first-child{color:var(--laranja)}
+.t td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* linha do tempo */
+.tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;position:relative;margin-top:26px}
+.tl::before{content:'';position:absolute;left:0;right:0;top:19px;height:3px;background:linear-gradient(90deg,var(--laranja),var(--azul),var(--roxo));border-radius:3px;opacity:.7}
+.tl>div{padding:0 14px 0 0;position:relative}
+.tl .dot{width:40px;height:40px;border-radius:50%;background:var(--noite);border:3px solid var(--laranja);display:grid;place-items:center;font:800 15px Poppins;color:var(--laranja);margin-bottom:16px;position:relative}
+.tl>div:nth-child(3) .dot{border-color:#b9a7d9;color:#b9a7d9}.tl>div:nth-child(4) .dot,.tl>div:nth-child(5) .dot{border-color:var(--azul);color:var(--azul)}
+.tl h4{font-size:16px;margin-bottom:4px}.tl .tk{font:700 13px Poppins;color:var(--laranja);margin-bottom:8px}
+.tl p{font-size:13.5px}
+/* 2x2 */
+.quad{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;height:420px;border:1px solid var(--linha);border-radius:16px;overflow:hidden}
+.quad>div{border:1px dashed rgba(255,244,224,.08);position:relative}
+.quad .ax{position:absolute;font:600 11px Poppins;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza2)}
+.dotc{position:absolute;display:flex;align-items:center;gap:8px;font:600 13px Poppins;color:var(--branco2);transform:translate(-50%,-50%);white-space:nowrap}
+.dotc i{width:14px;height:14px;border-radius:50%;background:var(--cinza);box-shadow:0 0 0 4px rgba(255,244,224,.06);flex:none}
+.dotc.nos{color:var(--laranja);font-size:16px}.dotc.nos i{width:22px;height:22px;background:var(--laranja);box-shadow:0 0 0 6px rgba(242,140,40,.2),0 0 26px var(--laranja)}
+/* mapa empatia */
+.emp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.emp .centro{grid-column:2;grid-row:1/3;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:radial-gradient(circle at 50% 30%,rgba(242,140,40,.2),rgba(242,140,40,.03) 70%);border-color:rgba(242,140,40,.32)}
+.emp h4{font-size:12px!important;letter-spacing:.14em;text-transform:uppercase;color:var(--azul)!important}
+.emp .dor h4{color:var(--verm)!important}.emp .ganho h4{color:var(--verde)!important}
+/* fluxo escola */
+.who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.who .card{border-top:3px solid var(--c)}
+.who .card h3{font-size:20px;color:var(--c);margin-bottom:10px}
+/* ui */
+.progress{position:fixed;bottom:0;left:0;height:3px;background:var(--laranja);z-index:100;transition:width .5s;box-shadow:0 0 12px var(--laranja)}
+.nav-dots{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100}
+.nav-dots button{width:7px;height:7px;border-radius:50%;border:0;background:rgba(255,244,224,.25);cursor:pointer;padding:0;transition:all .3s}
+.nav-dots button.on{background:var(--laranja);width:20px;border-radius:4px}
+.arrows{position:fixed;bottom:16px;right:24px;display:flex;gap:10px;z-index:100}
+.arrows button{width:44px;height:44px;border-radius:50%;border:1px solid var(--linha);background:rgba(255,244,224,.06);color:#fff;cursor:pointer;font-size:18px;backdrop-filter:blur(8px)}
+.arrows button:hover{background:var(--laranja);color:var(--noite)}.arrows button:disabled{opacity:.3;cursor:default}
+.arrows button:focus-visible,.nav-dots button:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+.counter{position:fixed;top:24px;right:30px;font:500 13px Poppins;color:var(--cinza);z-index:100;letter-spacing:.1em}.counter b{color:#fff}
+.brand{position:fixed;top:20px;left:28px;z-index:100;height:28px}
+@media(max-width:860px){
+  .slide{padding:66px 20px 86px;justify-content:flex-start}
+  .slide h2{font-size:28px}.lead{font-size:16px}
+  .two,.g2,.g3,.g4,.emp,.who{grid-template-columns:1fr}.emp .centro{grid-column:auto;grid-row:auto}
+  .tl{grid-template-columns:1fr;gap:18px}.tl::before{display:none}
+  .bar-row{grid-template-columns:110px minmax(0,1fr) 74px;font-size:12px}
+  .quad{height:340px}.dotc{font-size:11px}
+  .t{font-size:12px}.t th,.t td{padding:8px}
+  .num{font-size:30px}
+}
+</style>
+</head>
+<body>
+<img class="brand" src="data:image/png;base64,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" alt="GBM">
+<div class="counter"><b id="cur">01</b> / <span id="tot">00</span></div>
+<div class="deck">
+
+<!-- 1 CAPA -->
+<section class="slide active" data-i="0">
+  <div class="pill anim">Oportunidade de negócio · Nov/2026</div>
+  <h2 class="anim" style="font-size:64px;line-height:1.02;max-width:900px">Histórias para<br>ler <span class="c">juntos.</span></h2>
+  <p class="lead anim" style="max-width:760px">Livros digitais para crianças de 0 a 8 anos em que cada história é a semente de um grande clássico. Assinatura para a família, livro impresso vendido dentro do app e distribuição por lojas de brinquedo e sistemas de ensino.</p>
+  <div class="grid g4 anim" style="margin-top:34px;max-width:1080px">
+    <div class="card"><div class="num">R$ 185 mi</div><p>faturamento da Leiturinha em 2025: famílias já pagam para ler com os filhos</p></div>
+    <div class="card"><div class="num b">78%</div><p>margem bruta da Leiturinha, mesmo vendendo livro físico</p></div>
+    <div class="card"><div class="num v">4 mi</div><p>alunos em escolas privadas atendidas por um único grupo de sistemas de ensino</p></div>
+    <div class="card"><div class="num r">Pronto</div><p>plataforma no ar: leitor, quiz, perfis, administração e controle de acesso</p></div>
+  </div>
+</section>
+
+<!-- 2 DOR -->
+<section class="slide" data-i="1">
+  <div class="kicker anim">O problema</div>
+  <h2 class="anim">As crianças estão deixando de ler, <span class="c">e a tela está ganhando.</span></h2>
+  <div class="two anim" style="margin-top:10px;align-items:start">
+    <div class="bars" id="dor">
+      <p style="font:600 13px Poppins;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase">Leitores entre estudantes do 1º ao 5º ano</p>
+      <div class="bar-row"><span>2019</span><div class="track"><i data-w="49"></i></div><span class="v">49%</span></div>
+      <div class="bar-row"><span>2024</span><div class="track"><i class="x" data-w="40"></i></div><span class="v">40%</span></div>
+      <p style="font:600 13px Poppins;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase;margin-top:14px">Crianças que usam internet no tempo livre</p>
+      <div class="bar-row"><span>2015</span><div class="track"><i class="b" data-w="47"></i></div><span class="v">47%</span></div>
+      <div class="bar-row"><span>2024</span><div class="track"><i class="b" data-w="79"></i></div><span class="v">79%</span></div>
+    </div>
+    <div class="grid" style="gap:14px">
+      <div class="card"><h4>O pai quer, mas o livro não ajuda</h4><p>Livros infantis repetitivos entediam o adulto. Quem lê por obrigação lê menos, e a criança percebe.</p></div>
+      <div class="card"><h4>A vontade existe</h4><p>Mais de 80% das crianças de 5 a 10 anos dizem gostar de ler. O que falta é história que prenda a criança e o adulto ao mesmo tempo.</p></div>
+      <div class="card hl"><h4>O GBM resolve o conteúdo, não o suporte</h4><p>Não dizemos que o digital é melhor que o papel. Entregamos histórias melhores e vendemos o impresso também.</p></div>
+    </div>
+  </div>
+  <p class="src anim">Fonte: Retratos da Leitura no Brasil, 6ª edição (Instituto Pró-Livro, 2024), via Blog da Letrinhas e PublishNews.</p>
+</section>
+
+<!-- 3 EMPATIA -->
+<section class="slide" data-i="2">
+  <div class="kicker anim">Mapa da empatia</div>
+  <h2 class="anim" style="font-size:36px">Quem compra: <span class="c">pai e mãe de crianças de 0 a 8 anos.</span></h2>
+  <div class="emp anim" style="margin-top:6px">
+    <div class="card"><h4>Pensa e sente</h4><ul class="lst"><li>"Quero que meu filho goste de ler, como eu gostava."</li><li>Culpa pelo tempo de tela e pelo pouco tempo junto.</li></ul></div>
+    <div class="card centro"><h3 style="font-size:22px;margin-bottom:6px">28 a 42 anos</h3><p style="font-size:14px">Classe média, filhos pequenos, celular e tablet em casa. Lê para os filhos à noite, quando consegue.</p><p style="font-size:13px;margin-top:12px;color:var(--laranja)">Decide pela escola, pelo pediatra e pelo que outros pais mostram.</p></div>
+    <div class="card"><h4>Vê</h4><ul class="lst"><li>Filhos presos a vídeos curtos.</li><li>Influenciadores abrindo kits de livros com os filhos.</li></ul></div>
+    <div class="card"><h4>Ouve</h4><ul class="lst"><li>Escola e pediatra: "leiam todos os dias".</li><li>"Criança que lê vai melhor na escola."</li></ul></div>
+    <div class="card"><h4>Fala e faz</h4><ul class="lst"><li>Compra livro por impulso, que fica na estante.</li><li>Lê a mesma história pela décima vez, sem vontade.</li></ul></div>
+    <div class="card dor"><h4>Dores</h4><ul class="lst" style="--dot:var(--verm)"><li>Pouco tempo e energia no fim do dia.</li><li>Não sabe escolher livro bom por idade.</li><li>Livro físico caro, que a criança larga.</li></ul></div>
+    <div class="card ganho" style="grid-column:2/4"><h4>Ganhos que procura</h4><ul class="lst" style="--dot:var(--verde)"><li>Um momento diário de vínculo, que o próprio adulto também aproveita.</li><li>Formar um leitor e plantar valores (coragem, fé, amizade) sem sermão.</li><li>Ver o filho reconhecer, anos depois, o clássico que conheceu pequeno.</li></ul></div>
+  </div>
+</section>
+
+<!-- 4 PRODUTO -->
+<section class="slide" data-i="3">
+  <div class="kicker anim">O produto</div>
+  <h2 class="anim">Toda história é a <span class="c">semente</span> de um clássico.</h2>
+  <div class="grid g4 anim" style="margin-top:8px">
+    <div class="card"><div class="num">1</div><h4>Obra semente</h4><p>Cada livro nasce de um clássico (Moby Dick, Dom Quixote, a Bíblia) ou de um grande filme. Não é adaptação: é uma história nova, inspirada, para a idade.</p></div>
+    <div class="card"><div class="num">2</div><h4>Valores e jornadas</h4><p>Cada título cultiva um valor (coragem, fé, perseverança) e pode apresentar uma jornada de futuro (medicina, direito, empreender).</p></div>
+    <div class="card"><div class="num">3</div><h4>Ler junto</h4><p>Perguntas para conversar em cada página, quiz no fim, palavras novas e diário da leitura. O adulto participa.</p></div>
+    <div class="card"><div class="num">4</div><h4>"Quando crescer, leia"</h4><p>Todo livro termina indicando a obra original. A criança cresce sabendo qual clássico a espera.</p></div>
+  </div>
+  <div class="grid g3 anim" style="margin-top:16px">
+    <div class="card"><h4 style="color:var(--azul)">Para os pais</h4><p>Jardim de valores e portas de jornadas mostram o que cada filho está cultivando.</p></div>
+    <div class="card"><h4 style="color:var(--azul)">Para a família</h4><p>Até 5 perfis, estante, lista "quero ler" e PDF de cada livro, que é da família para sempre.</p></div>
+    <div class="card"><h4 style="color:var(--azul)">Para a estante</h4><p>Cada título pode ser comprado impresso, com capa firme, dentro da plataforma.</p></div>
+  </div>
+</section>
+
+<!-- 5 PRONTO + PROVA -->
+<section class="slide" data-i="4">
+  <div class="kicker anim">Onde estamos</div>
+  <h2 class="anim">Plataforma no ar. <span class="c">Três livros lidos.</span> Três crianças pedindo o próximo.</h2>
+  <div class="two anim" style="align-items:start;margin-top:6px">
+    <div class="card"><h4 style="margin-bottom:12px">Construído e funcionando</h4><ul class="lst" style="--dot:var(--azul)">
+      <li><b>Leitor</b> em formato de livro aberto, em tablet, celular e computador, inclusive iPads antigos</li>
+      <li><b>Perfis</b> por filho, com estante, progresso e recomendações</li>
+      <li><b>Quiz</b> de compreensão e perguntas para conversar</li>
+      <li><b>Administração</b> para cadastrar, revisar e publicar livros</li>
+      <li><b>Contra compartilhamento:</b> 2 leituras ao mesmo tempo, 6 aparelhos e PDF com o nome da família</li>
+      <li><b>86 títulos</b> planejados no catálogo, com capas e fichas</li></ul></div>
+    <div class="card hl"><h4 style="margin-bottom:12px">A primeira prova (em casa)</h4><ul class="lst">
+      <li><b>Moby Dick:</b> as crianças acertaram as 4 perguntas do quiz e pediram outra história</li>
+      <li><b>As Baquetas do Bento</b> (semente: Whiplash) e <b>O Diamante da Gi</b> (semente: Aladim, das Mil e Uma Noites)</li>
+      <li>A irmã ficou brava até ganhar o livro dela</li></ul>
+      <p style="margin-top:14px;font-size:13px">Honesto: a prova é de uma família, e o autor é o pai. O próximo passo é o teste com 20 famílias de fora.</p></div>
+  </div>
+</section>
+
+<!-- 6 MERCADO -->
+<section class="slide" data-i="5">
+  <div class="kicker anim">Tamanho do mercado</div>
+  <h2 class="anim">Milhões de crianças, <span class="c">e um mercado privado que cresce.</span></h2>
+  <div class="grid g4 anim" style="margin-top:8px">
+    <div class="card"><div class="num">2,38 mi</div><h4>nascimentos em 2024</h4><p>Cada ano, uma nova geração entra na faixa de 0 a 8 anos.</p></div>
+    <div class="card"><div class="num">~22 mi</div><h4>crianças de 0 a 8 anos</h4><p>Estimativa nossa a partir dos nascimentos anuais e do Censo 2022 (40,1 mi de 0 a 14 anos).</p></div>
+    <div class="card"><div class="num b">9,5 mi</div><h4>matrículas na rede privada</h4><p>Educação básica, 2024. A rede privada cresceu enquanto a pública encolheu.</p></div>
+    <div class="card"><div class="num v">86,7%</div><h4>das crianças de 4 a 5 anos na escola</h4><p>E 33,9% das de até 3 anos já frequentam creche: a escola alcança a família cedo.</p></div>
+  </div>
+  <div class="card hl anim" style="margin-top:16px"><p style="font-size:15.5px;color:var(--branco2)"><b style="color:#fff">Leitura de mercado:</b> a natalidade cai (-5,8% em 2024), então o crescimento não vem de mais crianças, e sim de <b style="color:#fff">mais gasto por criança</b> nas famílias de classe média e alta, o mesmo público que paga escola privada e clube de livros.</p></div>
+  <p class="src anim">Fontes: IBGE, Estatísticas do Registro Civil 2024 e Censo 2022; Inep, Censo Escolar 2024.</p>
+</section>
+
+<!-- 7 LEITURINHA DRE -->
+<section class="slide" data-i="6">
+  <div class="kicker anim">O benchmark: Leiturinha S.A. em 2025</div>
+  <h2 class="anim">O maior clube de livros infantis do país <span class="c">fatura R$ 185 milhões e lucra R$ 20 milhões.</span></h2>
+  <div class="two anim" style="align-items:start;margin-top:4px">
+    <div class="bars" id="dre">
+      <p style="font:600 13px Poppins;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase">Para cada R$ 100 de receita líquida (2025)</p>
+      <div class="bar-row"><span>Custo dos livros e kits</span><div class="track"><i class="x" data-w="21.7"></i></div><span class="v">R$ 21,7</span></div>
+      <div class="bar-row"><span>Despesas comerciais</span><div class="track"><i class="r" data-w="34.1"></i></div><span class="v">R$ 34,1</span></div>
+      <div class="bar-row"><span>Despesas administrativas</span><div class="track"><i class="b" data-w="27"></i></div><span class="v">R$ 27,0</span></div>
+      <div class="bar-row"><span>Resultado operacional</span><div class="track"><i class="g" data-w="16.8"></i></div><span class="v">R$ 16,8</span></div>
+      <div class="bar-row"><span>Lucro líquido</span><div class="track"><i data-w="11.2"></i></div><span class="v">R$ 11,2</span></div>
+    </div>
+    <table class="t">
+      <tr><th>Indicador</th><th style="text-align:right">2024</th><th style="text-align:right">2025</th></tr>
+      <tr><td>Receita bruta</td><td class="r">R$ 139,2 mi</td><td class="r">R$ 185,3 mi</td></tr>
+      <tr><td>Crescimento</td><td class="r">—</td><td class="r">+33%</td></tr>
+      <tr><td>Margem bruta</td><td class="r">69,8%</td><td class="r">78,3%</td></tr>
+      <tr><td>Despesas comerciais</td><td class="r">R$ 44,4 mi</td><td class="r">R$ 61,6 mi</td></tr>
+      <tr><td>Lucro líquido</td><td class="r">R$ 8,0 mi</td><td class="r">R$ 20,3 mi</td></tr>
+      <tr><td>Dividendos pagos</td><td class="r">R$ 0,6 mi</td><td class="r">R$ 29,0 mi</td></tr>
+      <tr><td>Deduções da receita</td><td class="r">2,6%</td><td class="r">2,3%</td></tr>
+    </table>
+  </div>
+  <p class="src anim">Fonte: Leiturinha S.A., Demonstrações Financeiras 2025 e 2024, publicadas no Jornal Mantiqueira em 28/03/2026. Percentuais calculados por nós sobre a receita líquida. A empresa projetava R$ 200 mi para 2025 (PublishNews, jul/2025) e entregou R$ 185 mi.</p>
+</section>
+
+<!-- 8 LIÇÕES -->
+<section class="slide" data-i="7">
+  <div class="kicker anim">O que o balanço da Leiturinha ensina</div>
+  <h2 class="anim">O jogo é <span class="c">aquisição e retenção.</span> E o digital joga com vantagem.</h2>
+  <div class="grid g3 anim" style="margin-top:6px">
+    <div class="card"><div class="num">R$ 45</div><h4>por família por mês</h4><p>Receita de 2025 dividida pelos 340 mil cadastros ativos (cálculo nosso). É quanto a família de classe média aceita pagar.</p></div>
+    <div class="card"><div class="num">25 meses</div><h4>de vida média da assinatura</h4><p>Dado da própria empresa. Uma família rende cerca de R$ 1.100 de receita ao longo da vida.</p></div>
+    <div class="card"><div class="num r">34%</div><h4>da receita vai para vender</h4><p>São R$ 61,6 mi em despesas comerciais, ou cerca de R$ 180 por cadastro por ano. Influenciadores destravaram o crescimento.</p></div>
+    <div class="card"><div class="num x" style="color:var(--verm)">22%</div><h4>da receita é custo físico</h4><p>Livro, kit e estoque. Sem contar o frete e a operação de envio. No GBM, o digital não tem esse custo.</p></div>
+    <div class="card"><div class="num v">85%</div><h4>dos livros são próprios</h4><p>A Leiturinha virou editora para ganhar margem. O GBM nasce editora: 100% do catálogo é próprio.</p></div>
+    <div class="card"><div class="num b">2,3%</div><h4>de deduções sobre a receita</h4><p>Livro tem imunidade tributária. O GBM usa a mesma lógica: venda de e-book com ISBN e download definitivo.</p></div>
+  </div>
+  <p class="src anim">Fontes: Demonstrações Financeiras 2025 (Jornal Mantiqueira, 28/03/2026); PublishNews, 24/07/2025 (vida útil, produção própria e influenciadores).</p>
+</section>
+
+<!-- 9 CONCORRENTES -->
+<section class="slide" data-i="8">
+  <div class="kicker anim">Concorrentes</div>
+  <h2 class="anim">Quem já está no jogo, <span class="c">e onde ninguém chegou.</span></h2>
+  <table class="t anim" style="margin-top:6px">
+    <tr><th>Empresa</th><th>Modelo</th><th>Para quem</th><th>Escala conhecida</th><th>Conteúdo</th><th>Ligação com clássicos</th></tr>
+    <tr><td>Leiturinha</td><td>Clube físico mensal + app com biblioteca</td><td>Família</td><td>340 mil cadastros; R$ 185 mi (2025)</td><td>85% próprio</td><td>Não</td></tr>
+    <tr><td>Quindim</td><td>Clube físico mensal</td><td>Família</td><td>15 mil crianças (2021)</td><td>Curadoria de terceiros</td><td>Não</td></tr>
+    <tr><td>Árvore</td><td>Biblioteca digital gamificada</td><td>Escola</td><td>35 mil livros de 600 editoras; 1 mi de alunos</td><td>Terceiros</td><td>Às vezes</td></tr>
+    <tr><td>Elefante Letrado</td><td>Plataforma digital de leitura</td><td>Escola</td><td>Desde 2013, da educação infantil ao médio</td><td>Próprio e terceiros</td><td>Não</td></tr>
+    <tr><td>Vídeos e redes</td><td>Contação gratuita</td><td>Criança</td><td>Ilimitada</td><td>Nenhuma curadoria</td><td>Não</td></tr>
+    <tr class="nos"><td>GBM</td><td>E-book por assinatura + impresso no app</td><td>Família e escola</td><td>Início</td><td>100% próprio</td><td>Em todo livro</td></tr>
+  </table>
+  <p class="lead anim" style="margin-top:16px;font-size:16px">Os clubes vendem para a família, mas com custo físico. As plataformas digitais vendem para a escola, mas com acervo de terceiros e sem o pai. <b>O GBM é o único que fala com os dois, com conteúdo próprio, e com um propósito que o pai entende em uma frase.</b></p>
+  <p class="src anim">Fontes: Leiturinha (balanço 2025, PublishNews); Quindim (PublishNews, 2021); Árvore (Mobile Time, 2021); Elefante Letrado (App Store).</p>
+</section>
+
+<!-- 10 POSICIONAMENTO -->
+<section class="slide" data-i="9">
+  <div class="kicker anim">Posicionamento</div>
+  <h2 class="anim">O espaço vazio: <span class="c">conteúdo próprio, digital, para família e escola.</span></h2>
+  <div class="two anim" style="grid-template-columns:1.2fr .8fr;align-items:center">
+    <div class="quad">
+      <div></div><div></div><div></div><div></div>
+      <span class="ax" style="left:14px;top:12px">Conteúdo próprio</span>
+      <span class="ax" style="left:14px;bottom:12px">Conteúdo de terceiros</span>
+      <span class="ax" style="left:14px;top:50%;transform:translateY(-140%)">Físico</span>
+      <span class="ax" style="right:14px;top:50%;transform:translateY(-140%)">Digital</span>
+      <span class="dotc" style="left:30%;top:30%"><i></i>Leiturinha</span>
+      <span class="dotc" style="left:22%;top:72%"><i></i>Quindim</span>
+      <span class="dotc" style="left:70%;top:76%"><i></i>Árvore</span>
+      <span class="dotc" style="left:64%;top:58%"><i></i>Elefante Letrado</span>
+      <span class="dotc" style="left:82%;top:90%"><i></i>Vídeos</span>
+      <span class="dotc nos" style="left:76%;top:24%"><i></i>GBM</span>
+    </div>
+    <div class="grid" style="gap:14px">
+      <div class="card"><h4>Por que é defensável</h4><p>Um catálogo próprio, ligado a clássicos e organizado por valores e jornadas, leva anos para copiar.</p></div>
+      <div class="card"><h4>Por que os grandes não fazem</h4><p>O clube físico vive do kit e do frete. Baratear para o digital canibaliza o próprio modelo.</p></div>
+      <div class="card hl"><h4>Por que agora</h4><p>A produção de conteúdo ilustrado ficou mais barata, e a escola procura projetos de leitura que envolvam a família.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 ROADMAP -->
+<section class="slide" data-i="10">
+  <div class="kicker anim">Roadmap de receita</div>
+  <h2 class="anim">Entrar barato, <span class="c">subir o ticket</span> e vender o livro de verdade.</h2>
+  <div class="tl anim">
+    <div><div class="dot">1</div><div class="tk">R$ 19,90/mês</div><h4>Lançamento</h4><p>Assinatura da família com catálogo mínimo de 20 a 30 livros. Foco em retenção e indicação.</p></div>
+    <div><div class="dot">2</div><div class="tk">R$ 29,90/mês</div><h4>Aumento de ticket</h4><p>Com catálogo maior, coleções e boxes, o preço sobe. Ainda abaixo dos R$ 45 por mês que a família paga no clube físico.</p></div>
+    <div><div class="dot">3</div><div class="tk">R$ 39,90 + frete</div><h4>Impresso no app</h4><p>A criança lê, se apega e pede o livro de verdade. Capa firme, impresso sob demanda, sem estoque parado.</p></div>
+    <div><div class="dot">4</div><div class="tk">B2B2C</div><h4>Lojas e escolas</h4><p>Plano anual vendido em lojas de brinquedo e projeto de leitura com escolas e sistemas de ensino.</p></div>
+    <div><div class="dot">5</div><div class="tk">A avaliar</div><h4>Clube com envio</h4><p>Só se os dados mostrarem demanda: assinatura com livro físico mensal, como os clubes.</p></div>
+  </div>
+  <div class="grid g3 anim" style="margin-top:30px">
+    <div class="card"><h4>Receita recorrente</h4><p>Assinatura mensal ou anual, com PDF de cada livro para a família.</p></div>
+    <div class="card"><h4>Receita transacional</h4><p>Livro impresso, compra direcionada pelo que a criança já leu e amou.</p></div>
+    <div class="card"><h4>Receita de canal</h4><p>Escolas e varejo, com repasse para quem indica e vende.</p></div>
+  </div>
+</section>
+
+<!-- 12 CANAIS -->
+<section class="slide" data-i="11">
+  <div class="kicker anim">Distribuição</div>
+  <h2 class="anim">Três portas de entrada, <span class="c">duas delas sem pagar anúncio.</span></h2>
+  <div class="grid g3 anim" style="margin-top:6px">
+    <div class="card"><div class="num" style="font-size:30px">Direto</div><h4>Pais, com influenciadores</h4><p>O que destravou a Leiturinha: famílias reais lendo com os filhos. O GBM tem uma história de origem real, de pai com os três filhos.</p></div>
+    <div class="card"><div class="num b" style="font-size:30px">Lojas de brinquedo</div><h4>Plano anual no caixa</h4><p>Vendido como presente, parcelado no cartão. A maior rede do país tem 293 lojas e já fez ação com a Leiturinha (1 mês grátis), sinal de que o canal aceita o produto.</p></div>
+    <div class="card hl"><div class="num v" style="font-size:30px">Escolas</div><h4>Sistemas de ensino e escolas privadas</h4><p>Só a Arco reúne 4 milhões de alunos em 10 mil escolas privadas. A escola já é quem o pai escuta sobre leitura.</p></div>
+  </div>
+  <div class="card anim" style="margin-top:16px"><p style="font-size:15px;color:var(--branco2)">Em uma pesquisa com mais de 700 mil alunos, a Árvore concluiu que <b style="color:#fff">os professores são os grandes influenciadores da leitura</b>. Quem convence a criança a ler é a professora, e quem paga é o pai. O canal escolar une os dois.</p></div>
+  <p class="src anim">Fontes: Ri Happy, 293 lojas (Economic News Brasil, set/2026); parceria Ri Happy e Leiturinha (Consumidor Moderno); Arco Educação (EY, nov/2025); Árvore (PublishNews).</p>
+</section>
+
+<!-- 13 MODELO ESCOLA -->
+<section class="slide" data-i="12">
+  <div class="kicker anim">O modelo com as escolas</div>
+  <h2 class="anim">Um projeto de leitura em que <span class="c">ganham a escola, a professora e o pai.</span></h2>
+  <div class="who anim" style="margin-top:6px">
+    <div class="card" style="--c:var(--azul)"><h3>A escola</h3><ul class="lst" style="--dot:var(--azul)"><li><b>Projeto de leitura em família pronto,</b> com relatório de quanto cada turma leu</li><li><b>Receita nova:</b> repasse recorrente sobre cada família que assina pela escola</li><li>Um diferencial para mostrar aos pais na matrícula</li></ul></div>
+    <div class="card" style="--c:var(--laranja)"><h3>A professora</h3><ul class="lst"><li><b>Painel da turma:</b> quem leu, quem acertou o quiz, quais valores apareceram</li><li><b>Atividades prontas</b> para a sala a partir de cada livro</li><li>Reconhecimento e bonificação pelas turmas mais leitoras</li></ul></div>
+    <div class="card" style="--c:var(--verde)"><h3>O pai</h3><ul class="lst" style="--dot:var(--verde)"><li><b>Preço de escola,</b> menor que o da assinatura direta</li><li>Leitura que conversa com o que o filho vê na sala</li><li>Continua com tudo o que já baixou, mesmo se trocar de escola</li></ul></div>
+  </div>
+  <div class="grid g2 anim" style="margin-top:16px">
+    <div class="card"><h4 style="color:var(--azul)">Modelo A: venda conjunta com o sistema de ensino</h4><p>O GBM entra no portfólio do sistema como módulo de leitura em família, cobrado por aluno por ano junto com o material. O sistema ganha um produto novo para vender às escolas que já atende.</p></div>
+    <div class="card"><h4 style="color:var(--verde)">Modelo B: venda direta ao pai, indicada pela escola</h4><p>A escola divulga um link próprio, o pai assina com desconto e a escola recebe um percentual de cada mensalidade enquanto a família continuar assinando.</p></div>
+  </div>
+</section>
+
+<!-- 14 MARGEM -->
+<section class="slide" data-i="13">
+  <div class="kicker anim">Por que dá para dividir</div>
+  <h2 class="anim">Margem alta permite <span class="c">pagar bem quem distribui.</span></h2>
+  <div class="two anim" style="align-items:start;margin-top:6px">
+    <div class="bars" id="margem">
+      <p style="font:600 13px Poppins;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase">De cada R$ 29,90 de assinatura (estimativa)</p>
+      <div class="bar-row"><span>Impostos (e-book)</span><div class="track"><i class="x" data-w="2.3"></i></div><span class="v">R$ 0,70</span></div>
+      <div class="bar-row"><span>Pagamento e infraestrutura</span><div class="track"><i class="b" data-w="8"></i></div><span class="v">R$ 2,40</span></div>
+      <div class="bar-row"><span>Repasse ao canal (25%)</span><div class="track"><i class="r" data-w="25"></i></div><span class="v">R$ 7,48</span></div>
+      <div class="bar-row"><span>Fica com o GBM</span><div class="track"><i class="g" data-w="64.7"></i></div><span class="v">R$ 19,34</span></div>
+    </div>
+    <div class="grid" style="gap:14px">
+      <div class="card"><h4>Sem custo físico por assinante</h4><p>Na Leiturinha, 22% da receita é livro e kit, mais frete. No GBM, o custo de cada livro é fixo: produzido uma vez, lido por todas as famílias.</p></div>
+      <div class="card"><h4>Canal mais barato que anúncio</h4><p>A Leiturinha gasta 34% da receita para vender. Pagar 25% a uma escola ou loja, só quando a venda acontece, é mais previsível.</p></div>
+      <div class="card hl"><h4>O impresso entra como lucro extra</h4><p>R$ 39,90 mais frete, com lucro estimado de R$ 15 a R$ 25 por livro conforme o tipo de impressão.</p></div>
+    </div>
+  </div>
+  <p class="src anim">Estimativas nossas, a validar: impostos pelo parecer jurídico da operação atual (cerca de 2,28%); pagamento e infraestrutura em 8%; repasse de 25% como hipótese de negociação.</p>
+</section>
+
+<!-- 15 PROJEÇÕES -->
+<section class="slide" data-i="14">
+  <div class="kicker anim">Projeções</div>
+  <h2 class="anim">Com 30 mil famílias, <span class="c">cerca de R$ 11,5 milhões por ano.</span></h2>
+  <table class="t anim" style="margin-top:6px">
+    <tr><th>Cenário</th><th style="text-align:right">Famílias</th><th style="text-align:right">Mensalidade</th><th style="text-align:right">Compram impresso no mês</th><th style="text-align:right">Assinatura / ano</th><th style="text-align:right">Impresso / ano</th><th style="text-align:right">Total / ano</th></tr>
+    <tr><td>Validação</td><td class="r">1.000</td><td class="r">R$ 19,90</td><td class="r">5%</td><td class="r">R$ 239 mil</td><td class="r">R$ 24 mil</td><td class="r">R$ 263 mil</td></tr>
+    <tr><td>Tração</td><td class="r">5.000</td><td class="r">R$ 29,90</td><td class="r">5%</td><td class="r">R$ 1,79 mi</td><td class="r">R$ 120 mil</td><td class="r">R$ 1,9 mi</td></tr>
+    <tr class="nos"><td>Meta</td><td class="r">30.000</td><td class="r">R$ 29,90</td><td class="r">5%</td><td class="r">R$ 10,8 mi</td><td class="r">R$ 718 mil</td><td class="r">R$ 11,5 mi</td></tr>
+  </table>
+  <div class="grid g3 anim" style="margin-top:18px">
+    <div class="card"><div class="num" style="font-size:32px">~9%</div><p>30 mil famílias são cerca de 9% dos cadastros ativos da Leiturinha.</p></div>
+    <div class="card"><div class="num b" style="font-size:32px">1%</div><p>dos 4 milhões de alunos de um único grupo de sistemas de ensino já seriam 40 mil famílias.</p></div>
+    <div class="card"><div class="num v" style="font-size:32px">R$ 747</div><p>de receita por família ao longo da vida, se ela ficar os mesmos 25 meses da média da Leiturinha.</p></div>
+  </div>
+  <p class="src anim">Receita bruta, sem descontar repasses de canal. Impresso a R$ 39,90 por livro, frete à parte. Premissas a validar no teste com famílias.</p>
+</section>
+
+<!-- 16 SWOT -->
+<section class="slide" data-i="15">
+  <div class="kicker anim">Matriz SWOT</div>
+  <h2 class="anim" style="margin-bottom:18px">Forças e pontos de <span class="c">atenção.</span></h2>
+  <div class="grid g2" style="gap:14px">
+    <div class="card anim" style="border-top:3px solid var(--verde)"><h4 style="color:var(--verde)">Forças</h4><ul class="lst" style="--dot:var(--verde)"><li>Proposta única: cada livro é semente de um clássico</li><li>Catálogo 100% próprio, sem custo físico por assinante</li><li>Plataforma pronta e operada em casa</li><li>Experiência em edtech de escala e em venda de e-book com estrutura fiscal de livro</li></ul></div>
+    <div class="card anim" style="border-top:3px solid var(--verm)"><h4 style="color:var(--verm)">Fraquezas</h4><ul class="lst" style="--dot:var(--verm)"><li>Catálogo pequeno no início (3 livros prontos)</li><li>Validação feita só em uma família</li><li>Marca nova, sem audiência própria</li><li>Produção de ilustrações ainda manual</li></ul></div>
+    <div class="card anim" style="border-top:3px solid var(--azul)"><h4 style="color:var(--azul)">Oportunidades</h4><ul class="lst" style="--dot:var(--azul)"><li>Família já paga cerca de R$ 45 por mês por leitura infantil</li><li>Escolas e sistemas de ensino buscando projetos de leitura</li><li>Lojas de brinquedo vendendo plano anual como presente</li><li>Impresso no app e coleções (Bíblia, santos, Mil e Uma Noites)</li></ul></div>
+    <div class="card anim" style="border-top:3px solid var(--amar)"><h4 style="color:var(--amar)">Ameaças</h4><ul class="lst" style="--dot:var(--amar)"><li>Resistência de pais à tela para crianças pequenas</li><li>A Leiturinha já tem app com biblioteca e pode ampliar o digital</li><li>Natalidade em queda</li><li>Interpretação fiscal do e-book na reforma tributária</li></ul></div>
+  </div>
+</section>
+
+<!-- 17 PRÓXIMOS PASSOS -->
+<section class="slide" data-i="16">
+  <div class="kicker anim">Próximos passos</div>
+  <h2 class="anim">Do produto pronto para o <span class="c">mercado provado.</span></h2>
+  <div class="grid g4 anim" style="margin-top:6px">
+    <div class="card"><div class="num">1</div><h4>Teste com 20 famílias</h4><p>30 dias de acesso. Medir quantas continuam lendo, livros por semana e indicação espontânea.</p></div>
+    <div class="card"><div class="num">2</div><h4>Catálogo mínimo</h4><p>20 a 30 livros prontos antes de cobrar, com ilustradora profissional.</p></div>
+    <div class="card"><div class="num">3</div><h4>Piloto com 1 escola</h4><p>Projeto de leitura em família com uma escola privada, para testar o Modelo B e o painel da professora.</p></div>
+    <div class="card"><div class="num">4</div><h4>Cobrança e edição</h4><p>Pagamento, termos de uso, ISBN, ficha catalográfica e impressão sob demanda.</p></div>
+  </div>
+  <div class="card anim" style="margin-top:16px"><h4>O que vamos medir antes de escalar</h4><p>Permanência após 30 e 90 dias · livros lidos por família por semana · compra do impresso · custo para conquistar cada família em cada canal.</p></div>
+</section>
+
+<!-- 18 TESE -->
+<section class="slide" data-i="17" style="align-items:center;text-align:center">
+  <div class="pill anim">A tese em uma frase</div>
+  <h2 class="anim" style="font-size:40px;line-height:1.22;max-width:980px">As famílias já pagam R$ 185 milhões por ano para ler com os filhos. O GBM entrega <span class="c">histórias melhores, por menos,</span> com margem para chegar a elas pelas escolas e pelas lojas, e com um caminho até os grandes clássicos.</h2>
+  <p class="lead anim" style="margin-top:18px">O produto está pronto e as crianças pediram o próximo livro. Falta provar fora de casa.</p>
+  <p class="src anim">Documento de trabalho · tese em construção · números a calibrar com o teste com famílias e escolas.</p>
+</section>
+
+</div>
+<div class="progress" id="prog"></div>
+<div class="nav-dots" id="dots"></div>
+<div class="arrows"><button id="prev" disabled aria-label="Anterior">‹</button><button id="next" aria-label="Próximo">›</button></div>
+<script>
+{
+const slides=[...document.querySelectorAll('.slide')];const tot=slides.length;let cur=0;
+document.getElementById('tot').textContent=String(tot).padStart(2,'0');
+const dotsBox=document.getElementById('dots');
+slides.forEach((_,i)=>{const b=document.createElement('button');if(i===0)b.className='on';b.setAttribute('aria-label','Slide '+(i+1));b.onclick=()=>go(i);dotsBox.appendChild(b)});
+const dots=[...dotsBox.children],prog=document.getElementById('prog'),prevB=document.getElementById('prev'),nextB=document.getElementById('next'),curEl=document.getElementById('cur');
+function bars(s){s.querySelectorAll('.track i[data-w]').forEach(i=>{i.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>{i.style.width=i.dataset.w+'%'}))})}
+function go(n){if(n<0||n>=tot||n===cur)return;slides[cur].classList.remove('active');slides[cur].classList.toggle('prev',n>cur);cur=n;
+  slides[cur].classList.remove('prev');slides[cur].classList.add('active');slides[cur].scrollTop=0;bars(slides[cur]);
+  dots.forEach((d,i)=>d.classList.toggle('on',i===cur));prog.style.width=((cur+1)/tot*100)+'%';curEl.textContent=String(cur+1).padStart(2,'0');
+  prevB.disabled=cur===0;nextB.disabled=cur===tot-1}
+prog.style.width=(100/tot)+'%';
+nextB.onclick=()=>go(cur+1);prevB.onclick=()=>go(cur-1);
+document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}if(e.key==='Home')go(0);if(e.key==='End')go(tot-1)});
+let tx=null,ty=null;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)go(cur+(dx<0?1:-1));tx=null});
+bars(slides[0]);
+}
+</script>
+</body>
+</html>
