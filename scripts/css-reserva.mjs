@@ -96,16 +96,18 @@ export function simplifica(v) {
 }
 
 // processa um texto CSS
+// Atenção: uma declaração que usa var() não é validada na leitura do CSS. No Safari antigo, a versão com
+// color-mix(…var(--x)…) "ganha" da reserva escrita antes dela e, na hora de pintar, vira o valor inicial
+// (degradê some, borda some). Por isso, quando há var(), a versão com color-mix vai para um bloco
+// @supports logo depois da própria regra (mesma posição na cascata e dentro do mesmo @media).
 export function reserva(css) {
-  let out = '', i = 0, extras = []
+  const edits = [] // [início, fim, texto]
+  const depois = new Map() // fim da regra -> blocos @supports
   const ini = /color-mix\(/g
-  let m
-  // percorre declaração por declaração que contenha color-mix
+  let m, limite = 0
   while ((m = ini.exec(css))) {
-    if (m.index < i) continue
-    // início da declaração: depois do último '{' ou ';' antes do color-mix
+    if (m.index < limite) continue
     const a = Math.max(css.lastIndexOf('{', m.index), css.lastIndexOf(';', m.index)) + 1
-    // fim: próximo ';' ou '}' fora de parênteses
     let d = 0, b = a
     for (; b < css.length; b++) {
       const c = css[b]
@@ -113,25 +115,29 @@ export function reserva(css) {
       else if (c === ')') d--
       else if (!d && (c === ';' || c === '}')) break
     }
+    limite = b; ini.lastIndex = b
     const decl = css.slice(a, b)
     const dois = decl.indexOf(':')
-    if (dois < 0) { out += css.slice(i, b); i = b; ini.lastIndex = b; continue }
+    if (dois < 0) continue
     const prop = decl.slice(0, dois).trim(), val = decl.slice(dois + 1)
-    const simples = simplifica(val)
-    if (prop.startsWith('--')) {
-      // variável: reserva no lugar e a mistura volta dentro de @supports, depois da regra
-      const abre = css.lastIndexOf('{', a - 1 < 0 ? 0 : a)
-      const antes = css.lastIndexOf('}', abre)
-      const seletor = css.slice(antes + 1, abre).trim()
-      out += css.slice(i, a) + `${prop}:${simples.trim()}`
-      if (seletor && !seletor.startsWith('@')) extras.push(`${SUPORTA}{${seletor}{${prop}:${val.trim()}}}`)
-    } else {
-      out += css.slice(i, a) + `${prop}:${simples.trim()};${decl.trim()}`
-    }
-    i = b; ini.lastIndex = b
+    const simples = simplifica(val).trim()
+    const usaVar = prop.startsWith('--') || /var\(/.test(val)
+    if (!usaVar) { edits.push([a, b, `${prop}:${simples};${decl.trim()}`]); continue }
+    edits.push([a, b, `${prop}:${simples}`])
+    const abre = css.lastIndexOf('{', a)
+    const antes = Math.max(css.lastIndexOf('}', abre), css.lastIndexOf('{', abre - 1), css.lastIndexOf(';', abre))
+    const seletor = css.slice(antes + 1, abre).trim()
+    const fim = css.indexOf('}', b)
+    if (!seletor || seletor.startsWith('@') || fim < 0) continue
+    const bloco = depois.get(fim) || { seletor, decls: [] }
+    bloco.decls.push(`${prop}:${val.trim()}`)
+    depois.set(fim, bloco)
   }
-  out += css.slice(i)
-  return out + (extras.length ? '\n' + extras.join('\n') + '\n' : '')
+  for (const [fim, { seletor, decls }] of depois) edits.push([fim + 1, fim + 1, `${SUPORTA}{${seletor}{${decls.join(';')}}}`])
+  edits.sort((x, y) => y[0] - x[0] || y[1] - x[1])
+  let out = css
+  for (const [x, y, t] of edits) out = out.slice(0, x) + t + out.slice(y)
+  return out
 }
 
 // reserva para cqw/cqi: mesma declaração com a unidade trocada, antes da original (fora de variáveis)
