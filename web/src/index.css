@@ -88,6 +88,9 @@ h1,h2{font-family:Poppins,system-ui,sans-serif;margin:0;letter-spacing:-.02em;li
 .theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--mute);display:grid;place-items:center;transition:color .2s,border-color .2s}
 .theme:hover{color:var(--ink);border-color:var(--mute)}
 .theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* Safari/Chrome do iPad põem padding e altura de linha padrão no botão e tiram o ícone do centro */
+.theme{padding:0;-webkit-appearance:none;appearance:none;line-height:0;box-sizing:border-box}
+.theme svg{display:block}
 .corner{position:fixed;top:14px;right:14px;z-index:20}
 .top-r{display:flex;align-items:center;gap:14px}
 .auth,.perfis{position:relative}
@@ -213,7 +216,8 @@ textarea:focus{outline:0;border-color:var(--blue)}
 .um-caret{transform:rotate(90deg);color:var(--mute);transition:transform .2s}
 .um-btn[aria-expanded=true] .um-caret{transform:rotate(-90deg)}
 @media(max-width:1100px){.nav-a{padding:9px 12px;font-size:14px}.hdr-in{gap:14px}.um-name{display:none}}
-@media(max-width:900px){
+/* Menu na barra de baixo: celular e qualquer tablet em pé (no iPad, o Chrome pode montar a página mais larga que 900 px) */
+@media(max-width:900px),(orientation:portrait) and (pointer:coarse) and (max-width:1366px){
   .hdr-in{height:62px;padding:0 14px;gap:10px}
   .hdr-logo img{height:32px}
   .hdr-nav,.search kbd{display:none}
