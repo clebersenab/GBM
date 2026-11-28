@@ -4,11 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script>
-/* iPad/iPhone: ao girar a tela, o Safari às vezes mantém o zoom anterior e a página parece ampliada.
-   Trava a escala em 1 por um instante na rotação e depois libera (o zoom com dois dedos continua funcionando). */
-(function(){var m=document.querySelector('meta[name="viewport"]');if(!m||!/iP(ad|hone|od)|Macintosh/.test(navigator.userAgent)||!("ontouchend" in document))return;var base=m.getAttribute("content");
-function gira(){m.setAttribute("content",base+",maximum-scale=1");setTimeout(function(){m.setAttribute("content",base)},400)}
-var deitado=innerWidth>innerHeight;window.addEventListener("orientationchange",gira);window.addEventListener("resize",function(){var d=innerWidth>innerHeight;if(d!==deitado){deitado=d;gira()}})})();
+// iPad/iPhone: ao girar a tela, o Safari e o Chrome do iPad podiam ampliar a página e não voltar.
+// O Chrome do iPad ignora o limite de escala (maximum-scale) por acessibilidade; por isso, depois de cada giro,
+// se a página ficou ampliada sem a pessoa ter pedido, reescrevemos a escala para forçar a volta a 1.
+// Com ?debug no endereço, cada giro mostra a escala e a largura medidas.
+(function(){var m=document.querySelector('meta[name="viewport"]');if(!m||!/iP(ad|hone|od)|Macintosh/.test(navigator.userAgent)||!("ontouchend" in document))return;
+var B="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1";m.setAttribute("content",B);
+var dbg=location.search.indexOf("debug")>=0;
+function info(t){if(!dbg)return;var vv=window.visualViewport,b=document.getElementById("dbg");var s=t+": tela "+innerWidth+"x"+innerHeight+" escala "+(vv?vv.scale.toFixed(2):"?")+" doc "+document.documentElement.scrollWidth;if(b)b.textContent+="\n"+s;else console.log(s)}
+function fix(t){var vv=window.visualViewport;info(t);if(vv&&Math.abs(vv.scale-1)>0.01){m.setAttribute("content","width=device-width,initial-scale=1.001,minimum-scale=1,maximum-scale=1");setTimeout(function(){m.setAttribute("content",B);window.scrollTo(0,window.scrollY);setTimeout(function(){info("corrigido")},150)},40)}}
+window.addEventListener("orientationchange",function(){setTimeout(function(){fix("giro")},350);setTimeout(function(){fix("giro+1s")},1000)});})();
 </script>
 
 <title>GBM - Histórias para ler juntos · Clássicos recontados para crianças de 0 a 8 anos</title>
@@ -46,7 +51,7 @@ window.addEventListener("load",function(){show("ok: carregou. "+navigator.userAg
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="../images/hero/hero-pai-e-filho.webp?v=2" imagesrcset="../images/hero/hero-pai-e-filho-800.webp?v=2 800w, ../images/hero/hero-pai-e-filho-1200.webp?v=2 1200w, ../images/hero/hero-pai-e-filho.webp?v=2 1672w" imagesizes="100vw" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=Literata:ital,opsz,wght@1,7..72,500;1,7..72,600&display=swap" rel="stylesheet">
-<style>html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+<style>html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
 /* VOICE  occasion: a bedtime-story catalogue for parents, warm and unhurried
    IDEA   a streaming shelf lit by a reading lamp; every book points to the classic it seeds
    PICTURE the full-bleed bedtime scene, then real shelves of covers you can open

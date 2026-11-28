@@ -1,5 +1,5 @@
 /* Safari do iPad/iPhone: não aumentar a fonte sozinho ao deitar a tela. */
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
 /* Mesma identidade da landing: noite azul-marinho, creme; laranja = ação, azul = descoberta, roxo = boxes. */
 :root{color-scheme:dark;--hero-a:#2b2160;--hero-b:#0f2a44;--bg:#0b0d17;--bg2:#121527;--card:#181c33;--ink:#fff4e0;--ink2:#e6dccb;--mute:#c4bba8;--line:#272c4a;--purple:#9146b5;--blue:#62c8ed;--orange:#f28c28;--on-orange:#1d1003;--red:#ff8a7a;--green:#7fe0a6;--v-ink:#ffc58a;--j-ink:#a9e3f7;--link:#62c8ed;--glass:rgba(11,13,23,.9);--sky:url(/images/marca/fundo-ceu.svg);--shadow:0 30px 60px -30px rgba(0,0,0,.9)}
 :root[data-theme=light]{color-scheme:light;--hero-a:#f8dfbd;--hero-b:#dcefff;--purple:#7b3aa0;--orange:#e07c1a;--bg:#fbf6ec;--bg2:#ffffff;--card:#f3eadb;--ink:#1b1a2b;--ink2:#34314a;--mute:#625d73;--line:#e2d6c1;--blue:#3aa8d0;--red:#c0392b;--green:#1e8a4c;--v-ink:#a8520a;--j-ink:#13698a;--link:#1b7fa6;--glass:rgba(251,246,236,.92);--sky:url(/images/marca/fundo-ceu-claro.svg);--shadow:0 24px 50px -28px rgba(60,40,10,.35)}
@@ -783,7 +783,9 @@ textarea:focus{outline:0;border-color:var(--blue)}
    abaixo de um tamanho mínimo; se não couberem, a fileira rola de lado em vez de sobrepor imagens e nomes. */
 .beds,.portals{display:flex!important;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
 .beds::-webkit-scrollbar,.portals::-webkit-scrollbar{display:none}
-.bed{flex:1 0 88px;min-width:88px}
+/* o canteiro nunca fica mais estreito que o nome do valor ("Perseverança", "Curiosidade"), mesmo com outra fonte */
+.bed{flex:1 0 108px;min-width:108px}
+.bed b{white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .portals{gap:18px}
 .portal{flex:1 0 108px;min-width:108px}
 .bed b,.portal b,.bed small,.portal small{max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:manual}
