@@ -391,9 +391,10 @@ details[open] summary::after{content:"–"}
 details p{color:var(--mute);padding:0 0 18px}
 /* final */
 .final{position:relative;overflow:hidden;min-height:clamp(420px,34vw,540px);display:grid;grid-template-rows:1fr auto;padding:0 max(5vw,16px)}
-.final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 42%}
+.final>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 22%}
 .final::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--bg) 0%,transparent 22%),linear-gradient(0deg,var(--bg) 6%,color-mix(in srgb,var(--bg) 70%,transparent) 26%,transparent 48%),linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 75%,transparent) 40%,transparent 75%)}
 .final .txt{position:relative;z-index:2;max-width:520px;display:grid;gap:18px;align-self:center}
+@media(min-width:761px) and (max-width:1100px){.final .txt{max-width:46%}}
 .foot{position:relative;z-index:2;display:grid;grid-template-columns:auto 1fr 1fr auto;gap:20px 48px;align-items:start;padding:18px 0 22px;border-top:1px solid color-mix(in srgb,var(--ink) 14%,transparent);color:var(--mute);font-size:14.5px}
 .foot-brand img{height:56px;width:auto}
 .foot-col{display:grid;gap:8px;justify-items:start}
@@ -806,7 +807,7 @@ details[open] summary::after{transform:rotate(180deg)}
 </section>
 
 <footer class="final">
-  <img loading="lazy" decoding="async" src="../images/hero/hero-mae-e-filha.webp" alt="Mãe e filha lendo juntas no sofá; da tela saem cenas de histórias">
+  <img loading="lazy" decoding="async" width="2560" height="1024" src="../images/hero/rodape-familia.webp" srcset="../images/hero/rodape-familia-1200.webp 1400w, ../images/hero/rodape-familia.webp 2560w" sizes="100vw" alt="Mãe e duas filhas lendo juntas no tablet à noite; da tela sobe um rio de luz com moinhos, um coelho com relógio e uma lagoa com palmeiras">
   <div class="txt">
     <h2>Escolham a história de hoje à noite</h2>
     <p class="lead">R$ 19,90 por mês, para a família inteira.</p>
